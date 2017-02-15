@@ -1,0 +1,13 @@
+name: bokain_models
+description: A collection of models for bokain
+version: 0.1.21
+author: Patrick Minogue <patrick.minogue@gmail.com>
+homepage: https://www.bokain.se
+
+environment:
+  sdk: '>=1.0.0 <2.0.0'
+
+dependencies:
+  fo_components: '>=0.0.1179 <=0.1.0'
+
+dev_dependencies:
