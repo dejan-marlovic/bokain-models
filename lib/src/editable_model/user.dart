@@ -6,30 +6,35 @@ class User extends EditableModel
   User() : super();
 
   @override
-  User.fromData(Map<String, dynamic> data) : super.fromData(data)
+  User.from(User other) : super.from(other);
+
+  @override
+  User.fromData(Map<String, dynamic> d) : super.fromData(d);
+
+  @override
+  User.decode(Map<String, dynamic> d) : super.decode(d)
   {
+    socialNumber = d["social_number"];
+    firstname = d["firstname"];
+    lastname = d["lastname"];
+    password = d["password"];
+    email = d["email"];
+    phone = d["phone"];
+    street = d["street"];
+    postalCode = d["postal_code"];
+    city = d["city"];
+    country = d["country"];
   }
 
   @override
-  User.decode(Map<String, String> data) : super.decode(data)
+  Map<String, String> get toTable
   {
-    socialNumber = data["social_number"];
-    firstname = data["firstname"];
-    lastname = data["lastname"];
-    password = data["password"];
-    email = data["email"];
-    phone = data["phone"];
-    street = data["street"];
-    postalCode = data["postal_code"];
-    city = data["city"];
-    country = data["country"];
-  }
-
-  @override
-  Map<String, String> encode()
-  {
-    Map<String, String> data = super.encode();
-    return data;
+    Map<String, String> table = new Map();
+    table["name"] = "$firstname $lastname";
+    table["email"] = email;
+    table["phone"] = phone;
+    table["social_number"] = socialNumber;
+    return table;
   }
 
   String get city => _data["city"];

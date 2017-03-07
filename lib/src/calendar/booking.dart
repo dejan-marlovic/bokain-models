@@ -17,27 +17,33 @@ class Booking extends ModelBase
   }
 
   @override
-  Booking.fromData(Map<String, dynamic> data) : super.fromData(data);
+  Booking.from(Booking other) : super.from(other);
 
   @override
-  Booking.decode(Map<String, String> data) : super.decode(data)
+  Booking.fromData(Map<String, dynamic> d) : super.fromData(d);
+
+  @override
+  Booking.decode(Map<String, dynamic> d) : super.decode(d)
   {
-    startTime = DateTime.parse(data["start_time"]);
-    endTime = DateTime.parse(data["end_time"]);
+    startTime = ModelBase.df.parse(d["start_time"]);
+    endTime = ModelBase.df.parse(d["end_time"]);
     duration = endTime.difference(startTime);
-    customerId = data["customer_id"];
-    serviceId = data["service_id"];
-    userId = data["user_id"];
-    roomId = data["room_id"];
-    serviceAddonIds = JSON.decode(data["service_addon_ids"]);
+    customerId = d["customer_id"];
+    serviceId = d["service_id"];
+    userId = d["user_id"];
+    roomId = d["room_id"];
+    serviceAddonIds = d["service_addon_ids"];
   }
 
   @override
-  Map<String, String> encode()
+  Map<String, String> get toTable
   {
-    Map<String, String> data = super.encode();
-    data["service_addon_ids"] = JSON.encode(serviceAddonIds);
-    return data;
+    Map<String, String> table = new Map();
+    table["start_time"] = ModelBase.df.format(startTime);
+    table["duration_minutes"] = duration.inMinutes.toString();
+    table["customer_id"] = customerId;
+    table["user_id"] = userId;
+    return table;
   }
 
   DateTime get startTime => _data["start_time"];

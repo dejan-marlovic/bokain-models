@@ -11,19 +11,35 @@ class Customer extends EditableModel
     {
       codeUnits.add(rnd.nextInt(30)+97);
     }
+    preferredLanguage = "sv";
+    country = "sv";
     password = new String.fromCharCodes(codeUnits);
   }
 
   @override
-  Customer.fromData(Map<String, dynamic> data) : super.fromData(data);
+  Customer.from(Customer other) : super.from(other);
 
   @override
-  Customer.decode(Map<String, String> data) : super.decode(data)
+  Customer.fromData(Map<String, dynamic> d) : super.fromData(d);
+
+  @override
+  Customer.decode(Map<String, dynamic> d) : super.decode(d)
   {
     /// It's all strings atm
     DateTime c = created;
-    _data = new Map.from(data);
+    _data = new Map.from(d);
     _data["created"] = c;
+  }
+
+  @override
+  Map<String, String> get toTable
+  {
+    Map<String, String> table = new  Map();
+    table["name"] = "$firstname $lastname";
+    table["email"] = email;
+    table["phone"] = phone;
+    table["ssn"] = socialNumber;
+    return table;
   }
 
   String get belongsTo => _data["belongs_to"];
@@ -52,6 +68,8 @@ class Customer extends EditableModel
   void set country(String value) { _data["country"] = value; }
   void set email(String value) { _data["email"] = value; }
   void set emailShop(String value) { _data["email_shop"] = value; }
+  void set firstname(String value) { _data["firstname"] = value; }
+  void set lastname(String value) { _data["lastname"] = value; }
   void set phone(String value) { _data["phone"] = value; }
   void set postalCode(String value) { _data["postal_code"] = value; }
   void set preferredLanguage(String value) { _data["preferred_language"] = value; }

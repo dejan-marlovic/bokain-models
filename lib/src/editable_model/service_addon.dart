@@ -6,23 +6,30 @@ class ServiceAddon extends EditableModel
   ServiceAddon() : super();
 
   @override
-  ServiceAddon.fromData(Map<String, dynamic> data) : super.fromData(data);
+  ServiceAddon.from(ServiceAddon other) : super.from(other);
 
   @override
-  ServiceAddon.decode(Map<String, String> data) : super.decode(data)
+  ServiceAddon.fromData(Map<String, dynamic> d) : super.fromData(d);
+
+  @override
+  ServiceAddon.decode(Map<String, dynamic> d) : super.decode(d)
   {
-    name = data["name"];
-    category = data["category"];
-    description = data["description"];
-    durationMinutes = int.parse(data["duration_minutes"]);
-    price = double.parse(data["price"]);
+    name = d["name"];
+    category = d["category"];
+    description = d["description"];
+    durationMinutes = d["duration_minutes"];
+    price = d["price"];
   }
 
   @override
-  Map<String, String> encode()
+  Map<String, String> get toTable
   {
-    Map<String, String> data = super.encode();
-    return data;
+    Map<String, String> table = new Map();
+    table["name"] = name;
+    table["category"] = category;
+    table["duration_minutes"] = durationMinutes.toString();
+    table["price"] = price.toString();
+    return table;
   }
 
   String get name => _data["name"];

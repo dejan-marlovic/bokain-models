@@ -10,24 +10,20 @@ abstract class EditableModel extends ModelBase
   }
 
   @override
-  EditableModel.fromData(Map<String, dynamic> data) : super.fromData(data);
+  EditableModel.from(EditableModel other) : super.from(other);
 
   @override
-  EditableModel.decode(Map<String, String> data) : super.decode(data)
+  EditableModel.fromData(Map<String, dynamic> d) : super.fromData(d);
+
+  @override
+  EditableModel.decode(Map<String, dynamic> d) : super.decode(d)
   {
-    addedBy = data["added_by"];
-    status = data["status"];
+    addedBy = d["added_by"];
+    status = d["status"];
   }
 
   @override
-  Map<String, String> encode()
-  {
-    Map<String, String> data = super.encode();
-
-    // TODO: add any non-string params here
-
-    return data;
-  }
+  Map<String, dynamic> get encoded => super.encoded;
 
   String get addedBy => _data["added_by"];
   String get status => _data["status"];  // active, frozen, disabled

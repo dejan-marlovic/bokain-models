@@ -9,27 +9,32 @@ class Service extends EditableModel
   }
 
   @override
-  Service.fromData(Map<String, dynamic> data) : super.fromData(data);
+  Service.from(Service other) : super.from(other);
 
   @override
-  Service.decode(Map<String, String> data) : super.decode(data)
+  Service.fromData(Map<String, dynamic> d) : super.fromData(d);
+
+  @override
+  Service.decode(Map<String, dynamic> d) : super.decode(d)
   {
-    name = data["name"];
-    category = data["category"];
-    description = data["description"];
-    durationMinutes = int.parse(data["duration_minutes"]);
-    price = double.parse(data["price"]);
-    roomIds = JSON.decode(data["room_ids"]);
-    serviceAddonIds = JSON.decode(data["service_addon_ids"]);
+    name = d["name"];
+    category = d["category"];
+    description = d["description"];
+    durationMinutes = d["duration_minutes"];
+    price = d["price"];
+    roomIds = d["room_ids"];
+    serviceAddonIds = d["service_addon_ids"];
   }
 
   @override
-  Map<String, String> encode()
+  Map<String, String> get toTable
   {
-    Map<String, String> data = super.encode();
-    data["room_ids"] = JSON.encode(roomIds);
-    data["service_addon_ids"] = JSON.encode(serviceAddonIds);
-    return data;
+    Map<String, String> table = new Map();
+    table["name"] = name;
+    table["category"] = category;
+    table["duration_minutes"] = durationMinutes.toString();
+    table["price"] = price.toString();
+    return table;
   }
 
   String get name => _data["name"];

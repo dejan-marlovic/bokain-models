@@ -9,20 +9,26 @@ class Salon extends EditableModel
   }
 
   @override
-  Salon.fromData(Map<String, dynamic> data) : super.fromData(data);
+  Salon.from(Salon other) : super.from(other);
 
   @override
-  Salon.decode(Map<String, String> data) : super.decode(data)
+  Salon.fromData(Map<String, dynamic> d) : super.fromData(d);
+
+  @override
+  Salon.decode(Map<String, dynamic> d) : super.decode(d)
   {
-    roomIds = JSON.decode(data["room_ids"]);
+    roomIds = d["room_ids"];
   }
 
   @override
-  Map<String, String> encode()
+  Map<String, String> get toTable
   {
-    Map<String, String> data = super.encode();
-    data["room_ids"] = JSON.encode(roomIds);
-    return data;
+    Map<String, String> table = new Map();
+    table["name"] = name;
+    table["email"] = email;
+    table["phone"] = phone;
+    table["city"] = city;
+    return table;
   }
 
   String get name => _data["name"];

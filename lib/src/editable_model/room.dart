@@ -9,22 +9,26 @@ class Room extends EditableModel
   }
 
   @override
-  Room.fromData(Map<String, dynamic> data) : super.fromData(data);
+  Room.from(Room other) : super.from(other);
 
   @override
-  Room.decode(Map<String, String> data) : super.decode(data)
+  Room.fromData(Map<String, dynamic> d) : super.fromData(d);
+
+  @override
+  Room.decode(Map<String, dynamic> d) : super.decode(d)
   {
-    name = data["name"];
-    salonId = data["salon_id"];
-    serviceIds = JSON.decode(data["service_ids"]);
+    name = d["name"];
+    salonId = d["salon_id"];
+    serviceIds = d["service_ids"];
   }
 
   @override
-  Map<String, String> encode()
+  Map<String, String> get toTable
   {
-    Map<String, String> data = super.encode();
-    data["service_ids"] = JSON.encode(serviceIds);
-    return data;
+    Map<String, String> table = new Map();
+    table["name"] = name;
+    table["salon_id"] = salonId;
+    return table;
   }
 
   String get name => _data["name"];
