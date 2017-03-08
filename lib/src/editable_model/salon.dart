@@ -17,7 +17,8 @@ class Salon extends EditableModel
   @override
   Salon.decode(Map<String, dynamic> d) : super.decode(d)
   {
-    roomIds = d["room_ids"];
+    _data = d;
+    roomIds = (d.containsKey("room_ids")) ? d["room_ids"] : new List();
   }
 
   @override

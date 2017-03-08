@@ -53,7 +53,7 @@ class Customer extends EditableModel
   String get firstname => _data["firstname"];
   String get lastname => _data["lastname"];
   String get phone => _data["phone"];
-  String get postalCode => _data["postalCode"];
+  String get postalCode => _data["postal_code"];
   String get preferredLanguage => _data["preferred_language"];
   String get skinType => _data["skin_type"];
   String get socialNumber => _data["social_number"];

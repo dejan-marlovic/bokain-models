@@ -1,5 +1,4 @@
 library model_base;
-import 'dart:convert';
 import 'dart:math';
 import 'package:intl/intl.dart' show DateFormat;
 part 'editable_model/editable_model.dart';
