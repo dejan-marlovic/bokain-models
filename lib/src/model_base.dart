@@ -1,5 +1,6 @@
 library model_base;
 import 'dart:math';
+import 'package:collection/collection.dart';
 import 'package:intl/intl.dart' show DateFormat;
 part 'editable_model/editable_model.dart';
 part 'editable_model/customer.dart';
@@ -21,13 +22,8 @@ abstract class ModelBase
 
   ModelBase.from(ModelBase other)
   {
-    _data = new Map.from(other.data);
-    if (!_data.containsKey("created")) _data["created"] = new DateTime.now();
-  }
-
-  ModelBase.fromData(Map<String, dynamic> d)
-  {
-    _data = new Map.from(d);
+    // _data = new Map.from(other._data);
+    _data = deepCopy(other._data);
     if (!_data.containsKey("created")) _data["created"] = new DateTime.now();
   }
 
@@ -68,7 +64,61 @@ abstract class ModelBase
     return false;
   }
 
-  bool isEqual(ModelBase other) => _data.keys.every((key) => other._data.keys.contains(key) && _data[key] == other._data[key]);
+  bool isEqual(ModelBase other)
+  {
+    for (String key in _data.keys)
+    {
+      if (!other._data.containsKey(key)) return false;
+
+      // Collections with identical child elements are not considered equal in dart
+      else if (_data[key] is List && other._data[key] is List)
+      {
+        if (!const DeepCollectionEquality.unordered().equals(_data[key], other._data[key])) return false;
+      }
+      else if (_data[key] is Map && other._data[key] is Map)
+      {
+        if (!const DeepCollectionEquality.unordered().equals(_data[key], other._data[key])) return false;
+      }
+      else if (_data[key] is Set && other._data[key] is Set)
+      {
+        if (!const DeepCollectionEquality.unordered().equals(_data[key], other._data[key])) return false;
+      }
+      else if (_data[key] != other._data[key]) return false;
+    }
+
+    return true;
+  }
+
+  dynamic deepCopy(dynamic data)
+  {
+    dynamic ret;
+    if (data is List)
+    {
+      ret = new List();
+      for (dynamic v in data)
+      {
+        ret.add(deepCopy(v));
+      }
+    }
+    else if (data is Map)
+    {
+      ret = new Map();
+      for (dynamic key in data.keys)
+      {
+        ret[key] = deepCopy(data[key]);
+      }
+    }
+    else if (data is Set)
+    {
+      ret = new Set();
+      for (dynamic v in data)
+      {
+        ret.add(deepCopy(v));
+      }
+    }
+    else ret = data;
+    return ret;
+  }
 
   Map<String, dynamic> get data => _data;
   DateTime get created => _data["created"];

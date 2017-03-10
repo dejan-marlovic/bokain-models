@@ -27,9 +27,6 @@ class Day extends ModelBase
   Day.from(Day other) : super.from(other);
 
   @override
-  Day.fromData(Map<String, dynamic> d) : super.fromData(d);
-
-  @override
   Day.decode(Map<String, dynamic> d) : super.decode(d)
   {
     userId = d["user_id"];

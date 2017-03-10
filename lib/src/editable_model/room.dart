@@ -12,9 +12,6 @@ class Room extends EditableModel
   Room.from(Room other) : super.from(other);
 
   @override
-  Room.fromData(Map<String, dynamic> d) : super.fromData(d);
-
-  @override
   Room.decode(Map<String, dynamic> d) : super.decode(d)
   {
     name = d["name"];

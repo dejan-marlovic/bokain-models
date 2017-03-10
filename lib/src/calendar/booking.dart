@@ -20,9 +20,6 @@ class Booking extends ModelBase
   Booking.from(Booking other) : super.from(other);
 
   @override
-  Booking.fromData(Map<String, dynamic> d) : super.fromData(d);
-
-  @override
   Booking.decode(Map<String, dynamic> d) : super.decode(d)
   {
     startTime = ModelBase.df.parse(d["start_time"]);

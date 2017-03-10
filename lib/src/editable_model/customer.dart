@@ -20,9 +20,6 @@ class Customer extends EditableModel
   Customer.from(Customer other) : super.from(other);
 
   @override
-  Customer.fromData(Map<String, dynamic> d) : super.fromData(d);
-
-  @override
   Customer.decode(Map<String, dynamic> d) : super.decode(d)
   {
     /// It's all strings atm

@@ -12,13 +12,10 @@ class Salon extends EditableModel
   Salon.from(Salon other) : super.from(other);
 
   @override
-  Salon.fromData(Map<String, dynamic> d) : super.fromData(d);
-
-  @override
   Salon.decode(Map<String, dynamic> d) : super.decode(d)
   {
     _data = d;
-    roomIds = (d.containsKey("room_ids")) ? d["room_ids"] : new List();
+    if (roomIds == null) roomIds = new List();
   }
 
   @override

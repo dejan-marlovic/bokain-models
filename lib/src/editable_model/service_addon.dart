@@ -9,9 +9,6 @@ class ServiceAddon extends EditableModel
   ServiceAddon.from(ServiceAddon other) : super.from(other);
 
   @override
-  ServiceAddon.fromData(Map<String, dynamic> d) : super.fromData(d);
-
-  @override
   ServiceAddon.decode(Map<String, dynamic> d) : super.decode(d)
   {
     name = d["name"];
