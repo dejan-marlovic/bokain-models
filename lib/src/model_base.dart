@@ -22,7 +22,6 @@ abstract class ModelBase
 
   ModelBase.from(ModelBase other)
   {
-    // _data = new Map.from(other._data);
     _data = deepCopy(other._data);
     if (!_data.containsKey("created")) _data["created"] = new DateTime.now();
   }

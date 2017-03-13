@@ -14,8 +14,8 @@ class Room extends EditableModel
   @override
   Room.decode(Map<String, dynamic> d) : super.decode(d)
   {
-    name = d["name"];
-    serviceIds = d["service_ids"];
+    _data = d;
+    if (serviceIds == null) serviceIds = new List();
   }
 
   @override
