@@ -5,7 +5,7 @@ class Service extends EditableModel
   @override
   Service() : super()
   {
-    serviceAddonIds = new List();
+    serviceAddons = new List();
   }
 
   @override
@@ -19,8 +19,8 @@ class Service extends EditableModel
     description = d["description"];
     durationMinutes = (d["duration_minutes"] is double) ? d["duration_minutes"] : d["duration_minutes"].toDouble();
     price = (d["price"] is double) ? d["price"] : d["price"].toDouble();
-    roomIds = d["room_ids"];
-    serviceAddonIds = d["service_addon_ids"];
+    roomIds = (d.containsKey("room_ids")) ? d["room_ids"] : new List();
+    serviceAddons = (d.containsKey("service_addons")) ? d["service_addons"] : new List();
   }
 
   @override
@@ -40,7 +40,7 @@ class Service extends EditableModel
   double get durationMinutes => _data["duration_minutes"];
   double get price => _data["price"];
   List<String> get roomIds => _data["room_ids"];
-  List<String> get serviceAddonIds => _data["service_addon_ids"];
+  List<Map<String, dynamic>> get serviceAddons => _data["service_addons"];
 
   void set category(String value) { _data["category"] = value; }
   void set description(String value) { _data["description"] = value; }
@@ -48,5 +48,36 @@ class Service extends EditableModel
   void set durationMinutes(double value) { _data["duration_minutes"] = value; }
   void set price(double value) { _data["price"] = value; }
   void set roomIds(List<String> value) { _data["room_ids"] = value; }
-  void set serviceAddonIds(List<String> value) { _data["service_addon_ids"] = value; }
+  void set serviceAddons(List<Map<String, dynamic>> value) { _data["service_addons"] = value; }
+}
+
+class ServiceAddon
+{
+  ServiceAddon()
+  {
+    name = "";
+    price = 0.0;
+    duration = 0.0;
+  }
+
+  String get name => _data["name"];
+  double get price => _data["price"];
+  double get duration => _data["duration"];
+  Map<String, dynamic> get data => _data;
+
+  void set name(String value)
+  {
+    _data["name"] = value;
+  }
+
+  void set price(double value)
+  {
+    _data["price"] = value;
+  }
+
+  void set duration(double value)
+  {
+    _data["duration"] = value;
+  }
+  Map<String, dynamic> _data = new Map();
 }

@@ -7,7 +7,6 @@ part 'editable_model/customer.dart';
 part 'editable_model/room.dart';
 part 'editable_model/salon.dart';
 part 'editable_model/service.dart';
-part 'editable_model/service_addon.dart';
 part 'editable_model/user.dart';
 part 'calendar/booking.dart';
 part 'calendar/day.dart';
