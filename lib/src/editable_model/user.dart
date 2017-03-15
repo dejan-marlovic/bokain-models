@@ -3,7 +3,10 @@ part of model_base;
 class User extends EditableModel
 {
   @override
-  User() : super();
+  User() : super()
+  {
+    customerIds = new List();
+  }
 
   @override
   User.from(User other) : super.from(other);
@@ -21,6 +24,7 @@ class User extends EditableModel
     postalCode = d["postal_code"];
     city = d["city"];
     country = d["country"];
+    customerIds = d.containsKey("customer_ids") ? d["customer_ids"] : new List();
   }
 
   @override
@@ -31,6 +35,7 @@ class User extends EditableModel
     table["email"] = email;
     table["phone"] = phone;
     table["social_number"] = socialNumber;
+    table["customers"] = customerIds.length.toString();
     return table;
   }
 
@@ -44,6 +49,7 @@ class User extends EditableModel
   String get socialNumber => _data["social_number"];
   String get street => _data["street"];
   String get password => _data["password"];
+  List<String> get customerIds => _data["customer_ids"];
 
   void set socialNumber(String value) { _data["social_number"] = value; }
   void set firstname(String value) { _data["firstname"] = value; }
@@ -55,4 +61,5 @@ class User extends EditableModel
   void set postalCode(String value) { _data["postal_code"] = value; }
   void set city(String value) { _data["city"] = value; }
   void set country(String value) { _data["country"] = value; }
+  void set customerIds(List<String> value) { _data["customer_ids"] = value; }
 }
