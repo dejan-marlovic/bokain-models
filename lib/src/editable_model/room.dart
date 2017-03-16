@@ -5,7 +5,7 @@ class Room extends EditableModel
   @override
   Room() : super()
   {
-    serviceIds = new List();
+    serviceIds = new Set();
   }
 
   @override
@@ -15,7 +15,7 @@ class Room extends EditableModel
   Room.decode(Map<String, dynamic> d) : super.decode(d)
   {
     _data = d;
-    if (serviceIds == null) serviceIds = new List();
+    if (serviceIds == null) serviceIds = new Set();
   }
 
   @override
@@ -27,8 +27,8 @@ class Room extends EditableModel
   }
 
   String get name => _data["name"];
-  List<String> get serviceIds => _data["service_ids"];
+  Set<String> get serviceIds => _data["service_ids"];
 
   void set name(String value) { _data["name"] = value; }
-  void set serviceIds(List<String> value) { _data["service_ids"] = value; }
+  void set serviceIds(Set<String> value) { _data["service_ids"] = value; }
 }

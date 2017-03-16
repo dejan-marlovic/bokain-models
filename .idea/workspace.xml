@@ -2,45 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3a385e5-e6e6-4e29-aeca-cdcedaf23309" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/load_indicator_component/load_indicator_component.dart" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/load_indicator_component/load_indicator_component.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/load_indicator_component/load_indicator_component.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/app_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/app_component.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/app_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/app_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/booking_details_component/booking_details_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/booking_details_component/booking_details_component.dart" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/associative_table_component/associated_table_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/associative_table_component/associated_table_component.dart" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/associative_table_component/associative_table_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/associative_table_component/associative_table_component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/calendar_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/calendar_component.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/customer/customer_add_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/customer/customer_add_component.dart" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/customer/customer_details_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/customer/customer_details_component.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/customer/customer_details_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/customer/customer_details_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/customer/customer_list_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/customer/customer_list_component.dart" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/customer/customer_list_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/customer/customer_list_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/model_detail_component_base.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/model_detail_component_base.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_add_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_add_component.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_details_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_details_component.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_edit_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_edit_component.dart" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_edit_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_edit_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_list_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_list_component.dart" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_list_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_list_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service/service_add_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service/service_add_component.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service/service_edit_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service/service_edit_component.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service/service_edit_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service/service_edit_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service/service_list_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service/service_list_component.dart" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service/service_list_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service/service_list_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_add_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_add_component.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_add_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_add_component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_details_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_details_component.dart" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_edit_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_edit_component.dart" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_edit_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_edit_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_list_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_list_component.dart" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_list_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_list_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/sidebar_component/sidebar_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/sidebar_component/sidebar_component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/services/editable_model/customer_service.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/services/editable_model/customer_service.dart" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/services/editable_model/editable_model_service.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/services/editable_model/editable_model_service.dart" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/services/editable_model/salon_service.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/services/editable_model/salon_service.dart" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/services/editable_model/service_service.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/services/editable_model/service_service.dart" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/services/editable_model/user_service.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/services/editable_model/user_service.dart" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/pubspec.yaml" afterPath="$PROJECT_DIR$/../bokain-admin/pubspec.yaml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/web/style.css" afterPath="$PROJECT_DIR$/../bokain-admin/web/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/web/style.scss" afterPath="$PROJECT_DIR$/../bokain-admin/web/style.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/web/gfx/icons/icons.svg" afterPath="$PROJECT_DIR$/../bokain-admin/web/gfx/icons/icons.svg" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -69,18 +49,28 @@
       <file leaf-file-name="user.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/src/editable_model/user.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
+            <state relative-caret-position="867">
               <caret line="51" column="19" lean-forward="false" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="editable_model.dart" pinned="false" current-in-tab="true">
+      <file leaf-file-name="editable_model.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/src/editable_model/editable_model.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="16" lean-forward="false" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
+            <state relative-caret-position="136">
+              <caret line="8" column="23" lean-forward="true" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="room.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/src/editable_model/room.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" column="11" lean-forward="true" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -89,8 +79,8 @@
       <file leaf-file-name="model_base.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/src/model_base.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="84" column="5" lean-forward="true" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
+            <state relative-caret-position="1275">
+              <caret line="84" column="5" lean-forward="false" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
               <folding>
                 <element signature="e#20#39#0" expanded="true" />
                 <element signature="e#134#176#0" expanded="true" />
@@ -113,7 +103,7 @@
       <file leaf-file-name="customer.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/src/editable_model/customer.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
+            <state relative-caret-position="493">
               <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding />
             </state>
@@ -169,11 +159,11 @@
         <option value="$PROJECT_DIR$/lib/src/editable_model/customer.dart" />
         <option value="$PROJECT_DIR$/lib/src/editable_model/service_addon.dart" />
         <option value="$PROJECT_DIR$/lib/src/editable_model/salon.dart" />
-        <option value="$PROJECT_DIR$/lib/src/editable_model/room.dart" />
         <option value="$PROJECT_DIR$/lib/src/model_base.dart" />
         <option value="$PROJECT_DIR$/lib/src/editable_model/service.dart" />
         <option value="$PROJECT_DIR$/lib/src/editable_model/user.dart" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
+        <option value="$PROJECT_DIR$/lib/src/editable_model/room.dart" />
       </list>
     </option>
   </component>
@@ -206,6 +196,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -274,8 +266,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -398,11 +388,12 @@
       <workItem from="1489415544040" duration="4804000" />
       <workItem from="1489508205138" duration="2477000" />
       <workItem from="1489583441295" duration="3195000" />
+      <workItem from="1489670473471" duration="1950000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="157946000" />
+    <option name="totallyTimeSpent" value="159896000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -417,15 +408,15 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15458423" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15618336" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Regex Tester" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30552545" sideWeight="0.5127932" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30552545" sideWeight="0.51492536" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dart Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32719395" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30552545" sideWeight="0.48720682" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30552545" sideWeight="0.48507464" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2536232" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -717,19 +708,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/editable_model/room.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/editable_model/service_addon.dart" />
     <entry file="file://$PROJECT_DIR$/lib/src/editable_model/service.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="867">
           <caret line="51" column="1" lean-forward="false" selection-start-line="51" selection-start-column="1" selection-end-line="51" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -743,7 +726,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/editable_model/customer.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
+        <state relative-caret-position="493">
           <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding />
         </state>
@@ -751,7 +734,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/editable_model/user.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
+        <state relative-caret-position="867">
           <caret line="51" column="19" lean-forward="false" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
           <folding />
         </state>
@@ -759,8 +742,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/model_base.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="84" column="5" lean-forward="true" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
+        <state relative-caret-position="1275">
+          <caret line="84" column="5" lean-forward="false" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
           <folding>
             <element signature="e#20#39#0" expanded="true" />
             <element signature="e#134#176#0" expanded="true" />
@@ -771,8 +754,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/editable_model/editable_model.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="16" lean-forward="false" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
+        <state relative-caret-position="136">
+          <caret line="8" column="23" lean-forward="true" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/src/editable_model/room.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="11" lean-forward="true" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
           <folding />
         </state>
       </provider>
