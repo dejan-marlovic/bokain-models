@@ -35,7 +35,7 @@ class Customer extends EditableModel
     table["name"] = "$firstname $lastname";
     table["email"] = email;
     table["phone"] = phone;
-    table["ssn"] = socialNumber;
+    table["social_number"] = socialNumber;
     return table;
   }
 
