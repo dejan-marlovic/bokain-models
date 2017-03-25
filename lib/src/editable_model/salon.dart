@@ -6,6 +6,7 @@ class Salon extends EditableModel
   Salon() : super()
   {
     roomIds = new List();
+    userIds = new List();
   }
 
   @override
@@ -16,6 +17,7 @@ class Salon extends EditableModel
   {
     _data = d;
     if (roomIds == null) roomIds = new List();
+    if (userIds == null) userIds = new List();
   }
 
   @override
@@ -36,6 +38,7 @@ class Salon extends EditableModel
   String get postalCode => _data["postal_code"];
   String get city => _data["city"];
   List<String> get roomIds => _data["room_ids"];
+  List<String> get userIds => _data["user_ids"];
 
   void set name(String value) { _data["name"] = value; }
   void set email(String value) { _data["email"] = value; }
@@ -44,4 +47,5 @@ class Salon extends EditableModel
   void set postalCode(String value) { _data["postal_code"] = value; }
   void set city(String value) { _data["city"] = value; }
   void set roomIds(List<String> value) { _data["room_ids"] = value; }
+  void set userIds(List<String> value) { _data["user_ids"] = value; }
 }

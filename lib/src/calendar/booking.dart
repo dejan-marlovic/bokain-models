@@ -2,9 +2,13 @@ part of model_base;
 
 class Booking extends ModelBase
 {
+  Booking.empty()
+  {
+  }
+
   @override
   Booking(DateTime start_time, DateTime end_time, String customer_id, String service_id, List<String> service_addon_ids,
-          String user_id, String room_id) : super()
+          String user_id, String salon_id, String room_id) : super()
   {
     startTime = start_time;
     endTime = end_time;
@@ -13,6 +17,7 @@ class Booking extends ModelBase
     serviceId = service_id;
     serviceAddonIds = service_addon_ids;
     userId = user_id;
+    salonId = salon_id;
     roomId = room_id;
   }
 
@@ -29,6 +34,7 @@ class Booking extends ModelBase
     serviceId = d["service_id"];
     userId = d["user_id"];
     roomId = d["room_id"];
+    salonId = d["salon_id"];
     serviceAddonIds = d["service_addon_ids"];
   }
 
@@ -40,6 +46,7 @@ class Booking extends ModelBase
     table["duration_minutes"] = duration.inMinutes.toString();
     table["customer_id"] = customerId;
     table["user_id"] = userId;
+    table["salon_id"] = salonId;
     return table;
   }
 
@@ -50,6 +57,7 @@ class Booking extends ModelBase
   String get serviceId => _data["service_id"];
   String get userId => _data["user_id"];
   String get roomId => _data["room_id"];
+  String get salonId => _data["salon_id"];
   List<String> get serviceAddonIds => _data["service_addon_ids"];
 
   void set startTime(DateTime value) { _data["start_time"] = value; }
@@ -59,5 +67,6 @@ class Booking extends ModelBase
   void set serviceId(String value) { _data["service_id"] = value; }
   void set userId(String value) { _data["user_id"] = value; }
   void set roomId(String value) { _data["room_id"] = value; }
+  void set salonId(String value) { _data["salon_id"] = value; }
   void set serviceAddonIds(List<String> value) { _data["service_addon_ids"] = value; }
 }
