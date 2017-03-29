@@ -8,9 +8,10 @@ class Day extends ModelBase
   static const int endMinute = 0;
 
   @override
-  Day(String user_id, DateTime date) : super()
+  Day(String user_id, String salon_id, DateTime date) : super()
   {
     userId = user_id;
+    salonId = salon_id;
     startTime = new DateTime(date.year, date.month, date.day, startHour, startMinute);
     endTime = new DateTime(date.year, date.month, date.day, endHour, endMinute);
 
@@ -30,6 +31,7 @@ class Day extends ModelBase
   Day.decode(Map<String, dynamic> d) : super.decode(d)
   {
     userId = d["user_id"];
+    salonId = d["salon_id"];
     startTime = ModelBase.df.parse(d["start_time"]);
     endTime = ModelBase.df.parse(d["end_time"]);
     increments = new List<Increment>();
@@ -74,6 +76,7 @@ class Day extends ModelBase
     Map<String, String> table = new Map();
     table["date"] = ModelBase.df.format(startTime);
     table["user_id"] = userId;
+    table["salon_id"] = salonId;
     return table;
   }
 
@@ -87,11 +90,13 @@ class Day extends ModelBase
   DateTime get startTime => _data["start_time"];
   DateTime get endTime => _data["end_time"];
   String get userId => _data["user_id"];
+  String get salonId => _data["salon_id"];
 
   void set increments(List<Increment> value) { _data["increments"] = value; }
   void set startTime(DateTime value) { _data["start_time"] = value; }
   void set endTime(DateTime value) { _data["end_time"] = value; }
   void set userId(String value) { _data["user_id"] = value; }
+  void set salonId(String value) { _data["salon_id"] = value; }
 }
 
 class Increment
