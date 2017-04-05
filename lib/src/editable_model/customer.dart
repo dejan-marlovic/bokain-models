@@ -14,6 +14,8 @@ class Customer extends EditableModel
     preferredLanguage = "sv";
     country = "sv";
     password = new String.fromCharCodes(codeUnits);
+
+    bookingIds = new List();
   }
 
   @override
@@ -22,10 +24,10 @@ class Customer extends EditableModel
   @override
   Customer.decode(Map<String, dynamic> d) : super.decode(d)
   {
-    /// It's all strings atm
     DateTime c = created;
     _data = new Map.from(d);
     _data["created"] = c;
+    bookingIds = d.containsKey("booking_ids") ? d["booking_ids"] : new List();
   }
 
   @override
@@ -56,6 +58,7 @@ class Customer extends EditableModel
   String get socialNumber => _data["social_number"];
   String get street => _data["street"];
   String get password => _data["password"];
+  List<String> get bookingIds => _data["booking_ids"];
 
   void set belongsTo(String value) { _data["belongs_to"] = value; }
   void set commentsExternal(String value) { _data["comments_external"] = value; }
@@ -74,4 +77,5 @@ class Customer extends EditableModel
   void set socialNumber(String value) { _data["social_number"] = value; }
   void set street(String value) { _data["street"] = value; }
   void set password(String value) { _data["password"] = value; }
+  void set bookingIds(List<String> value) { _data["booking_ids"] = value; }
 }

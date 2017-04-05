@@ -19,6 +19,7 @@ class Booking extends ModelBase
     userId = user_id;
     salonId = salon_id;
     roomId = room_id;
+    addedBy = null;
   }
 
   @override
@@ -36,6 +37,7 @@ class Booking extends ModelBase
     roomId = d["room_id"];
     salonId = d["salon_id"];
     serviceAddonNames = d["service_addon_names"];
+    addedBy = d["added_by"];
   }
 
   @override
@@ -59,6 +61,7 @@ class Booking extends ModelBase
   String get roomId => _data["room_id"];
   String get salonId => _data["salon_id"];
   List<String> get serviceAddonNames => _data["service_addon_names"];
+  String get addedBy => _data["added_by"];
 
   void set startTime(DateTime value) { _data["start_time"] = value; }
   void set endTime(DateTime value) { _data["end_time"] = value; }
@@ -69,4 +72,7 @@ class Booking extends ModelBase
   void set roomId(String value) { _data["room_id"] = value; }
   void set salonId(String value) { _data["salon_id"] = value; }
   void set serviceAddonNames(List<String> value) { _data["service_addon_names"] = value; }
+  void set addedBy(String value) { _data["addded_by"] = value; }
+
+  int progress = 0;
 }

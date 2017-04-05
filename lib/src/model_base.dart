@@ -123,5 +123,5 @@ abstract class ModelBase
   void set created(DateTime value) { _data["created"] = value; }
 
   Map<String, dynamic> _data;
-  static final DateFormat df = new DateFormat('y-MM-d H:mm:s');
+  static final DateFormat df = new DateFormat('y-MM-dd HH:mm:ss');
 }

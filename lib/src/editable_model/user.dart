@@ -6,6 +6,9 @@ class User extends EditableModel
   User() : super()
   {
     customerIds = new List();
+    salonIds = new List();
+    serviceIds = new List();
+    bookingIds = new List();
   }
 
   @override
@@ -27,6 +30,7 @@ class User extends EditableModel
     customerIds = d.containsKey("customer_ids") ? d["customer_ids"] : new List();
     salonIds = d.containsKey("salon_ids") ? d["salon_ids"] : new List();
     serviceIds = d.containsKey("service_ids") ? d["service_ids"] : new List();
+    bookingIds = d.containsKey("booking_ids") ? bookingIds = d["booking_ids"] : new List();
   }
 
   @override
@@ -54,6 +58,7 @@ class User extends EditableModel
   List<String> get customerIds => _data["customer_ids"];
   List<String> get salonIds => _data["salon_ids"];
   List<String> get serviceIds => _data["service_ids"];
+  List<String> get bookingIds => _data["booking_ids"];
 
   void set socialNumber(String value) { _data["social_number"] = value; }
   void set firstname(String value) { _data["firstname"] = value; }
@@ -68,4 +73,5 @@ class User extends EditableModel
   void set customerIds(List<String> value) { _data["customer_ids"] = value; }
   void set salonIds(List<String> value) { _data["salon_ids"] = value; }
   void set serviceIds(List<String> value) { _data["service_ids"] = value; }
+  void set bookingIds(List<String> value) { _data["booking_ids"] = value; }
 }
