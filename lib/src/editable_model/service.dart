@@ -30,10 +30,10 @@ class Service extends EditableModel
   Map<String, String> get toTable
   {
     Map<String, String> table = new Map();
-    table["name"] = name;
-    table["category"] = category;
-    table["duration_minutes"] = durationMinutes.toString();
-    table["price"] = price.toString();
+    table[ModelBase.phrase.get(["name"])] = name;
+    table[ModelBase.phrase.get(["category"])] = category;
+    table[ModelBase.phrase.get(["duration_minutes"])] = durationMinutes.toString();
+    table[ModelBase.phrase.get(["price"])] = price.toString();
     return table;
   }
 

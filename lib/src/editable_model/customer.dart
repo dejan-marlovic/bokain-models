@@ -34,10 +34,10 @@ class Customer extends EditableModel
   Map<String, String> get toTable
   {
     Map<String, String> table = new  Map();
-    table["name"] = "$firstname $lastname";
-    table["email"] = email;
-    table["phone"] = phone;
-    table["social_number"] = socialNumber;
+    table[ModelBase.phrase.get(["name"])] = "$firstname $lastname";
+    table[ModelBase.phrase.get(["email"])] = email;
+    table[ModelBase.phrase.get(["phone"])] = phone;
+    table[ModelBase.phrase.get(["social_number"])] = socialNumber;
     return table;
   }
 

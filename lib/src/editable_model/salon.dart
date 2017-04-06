@@ -26,10 +26,10 @@ class Salon extends EditableModel
   Map<String, String> get toTable
   {
     Map<String, String> table = new Map();
-    table["name"] = name;
-    table["email"] = email;
-    table["phone"] = phone;
-    table["city"] = city;
+    table[ModelBase.phrase.get(["name"])] = name;
+    table[ModelBase.phrase.get(["email"])] = email;
+    table[ModelBase.phrase.get(["phone"])] = phone;
+    table[ModelBase.phrase.get(["city"])] = city;
     return table;
   }
 

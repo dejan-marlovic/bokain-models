@@ -22,7 +22,7 @@ class Room extends EditableModel
   Map<String, String> get toTable
   {
     Map<String, String> table = new Map();
-    table["name"] = name;
+    table[ModelBase.phrase.get(["name"])] = name;
     return table;
   }
 

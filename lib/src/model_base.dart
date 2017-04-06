@@ -1,7 +1,7 @@
 library model_base;
 import 'dart:math';
 import 'package:collection/collection.dart';
-import 'package:intl/intl.dart' show DateFormat;
+import 'phrase.dart';
 part 'editable_model/editable_model.dart';
 part 'editable_model/customer.dart';
 part 'editable_model/room.dart';
@@ -28,7 +28,7 @@ abstract class ModelBase
   ModelBase.decode(Map<String, dynamic> d)
   {
     _data = new Map();
-    created = df.parse(d["created"]);
+    created = DateTime.parse(d["created"]);
   }
 
   Map<String, dynamic> get encoded
@@ -39,7 +39,7 @@ abstract class ModelBase
     _data.forEach((key, value)
     {
       if (value is String || value is num || value is List<String>) d[key] = value;
-      else if (value is DateTime) d[key] = df.format(value);
+      else if (value is DateTime) d[key] = timestampFormat(value);
       else if (value == null) d[key] = null;
     });
     return d;
@@ -55,7 +55,7 @@ abstract class ModelBase
       String v = null;
       if (value is String) v = value;
       else if (value is num) v = value.toString();
-      else if (value is DateTime) v = df.format(value);
+      else if (value is DateTime) v = timestampFormat(value);
 
       if (v != null && v.toLowerCase().contains(keyword)) return true;
     }
@@ -123,5 +123,18 @@ abstract class ModelBase
   void set created(DateTime value) { _data["created"] = value; }
 
   Map<String, dynamic> _data;
-  static final DateFormat df = new DateFormat('y-MM-dd HH:mm:ss');
+  //static final DateFormat df = new DateFormat('y-MM-dd HH:mm:ss');
+
+  static String timestampFormat(DateTime dt)
+  {
+    String y = dt.year.toString();
+    String MM = dt.month < 10 ? "0" + dt.month.toString() : dt.month.toString();
+    String dd = dt.day < 10 ? "0" + dt.day.toString() : dt.day.toString();
+    String HH = dt.hour < 10 ? "0" + dt.hour.toString() : dt.hour.toString();
+    String mm = dt.minute < 10 ? "0" + dt.minute.toString() : dt.minute.toString();
+    String ss = dt.second < 10 ? "0" + dt.second.toString() : dt.second.toString();
+    return "$y-$MM-$dd $HH:$mm:$ss";
+  }
+
+  static final Phrase phrase = new Phrase();
 }

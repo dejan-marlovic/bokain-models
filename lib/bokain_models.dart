@@ -4,3 +4,4 @@
 library bokain_models;
 
 export 'package:bokain_models/src/model_base.dart';
+export 'package:bokain_models/src/phrase.dart';

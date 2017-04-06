@@ -28,8 +28,8 @@ class Booking extends ModelBase
   @override
   Booking.decode(Map<String, dynamic> d) : super.decode(d)
   {
-    startTime = ModelBase.df.parse(d["start_time"]);
-    endTime = ModelBase.df.parse(d["end_time"]);
+    startTime = DateTime.parse(d["start_time"]);//ModelBase.timestampFormat(d["start_time"]);//df.parse(d["start_time"]);
+    endTime = DateTime.parse(d["end_time"]);
     duration = endTime.difference(startTime);
     customerId = d["customer_id"];
     serviceId = d["service_id"];
@@ -44,16 +44,18 @@ class Booking extends ModelBase
   Map<String, String> get toTable
   {
     Map<String, String> table = new Map();
-    table["start_time"] = ModelBase.df.format(startTime);
-    table["duration_minutes"] = duration.inMinutes.toString();
-    table["customer_id"] = customerId;
-    table["user_id"] = userId;
-    table["salon_id"] = salonId;
+    table[ModelBase.phrase.get(["start_time"])] = ModelBase.timestampFormat(startTime);
+    table[ModelBase.phrase.get(["duration_minutes"])] = duration.inMinutes.toString();
+    table[ModelBase.phrase.get(["customer_id"])] = customerId;
+    table[ModelBase.phrase.get(["user_id"])] = userId;
+    table[ModelBase.phrase.get(["salon_id"])] = salonId;
     return table;
   }
 
   DateTime get startTime => _data["start_time"];
   DateTime get endTime => _data["end_time"];
+  String get strStartTime => ModelBase.timestampFormat(startTime);
+  String get strEndTime => ModelBase.timestampFormat(endTime);
   Duration get duration => _data["duration"];
   String get customerId => _data["customer_id"];
   String get serviceId => _data["service_id"];

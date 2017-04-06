@@ -32,8 +32,8 @@ class Day extends ModelBase
   {
     userId = d["user_id"];
     salonId = d["salon_id"];
-    startTime = ModelBase.df.parse(d["start_time"]);
-    endTime = ModelBase.df.parse(d["end_time"]);
+    startTime = DateTime.parse(d["start_time"]);
+    endTime = DateTime.parse(d["end_time"]);
     increments = new List<Increment>();
 
     // Parse any active increments
@@ -74,9 +74,9 @@ class Day extends ModelBase
   Map<String, String> get toTable
   {
     Map<String, String> table = new Map();
-    table["date"] = ModelBase.df.format(startTime);
-    table["user_id"] = userId;
-    table["salon_id"] = salonId;
+    table[ModelBase.phrase.get(["date"])] = ModelBase.timestampFormat(startTime);
+    table[ModelBase.phrase.get(["user_id"])] = userId;
+    table[ModelBase.phrase.get(["salon_id"])] = salonId;
     return table;
   }
 
@@ -89,6 +89,8 @@ class Day extends ModelBase
   List<Increment> get increments => _data["increments"];
   DateTime get startTime => _data["start_time"];
   DateTime get endTime => _data["end_time"];
+  String get strStartTime => ModelBase.timestampFormat(startTime);
+  String get strEndTime => ModelBase.timestampFormat(endTime);
   String get userId => _data["user_id"];
   String get salonId => _data["salon_id"];
 
@@ -111,8 +113,8 @@ class Increment
 
   Increment.decode(Map<String, String> d)
   {
-    startTime = ModelBase.df.parse(d["start_time"]);
-    endTime = ModelBase.df.parse(d["end_time"]);
+    startTime = DateTime.parse(d["start_time"]);
+    endTime = DateTime.parse(d["end_time"]);
     state = d["state"];
     bookingId = d["booking_id"];
     roomId = d["room_id"];
@@ -121,8 +123,8 @@ class Increment
   Map<String, String> get encoded
   {
     Map<String, String> d = new Map();
-    d["start_time"] = ModelBase.df.format(startTime);
-    d["end_time"] = ModelBase.df.format(endTime);
+    d["start_time"] = ModelBase.timestampFormat(startTime);
+    d["end_time"] = ModelBase.timestampFormat(endTime);
     d["booking_id"] = bookingId;
     d["room_id"] = roomId;
     d["state"] = state;
