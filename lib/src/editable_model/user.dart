@@ -45,6 +45,9 @@ class User extends EditableModel
     return table;
   }
 
+  @override
+  String toString() => email;
+
   String get city => _data["city"];
   String get country => _data["country"];
   String get email => _data["email"];

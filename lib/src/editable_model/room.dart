@@ -26,6 +26,8 @@ class Room extends EditableModel
     return table;
   }
 
+  String toString() => name;
+
   String get name => _data["name"];
   List<String> get serviceIds => _data["service_ids"];
 

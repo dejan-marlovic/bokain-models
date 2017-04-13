@@ -41,6 +41,9 @@ class Customer extends EditableModel
     return table;
   }
 
+  @override
+  String toString() => email;
+
   String get belongsTo => _data["belongs_to"];
   String get commentsExternal => _data["comments_external"];
   String get commentsInternal => _data["comments_internal"];

@@ -23,6 +23,9 @@ class Salon extends EditableModel
   }
 
   @override
+  String toString() => name;
+
+  @override
   Map<String, String> get toTable
   {
     Map<String, String> table = new Map();

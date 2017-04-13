@@ -7,6 +7,7 @@ part 'editable_model/customer.dart';
 part 'editable_model/room.dart';
 part 'editable_model/salon.dart';
 part 'editable_model/service.dart';
+part 'editable_model/service_addon.dart';
 part 'editable_model/user.dart';
 part 'calendar/booking.dart';
 part 'calendar/day.dart';
@@ -38,9 +39,8 @@ abstract class ModelBase
     /// Auto-encode default type properties (String, DateTime, num, null)
     _data.forEach((key, value)
     {
-      if (value is String || value is num || value is List<String>) d[key] = value;
+      if (value is String || value is int || value is double || value is List<String> || value == null) d[key] = value;
       else if (value is DateTime) d[key] = timestampFormat(value);
-      else if (value == null) d[key] = null;
     });
     return d;
   }
@@ -123,7 +123,6 @@ abstract class ModelBase
   void set created(DateTime value) { _data["created"] = value; }
 
   Map<String, dynamic> _data;
-  //static final DateFormat df = new DateFormat('y-MM-dd HH:mm:ss');
 
   static String timestampFormat(DateTime dt)
   {
