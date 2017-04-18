@@ -50,7 +50,7 @@ class Booking extends ModelBase
   String get userId => _data["user_id"];
   String get roomId => _data["room_id"];
   String get salonId => _data["salon_id"];
-  List<String> get serviceAddonIds => _data["service_addon_names"];
+  List<String> get serviceAddonIds => _data["service_addon_ids"];
   String get addedBy => _data["added_by"];
 
   void set startTime(DateTime value) { _data["start_time"] = value; }
@@ -62,8 +62,9 @@ class Booking extends ModelBase
   void set userId(String value) { _data["user_id"] = value; }
   void set roomId(String value) { _data["room_id"] = value; }
   void set salonId(String value) { _data["salon_id"] = value; }
-  void set serviceAddonIds(List<String> value) { _data["service_addon_names"] = value; }
+  void set serviceAddonIds(List<String> value) { _data["service_addon_ids"] = value; }
   void set addedBy(String value) { _data["addded_by"] = value; }
 
   int progress = 0;
+  int secondaryProgress = 0;
 }

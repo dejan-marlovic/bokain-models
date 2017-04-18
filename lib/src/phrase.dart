@@ -45,6 +45,7 @@ class Phrase
     "booking_details" : "bokningsinformation",
     "booking_history" : "bokningshistorik",
     "booking_plural" : "bokningar",
+    "booking_rank" : "bokningsranking",
     "break" : "rast",
     "calendar" : "kalender",
     "cancel" : "avbryt",

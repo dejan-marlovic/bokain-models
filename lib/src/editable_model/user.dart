@@ -31,6 +31,7 @@ class User extends EditableModel
     salonIds = d.containsKey("salon_ids") ? d["salon_ids"] : new List();
     serviceIds = d.containsKey("service_ids") ? d["service_ids"] : new List();
     bookingIds = d.containsKey("booking_ids") ? bookingIds = d["booking_ids"] : new List();
+    bookingRank = d.containsKey("booking_rank") ? d["booking_rank"] : 0;
   }
 
   @override
@@ -41,7 +42,7 @@ class User extends EditableModel
     table[ModelBase.phrase.get(["email"])] = email;
     table[ModelBase.phrase.get(["phone"])] = phone;
     table[ModelBase.phrase.get(["social_number"])] = socialNumber;
-    table[ModelBase.phrase.get(["customers"])] = customerIds.length.toString();
+    table[ModelBase.phrase.get(["customer_plural"])] = customerIds.length.toString();
     return table;
   }
 
@@ -62,6 +63,8 @@ class User extends EditableModel
   List<String> get salonIds => _data["salon_ids"];
   List<String> get serviceIds => _data["service_ids"];
   List<String> get bookingIds => _data["booking_ids"];
+  num get bookingRank => _data["booking_rank"];
+  String get strBookingRank => bookingRank.toString();
 
   void set socialNumber(String value) { _data["social_number"] = value; }
   void set firstname(String value) { _data["firstname"] = value; }
@@ -77,4 +80,6 @@ class User extends EditableModel
   void set salonIds(List<String> value) { _data["salon_ids"] = value; }
   void set serviceIds(List<String> value) { _data["service_ids"] = value; }
   void set bookingIds(List<String> value) { _data["booking_ids"] = value; }
+  void set bookingRank(num value) { _data["booking_rank"] = value.toInt(); }
+  void set strBookingRank(String value) { _data["booking_rank"] = int.parse(value); }
 }

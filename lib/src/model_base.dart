@@ -42,6 +42,9 @@ abstract class ModelBase
       if (value is String || value is int || value is double || value is List<String> || value == null) d[key] = value;
       else if (value is DateTime) d[key] = timestampFormat(value);
     });
+
+
+    print(d);
     return d;
   }
 
