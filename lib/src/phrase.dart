@@ -44,6 +44,7 @@ class Phrase
     "booking_confirmation_send" : "skicka bokningsbekräftelse till kunden",
     "booking_details" : "bokningsinformation",
     "booking_history" : "bokningshistorik",
+    "booking_mode" : "bokningsläge",
     "booking_plural" : "bokningar",
     "booking_rank" : "bokningsranking",
     "break" : "rast",

@@ -56,7 +56,7 @@ class Booking extends ModelBase
   void set startTime(DateTime value) { _data["start_time"] = value; }
   void set endTime(DateTime value) { _data["end_time"] = value; }
   void set duration(Duration value) { _data["duration"] = value; }
-  void set price(num value) { _data["price"] = value.toDouble(); }
+  void set price(num value) { _data["price"] = (value == null) ? null : value.toDouble(); }
   void set customerId(String value) { _data["customer_id"] = value; }
   void set serviceId(String value) { _data["service_id"] = value; }
   void set userId(String value) { _data["user_id"] = value; }
