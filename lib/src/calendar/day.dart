@@ -28,7 +28,7 @@ class Day extends ModelBase
   Day.from(Day other) : super.from(other);
 
   @override
-  Day.decode(Map<String, dynamic> d) : super.decode(d)
+  Day.decode(String id, Map<String, dynamic> d) : super.decode(id, d)
   {
     userId = d["user_id"];
     salonId = d["salon_id"];
@@ -45,7 +45,7 @@ class Day extends ModelBase
       {
         for (Map<String, dynamic> incrementData in activeIncrementsData)
         {
-          activeIncrements.add(new Increment.decode(incrementData));
+          if (incrementData != null) activeIncrements.add(new Increment.decode(incrementData));
         }
       }
     }
@@ -131,9 +131,17 @@ class Increment
     return d;
   }
 
-  bool highlighted = false;
-  Map<String, dynamic> _data = new Map();
+  void reset()
+  {
+    state = null;
+    bookingId = null;
+    roomId = null;
+  }
 
+  /// This list is not stored in the database, as it depends on context (which service and salon is currently selected)
+  List<String> availableRoomIds = new List();
+
+  Map<String, dynamic> _data = new Map();
   DateTime get startTime => _data["start_time"];
   DateTime get endTime => _data["end_time"];
   String get state => _data["state"];

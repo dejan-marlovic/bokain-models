@@ -12,9 +12,12 @@ class Room extends EditableModel
   Room.from(Room other) : super.from(other);
 
   @override
-  Room.decode(Map<String, dynamic> d) : super.decode(d)
+  Room.decode(String id, Map<String, dynamic> d) : super.decode(id, d)
   {
-    _data = d;
+    for (String key in d.keys)
+    {
+      _data[key] = d[key];
+    }
     if (serviceIds == null) serviceIds = new List();
   }
 

@@ -22,12 +22,13 @@ class Customer extends EditableModel
   Customer.from(Customer other) : super.from(other);
 
   @override
-  Customer.decode(Map<String, dynamic> d) : super.decode(d)
+  Customer.decode(String id, Map<String, dynamic> d) : super.decode(id, d)
   {
-    DateTime c = created;
-    _data = new Map.from(d);
-    _data["created"] = c;
-    bookingIds = d.containsKey("booking_ids") ? d["booking_ids"] : new List();
+    for (String key in d.keys)
+    {
+      _data[key] = d[key];
+    }
+    if (bookingIds == null) bookingIds = new List();
   }
 
   @override

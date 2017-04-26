@@ -13,7 +13,7 @@ abstract class EditableModel extends ModelBase
   EditableModel.from(EditableModel other) : super.from(other);
 
   @override
-  EditableModel.decode(Map<String, dynamic> d) : super.decode(d)
+  EditableModel.decode(String id, Map<String, dynamic> d) : super.decode(id, d)
   {
     addedBy = d["added_by"];
     status = d["status"];

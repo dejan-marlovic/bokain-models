@@ -15,7 +15,7 @@ class User extends EditableModel
   User.from(User other) : super.from(other);
 
   @override
-  User.decode(Map<String, dynamic> d) : super.decode(d)
+  User.decode(String id, Map<String, dynamic> d) : super.decode(id, d)
   {
     socialNumber = d["social_number"];
     firstname = d["firstname"];

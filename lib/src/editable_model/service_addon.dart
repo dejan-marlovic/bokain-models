@@ -6,7 +6,7 @@ class ServiceAddon extends EditableModel
   {
     this.name = name;
     this.price = price.toDouble();
-    this.duration = duration_minutes.toInt();
+    this.durationMinutes = duration_minutes.toInt();
   }
 
   @override
@@ -14,7 +14,7 @@ class ServiceAddon extends EditableModel
   {
     name = "";
     price = 0.0;
-    duration = 0;
+    durationMinutes = 0;
   }
 
   @override
@@ -27,29 +27,31 @@ class ServiceAddon extends EditableModel
   }
 
   @override
-  ServiceAddon.decode(Map<String, dynamic> d) : super.decode(d)
+  ServiceAddon.decode(String id, Map<String, dynamic> d) : super.decode(id, d)
   {
     name = d["name"];
     price = d["price"];
-    duration = d["duration"];
+    durationMinutes = d["duration_minutes"];
     description = d["description"];
   }
 
   @override
   Map<String, String> get toTable
   {
-    return {ModelBase.phrase.get(["name"]) : name, ModelBase.phrase.get(["duration"]) : duration.toString(), ModelBase.phrase.get(["price"]) : price.toString()};
+    return {ModelBase.phrase.get(["name"]) : name, ModelBase.phrase.get(["duration"]) : durationMinutes.toString(), ModelBase.phrase.get(["price"]) : price.toString()};
   }
 
-  String toString() => ModelBase.phrase.get(["_ui_name_service_addon"], params: {"name":name, "duration":duration.toString(), "price":price.toString()});
+  String toString() => ModelBase.phrase.get(["_ui_name_service_addon"], params: {"name":name, "duration":durationMinutes.toString(), "price":price.toString()});
 
   String get description => _data["description"];
   String get name => _data["name"];
   num get price => _data["price"];
-  num get duration => _data["duration"];
+  Duration get duration => new Duration(minutes: durationMinutes);
+  num get durationMinutes => _data["duration_minutes"];
 
   void set description(String value) { _data["description"] = value; }
   void set name(String value) { _data["name"] = value; }
   void set price(num value) { _data["price"] = value.toDouble(); }
-  void set duration(num value) { _data["duration"] = value.toInt(); }
+  void set duration(Duration value) { durationMinutes = value.inMinutes; }
+  void set durationMinutes(num value) { data["duration_minutes"] = value.toInt(); }
 }

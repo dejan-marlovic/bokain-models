@@ -12,7 +12,7 @@ class Booking extends ModelBase
   Booking.from(Booking other) : super.from(other);
 
   @override
-  Booking.decode(Map<String, dynamic> d) : super.decode(d)
+  Booking.decode(String id, Map<String, dynamic> d) : super.decode(id, d)
   {
     startTime = DateTime.parse(d["start_time"]);
     endTime = DateTime.parse(d["end_time"]);

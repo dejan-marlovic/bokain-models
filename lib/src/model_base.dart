@@ -14,19 +14,19 @@ part 'calendar/day.dart';
 
 abstract class ModelBase
 {
-  ModelBase()
+  ModelBase([this._id = null])
   {
     _data = new Map();
     created = new DateTime.now();
   }
 
-  ModelBase.from(ModelBase other)
+  ModelBase.from(ModelBase other, [this._id = null])
   {
     _data = deepCopy(other._data);
     if (!_data.containsKey("created")) _data["created"] = new DateTime.now();
   }
 
-  ModelBase.decode(Map<String, dynamic> d)
+  ModelBase.decode(this._id, Map<String, dynamic> d)
   {
     _data = new Map();
     created = DateTime.parse(d["created"]);
@@ -121,11 +121,13 @@ abstract class ModelBase
     return ret;
   }
 
+  String get id => _id;
   Map<String, dynamic> get data => _data;
   DateTime get created => _data["created"];
   void set created(DateTime value) { _data["created"] = value; }
 
   Map<String, dynamic> _data;
+  final String _id;
 
   static String timestampFormat(DateTime dt)
   {

@@ -14,7 +14,7 @@ class Service extends EditableModel
   Service.from(Service other) : super.from(other);
 
   @override
-  Service.decode(Map<String, dynamic> d) : super.decode(d)
+  Service.decode(String id, Map<String, dynamic> d) : super.decode(id, d)
   {
     name = d["name"];
     category = d["category"];
