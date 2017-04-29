@@ -21,6 +21,10 @@ class Service extends EditableModel
     description = d["description"];
     durationMinutes = d["duration_minutes"];
     price = (d["price"] is double) ? d["price"] : d["price"].toDouble();
+
+    // TODO temporary while all services hasn't been updated
+    dynamicTime = d.containsKey("dynamic_time") ? d["dynamic_time"] : false;
+
     roomIds = (d.containsKey("room_ids")) ? d["room_ids"] : new List();
     userIds = (d.containsKey("user_ids")) ? d["user_ids"] : new List();
     serviceAddonIds = (d.containsKey("service_addon_ids")) ? d["service_addon_ids"] : new List();
@@ -53,6 +57,7 @@ class Service extends EditableModel
   Duration get duration => new Duration(minutes: durationMinutes);
   num get durationMinutes => _data["duration_minutes"];
   num get price => _data["price"];
+  bool get dynamicTime => _data["dynamic_time"];
   List<String> get roomIds => _data["room_ids"];
   List<String> get userIds => _data["user_ids"];
   List<String> get serviceAddonIds => _data["service_addon_ids"];
@@ -63,6 +68,7 @@ class Service extends EditableModel
   void set duration(Duration value) { _data["duration_minutes"] = value.inMinutes; }
   void set durationMinutes(num value) { data["duration_minutes"] = value.toInt(); }
   void set price(num value) { _data["price"] = value.toDouble(); }
+  void set dynamicTime(bool value) { _data["dynamic_time"] = value; }
   void set roomIds(List<String> value) { _data["room_ids"] = value; }
   void set userIds(List<String> value) { _data["user_ids"] = value; }
   void set serviceAddonIds(List<String> value) { _data["service_addon_ids"] = value; }

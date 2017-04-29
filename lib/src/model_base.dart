@@ -11,6 +11,7 @@ part 'editable_model/service_addon.dart';
 part 'editable_model/user.dart';
 part 'calendar/booking.dart';
 part 'calendar/day.dart';
+part 'calendar/increment.dart';
 
 abstract class ModelBase
 {
@@ -39,7 +40,7 @@ abstract class ModelBase
     /// Auto-encode default type properties (String, DateTime, num, null)
     _data.forEach((key, value)
     {
-      if (value is String || value is int || value is double || value is List<String> || value == null) d[key] = value;
+      if (value is String || value is bool || value is int || value is double || value is List<String> || value == null) d[key] = value;
       else if (value is DateTime) d[key] = timestampFormat(value);
     });
 
