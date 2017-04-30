@@ -1,8 +1,8 @@
 name: bokain_models
 description: A collection of models for bokain
-version: 0.2.48
+version: 0.2.57
 author: Patrick Minogue <patrick.minogue@gmail.com>
-homepage: https://www.bokain.7se
+homepage: https://www.bokain.se
 
 environment:
   sdk: '>=1.23.0-dev.11.11 <2.0.0'

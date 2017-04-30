@@ -8,43 +8,35 @@ class Increment extends ModelBase
   {
     startTime = start_time;
     endTime = startTime.add(duration);
-  }
-
-  Increment.from(Increment other)
-  {
-    startTime = other.startTime;
-    endTime = other.endTime;
-    state = other.state;
-    bookingId = other.bookingId;
-    availableRoomIds = new List.from(other.availableRoomIds);
+    userStates = new Map<String, UserState>();
   }
 
   @override
-  Increment.decode(Map<String, String> d)
+  Increment.decode(Map<String, dynamic> d)
   {
     startTime = DateTime.parse(d["start_time"]);
     endTime = DateTime.parse(d["end_time"]);
-    state = d["state"];
-    bookingId = d["booking_id"];
+    Map<String, Map<String, String>> userStateTable = d["user_states"];
+    userStates = new Map<String, UserState>();
+    if (userStateTable == null) userStates = new Map();
+    else userStateTable.keys.forEach((id) => userStates[id] = new UserState.decode(userStateTable[id]));
   }
 
   @override
-  Map<String, String> get encoded => super.encoded;
+  Map<String, dynamic> get encoded
+  {
+    Map<String, dynamic> output = super.encoded;
+    output["user_states"] = new Map<String, Map<String, String>>();
+    userStates.keys.forEach((id) => output["user_states"][id] = userStates[id].encoded);
+    return output;
+  }
 
   @override
   Map<String, String> get toTable
   {
     Map<String, String> table = new Map();
     table[ModelBase.phrase.get(['date'])] = ModelBase.timestampFormat(startTime);
-    table[ModelBase.phrase.get(['booking'])] = bookingId;
     return table;
-  }
-
-  void resetState()
-  {
-    state = null;
-    bookingId = null;
-    availableRoomIds = [];
   }
 
   /// This list is not stored in the database, as it depends on context (selected service and salon)
@@ -53,11 +45,34 @@ class Increment extends ModelBase
   Map<String, dynamic> _data = new Map();
   DateTime get startTime => _data["start_time"];
   DateTime get endTime => _data["end_time"];
-  String get state => _data["state"];
-  String get bookingId => _data["booking_id"];
+  Map<String, UserState> get userStates => _data["user_states"];
+
+ // UserState getUserState(String user_id) => userStates.firstWhere((us) => us.userId == user_id, orElse: () => null);
+
+  bool get isPopulated => userStates.values.firstWhere((us) => us.state != null, orElse: () => null) != null;
 
   void set startTime(DateTime value) { _data["start_time"] = value; }
   void set endTime(DateTime value) { _data["end_time"] = value; }
-  void set state(String value) { _data["state"] = value; }
-  void set bookingId(String value) { _data["booking_id"] = value; }
+  void set userStates(Map<String, UserState> value) { _data["user_states"] = value; }
+}
+
+class UserState
+{
+  UserState(this.userId)
+  {
+    bookingId = null;
+    state = null;
+  }
+
+  UserState.decode(Map<String, String> data) : userId = data["user_id"]
+  {
+    bookingId = data["booking_id"];
+    state = data["state"];
+  }
+
+  Map<String, String> get encoded => {"user_id" : userId, "booking_id" : bookingId, "state" : state};
+
+  final String userId;
+  String bookingId;
+  String state;
 }
