@@ -10,6 +10,7 @@ class Increment extends ModelBase
     endTime = startTime.add(duration);
     userStates = new Map<String, UserState>();
   }
+  
 
   @override
   Increment.decode(Map<String, dynamic> d)
@@ -38,9 +39,6 @@ class Increment extends ModelBase
     table[ModelBase.phrase.get(['date'])] = ModelBase.timestampFormat(startTime);
     return table;
   }
-
-  /// This list is not stored in the database, as it depends on context (selected service and salon)
-  List<String> availableRoomIds = new List();
 
   Map<String, dynamic> _data = new Map();
   DateTime get startTime => _data["start_time"];

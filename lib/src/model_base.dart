@@ -43,9 +43,6 @@ abstract class ModelBase
       if (value is String || value is bool || value is int || value is double || value is List<String> || value == null) d[key] = value;
       else if (value is DateTime) d[key] = timestampFormat(value);
     });
-
-
-    print(d);
     return d;
   }
 
@@ -72,6 +69,7 @@ abstract class ModelBase
     {
       if (!other._data.containsKey(key)) return false;
 
+      /*
       // Collections with identical child elements are not considered equal in dart
       else if (_data[key] is List && other._data[key] is List)
       {
@@ -85,7 +83,8 @@ abstract class ModelBase
       {
         if (!const DeepCollectionEquality.unordered().equals(_data[key], other._data[key])) return false;
       }
-      else if (_data[key] != other._data[key]) return false;
+      */
+      if ((_data[key] is String || data[key] is num) && _data[key] != other._data[key]) return false;
     }
 
     return true;
