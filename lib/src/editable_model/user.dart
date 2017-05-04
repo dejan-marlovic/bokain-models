@@ -12,9 +12,6 @@ class User extends EditableModel
   }
 
   @override
-  User.from(User other) : super.from(other);
-
-  @override
   User.decode(String id, Map<String, dynamic> d) : super.decode(id, d)
   {
     socialNumber = d["social_number"];
@@ -45,6 +42,9 @@ class User extends EditableModel
     table[ModelBase.phrase.get(["customer_plural"])] = customerIds.length.toString();
     return table;
   }
+
+  @override
+  User.from(User other) : super.from(other);
 
   @override
   String toString() => email;

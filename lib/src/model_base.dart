@@ -1,6 +1,7 @@
 library model_base;
 import 'dart:math';
-import 'package:collection/collection.dart';
+//import 'package:collection/collection.dart';
+import 'dart:convert';
 import 'phrase.dart';
 part 'editable_model/editable_model.dart';
 part 'editable_model/customer.dart';
@@ -21,9 +22,9 @@ abstract class ModelBase
     created = new DateTime.now();
   }
 
-  ModelBase.from(ModelBase other, [this._id = null])
+  ModelBase.from(ModelBase other) : this._id = other.id
   {
-    _data = deepCopy(other._data);
+    _data = _deepCopy(other._data);
     if (!_data.containsKey("created")) _data["created"] = new DateTime.now();
   }
 
@@ -65,6 +66,9 @@ abstract class ModelBase
 
   bool isEqual(ModelBase other)
   {
+
+    return JSON.encode(encoded) == JSON.encode(other.encoded);
+/*
     for (String key in _data.keys)
     {
       if (!other._data.containsKey(key)) return false;
@@ -88,9 +92,10 @@ abstract class ModelBase
     }
 
     return true;
+    */
   }
 
-  dynamic deepCopy(dynamic data)
+  dynamic _deepCopy(dynamic data)
   {
     dynamic ret;
     if (data is List)
@@ -98,7 +103,7 @@ abstract class ModelBase
       ret = new List();
       for (dynamic v in data)
       {
-        ret.add(deepCopy(v));
+        ret.add(_deepCopy(v));
       }
     }
     else if (data is Map)
@@ -106,7 +111,7 @@ abstract class ModelBase
       ret = new Map();
       for (dynamic key in data.keys)
       {
-        ret[key] = deepCopy(data[key]);
+        ret[key] = _deepCopy(data[key]);
       }
     }
     else if (data is Set)
@@ -114,7 +119,7 @@ abstract class ModelBase
       ret = new Set();
       for (dynamic v in data)
       {
-        ret.add(deepCopy(v));
+        ret.add(_deepCopy(v));
       }
     }
     else ret = data;
