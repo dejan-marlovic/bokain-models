@@ -30,13 +30,14 @@ class Service extends EditableModel
     serviceAddonIds = (d.containsKey("service_addon_ids")) ? d["service_addon_ids"] : new List();
   }
 
+  /*
   @override
   Map<String, dynamic> get encoded
   {
     Map<String, dynamic> d = super.encoded;
     return d;
   }
-
+*/
   @override
   Map<String, String> get toTable
   {

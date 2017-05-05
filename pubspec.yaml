@@ -1,11 +1,20 @@
 name: bokain_models
-description: A collection of models for bokain
-version: 0.2.63
+description: A collection of models and their services for bokain
+version: 0.2.74
 author: Patrick Minogue <patrick.minogue@gmail.com>
 homepage: https://www.bokain.se
 
 environment:
-  sdk: '>=1.23.0-dev.11.11 <2.0.0'
+  sdk: '>=1.23.0 <2.0.0'
 
 dependencies:
-  collection: ^1.12.0
+  angular2: '^3.0.0'
+  angular_components: '^0.5.1'
+  firebase: '^3.0.2'
+
+transformers:
+- angular2:
+    platform_directives:
+    - 'package:angular2/common.dart#COMMON_DIRECTIVES'
+    platform_pipes:
+    - 'package:angular2/common.dart#COMMON_PIPES'
