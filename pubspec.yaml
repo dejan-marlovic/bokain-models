@@ -1,6 +1,6 @@
 name: bokain_models
 description: A collection of models and their services for bokain
-version: 0.2.74
+version: 0.2.96
 author: Patrick Minogue <patrick.minogue@gmail.com>
 homepage: https://www.bokain.se
 
@@ -11,6 +11,7 @@ dependencies:
   angular2: '^3.0.0'
   angular_components: '^0.5.1'
   firebase: '^3.0.2'
+  http: '^0.11.3+13'
 
 transformers:
 - angular2:

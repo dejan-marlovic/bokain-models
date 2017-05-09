@@ -12,6 +12,7 @@ part 'editable_model/user.dart';
 part 'calendar/booking.dart';
 part 'calendar/day.dart';
 part 'calendar/increment.dart';
+part 'journal_entry.dart';
 
 abstract class ModelBase
 {
@@ -31,6 +32,7 @@ abstract class ModelBase
   {
     _data = new Map();
     created = DateTime.parse(d["created"]);
+    addedBy = d["added_by"];
   }
 
   Map<String, dynamic> get encoded
@@ -63,36 +65,7 @@ abstract class ModelBase
     return false;
   }
 
-  bool isEqual(ModelBase other)
-  {
-
-    return JSON.encode(encoded) == JSON.encode(other.encoded);
-/*
-    for (String key in _data.keys)
-    {
-      if (!other._data.containsKey(key)) return false;
-
-      /*
-      // Collections with identical child elements are not considered equal in dart
-      else if (_data[key] is List && other._data[key] is List)
-      {
-        if (!const DeepCollectionEquality.unordered().equals(_data[key], other._data[key])) return false;
-      }
-      else if (_data[key] is Map && other._data[key] is Map)
-      {
-        if (!const DeepCollectionEquality.unordered().equals(_data[key], other._data[key])) return false;
-      }
-      else if (_data[key] is Set && other._data[key] is Set)
-      {
-        if (!const DeepCollectionEquality.unordered().equals(_data[key], other._data[key])) return false;
-      }
-      */
-      if ((_data[key] is String || data[key] is num) && _data[key] != other._data[key]) return false;
-    }
-
-    return true;
-    */
-  }
+  bool isEqual(ModelBase other) => JSON.encode(encoded) == JSON.encode(other.encoded);
 
   dynamic _deepCopy(dynamic data)
   {
@@ -127,8 +100,10 @@ abstract class ModelBase
 
   String get id => _id;
   Map<String, dynamic> get data => _data;
+  String get addedBy => _data["added_by"];
   DateTime get created => _data["created"];
   void set created(DateTime value) { _data["created"] = value; }
+  void set addedBy(String value) { _data["added_by"] = value; }
 
   Map<String, dynamic> _data;
   final String _id;

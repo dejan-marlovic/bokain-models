@@ -17,4 +17,11 @@ class CustomerService extends ModelService
     await _ref.child(customer.id).child("booking_ids").set(customer.bookingIds);
     _loading = false;
   }
+
+  Future patchJournalEntries(Customer customer) async
+  {
+    _loading = true;
+    await _ref.child(customer.id).child("journal_entry_ids").set(customer.journalEntryIds);
+    _loading = false;
+  }
 }

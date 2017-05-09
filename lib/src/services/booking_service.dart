@@ -19,28 +19,24 @@ class BookingService extends ModelService
   Booking find(DateTime time, String room_id)
   {
     return _bookingMap.values.firstWhere((b) =>
-    b.roomId == room_id &&
-        (b.startTime.isAtSameMomentAs(time) || (b.startTime.isBefore(time) && b.endTime.isAfter(time))), orElse: () => null);
+    b.roomId == room_id && (b.startTime.isAtSameMomentAs(time) || (b.startTime.isBefore(time) && b.endTime.isAfter(time))), orElse: () => null);
   }
 
   Future _onChildAddedOrChanged(firebase.QueryEvent e) async
   {
     Booking booking = new Booking.decode(e.snapshot.key, e.snapshot.val());
 
-    if (_bookingMap.containsKey(e.snapshot.key)) await _patchRemove(_bookingMap[e.snapshot.key]);
+    await _patchRemove(booking);
     await _patchAdd(booking);
 
-    _bookingMap[e.snapshot.key] = booking;
+    //_bookingMap[e.snapshot.key] = booking;
   }
 
   Future _onChildRemoved(firebase.QueryEvent e) async
   {
-    Booking booking = bookingMap[e.snapshot.key];
-    if (booking != null)
-    {
-      await _patchRemove(booking);
-      _bookingMap.remove(booking.id);
-    }
+    Booking booking = new Booking.decode(e.snapshot.key, e.snapshot.val());//bookingMap[e.snapshot.key];
+    await _patchRemove(booking);
+    //_bookingMap.remove(booking.id);
   }
 
   Future _patchAdd(Booking booking) async

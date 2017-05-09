@@ -9,3 +9,4 @@ export 'package:bokain_models/src/phrase.dart';
 export 'package:bokain_models/src/services/phrase_service.dart';
 export 'package:bokain_models/src/services/model_service.dart';
 export 'package:bokain_models/src/services/calendar_service.dart';
+export 'package:bokain_models/src/services/mailer_service.dart';

@@ -1,14 +1,16 @@
 library model_service;
 
 import 'dart:async';
+//import 'dart:math' show Random;
 import 'package:angular2/core.dart';
 import 'package:angular_components/angular_components.dart' show SelectionOptions, OptionGroup;
 import 'package:firebase/firebase.dart' as firebase;
 import 'package:bokain_models/src/services/calendar_service.dart';
-import 'package:bokain_models/bokain_models.dart' show Booking, Customer, Day, EditableModel, Increment, ModelBase, Room, Salon, Service, ServiceAddon, User;
+import 'package:bokain_models/bokain_models.dart' show Booking, Customer, Day, Increment, JournalEntry, ModelBase, Room, Salon, Service, ServiceAddon, User;
 
 part 'booking_service.dart';
 part 'customer_service.dart';
+part 'journal_service.dart';
 part 'salon_service.dart';
 part 'service_service.dart';
 part 'service_addon_service.dart';
@@ -43,7 +45,7 @@ abstract class ModelService
   {
     _loading = true;
     model.created = new DateTime.now();
-    if (model is EditableModel) model.addedBy = firebase.auth().currentUser.uid;
+    model.addedBy = firebase.auth().currentUser.uid;
 
     firebase.ThenableReference ref = await _ref.push(model.encoded);
     _loading = false;
