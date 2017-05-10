@@ -3,12 +3,7 @@ part of model_service;
 @Injectable()
 class JournalService extends ModelService
 {
-  @override
-  JournalService(this._customerService) : super("journal")
-  {
-    _ref.onChildAdded.listen(_onChildAdded);
-    _ref.onChildRemoved.listen(_onChildRemoved);
-  }
+  JournalService(this._customerService) : super("journal");
 
   @override
   JournalEntry createModelInstance(String id, Map<String, dynamic> data)
@@ -20,14 +15,19 @@ class JournalService extends ModelService
   {
     String filename = new DateTime.now().millisecondsSinceEpoch.toString() + ".jpg";
     _loading = true;
-    await _imagesRef.child(filename).putString(data_base64, "base64", new firebase.UploadMetadata(contentType: "image/jpeg"));
+    await _imagesRef.child(filename).putString(data_base64, "base64", new firebase.UploadMetadata(contentType: "image/jpeg")).future;
+    String url = (await _imagesRef.child(filename).getDownloadURL()).toString();
+
     _loading = false;
-    return filename;
+    return url;
   }
 
+  @override
   Future _onChildAdded(firebase.QueryEvent e) async
   {
-    JournalEntry journalEntry = new JournalEntry.decode(e.snapshot.key, e.snapshot.val());
+    await super._onChildAdded(e);
+
+    JournalEntry journalEntry = _models[e.snapshot.key];
 
     Customer customer = _customerService.getModel(journalEntry.customerId);
     if (customer != null && !customer.journalEntryIds.contains(journalEntry.id))
@@ -37,18 +37,21 @@ class JournalService extends ModelService
     }
   }
 
+  @override
   Future _onChildRemoved(firebase.QueryEvent e) async
   {
-    JournalEntry journalEntry = new JournalEntry.decode(e.snapshot.key, e.snapshot.val());
+    JournalEntry journalEntry = _models[e.snapshot.key];
+
     Customer customer = _customerService.getModel(journalEntry.customerId);
     if (customer != null && customer.journalEntryIds.contains(journalEntry.id))
     {
       customer.journalEntryIds.remove(journalEntry.id);
       await _customerService.patchJournalEntries(customer);
     }
+
+    await super._onChildRemoved(e);
   }
 
   final firebase.StorageReference _imagesRef = firebase.storage().ref("journal-images");
-
   final CustomerService _customerService;
 }

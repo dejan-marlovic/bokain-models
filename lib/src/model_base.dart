@@ -33,6 +33,8 @@ abstract class ModelBase
     _data = new Map();
     created = DateTime.parse(d["created"]);
     addedBy = d["added_by"];
+    d.remove("created");
+    d.remove("added_by");
   }
 
   Map<String, dynamic> get encoded
