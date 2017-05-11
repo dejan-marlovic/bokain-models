@@ -23,9 +23,21 @@ class JournalService extends ModelService
   }
 
   @override
-  Future _onChildAdded(firebase.QueryEvent e) async
+  Future<String> push(JournalEntry model) async
   {
-    await super._onChildAdded(e);
+    String id = await super.push(model);
+    _loading = true;
+
+    
+
+    _loading = false;
+    return id;
+  }
+
+  @override
+  void _onChildAdded(firebase.QueryEvent e)
+  {
+    super._onChildAdded(e);
 
     JournalEntry journalEntry = _models[e.snapshot.key];
 
@@ -33,12 +45,12 @@ class JournalService extends ModelService
     if (customer != null && !customer.journalEntryIds.contains(journalEntry.id))
     {
       customer.journalEntryIds.add(journalEntry.id);
-      await _customerService.patchJournalEntries(customer);
+      //await _customerService.patchJournalEntries(customer);
     }
   }
 
   @override
-  Future _onChildRemoved(firebase.QueryEvent e) async
+  void _onChildRemoved(firebase.QueryEvent e)
   {
     JournalEntry journalEntry = _models[e.snapshot.key];
 
@@ -46,10 +58,9 @@ class JournalService extends ModelService
     if (customer != null && customer.journalEntryIds.contains(journalEntry.id))
     {
       customer.journalEntryIds.remove(journalEntry.id);
-      await _customerService.patchJournalEntries(customer);
+      //await _customerService.patchJournalEntries(customer);
     }
-
-    await super._onChildRemoved(e);
+    super._onChildRemoved(e);
   }
 
   final firebase.StorageReference _imagesRef = firebase.storage().ref("journal-images");

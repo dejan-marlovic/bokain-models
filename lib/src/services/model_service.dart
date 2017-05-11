@@ -112,7 +112,6 @@ abstract class ModelService
   {
     ModelBase model = createModelInstance(e.snapshot.key, e.snapshot.val());
     _models[e.snapshot.key] = model;
-
     _optionGroup.add(model);
     modelOptions = new SelectionOptions([_optionGroup]);
   }

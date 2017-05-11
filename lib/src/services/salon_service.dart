@@ -7,7 +7,6 @@ class SalonService extends ModelService
   {
     _db.ref('rooms').onChildAdded.listen(_onRoomAdded);
     _db.ref('rooms').onChildChanged.listen(_onRoomChanged);
-    _db.ref('rooms').onChildRemoved.listen(_onRoomRemoved);
   }
 
   @override
@@ -27,17 +26,10 @@ class SalonService extends ModelService
 
   Iterable<Room> getRooms(List<String> ids) => _rooms.keys.where(ids.contains).map((id) => getRoom(id));
 
-  Future removeRoom(String id) async
-  {
-    _loading = true;
-    await _db.ref('rooms').child(id).remove();
-    _loading = false;
-  }
-
   Future setRoom(String id) async
   {
     _loading = true;
-    await _db.ref('rooms').child(id).set(getRoom(id).data);
+    await _db.ref('rooms').child(id).set(getRoom(id).encoded);
     _loading = false;
   }
 
@@ -73,17 +65,6 @@ class SalonService extends ModelService
   void _onRoomChanged(firebase.QueryEvent e)
   {
     _rooms[e.snapshot.key] = new Room.decode(e.snapshot.key, e.snapshot.val());
-  }
-
-  void _onRoomRemoved(firebase.QueryEvent e)
-  {
-    _rooms.remove(e.snapshot.key);
-
-    /*
-    Salon salon = selectedModel as Salon;
-    salon.roomIds.remove(e.snapshot.key);
-    _ref.child(_selectedModel.id).child("room_ids").set(salon.roomIds);
-    */
   }
 
   Future patchRooms(Salon salon) async
