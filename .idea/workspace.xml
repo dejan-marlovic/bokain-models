@@ -20,12 +20,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_details_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_details_component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/pubspec.yaml" afterPath="$PROJECT_DIR$/../bokain-admin/pubspec.yaml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/web/index.html" afterPath="$PROJECT_DIR$/../bokain-admin/web/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/services/booking_service.dart" afterPath="$PROJECT_DIR$/lib/src/services/booking_service.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/services/journal_service.dart" afterPath="$PROJECT_DIR$/lib/src/services/journal_service.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/services/model_service.dart" afterPath="$PROJECT_DIR$/lib/src/services/model_service.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/services/salon_service.dart" afterPath="$PROJECT_DIR$/lib/src/services/salon_service.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pubspec.yaml" afterPath="$PROJECT_DIR$/pubspec.yaml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -505,6 +499,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24714434" sideWeight="0.4402985" order="7" side_tool="false" content_ui="tabs" />
