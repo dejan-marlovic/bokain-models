@@ -3,7 +3,7 @@ part of model_base;
 class Salon extends EditableModel
 {
   @override
-  Salon() : super()
+  Salon(String id) : super(id)
   {
     roomIds = new List();
     userIds = new List();
@@ -29,7 +29,7 @@ class Salon extends EditableModel
   String toString() => name;
 
   @override
-  Map<String, String> get toTable
+  Map<String, String> toTableRow()
   {
     Map<String, String> table = new Map();
     table[ModelBase.phrase.get(["name"])] = name;

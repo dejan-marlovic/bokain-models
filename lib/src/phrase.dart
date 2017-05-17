@@ -98,6 +98,7 @@ class Phrase
     "customer_plural" : "kunder",
     "customer_details" : "kunduppgifter",
     "dashboard" : "dashboard",
+    "day" : "dag",
     "delete" : "ta bort",
     "description" : "beskrivning",
     "details" : "uppgifter",

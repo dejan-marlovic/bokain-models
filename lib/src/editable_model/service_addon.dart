@@ -2,7 +2,7 @@ part of model_base;
 
 class ServiceAddon extends EditableModel
 {
-  ServiceAddon(String name, num price, num duration_minutes)
+  ServiceAddon(String id, String name, num price, num duration_minutes) : super(id)
   {
     this.name = name;
     this.price = price.toDouble();
@@ -10,16 +10,6 @@ class ServiceAddon extends EditableModel
     serviceIds = new List();
   }
 
-  /*
-  @override
-  ServiceAddon.empty()
-  {
-    name = "";
-    price = 0.0;
-    durationMinutes = 0;
-    serviceIds = new List();
-  }
-*/
   @override
   ServiceAddon.from(ServiceAddon other) : super.from(other);
 
@@ -34,7 +24,7 @@ class ServiceAddon extends EditableModel
   }
 
   @override
-  Map<String, String> get toTable
+  Map<String, String> toTableRow()
   {
     return {ModelBase.phrase.get(["name"]) : name, ModelBase.phrase.get(["duration"]) : durationMinutes.toString(), ModelBase.phrase.get(["price"]) : price.toString()};
   }

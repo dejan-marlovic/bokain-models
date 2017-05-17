@@ -3,9 +3,9 @@ part of model_base;
 abstract class EditableModel extends ModelBase
 {
   @override
-  EditableModel([String current_status = "active"]) : super()
+  EditableModel(String id) : super(id)
   {
-    status = current_status;
+    status = "active";
   }
 
   @override

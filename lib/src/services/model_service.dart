@@ -22,6 +22,7 @@ abstract class ModelService
   {
     _db = firebase.database();
     _ref = _db.ref(_name);
+
     _ref.onChildAdded.listen(_onChildAdded);
     _ref.onChildChanged.listen(_onChildChanged);
     _ref.onChildRemoved.listen(_onChildRemoved);
@@ -75,7 +76,7 @@ abstract class ModelService
     }
   }
 
-  List<ModelBase> getModelObjects({List<String> ids : null, bool include_disabled : false})
+  List<ModelBase> getModels([List<String> ids = null, bool include_disabled = false])
   {
     List<ModelBase> output = (ids == null) ? new List.from(_models.values) : _models.values.where((m) => ids.contains(m.id)).toList(growable: !include_disabled);
     if (include_disabled == false)
@@ -91,22 +92,24 @@ abstract class ModelService
 
   List<String> get modelIds => _models.keys.toList(growable: false);
 
-  Map<String, Map<String, dynamic>> getRows([List<String> ids = null, bool as_table = false])
+  /*
+  Map<String, Map<String, dynamic>> getRows([List<String> ids = null])
   {
     Map<String, Map<String, dynamic>> output = new Map();
 
     if (ids == null)
     {
-      if (as_table == true) _models.keys.forEach((id) => output[id] = _models[id].toTable);
+      if (as_table == true) _models.keys.forEach((id) => output[id] = _models[id].toTableRow());
       else _models.keys.forEach((id) => output[id] = _models[id].data);
     }
     else
     {
-      if (as_table == true) _models.keys.where((ids.contains)).forEach((id) => output[id] = _models[id].toTable);
+      if (as_table == true) _models.keys.where((ids.contains)).forEach((id) => output[id] = _models[id].toTableRow());
       else _models.keys.where((ids.contains)).forEach((id) => output[id] = _models[id].data);
     }
     return output;
   }
+  */
 
   void _onChildAdded(firebase.QueryEvent e)
   {
@@ -114,6 +117,8 @@ abstract class ModelService
     _models[e.snapshot.key] = model;
     _optionGroup.add(model);
     modelOptions = new SelectionOptions([_optionGroup]);
+
+    _onChildAddedController.add(model);
   }
 
   void _onChildChanged(firebase.QueryEvent e)
@@ -125,6 +130,8 @@ abstract class ModelService
     _optionGroup.insert(index, model);
 
     modelOptions = new SelectionOptions([_optionGroup]);
+
+    _onChildUpdatedController.add(model);
   }
 
   void _onChildRemoved(firebase.QueryEvent e)
@@ -132,9 +139,15 @@ abstract class ModelService
     _models.remove(e.snapshot.key);
     _optionGroup.removeWhere((m) => m.id == e.snapshot.key);
     modelOptions = new SelectionOptions([_optionGroup]);
+
+    _onChildRemovedController.add(e.snapshot.key);
   }
 
   ModelBase createModelInstance(String id, Map<String, dynamic> data);
+
+  Stream<ModelBase> get childAddedStream => _onChildAddedController.stream;
+  Stream<ModelBase> get childUpdatedStream => _onChildUpdatedController.stream;
+  Stream<String> get childRemovedStream => _onChildRemovedController.stream;
 
   final String _name;
   firebase.Database _db;
@@ -144,4 +157,7 @@ abstract class ModelService
   Map<String, ModelBase> _models = new Map();
   OptionGroup<ModelBase> _optionGroup = new OptionGroup([]);
   SelectionOptions<ModelBase> modelOptions;
+  final StreamController<ModelBase> _onChildAddedController = new StreamController();
+  final StreamController<ModelBase> _onChildUpdatedController = new StreamController();
+  final StreamController<String> _onChildRemovedController = new StreamController();
 }

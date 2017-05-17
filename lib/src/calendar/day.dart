@@ -8,7 +8,7 @@ class Day extends ModelBase
   static const int endMinute = 0;
 
   @override
-  Day(String salon_id, DateTime date) : super()
+  Day(String id, String salon_id, DateTime date) : super(id)
   {
     salonId = salon_id;
     startTime = new DateTime(date.year, date.month, date.day, startHour, startMinute);
@@ -47,7 +47,7 @@ class Day extends ModelBase
   }
 
   @override
-  Map<String, String> get toTable
+  Map<String, String> toTableRow()
   {
     Map<String, String> table = new Map();
     table[ModelBase.phrase.get(["date"])] = ModelBase.timestampFormat(startTime);

@@ -1,6 +1,8 @@
 library model_base;
 import 'dart:math';
 import 'dart:convert';
+import 'package:fo_components/fo_components.dart' show DataTableModel;
+
 import 'phrase.dart';
 part 'editable_model/editable_model.dart';
 part 'editable_model/customer.dart';
@@ -14,21 +16,21 @@ part 'calendar/day.dart';
 part 'calendar/increment.dart';
 part 'journal_entry.dart';
 
-abstract class ModelBase
+abstract class ModelBase extends DataTableModel
 {
-  ModelBase([this._id = null])
+  ModelBase(String id) : super(id)
   {
     _data = new Map();
     created = new DateTime.now();
   }
 
-  ModelBase.from(ModelBase other) : this._id = other.id
+  ModelBase.from(ModelBase other) : super(other.id) //this._id = other.id
   {
     _data = _deepCopy(other._data);
     if (!_data.containsKey("created")) _data["created"] = new DateTime.now();
   }
 
-  ModelBase.decode(this._id, Map<String, dynamic> d)
+  ModelBase.decode(String id, Map<String, dynamic> d) : super(id)
   {
     _data = new Map();
     created = DateTime.parse(d["created"]);
@@ -50,8 +52,8 @@ abstract class ModelBase
     return d;
   }
 
-  // Table representation of the model
-  Map<String, String> get toTable;
+  @override
+  Map<String, String> toTableRow();
 
   bool matchesKeyword(String keyword)
   {
@@ -100,7 +102,6 @@ abstract class ModelBase
     return ret;
   }
 
-  String get id => _id;
   Map<String, dynamic> get data => _data;
   String get addedBy => _data["added_by"];
   DateTime get created => _data["created"];
@@ -108,7 +109,6 @@ abstract class ModelBase
   void set addedBy(String value) { _data["added_by"] = value; }
 
   Map<String, dynamic> _data;
-  final String _id;
 
   static String timestampFormat(DateTime dt)
   {

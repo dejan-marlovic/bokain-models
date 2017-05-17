@@ -3,7 +3,7 @@ part of model_base;
 class User extends EditableModel
 {
   @override
-  User() : super()
+  User(String id) : super(id)
   {
     customerIds = new List();
     salonIds = new List();
@@ -32,7 +32,10 @@ class User extends EditableModel
   }
 
   @override
-  Map<String, String> get toTable
+  User.from(User other) : super.from(other);
+
+  @override
+  Map<String, String> toTableRow()
   {
     Map<String, String> table = new Map();
     table[ModelBase.phrase.get(["name"])] = "$firstname $lastname";
@@ -42,9 +45,6 @@ class User extends EditableModel
     table[ModelBase.phrase.get(["customer_plural"])] = customerIds.length.toString();
     return table;
   }
-
-  @override
-  User.from(User other) : super.from(other);
 
   @override
   String toString() => email;

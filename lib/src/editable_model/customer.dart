@@ -3,7 +3,7 @@ part of model_base;
 class Customer extends EditableModel
 {
   @override
-  Customer() : super()
+  Customer(String id) : super(id)
   {
     Random rnd = new Random.secure();
     List<int> codeUnits = new List();
@@ -34,7 +34,7 @@ class Customer extends EditableModel
   }
 
   @override
-  Map<String, String> get toTable
+  Map<String, String> toTableRow()
   {
     Map<String, String> table = new  Map();
     table[ModelBase.phrase.get(["name"])] = "$firstname $lastname";

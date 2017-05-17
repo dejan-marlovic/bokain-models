@@ -3,7 +3,7 @@ part of model_base;
 class Service extends EditableModel
 {
   @override
-  Service() : super()
+  Service(String id) : super(id)
   {
     roomIds = new List();
     userIds = new List();
@@ -30,16 +30,8 @@ class Service extends EditableModel
     serviceAddonIds = (d.containsKey("service_addon_ids")) ? d["service_addon_ids"] : new List();
   }
 
-  /*
   @override
-  Map<String, dynamic> get encoded
-  {
-    Map<String, dynamic> d = super.encoded;
-    return d;
-  }
-*/
-  @override
-  Map<String, String> get toTable
+  Map<String, String> toTableRow()
   {
     Map<String, String> table = new Map();
     table[ModelBase.phrase.get(["name"])] = name;

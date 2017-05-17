@@ -3,7 +3,7 @@ part of model_base;
 class Booking extends ModelBase
 {
   @override
-  Booking() : super()
+  Booking(String id) : super(id)
   {
     serviceAddonIds = new List();
   }
@@ -28,7 +28,7 @@ class Booking extends ModelBase
   }
 
   @override
-  Map<String, String> get toTable
+  Map<String, String> toTableRow()
   {
     Map<String, String> table = new Map();
     table[ModelBase.phrase.get(["start_time"])] = ModelBase.timestampFormat(startTime);

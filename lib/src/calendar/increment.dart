@@ -4,16 +4,15 @@ class Increment extends ModelBase
 {
   static const Duration duration = const Duration(minutes: 10);
 
-  Increment(DateTime start_time) : super()
+  Increment(DateTime start_time) : super(null)
   {
     startTime = start_time;
     endTime = startTime.add(duration);
     userStates = new Map<String, UserState>();
   }
-  
 
   @override
-  Increment.decode(Map<String, dynamic> d)
+  Increment.decode(Map<String, dynamic> d) : super.decode(null, d)
   {
     startTime = DateTime.parse(d["start_time"]);
     endTime = DateTime.parse(d["end_time"]);
@@ -33,7 +32,7 @@ class Increment extends ModelBase
   }
 
   @override
-  Map<String, String> get toTable
+  Map<String, String> toTableRow()
   {
     Map<String, String> table = new Map();
     table[ModelBase.phrase.get(['date'])] = ModelBase.timestampFormat(startTime);
@@ -44,8 +43,6 @@ class Increment extends ModelBase
   DateTime get startTime => _data["start_time"];
   DateTime get endTime => _data["end_time"];
   Map<String, UserState> get userStates => _data["user_states"];
-
- // UserState getUserState(String user_id) => userStates.firstWhere((us) => us.userId == user_id, orElse: () => null);
 
   bool get isPopulated => userStates.values.firstWhere((us) => us.state != null, orElse: () => null) != null;
 

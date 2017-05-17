@@ -3,7 +3,7 @@ part of model_base;
 class JournalEntry extends ModelBase
 {
   @override
-  JournalEntry(String customer_id) : super()
+  JournalEntry(String id, String customer_id) : super(id)
   {
     imageURIs = new List();
     customerId = customer_id;
@@ -21,7 +21,7 @@ class JournalEntry extends ModelBase
   }
 
   @override
-  Map<String, String> get toTable => {"comments_internal":commentsInternal, "comments_external":commentsExternal};
+  Map<String, String> toTableRow() => {"comments_internal":commentsInternal, "comments_external":commentsExternal};
 
   String get commentsExternal => _data["comments_external"];
   String get commentsInternal => _data["comments_internal"];
