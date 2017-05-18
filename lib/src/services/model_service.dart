@@ -3,6 +3,7 @@ library model_service;
 import 'dart:async';
 //import 'dart:math' show Random;
 import 'package:angular2/core.dart';
+// TODO get rid of this shit
 import 'package:angular_components/angular_components.dart' show SelectionOptions, OptionGroup;
 import 'package:firebase/firebase.dart' as firebase;
 import 'package:bokain_models/src/services/calendar_service.dart';
@@ -76,12 +77,34 @@ abstract class ModelService
     }
   }
 
-  List<ModelBase> getModels([List<String> ids = null, bool include_disabled = false])
+  List<ModelBase> getModelsAsList([List<String> ids = null, bool include_disabled = false])
   {
+    if (_models.isEmpty) return _models.values.toList(growable: false);
+
     List<ModelBase> output = (ids == null) ? new List.from(_models.values) : _models.values.where((m) => ids.contains(m.id)).toList(growable: !include_disabled);
     if (include_disabled == false)
     {
       output.removeWhere((model) => model.data.containsKey("status") && model.data["status"] != "active");
+    }
+    return output;
+  }
+
+  Map<String, ModelBase> getModelsAsMap([List<String> ids = null, bool include_disabled = false])
+  {
+    if (_models.isEmpty) return _models;
+
+    Map<String, ModelBase> output;
+    if (ids == null) output = new Map.from(_models);
+    else
+    {
+      output = new Map();
+      _models.keys.where(ids.contains).forEach((key) => output[key] = _models[key]);
+    }
+
+    if (include_disabled == false)
+    {
+      Iterable<String> disabledKeys = output.keys.where((k) => output[k].data.containsKey("status") && output[k].data["status"] != "active");
+      disabledKeys.forEach(output.remove);
     }
     return output;
   }
