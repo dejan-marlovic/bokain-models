@@ -23,6 +23,7 @@ class Service extends EditableModel
     price = (d["price"] is double) ? d["price"] : d["price"].toDouble();
 
     // TODO temporary while all services hasn't been updated
+    color = (d.containsKey("color")) ? d["color"] : "green";
     dynamicTime = d.containsKey("dynamic_time") ? d["dynamic_time"] : false;
 
     roomIds = (d.containsKey("room_ids")) ? d["room_ids"] : new List();
@@ -47,6 +48,7 @@ class Service extends EditableModel
   String get name => _data["name"];
   String get category => _data["category"];
   String get description => _data["description"];
+  String get color => _data["color"];
   Duration get duration => new Duration(minutes: durationMinutes);
   num get durationMinutes => _data["duration_minutes"];
   num get price => _data["price"];
@@ -58,6 +60,7 @@ class Service extends EditableModel
   void set category(String value) { _data["category"] = value; }
   void set description(String value) { _data["description"] = value; }
   void set name(String value) { _data["name"] = value; }
+  void set color(String value) { _data["color"] = value; }
   void set duration(Duration value) { _data["duration_minutes"] = value.inMinutes; }
   void set durationMinutes(num value) { data["duration_minutes"] = value.toInt(); }
   void set price(num value) { _data["price"] = value.toDouble(); }
