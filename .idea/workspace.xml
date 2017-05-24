@@ -2,77 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3a385e5-e6e6-4e29-aeca-cdcedaf23309" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/service_picker_component/service_picker_component.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_booking_component/week_booking_component.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_schedule_component/week_schedule_component.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_stepper_component/week_stepper_component.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/associative_table_component/associative_table_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/associative_table_component/associative_table_component.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/associative_table_component/associative_table_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/associative_table_component/associative_table_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/calendar_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/calendar_component.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/calendar_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/calendar_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/journal_component/journal_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/journal_component/journal_component.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/customer/customer_edit_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/customer/customer_edit_component.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/customer/customer_edit_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/customer/customer_edit_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/customer/customer_list_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/customer/customer_list_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_edit_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_edit_component.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_edit_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_edit_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_list_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/salon/salon_list_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service/service_edit_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service/service_edit_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service/service_list_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service/service_list_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service_addon/service_addon_edit_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service_addon/service_addon_edit_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service_addon/service_addon_list_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/service_addon/service_addon_list_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_edit_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_edit_component.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_edit_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_edit_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_list_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/model_components/user/user_list_component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/pubspec.yaml" afterPath="$PROJECT_DIR$/../bokain-admin/pubspec.yaml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../bokain-admin/web/foundation-grid.min.css" afterPath="$PROJECT_DIR$/../bokain-admin/web/foundation-grid.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/services/model_service.dart" afterPath="$PROJECT_DIR$/lib/src/services/model_service.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pubspec.yaml" afterPath="$PROJECT_DIR$/pubspec.yaml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/booking_add_component/booking_add_component.css" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/new_booking_component/new_booking_component.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/booking_add_component/booking_add_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/new_booking_component/new_booking_component.dart" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/booking_add_component/booking_add_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/new_booking_component/new_booking_component.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/booking_add_component/booking_add_component.scss" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/new_booking_component/new_booking_component.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_add_component.css" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_add_component/booking_add_component.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_add_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_add_component/booking_add_component.dart" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_add_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_add_component/booking_add_component.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_add_component.scss" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_add_component/booking_add_component.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_schedule_component.css" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_schedule_component/booking_schedule_component.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_schedule_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_schedule_component/booking_schedule_component.dart" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_schedule_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_schedule_component/booking_schedule_component.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_schedule_component.scss" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_schedule_component/booking_schedule_component.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_time_component.css" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_time_component/booking_time_component.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_time_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_time_component/booking_time_component.dart" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_time_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_time_component/booking_time_component.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_time_component.scss" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/booking_time_component/booking_time_component.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/increment_component.css" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/increment_component/increment_component.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/increment_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/increment_component/increment_component.dart" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/increment_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/increment_component/increment_component.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/increment_component.scss" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/increment_component/increment_component.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/month_calendar_component.css" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/month_calendar_component/month_calendar_component.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/month_calendar_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/month_calendar_component/month_calendar_component.dart" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/month_calendar_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/month_calendar_component/month_calendar_component.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/month_calendar_component.scss" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/month_calendar_component/month_calendar_component.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/service_picker_component.css" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/service_picker_component/service_picker_component.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/service_picker_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/service_picker_component/service_picker_component.dart" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/service_picker_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/service_picker_component/service_picker_component.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/service_picker_component.scss" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/day_base/day_base.dart" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_booking_component.css" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_booking_component/week_booking_component.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_booking_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_booking_component/week_booking_component.dart" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_booking_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_booking_component/week_booking_component.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_booking_component.scss" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/day_booking_component/day_booking_component.dart" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_calendar_base.css" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_base/week_base.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_calendar_base.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_base/week_base.dart" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_calendar_base.scss" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_base/week_base.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_schedule_component.css" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_schedule_component/week_schedule_component.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_schedule_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_schedule_component/week_schedule_component.dart" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_schedule_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_schedule_component/week_schedule_component.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_schedule_component.scss" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/day_booking_component/day_booking_component.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_stepper_component.css" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_stepper_component/week_stepper_component.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_stepper_component.dart" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_stepper_component/week_stepper_component.dart" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_stepper_component.html" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_stepper_component/week_stepper_component.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/week_stepper_component.scss" afterPath="$PROJECT_DIR$/../bokain-admin/lib/components/calendar_component/day_booking_component/day_booking_component.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/calendar/day.dart" afterPath="$PROJECT_DIR$/lib/src/calendar/day.dart" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/phrase.dart" afterPath="$PROJECT_DIR$/lib/src/phrase.dart" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -97,54 +29,44 @@
     <favorites_list name="bokain-models" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="booking_service.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/src/services/booking_service.dart">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="day.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/src/calendar/day.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="3" lean-forward="true" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
+            <state relative-caret-position="718">
+              <caret line="67" column="62" lean-forward="false" selection-start-line="67" selection-start-column="62" selection-end-line="67" selection-end-column="62" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="model_service.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/src/services/model_service.dart">
+      <file leaf-file-name="bo_validators.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/src/validators/bo_validators.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="81" column="39" lean-forward="false" selection-start-line="81" selection-start-column="39" selection-end-line="81" selection-end-column="39" />
+            <state relative-caret-position="51">
+              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding>
-                <element signature="e#24#44#0" expanded="true" />
+                <element signature="e#0#86#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="model_base.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/src/model_base.dart">
+      <file leaf-file-name="phrase_service.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/src/services/phrase_service.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="37" column="24" lean-forward="true" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
+            <state relative-caret-position="85">
+              <caret line="6" column="28" lean-forward="false" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pubspec.yaml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pubspec.yaml">
+      <file leaf-file-name="phrase.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/src/phrase.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="user_service.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/src/services/user_service.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="745">
-              <caret line="79" column="10" lean-forward="false" selection-start-line="79" selection-start-column="10" selection-end-line="79" selection-end-column="10" />
+            <state relative-caret-position="884">
+              <caret line="117" column="34" lean-forward="false" selection-start-line="117" selection-start-column="34" selection-end-line="117" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -223,10 +145,8 @@
         <option value="$PROJECT_DIR$/lib/src/services/salon_service.dart" />
         <option value="$PROJECT_DIR$/lib/src/services/journal_service.dart" />
         <option value="$PROJECT_DIR$/lib/src/services/booking_service.dart" />
-        <option value="$PROJECT_DIR$/lib/src/phrase.dart" />
         <option value="$PROJECT_DIR$/lib/src/model_base.dart" />
         <option value="$PROJECT_DIR$/lib/src/calendar/booking.dart" />
-        <option value="$PROJECT_DIR$/lib/src/calendar/day.dart" />
         <option value="$PROJECT_DIR$/lib/src/calendar/increment.dart" />
         <option value="$PROJECT_DIR$/lib/src/editable_model/customer.dart" />
         <option value="$PROJECT_DIR$/lib/src/editable_model/editable_model.dart" />
@@ -238,6 +158,8 @@
         <option value="$PROJECT_DIR$/lib/src/journal_entry.dart" />
         <option value="$PROJECT_DIR$/lib/src/services/model_service.dart" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
+        <option value="$PROJECT_DIR$/lib/src/calendar/day.dart" />
+        <option value="$PROJECT_DIR$/lib/src/phrase.dart" />
       </list>
     </option>
   </component>
@@ -249,10 +171,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
+    <option name="x" value="1912" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -270,6 +192,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -383,7 +306,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -572,11 +494,14 @@
       <workItem from="1494593736427" duration="612000" />
       <workItem from="1495010011459" duration="7095000" />
       <workItem from="1495046149051" duration="3321000" />
+      <workItem from="1495187855434" duration="1227000" />
+      <workItem from="1495464698248" duration="2060000" />
+      <workItem from="1495553584186" duration="1830000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="341028000" />
+    <option name="totallyTimeSpent" value="346145000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -588,29 +513,29 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="1912" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24413647" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25785482" sideWeight="0.4402985" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Regex Tester" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27952328" sideWeight="0.5948827" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dart Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3217768" sideWeight="0.47654584" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.4936034" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2881907" sideWeight="0.40511727" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23614073" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2881907" sideWeight="0.40511727" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997833" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25785482" sideWeight="0.4402985" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Pub Serve" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -735,20 +660,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/services/phrase_service.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="28" lean-forward="true" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/validators/bo_validators.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="120" column="39" lean-forward="false" selection-start-line="120" selection-start-column="39" selection-end-line="120" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/barback-0.15.2+11/lib/src/graph/phase.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -816,15 +727,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="61" lean-forward="false" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/phrase.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="85" column="20" lean-forward="true" selection-start-line="85" selection-start-column="20" selection-end-line="85" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -832,15 +734,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
           <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/calendar/day.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="48" column="11" lean-forward="true" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -848,7 +741,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="18" column="71" lean-forward="true" selection-start-line="18" selection-start-column="71" selection-end-line="18" selection-end-column="71" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -863,7 +755,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="3" lean-forward="false" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -911,35 +802,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/services/user_service.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="745">
+        <state relative-caret-position="1343">
           <caret line="79" column="10" lean-forward="false" selection-start-line="79" selection-start-column="10" selection-end-line="79" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/services/booking_service.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
-          <caret line="24" column="3" lean-forward="true" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
-          <folding />
+          <caret line="24" column="3" lean-forward="false" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/model_base.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
-          <caret line="37" column="24" lean-forward="true" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
-          <folding />
+          <caret line="37" column="24" lean-forward="false" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/services/model_service.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
+        <state relative-caret-position="1156">
           <caret line="81" column="39" lean-forward="false" selection-start-line="81" selection-start-column="39" selection-end-line="81" selection-end-column="39" />
-          <folding>
-            <element signature="e#24#44#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -947,6 +832,39 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/src/phrase.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="117" column="34" lean-forward="false" selection-start-line="117" selection-start-column="34" selection-end-line="117" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/src/services/phrase_service.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="28" lean-forward="false" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/src/validators/bo_validators.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/src/calendar/day.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="718">
+          <caret line="67" column="62" lean-forward="false" selection-start-line="67" selection-start-column="62" selection-end-line="67" selection-end-column="62" />
           <folding />
         </state>
       </provider>

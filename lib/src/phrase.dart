@@ -68,6 +68,7 @@ class Phrase
     "book" : "boka in",
     "bookable_plural" : "bokningsbara",
     "booking" : "bokning",
+    "booking_calendar" : "bokningskalender",
     "booking_cancel" : "avboka",
     "booking_cancellation" : "avbokning",
     "booking_confirm" : "bekräfta bokning",
