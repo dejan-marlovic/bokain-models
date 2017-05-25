@@ -50,9 +50,11 @@ class SalonService extends ModelService
   List<String> getServiceIds(Salon s)
   {
     Set<String> ids = new Set();
+    if (s == null) return null;
     for (String room_id in s.roomIds)
     {
-      ids.addAll(getRoom(room_id)?.serviceIds);
+      Room r = getRoom(room_id);
+      if (r != null && r.serviceIds != null && r.serviceIds.isNotEmpty) ids.addAll(r.serviceIds);
     }
     return ids.toList(growable: false);
   }
