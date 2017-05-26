@@ -8,11 +8,16 @@ class BoValidators
   {
     return (AbstractControl control)
     {
-      if (Validators.required(control) != null) return null;
+      if (Validators.required(control) != null || service == null || currentModelId == null) return null;
 
       List<String> ids = service.getIdsByProperty(property, control.value)..removeWhere((id) => id == currentModelId);
       return (ids.isEmpty) ? null : {"error" : _phrase.get([error_phrase])};
     };
+  }
+
+  static Map<String, String> required(AbstractControl control)
+  {
+    return control.value == null || control.value == '' ? {"error": _phrase.get(["_enter_a_value"])} : null;
   }
 
   static Map<String, String> isAlpha(AbstractControl control)
@@ -124,7 +129,7 @@ class BoValidators
   }
 
 
-  /// Used by unique field validator, specified externally by calling component
+  /// Used by unique field validator, specified externally by the calling component
   static ModelService service;
   static String currentModelId;
 

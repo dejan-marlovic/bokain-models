@@ -11,8 +11,9 @@ class Customer extends EditableModel
     {
       codeUnits.add(rnd.nextInt(30)+97);
     }
-    preferredLanguage = "sv";
-    country = "sv";
+    language = "1"; /// Swedish
+    country = "1";  /// Sweden
+    skinType = "7"; /// Normal
     password = new String.fromCharCodes(codeUnits);
 
     bookingIds = new List();
@@ -48,6 +49,7 @@ class Customer extends EditableModel
   String toString() => email;
 
   String get belongsTo => _data["belongs_to"];
+  String get careOf => _data["careof"];
   String get commentsExternal => _data["comments_external"];
   String get commentsInternal => _data["comments_internal"];
   String get consultationId => _data["consultation_id"];
@@ -59,7 +61,7 @@ class Customer extends EditableModel
   String get lastname => _data["lastname"];
   String get phone => _data["phone"];
   String get postalCode => _data["postal_code"];
-  String get preferredLanguage => _data["preferred_language"];
+  String get language => _data["language"];
   String get skinType => _data["skin_type"];
   String get socialNumber => _data["social_number"];
   String get street => _data["street"];
@@ -70,6 +72,7 @@ class Customer extends EditableModel
   void set belongsTo(String value) { _data["belongs_to"] = value; }
   void set commentsExternal(String value) { _data["comments_external"] = value; }
   void set commentsInternal(String value) { _data["comments_internal"] = value; }
+  void set careOf(String value){ _data["careof"] = value; }
   void set consultationId(String value) { _data["consultation_id"] = value; }
   void set city(String value) { _data["city"] = value; }
   void set country(String value) { _data["country"] = value; }
@@ -79,7 +82,7 @@ class Customer extends EditableModel
   void set lastname(String value) { _data["lastname"] = value; }
   void set phone(String value) { _data["phone"] = value; }
   void set postalCode(String value) { _data["postal_code"] = value; }
-  void set preferredLanguage(String value) { _data["preferred_language"] = value; }
+  void set language(String value) { _data["language"] = value; }
   void set skinType(String value) { _data["skin_type"] = value; }
   void set socialNumber(String value) { _data["social_number"] = value; }
   void set street(String value) { _data["street"] = value; }

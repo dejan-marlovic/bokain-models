@@ -5,11 +5,14 @@ import 'package:fo_components/fo_components.dart' show DataTableModel;
 
 import 'phrase.dart';
 part 'editable_model/editable_model.dart';
+part 'editable_model/country.dart';
 part 'editable_model/customer.dart';
+part 'editable_model/language.dart';
 part 'editable_model/room.dart';
 part 'editable_model/salon.dart';
 part 'editable_model/service.dart';
 part 'editable_model/service_addon.dart';
+part 'editable_model/skin_type.dart';
 part 'editable_model/user.dart';
 part 'calendar/booking.dart';
 part 'calendar/day.dart';
@@ -24,7 +27,8 @@ abstract class ModelBase extends DataTableModel
     created = new DateTime.now();
   }
 
-  ModelBase.from(ModelBase other) : super(other.id) //this._id = other.id
+
+  ModelBase.from(ModelBase other) : super(other.id)
   {
     _data = _deepCopy(other._data);
     if (!_data.containsKey("created")) _data["created"] = new DateTime.now();
