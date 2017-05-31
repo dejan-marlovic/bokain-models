@@ -24,4 +24,12 @@ class CustomerService extends ModelService
     await _ref.child(customer.id).child("journal_entry_ids").set(customer.journalEntryIds);
     _loading = false;
   }
+
+  Future<Map<String, String>> fetchDetails(String social_number) async
+  {
+    _loading = true;
+    String response = await dom.HttpRequest.getString("https://api.bokain.se/restful.php/ssn/$social_number", withCredentials: false);
+    _loading = false;
+    return JSON.decode(response);
+  }
 }

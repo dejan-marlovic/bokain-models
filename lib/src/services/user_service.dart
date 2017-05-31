@@ -3,9 +3,7 @@ part of model_service;
 @Injectable()
 class UserService extends ModelService
 {
-  UserService() : super("users")
-  {
-  }
+  UserService() : super("users");
 
   Future<String> login(String email, String password) async
   {
@@ -38,7 +36,8 @@ class UserService extends ModelService
     } catch(e)
     {
       _loading = false;
-      return e.toString();
+
+      throw (e);
     }
     return await super.push(model);
   }

@@ -1,16 +1,19 @@
-import 'package:angular2/angular2.dart' show ValidatorFn, Validators, AbstractControl;
+import 'package:angular2/angular2.dart' show ValidatorFn, AbstractControl;
 import 'package:bokain_models/src/services/model_service.dart';
+import 'package:bokain_models/src/model_base.dart' show EditableModel;
 import 'package:bokain_models/bokain_models.dart' show Phrase;
 
 class BoValidators
 {
-  static ValidatorFn unique(String property, String error_phrase)
+  static ValidatorFn unique(String property, String error_phrase, ModelService service, EditableModel model)
   {
     return (AbstractControl control)
     {
-      if (Validators.required(control) != null || service == null || currentModelId == null) return null;
+      if (required(control) != null || service == null) return null;
 
-      List<String> ids = service.getIdsByProperty(property, control.value)..removeWhere((id) => id == currentModelId);
+      List<String> ids = service.getIdsByProperty(property, control.value);
+      if (model != null) ids.removeWhere((id) => id == model.id);
+
       return (ids.isEmpty) ? null : {"error" : _phrase.get([error_phrase])};
     };
   }
@@ -22,7 +25,7 @@ class BoValidators
 
   static Map<String, String> isAlpha(AbstractControl control)
   {
-    if (Validators.required(control) != null) return null;
+    if (required(control) != null) return null;
     String value = control.value;
     Map<String, String> output = new Map();
 
@@ -36,7 +39,7 @@ class BoValidators
 
   static Map<String, String> isName(AbstractControl control)
   {
-    if (Validators.required(control) != null) return null;
+    if (required(control) != null) return null;
     String value = control.value;
     Map<String, String> output = new Map();
 
@@ -50,7 +53,7 @@ class BoValidators
 
   static Map<String, String> isAlphaNumeric(AbstractControl control)
   {
-    if (Validators.required(control) != null) return null;
+    if (required(control) != null) return null;
     String value = control.value;
     Map<String, String> output = new Map();
 
@@ -64,7 +67,7 @@ class BoValidators
 
   static Map<String, String> isNumeric(AbstractControl control)
   {
-    if (Validators.required(control) != null) return null;
+    if (required(control) != null) return null;
     String value = control.value;
     Map<String, String> output = new Map();
     RegExp r = new RegExp("[0-9]+(\.[0-9]+)?");
@@ -77,7 +80,7 @@ class BoValidators
 
   static Map<String, String> isPhoneNumber(AbstractControl control)
   {
-    if (Validators.required(control) != null) return null;
+    if (required(control) != null) return null;
     String value = control.value;
     Map<String, String> output = new Map();
     RegExp r = new RegExp("[\+]{0,1}[0-9]{7,32}");
@@ -90,7 +93,7 @@ class BoValidators
 
   static Map<String, String> isSwedishCellphoneNumber(AbstractControl control)
   {
-    if (Validators.required(control) != null) return null;
+    if (required(control) != null) return null;
     String value = control.value;
     Map<String, String> output = new Map();
 
@@ -104,7 +107,7 @@ class BoValidators
 
   static Map<String, String> isSwedishSocialSecurityNumber(AbstractControl control)
   {
-    if (Validators.required(control) != null) return null;
+    if (required(control) != null) return null;
     String value = control.value;
     Map<String, String> output = new Map();
     RegExp r = new RegExp("(19|20)[0-9]{2,2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-2])[0-9]{4,4}");
@@ -117,7 +120,7 @@ class BoValidators
 
   static Map<String, String> isCancelBookingCode(AbstractControl control)
   {
-    if (Validators.required(control) != null) return null;
+    if (required(control) != null) return null;
     String value = control.value;
     Map<String, String> output = new Map();
     RegExp r = new RegExp("[A-Z]{3}[0-9]{3}");
@@ -130,8 +133,8 @@ class BoValidators
 
 
   /// Used by unique field validator, specified externally by the calling component
-  static ModelService service;
-  static String currentModelId;
+//  static ModelService service;
+//  static String currentModelId;
 
   static Phrase _phrase = new Phrase();
 }

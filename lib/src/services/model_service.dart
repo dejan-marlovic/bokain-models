@@ -1,6 +1,8 @@
 library model_service;
 
 import 'dart:async';
+import 'dart:html' as dom show HttpRequest;
+import 'dart:convert' show JSON;
 import 'package:angular2/core.dart';
 import 'package:firebase/firebase.dart' as firebase;
 import 'package:bokain_models/src/services/calendar_service.dart';
@@ -46,6 +48,8 @@ abstract class ModelService
     _loading = true;
     model.created = new DateTime.now();
     model.addedBy = firebase.auth().currentUser.uid;
+
+    print(_name);
 
     firebase.ThenableReference ref = await _ref.push(model.encoded);
     _loading = false;
