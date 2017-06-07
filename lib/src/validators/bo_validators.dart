@@ -67,15 +67,25 @@ class BoValidators
 
   static Map<String, String> isNumeric(AbstractControl control)
   {
-    if (required(control) != null) return null;
-    String value = control.value;
-    Map<String, String> output = new Map();
-    RegExp r = new RegExp("[0-9]+(\.[0-9]+)?");
-    if (r.stringMatch(value) == null || r.stringMatch(value).length != value.length)
+    return (control.value is num) ? null : {"error":_phrase.get(["_enter_numbers_only"])};
+  }
+
+  static ValidatorFn numericMax(num max)
+  {
+    return (AbstractControl control)
     {
-      output["error"] = _phrase.get(["_enter_numbers_only"]);
-    }
-    return output;
+      if (isNumeric(control) != null) return null;
+      return control.value <= max ? null : {"error":_phrase.get(["_numeric_max_exceeded"], params: {"max":max.toString()})};
+    };
+  }
+
+  static ValidatorFn numericMin(num min)
+  {
+    return (AbstractControl control)
+    {
+      if (isNumeric(control) != null) return null;
+      return control.value >= min ? null : {"error":_phrase.get(["_numeric_min_exceeded"], params: {"min":min.toString()})};
+    };
   }
 
   static Map<String, String> isPhoneNumber(AbstractControl control)
@@ -130,11 +140,6 @@ class BoValidators
     }
     return output;
   }
-
-
-  /// Used by unique field validator, specified externally by the calling component
-//  static ModelService service;
-//  static String currentModelId;
 
   static Phrase _phrase = new Phrase();
 }

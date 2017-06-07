@@ -62,8 +62,8 @@ class Service extends EditableModel
   void set name(String value) { _data["name"] = value; }
   void set color(String value) { _data["color"] = value; }
   void set duration(Duration value) { _data["duration_minutes"] = value.inMinutes; }
-  void set durationMinutes(num value) { data["duration_minutes"] = value.toInt(); }
-  void set price(num value) { _data["price"] = value.toDouble(); }
+  void set durationMinutes(num value) { data["duration_minutes"] = value?.toInt(); }
+  void set price(num value) { _data["price"] = value?.toDouble(); }
   void set dynamicTime(bool value) { _data["dynamic_time"] = value; }
   void set roomIds(List<String> value) { _data["room_ids"] = value; }
   void set userIds(List<String> value) { _data["user_ids"] = value; }

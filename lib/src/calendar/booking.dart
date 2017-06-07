@@ -17,7 +17,7 @@ class Booking extends ModelBase
     startTime = DateTime.parse(d["start_time"]);
     endTime = DateTime.parse(d["end_time"]);
     duration = endTime.difference(startTime);
-    price = d["price"];
+   // price = d["price"];
     customerId = d["customer_id"];
     serviceId = d["service_id"];
     userId = d["user_id"];
@@ -44,7 +44,7 @@ class Booking extends ModelBase
   String get strStartTime => ModelBase.timestampFormat(startTime);
   String get strEndTime => ModelBase.timestampFormat(endTime);
   Duration get duration => _data["duration"];
-  num get price => _data["price"];
+  //num get price => _data["price"];
   String get customerId => _data["customer_id"];
   String get serviceId => _data["service_id"];
   String get userId => _data["user_id"];
@@ -56,7 +56,7 @@ class Booking extends ModelBase
   void set startTime(DateTime value) { _data["start_time"] = value; }
   void set endTime(DateTime value) { _data["end_time"] = value; }
   void set duration(Duration value) { _data["duration"] = value; }
-  void set price(num value) { _data["price"] = (value == null) ? null : value.toDouble(); }
+  //void set price(num value) { _data["price"] = (value == null) ? null : value.toDouble(); }
   void set customerId(String value) { _data["customer_id"] = value; }
   void set serviceId(String value) { _data["service_id"] = value; }
   void set userId(String value) { _data["user_id"] = value; }

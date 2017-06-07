@@ -29,7 +29,7 @@ class ServiceAddon extends EditableModel
     return {ModelBase.phrase.get(["name"]) : name, ModelBase.phrase.get(["duration"]) : durationMinutes.toString(), ModelBase.phrase.get(["price"]) : price.toString()};
   }
 
-  String toString() => ModelBase.phrase.get(["_ui_name_service_addon"], params: {"name":name, "duration":durationMinutes.toString(), "price":price.toString()});
+  String toString() => name;
 
   String get description => _data["description"];
   String get name => _data["name"];
