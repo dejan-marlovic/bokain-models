@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e3a385e5-e6e6-4e29-aeca-cdcedaf23309" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/calendar/day.dart" afterPath="$PROJECT_DIR$/lib/src/calendar/day.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/calendar/increment.dart" afterPath="$PROJECT_DIR$/lib/src/calendar/increment.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pubspec.yaml" afterPath="$PROJECT_DIR$/pubspec.yaml" />
-    </list>
+    <list default="true" id="e3a385e5-e6e6-4e29-aeca-cdcedaf23309" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -462,12 +457,12 @@
       <workItem from="1496818732457" duration="3849000" />
       <workItem from="1496830253092" duration="630000" />
       <workItem from="1496835951843" duration="5725000" />
-      <workItem from="1496918036621" duration="4754000" />
+      <workItem from="1496918036621" duration="4801000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="393304000" />
+    <option name="totallyTimeSpent" value="393351000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
