@@ -65,6 +65,12 @@ class UserState
     state = data["state"];
   }
 
+  @override
+  bool operator ==(UserState other) => (hashCode == other.hashCode);
+
+  @override
+  int get hashCode => JSON.encode(encoded).hashCode;
+
   Map<String, String> get encoded => {"user_id" : userId, "booking_id" : bookingId, "state" : state};
 
   final String userId;

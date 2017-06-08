@@ -23,7 +23,6 @@ class Day extends ModelBase
       increments.add(new Increment(iTime));
       iTime = iTime.add(Increment.duration);
     }
-
   }
 
   @override
@@ -56,11 +55,9 @@ class Day extends ModelBase
   }
 
   bool isSameDateAs(DateTime dt) => (startTime.year == dt.year && startTime.month == dt.month && startTime.day == dt.day);
-
   bool containsUser(String user_id) => increments.firstWhere((i) => i.userStates.containsKey(user_id), orElse: () => null) != null;
 
   bool get isPopulated => increments.firstWhere((increment) => increment.isPopulated, orElse: () => null) != null;
-
   List<Increment> get increments => _data["increments"];
   DateTime get startTime => _data["start_time"];
   DateTime get endTime => _data["end_time"];
