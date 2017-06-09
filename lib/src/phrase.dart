@@ -161,7 +161,7 @@ class Phrase
     "none" : "inget",
     "not" : "ej",
     "only" : "enbart",
-    "open" : "öppna",
+    "open" : "öppen",
     "order_history" : "orderhistorik",
     "other" : "övrigt",
     "password" : "lösenord",
