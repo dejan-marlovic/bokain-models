@@ -3,12 +3,14 @@ part of model_base;
 class User extends EditableModel
 {
   @override
-  User(String id) : super(id)
+  User([String id = null]) : super(id)
   {
     customerIds = new List();
     salonIds = new List();
     serviceIds = new List();
     bookingIds = new List();
+
+    bookingRank = 0;
   }
 
   @override
@@ -23,7 +25,6 @@ class User extends EditableModel
     street = d["street"];
     postalCode = d["postal_code"];
     city = d["city"];
-    country = d["country"];
     customerIds = d.containsKey("customer_ids") ? d["customer_ids"] : new List();
     salonIds = d.containsKey("salon_ids") ? d["salon_ids"] : new List();
     serviceIds = d.containsKey("service_ids") ? d["service_ids"] : new List();
@@ -50,7 +51,6 @@ class User extends EditableModel
   String toString() => email;
 
   String get city => _data["city"];
-  String get country => _data["country"];
   String get email => _data["email"];
   String get firstname => _data["firstname"];
   String get lastname => _data["lastname"];
@@ -75,11 +75,15 @@ class User extends EditableModel
   void set street(String value) { _data["street"] = value; }
   void set postalCode(String value) { _data["postal_code"] = value; }
   void set city(String value) { _data["city"] = value; }
-  void set country(String value) { _data["country"] = value; }
   void set customerIds(List<String> value) { _data["customer_ids"] = value; }
   void set salonIds(List<String> value) { _data["salon_ids"] = value; }
   void set serviceIds(List<String> value) { _data["service_ids"] = value; }
   void set bookingIds(List<String> value) { _data["booking_ids"] = value; }
   void set bookingRank(num value) { _data["booking_rank"] = value.toInt(); }
-  void set strBookingRank(String value) { _data["booking_rank"] = int.parse(value); }
+  void set strBookingRank(String value)
+  {
+    int v = 0;
+    try { v = int.parse(value); } on FormatException catch(e) { print(e); }
+    _data["booking_rank"] = v;
+  }
 }

@@ -2,11 +2,11 @@ part of model_base;
 
 class ServiceAddon extends EditableModel
 {
-  ServiceAddon(String id, String name, num price, num duration_minutes) : super(id)
+  ServiceAddon([String id = null]) : super(id)
   {
     this.name = name;
-    this.price = price.toDouble();
-    this.durationMinutes = duration_minutes.toInt();
+    this.price = 0;
+    this.durationMinutes = 1;
     serviceIds = new List();
   }
 

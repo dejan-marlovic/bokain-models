@@ -3,11 +3,13 @@ part of model_base;
 class Service extends EditableModel
 {
   @override
-  Service(String id) : super(id)
+  Service([String id = null]) : super(id)
   {
     roomIds = new List();
     userIds = new List();
     serviceAddonIds = new List();
+    price = 0;
+    duration = const Duration(minutes: 1);
   }
 
   @override

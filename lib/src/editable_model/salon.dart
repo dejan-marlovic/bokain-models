@@ -3,7 +3,7 @@ part of model_base;
 class Salon extends EditableModel
 {
   @override
-  Salon(String id) : super(id)
+  Salon([String id = null]) : super(id)
   {
     roomIds = new List();
     userIds = new List();

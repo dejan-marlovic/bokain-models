@@ -67,7 +67,20 @@ class BoValidators
 
   static Map<String, String> isNumeric(AbstractControl control)
   {
-    return (control.value is num) ? null : {"error":_phrase.get(["_enter_numbers_only"])};
+    if (control.value is num) return null;
+
+    else
+    {
+      try
+      {
+        num.parse(control.value);
+      }
+      on FormatException
+      {
+        return {"error" : _phrase.get(['_enter_numbers_only'])};
+      }
+      return null;
+    }
   }
 
   static ValidatorFn numericMax(num max)
