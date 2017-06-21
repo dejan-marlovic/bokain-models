@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:angular2/core.dart';
 import 'package:firebase/firebase.dart' as firebase;
+import 'package:bokain_models/bokain_models.dart' show ModelBase;
 import 'package:bokain_models/bokain_models.dart' show Day;
 
 @Injectable()
@@ -8,20 +9,35 @@ class CalendarService
 {
   CalendarService()
   {
-    firebase.database().ref('days').orderByChild('start_time').equalTo("2017-06-16 08:00:00").once('value').then((firebase.QueryEvent qe) => _onChildAdded(qe));
-   //_refDays.onChildAdded.listen(_onChildAdded);
-    //_refDays = firebase.database().ref('days');
-    //_refDays.onChildAdded.listen(_onChildAdded);
-    //_refDays.onChildChanged.listen(_onChildChanged);
-    //_refDays.onChildRemoved.listen(_onChildRemoved);
+    _refDays = firebase.database().ref('days');
+  }
+
+  void setRange(DateTime from, DateTime to, String salon_id)
+  {
+    _dayMap.clear();
+
+    from = new DateTime(from.year, from.month, from.day, Day.startHour, Day.startMinute);
+    to = new DateTime(from.year, from.month, from.day, Day.endHour, Day.endMinute);
+
+    DateTime iDate = new DateTime(from.year, from.month, from.day, from.hour, from.minute);
+    while (iDate.isBefore(to))
+    {
+      _dayMap[iDate.toIso8601String() + salon_id] = new Day(null, salon_id, iDate);
+      iDate = iDate.add(const Duration(days: 1));
+    }
+
+    firebase.Query q = _refDays.orderByChild('start_time').startAt(ModelBase.timestampFormat(from)).endAt(ModelBase.timestampFormat(to));
+
+    addStream?.cancel();
+    changeStream?.cancel();
+    removeStream?.cancel();
+    addStream = q.onChildAdded.listen(_onChildAdded);
+    changeStream = q.onChildChanged.listen(_onChildChanged);
+    removeStream = q.onChildRemoved.listen(_onChildRemoved);
   }
 
   Day getDay(String salon_id, DateTime date)
   {
-    //Day d = new Day(null, salon_id, date);
-    //firebase.database().ref('days').push(d.encoded);
-   // firebase.database().ref('days').orderByChild("")
-
     if (salon_id == null || date == null) return null;
     String id = _dayMap.keys.firstWhere((key) => _dayMap[key].salonId == salon_id && _dayMap[key].isSameDateAs(date), orElse: () => null);
     return (id == null) ? null : _dayMap[id];
@@ -30,38 +46,41 @@ class CalendarService
   Future<String> save(Day day) async
   {
     _loading = true;
-    if (getDay(day.salonId, day.startTime) == null) await _refDays.push(day.encoded);
+    if (day.id == null) await _refDays.push(day.encoded);
     else await _refDays.child(day.id).update(day.encoded);
     _loading = false;
     return null;
   }
 
 
-  void _onChildAdded(firebase.QueryEvent e)
+  void _onChildAdded(firebase.QueryEvent qe)
   {
+    Day d = new Day.decode(qe.snapshot.key, qe.snapshot.val());
+    _dayMap.remove(getDay(d.salonId, d.startTime));
 
-    print(e.snapshot.val());
-  //  _dayMap[e.snapshot.key] = new Day.decode(e.snapshot.key, e.snapshot.val());
-  }
-/*
-  void _onChildChanged(firebase.QueryEvent e)
-  {
-    _dayMap[e.snapshot.key] = new Day.decode(e.snapshot.key, e.snapshot.val());
+    _dayMap[qe.snapshot.key] = d;
   }
 
-  void _onChildRemoved(firebase.QueryEvent e)
+  void _onChildRemoved(firebase.QueryEvent qe)
   {
-    _dayMap.remove(e.snapshot.key);
+    _dayMap.remove(qe.snapshot.key);
   }
-*/
+
+  void _onChildChanged(firebase.QueryEvent qe)
+  {
+    _dayMap[qe.snapshot.key] = new Day.decode(qe.snapshot.key, qe.snapshot.val());
+  }
+
+  Map<String, Day> get dayMap => _dayMap;
+
+  final Map<String, Day> _dayMap = new Map();
+
   bool get isLoading => _loading;
 
-  Map<String, Day> _dayMap = new Map();
   firebase.DatabaseReference _refDays;
-
   bool _loading = false;
 
-  Day currentDay;
-  List<Day> currentWeek = new List(7);
-  List<Day> currentMonth = new List();
+  StreamSubscription<firebase.QueryEvent> addStream;
+  StreamSubscription<firebase.QueryEvent> changeStream;
+  StreamSubscription<firebase.QueryEvent> removeStream;
 }

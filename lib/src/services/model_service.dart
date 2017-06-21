@@ -35,11 +35,12 @@ abstract class ModelService
   {
     if (value is String)
     {
-      return _models.keys.where((id) => (_models[id].data[property] as String).toLowerCase().compareTo(value.toLowerCase()) == 0).toList();
+      return _models.keys.where((id) =>
+      _models[id].data[property] != null && (_models[id].data[property] as String).toLowerCase().compareTo(value.toLowerCase()) == 0).toList();
     }
     else
     {
-      return _models.keys.where((id) => _models[id].data[property] == value).toList();
+      return _models.keys.where((id) => _models[id].data[property] != null && _models[id].data[property] == value).toList();
     }
   }
 
@@ -48,8 +49,6 @@ abstract class ModelService
     _loading = true;
     model.created = new DateTime.now();
     model.addedBy = firebase.auth().currentUser.uid;
-
-    print(_name);
 
     firebase.ThenableReference ref = await _ref.push(model.encoded);
     _loading = false;
