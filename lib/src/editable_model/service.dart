@@ -10,6 +10,7 @@ class Service extends EditableModel
     serviceAddonIds = new List();
     price = 0;
     duration = const Duration(minutes: 1);
+    afterMargin = const Duration(seconds: 0);
   }
 
   @override
@@ -22,11 +23,11 @@ class Service extends EditableModel
     category = d["category"];
     description = d["description"];
     durationMinutes = d["duration_minutes"];
+    afterMarginMinutes = d["after_margin_minutes"];
     price = (d["price"] is double) ? d["price"] : d["price"].toDouble();
 
     // TODO temporary while all services hasn't been updated
     color = (d.containsKey("color")) ? d["color"] : "green";
-    dynamicTime = d.containsKey("dynamic_time") ? d["dynamic_time"] : false;
 
     roomIds = (d.containsKey("room_ids")) ? d["room_ids"] : new List();
     userIds = (d.containsKey("user_ids")) ? d["user_ids"] : new List();
@@ -53,8 +54,9 @@ class Service extends EditableModel
   String get color => _data["color"];
   Duration get duration => new Duration(minutes: durationMinutes);
   num get durationMinutes => _data["duration_minutes"];
+  Duration get afterMargin => new Duration(minutes: afterMarginMinutes);
+  num get afterMarginMinutes => _data["after_margin_minutes"];
   num get price => _data["price"];
-  bool get dynamicTime => _data["dynamic_time"];
   List<String> get roomIds => _data["room_ids"];
   List<String> get userIds => _data["user_ids"];
   List<String> get serviceAddonIds => _data["service_addon_ids"];
@@ -64,9 +66,10 @@ class Service extends EditableModel
   void set name(String value) { _data["name"] = value; }
   void set color(String value) { _data["color"] = value; }
   void set duration(Duration value) { _data["duration_minutes"] = value.inMinutes; }
-  void set durationMinutes(num value) { data["duration_minutes"] = value?.toInt(); }
+  void set durationMinutes(num value) { _data["duration_minutes"] = value?.toInt(); }
+  void set afterMargin(Duration value) { _data["after_margin_minutes"] = value.inMinutes; }
+  void set afterMarginMinutes(num value) { _data["after_margin_minutes"] = value?.toInt(); }
   void set price(num value) { _data["price"] = value?.toDouble(); }
-  void set dynamicTime(bool value) { _data["dynamic_time"] = value; }
   void set roomIds(List<String> value) { _data["room_ids"] = value; }
   void set userIds(List<String> value) { _data["user_ids"] = value; }
   void set serviceAddonIds(List<String> value) { _data["service_addon_ids"] = value; }

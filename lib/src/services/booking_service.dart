@@ -3,7 +3,7 @@ part of model_service;
 @Injectable()
 class BookingService extends ModelService
 {
-  BookingService(this._calendarService, this._customerService, this._salonService, this._userService) : super("bookings");
+  BookingService(this._calendarService, this._customerService, this._salonService, this._serviceService, this._userService) : super("bookings");
 
   @override
   Booking createModelInstance(String id, Map<String, dynamic> data)
@@ -28,6 +28,7 @@ class BookingService extends ModelService
   Future _onChildChanged(firebase.QueryEvent e) async
   {
     Booking booking = _models[e.snapshot.key];
+
     // Remove old
     await patchRemove(booking, update_remote: false);
 
@@ -48,9 +49,9 @@ class BookingService extends ModelService
   @override
   Future<String> push(Booking model) async
   {
-    String id = await super.push(model);
+    model.id = await super.push(model);
     await _patchAdd(model, update_remote: true);
-    return id;
+    return model.id;
   }
 
   @override
@@ -66,19 +67,25 @@ class BookingService extends ModelService
     if (booking == null) return;
 
     _loading = true;
-    Day day = _calendarService.getDay(booking.salonId, booking.startTime);
+
+    Day day = await _calendarService.fetch(booking.dayId);
     User user = _userService.getModel(booking.userId);
     Salon salon = _salonService.getModel(booking.salonId);
     Customer customer = _customerService.getModel(booking.customerId);
+    Service service = _serviceService.getModel(booking.serviceId);
 
     /// Increments
     if (day != null)
     {
       DateTime iTime = new DateTime.fromMillisecondsSinceEpoch(booking.startTime.millisecondsSinceEpoch);
-      while (iTime.isBefore(booking.endTime))
+      DateTime endTimeWithMargin = booking.endTime.add(service.afterMargin);
+      while (iTime.isBefore(endTimeWithMargin))
       {
         Increment increment = day.increments.firstWhere((i) => i.startTime.isAtSameMomentAs(iTime));
-        increment.userStates[booking.userId]?.bookingId = booking.id;
+        increment.userStates[booking.userId].bookingId = booking.id;
+
+        /// After-margin
+        if (increment.endTime.isAfter(booking.endTime)) { increment.userStates[booking.userId].state = "margin"; }
         iTime = iTime.add(Increment.duration);
       }
       if (update_remote == true) await _calendarService.save(day);
@@ -114,14 +121,19 @@ class BookingService extends ModelService
 
     _loading = true;
     /// Increments
-    Day day = _calendarService.getDay(booking.salonId, booking.startTime);
+    Day day = await _calendarService.fetch(booking.dayId);
     User user = _userService.getModel(booking.userId);
     Salon salon = _salonService.getModel(booking.salonId);
     Customer customer = _customerService.getModel(booking.customerId);
 
     if (day != null)
     {
-      day.increments.where((inc) => inc.userStates[booking.userId]?.bookingId == booking.id).forEach((i) => i.userStates[booking.userId].bookingId = null);
+      day.increments.where((inc) => inc.userStates[booking.userId]?.bookingId == booking.id).forEach((i)
+      {
+        i.userStates[booking.userId].bookingId = null;
+        /// Reset state to open, clearing any after-margin
+        i.userStates[booking.userId].state = "open";
+      });
       if (update_remote == true) await _calendarService.save(day);
     }
 
@@ -152,6 +164,7 @@ class BookingService extends ModelService
   final CalendarService _calendarService;
   final CustomerService _customerService;
   final SalonService _salonService;
+  final ServiceService _serviceService;
   final UserService _userService;
 }
 

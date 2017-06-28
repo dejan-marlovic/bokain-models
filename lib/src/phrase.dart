@@ -61,6 +61,7 @@ class Phrase
     "account" : "konto",
     "active" : "aktiv",
     "add" : "lägg till",
+    "after_margin" : "städmarginal",
     "associate" : "anslut",
     "associated" : "ansluten",
     "associated_plural" : "anslutna",

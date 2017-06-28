@@ -3,7 +3,7 @@ part of model_base;
 class Booking extends ModelBase
 {
   @override
-  Booking(String id) : super(id)
+  Booking([String id = null]) : super(id)
   {
     serviceAddonIds = new List();
   }
@@ -17,12 +17,13 @@ class Booking extends ModelBase
     startTime = DateTime.parse(d["start_time"]);
     endTime = DateTime.parse(d["end_time"]);
     duration = endTime.difference(startTime);
-   // price = d["price"];
+    //afterMargin = new Duration(minutes: d["after_margin"]);
     customerId = d["customer_id"];
-    serviceId = d["service_id"];
     userId = d["user_id"];
     roomId = d["room_id"];
     salonId = d["salon_id"];
+    dayId = d["day_id"];
+    serviceId = d["service_id"];
     serviceAddonIds = d["service_addon_ids"];
     addedBy = d["added_by"];
   }
@@ -44,27 +45,26 @@ class Booking extends ModelBase
   String get strStartTime => ModelBase.timestampFormat(startTime);
   String get strEndTime => ModelBase.timestampFormat(endTime);
   Duration get duration => _data["duration"];
-  //num get price => _data["price"];
+  //Duration get afterMargin => _data["after_margin"];
   String get customerId => _data["customer_id"];
   String get serviceId => _data["service_id"];
   String get userId => _data["user_id"];
   String get roomId => _data["room_id"];
   String get salonId => _data["salon_id"];
+  String get dayId => _data["day_id"];
   List<String> get serviceAddonIds => _data["service_addon_ids"];
   String get addedBy => _data["added_by"];
 
   void set startTime(DateTime value) { _data["start_time"] = value; }
   void set endTime(DateTime value) { _data["end_time"] = value; }
   void set duration(Duration value) { _data["duration"] = value; }
-  //void set price(num value) { _data["price"] = (value == null) ? null : value.toDouble(); }
+  //void set afterMargin(Duration value) { _data["after_margin"] = value; }
   void set customerId(String value) { _data["customer_id"] = value; }
   void set serviceId(String value) { _data["service_id"] = value; }
   void set userId(String value) { _data["user_id"] = value; }
   void set roomId(String value) { _data["room_id"] = value; }
   void set salonId(String value) { _data["salon_id"] = value; }
+  void set dayId(String value) { _data["day_id"] = value; }
   void set serviceAddonIds(List<String> value) { _data["service_addon_ids"] = value; }
   void set addedBy(String value) { _data["addded_by"] = value; }
-
-  int progress = 0;
-  int secondaryProgress = 0;
 }

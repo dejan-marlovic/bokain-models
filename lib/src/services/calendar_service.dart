@@ -9,78 +9,70 @@ class CalendarService
 {
   CalendarService()
   {
-    _refDays = firebase.database().ref('days');
+    onDayAdded = _onDayAddedController.stream;
+    onDayChanged = _onDayChangedController.stream;
   }
 
-  void setRange(DateTime from, DateTime to, String salon_id)
+  void setFilters(DateTime from, DateTime to)
   {
-    _dayMap.clear();
-
     from = new DateTime(from.year, from.month, from.day, Day.startHour, Day.startMinute);
-    to = new DateTime(from.year, from.month, from.day, Day.endHour, Day.endMinute);
+    to = new DateTime(to.year, to.month, to.day, Day.endHour, Day.endMinute);
 
-    DateTime iDate = new DateTime(from.year, from.month, from.day, from.hour, from.minute);
-    while (iDate.isBefore(to))
-    {
-      _dayMap[iDate.toIso8601String() + salon_id] = new Day(null, salon_id, iDate);
-      iDate = iDate.add(const Duration(days: 1));
-    }
+    firebase.Query q = firebase.database().ref('days').orderByChild('start_time').startAt(ModelBase.timestampFormat(from)).endAt(ModelBase.timestampFormat(to));
 
-    firebase.Query q = _refDays.orderByChild('start_time').startAt(ModelBase.timestampFormat(from)).endAt(ModelBase.timestampFormat(to));
-
-    addStream?.cancel();
-    changeStream?.cancel();
-    removeStream?.cancel();
-    addStream = q.onChildAdded.listen(_onChildAdded);
-    changeStream = q.onChildChanged.listen(_onChildChanged);
-    removeStream = q.onChildRemoved.listen(_onChildRemoved);
+    addStreamListener?.cancel();
+    changeStreamListener?.cancel();
+    removeStreamListener?.cancel();
+    addStreamListener = q.onChildAdded.listen(_onChildAdded);
+    changeStreamListener = q.onChildChanged.listen(_onChildChanged);
+    removeStreamListener = q.onChildRemoved.listen(_onChildRemoved);
   }
 
-  Day getDay(String salon_id, DateTime date)
+  Future<Day> fetch(String id) async
   {
-    if (salon_id == null || date == null) return null;
-    String id = _dayMap.keys.firstWhere((key) => _dayMap[key].salonId == salon_id && _dayMap[key].isSameDateAs(date), orElse: () => null);
-    return (id == null) ? null : _dayMap[id];
+    firebase.QueryEvent qe = await firebase.database().ref('days').child(id).once('value');
+    return qe.snapshot.val() == null ? null : new Day.decode(qe.snapshot.key, qe.snapshot.val());
   }
 
-  Future<String> save(Day day) async
+  Future save(Day day) async
   {
     _loading = true;
-    if (day.id == null) await _refDays.push(day.encoded);
-    else await _refDays.child(day.id).update(day.encoded);
+    if (day.id == null) await firebase.database().ref('days').push(day.encoded);
+    else await firebase.database().ref('days').child(day.id).update(day.encoded);
     _loading = false;
-    return null;
   }
-
 
   void _onChildAdded(firebase.QueryEvent qe)
   {
     Day d = new Day.decode(qe.snapshot.key, qe.snapshot.val());
-    _dayMap.remove(getDay(d.salonId, d.startTime));
+    _onDayAddedController.add(d);
 
-    _dayMap[qe.snapshot.key] = d;
   }
 
   void _onChildRemoved(firebase.QueryEvent qe)
   {
-    _dayMap.remove(qe.snapshot.key);
+   // _models.remove(qe.snapshot.key);
   }
 
   void _onChildChanged(firebase.QueryEvent qe)
   {
-    _dayMap[qe.snapshot.key] = new Day.decode(qe.snapshot.key, qe.snapshot.val());
+    Day d = new Day.decode(qe.snapshot.key, qe.snapshot.val());
+    _onDayChangedController.add(d);
   }
-
-  Map<String, Day> get dayMap => _dayMap;
-
-  final Map<String, Day> _dayMap = new Map();
 
   bool get isLoading => _loading;
 
-  firebase.DatabaseReference _refDays;
+
   bool _loading = false;
 
-  StreamSubscription<firebase.QueryEvent> addStream;
-  StreamSubscription<firebase.QueryEvent> changeStream;
-  StreamSubscription<firebase.QueryEvent> removeStream;
+  StreamSubscription<firebase.QueryEvent> addStreamListener;
+  StreamSubscription<firebase.QueryEvent> changeStreamListener;
+  StreamSubscription<firebase.QueryEvent> removeStreamListener;
+
+  final StreamController<Day> _onDayAddedController = new StreamController<Day>.broadcast();
+  final StreamController<Day> _onDayChangedController = new StreamController<Day>.broadcast();
+
+  Stream<Day> onDayAdded;
+  Stream<Day> onDayChanged;
+
 }
