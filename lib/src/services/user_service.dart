@@ -36,7 +36,6 @@ class UserService extends ModelService
     } catch(e)
     {
       _loading = false;
-
       throw (e);
     }
     return await super.push(model);

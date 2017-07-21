@@ -54,10 +54,11 @@ class Day extends ModelBase
     return table;
   }
 
+  bool isPopulated(String salon_id, String user_id) => increments.where((i) => user_id != null && salon_id != null && i.userStates.containsKey(user_id)).isNotEmpty && salonId == salon_id;
+
   bool isSameDateAs(DateTime dt) => (startTime.year == dt.year && startTime.month == dt.month && startTime.day == dt.day);
   bool containsUser(String user_id) => increments.firstWhere((i) => i.userStates.containsKey(user_id), orElse: () => null) != null;
 
-  bool get isPopulated => increments.firstWhere((increment) => increment.isPopulated, orElse: () => null) != null;
   List<Increment> get increments => _data["increments"];
   DateTime get startTime => _data["start_time"];
   DateTime get endTime => _data["end_time"];

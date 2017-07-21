@@ -81,11 +81,14 @@ class BookingService extends ModelService
       DateTime endTimeWithMargin = booking.endTime.add(service.afterMargin);
       while (iTime.isBefore(endTimeWithMargin))
       {
-        Increment increment = day.increments.firstWhere((i) => i.startTime.isAtSameMomentAs(iTime));
-        increment.userStates[booking.userId].bookingId = booking.id;
+        Increment increment = day.increments.firstWhere((i) => i.startTime.isAtSameMomentAs(iTime), orElse: () => null);
 
-        /// After-margin
-        if (increment.endTime.isAfter(booking.endTime)) { increment.userStates[booking.userId].state = "margin"; }
+        if (increment != null)
+        {
+          increment.userStates[booking.userId].bookingId = booking.id;
+          /// After-margin
+          if (increment.endTime.isAfter(booking.endTime)) { increment.userStates[booking.userId].state = "margin"; }
+        }
         iTime = iTime.add(Increment.duration);
       }
       if (update_remote == true) await _calendarService.save(day);

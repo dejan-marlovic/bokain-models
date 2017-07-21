@@ -26,6 +26,8 @@ abstract class ModelService
     _db = firebase.database();
     _ref = _db.ref(_name);
 
+
+
     _ref.onChildAdded.listen(_onChildAdded);
     _ref.onChildChanged.listen(_onChildChanged);
     _ref.onChildRemoved.listen(_onChildRemoved);

@@ -4,9 +4,13 @@
 library bokain_models;
 
 export 'package:bokain_models/src/model_base.dart';
+export 'package:bokain_models/src/billogram/billogram_base.dart';
 export 'package:bokain_models/src/validators/bo_validators.dart';
 export 'package:bokain_models/src/phrase.dart';
-export 'package:bokain_models/src/services/phrase_service.dart';
-export 'package:bokain_models/src/services/model_service.dart';
+
+export 'package:bokain_models/src/services/auth_service.dart';
+export 'package:bokain_models/src/services/billogram_service.dart';
 export 'package:bokain_models/src/services/calendar_service.dart';
 export 'package:bokain_models/src/services/mailer_service.dart';
+export 'package:bokain_models/src/services/model_service.dart';
+export 'package:bokain_models/src/services/phrase_service.dart';

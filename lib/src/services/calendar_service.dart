@@ -15,6 +15,7 @@ class CalendarService
 
   void setFilters(DateTime from, DateTime to)
   {
+    _loading = true;
     from = new DateTime(from.year, from.month, from.day, Day.startHour, Day.startMinute);
     to = new DateTime(to.year, to.month, to.day, Day.endHour, Day.endMinute);
 
@@ -26,11 +27,16 @@ class CalendarService
     addStreamListener = q.onChildAdded.listen(_onChildAdded);
     changeStreamListener = q.onChildChanged.listen(_onChildChanged);
     removeStreamListener = q.onChildRemoved.listen(_onChildRemoved);
+
+    _finishedLoadingTimer?.cancel();
+    _finishedLoadingTimer = new Timer(new Duration(milliseconds: 1000 * (from.difference(to).inDays + 1)), () => _loading = false);
   }
 
   Future<Day> fetch(String id) async
   {
+    _loading = true;
     firebase.QueryEvent qe = await firebase.database().ref('days').child(id).once('value');
+    _loading = false;
     return qe.snapshot.val() == null ? null : new Day.decode(qe.snapshot.key, qe.snapshot.val());
   }
 
@@ -46,7 +52,8 @@ class CalendarService
   {
     Day d = new Day.decode(qe.snapshot.key, qe.snapshot.val());
     _onDayAddedController.add(d);
-
+    _finishedLoadingTimer?.cancel();
+    _loading = false;
   }
 
   void _onChildRemoved(firebase.QueryEvent qe)
@@ -71,6 +78,8 @@ class CalendarService
 
   final StreamController<Day> _onDayAddedController = new StreamController<Day>.broadcast();
   final StreamController<Day> _onDayChangedController = new StreamController<Day>.broadcast();
+
+  Timer _finishedLoadingTimer;
 
   Stream<Day> onDayAdded;
   Stream<Day> onDayChanged;

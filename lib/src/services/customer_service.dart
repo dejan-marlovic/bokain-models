@@ -28,7 +28,7 @@ class CustomerService extends ModelService
   Future<Map<String, String>> fetchDetails(String social_number) async
   {
     _loading = true;
-    String response = await dom.HttpRequest.getString("https://api.bokain.se/restful.php/ssn/$social_number", withCredentials: false);
+    String response = await dom.HttpRequest.getString("https://api.bokain.se/index.php/ssn/$social_number", withCredentials: false);
     _loading = false;
     return JSON.decode(response);
   }
