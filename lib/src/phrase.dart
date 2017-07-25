@@ -208,6 +208,8 @@ class Phrase
     "schedule" : "schema",
     "schedule_mode" : "schemaläge",
     "search" : "sök",
+    "selected" : "vald",
+    "selected_plural" : "valda",
     "selection_state" : "markeringsläge",
     "send_email_notification" : "skicka e-post notifikation",
     "send_invoice" : "skicka faktura",
