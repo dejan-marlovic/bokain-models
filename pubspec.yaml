@@ -5,7 +5,7 @@ author: Patrick Minogue <patrick.minogue@gmail.com>
 homepage: https://www.bokain.se
 
 environment:
-  sdk: '>=1.23.0 <2.0.0'
+  sdk: '>=1.24.2 <2.0.0'
 
 dependencies:
   angular2: '^3.1.0'
@@ -13,7 +13,9 @@ dependencies:
   firebase: '^4.0.0'
   fo_components:
     path: ../../Visurus/FoComponents
-  http: '^0.11.3+13'
+  http: '^0.11.3+14'
+  vi_auth_client:
+    path: ../../Visurus/ViAuthClient
 
 transformers:
 - angular2:

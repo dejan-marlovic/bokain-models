@@ -69,7 +69,6 @@ class Customer extends EditableModel
   String get password => _data["password"];
   List<String> get bookingIds => _data["booking_ids"];
   List<String> get journalEntryIds => _data["journal_entry_ids"];
-  String get token => _data["token"];
 
   void set belongsTo(String value) { _data["belongs_to"] = value; }
   void set commentsExternal(String value) { _data["comments_external"] = value; }
@@ -91,5 +90,4 @@ class Customer extends EditableModel
   void set password(String value) { _data["password"] = value; }
   void set bookingIds(List<String> value) { _data["booking_ids"] = value; }
   void set journalEntryIds(List<String> value) { _data["journal_entry_ids"] = value; }
-  void set token(String value) { _data["token"] = value; }
 }

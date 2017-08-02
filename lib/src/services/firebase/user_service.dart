@@ -1,7 +1,7 @@
 part of model_service;
 
 @Injectable()
-class UserService extends ModelService
+class UserService extends FirebaseServiceBase
 {
   UserService() : super("users");
 
@@ -33,10 +33,9 @@ class UserService extends ModelService
     {
       firebase.User user = await firebase.auth().createUserWithEmailAndPassword((model as User).email, (model as User).password);
       await user.sendEmailVerification();
-    } catch(e)
+    } finally
     {
       _loading = false;
-      throw (e);
     }
     return await super.push(model);
   }

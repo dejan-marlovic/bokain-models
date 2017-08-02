@@ -1,21 +1,14 @@
 import 'dart:async' show Future;
-import 'package:http/http.dart' show Response;
-import 'package:http/browser_client.dart';
 import 'package:angular2/angular2.dart' show Injectable;
 import 'package:bokain_models/bokain_models.dart' show PhraseService;
+import 'package:bokain_models/src/services/api.bokain.se/restful_service_base.dart';
 
 @Injectable()
-class MailerService
+class MailerService extends RestfulServiceBase
 {
-  MailerService(this._phraseService);
+  MailerService(this._phraseService) : super();
 
-  Future<Response> mail(String body, String subject, String to) async
-  {
-    _loading = true;
-    Response r = await _client.post(_url, body: {"body":body, "subject":subject, "to":to});
-    _loading = false;
-    return r;
-  }
+  Future<Map<String, dynamic>> mail(String body, String subject, String to) async => await httpPOST("mail", {"body":body, "subject":subject, "to":to});
 
   String formatDatePronounced(DateTime date)
   {
@@ -34,10 +27,5 @@ class MailerService
     return "$hour:$minute";
   }
 
-  bool get isLoading => _loading;
-
-  bool _loading = false;
-  final BrowserClient _client = new BrowserClient();
   final PhraseService _phraseService;
-  static final String _url = "https://api.bokain.se/mailer.php";
 }

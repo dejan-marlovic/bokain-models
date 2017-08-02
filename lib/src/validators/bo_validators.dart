@@ -1,11 +1,11 @@
 import 'package:angular2/angular2.dart' show ValidatorFn, AbstractControl;
-import 'package:bokain_models/src/services/model_service.dart';
+import 'package:bokain_models/src/services/firebase/firebase_service_base.dart';
 import 'package:bokain_models/src/model_base.dart' show EditableModel;
 import 'package:bokain_models/bokain_models.dart' show Phrase;
 
 class BoValidators
 {
-  static ValidatorFn unique(String property, String error_phrase, ModelService service, EditableModel model)
+  static ValidatorFn unique(String property, String error_phrase, FirebaseServiceBase service, EditableModel model)
   {
     return (AbstractControl control)
     {

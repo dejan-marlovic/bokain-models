@@ -1,7 +1,7 @@
 part of model_service;
 
 @Injectable()
-class BookingService extends ModelService
+class BookingService extends FirebaseServiceBase
 {
   BookingService(this._calendarService, this._customerService, this._salonService, this._serviceService, this._userService) : super("bookings");
 

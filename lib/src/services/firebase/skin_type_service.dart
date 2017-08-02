@@ -1,7 +1,7 @@
 part of model_service;
 
 @Injectable()
-class SkinTypeService extends ModelService
+class SkinTypeService extends FirebaseServiceBase
 {
   SkinTypeService() : super("skin_types");
 

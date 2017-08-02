@@ -1,7 +1,7 @@
 part of model_service;
 
 @Injectable()
-class JournalService extends ModelService
+class JournalService extends FirebaseServiceBase
 {
   JournalService(this._customerService) : super("journal");
 

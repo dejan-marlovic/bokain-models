@@ -5,8 +5,8 @@ import 'dart:html' as dom show HttpRequest;
 import 'dart:convert' show JSON;
 import 'package:angular2/core.dart';
 import 'package:firebase/firebase.dart' as firebase;
-import 'package:bokain_models/src/services/calendar_service.dart';
 import 'package:bokain_models/bokain_models.dart';
+import 'package:bokain_models/src/services/firebase/calendar_service.dart';
 
 part 'booking_service.dart';
 part 'country_service.dart';
@@ -19,9 +19,9 @@ part 'service_addon_service.dart';
 part 'skin_type_service.dart';
 part 'user_service.dart';
 
-abstract class ModelService
+abstract class FirebaseServiceBase
 {
-  ModelService(this._name)
+  FirebaseServiceBase(this._name)
   {
     _db = firebase.database();
     _ref = _db.ref(_name);
@@ -110,7 +110,7 @@ abstract class ModelService
     return output;
   }
 
-  bool get isLoading => _loading;
+  bool get loading => _loading;
 
   ModelBase getModel(String id) => _models.containsKey(id) ? _models[id] : null;
 

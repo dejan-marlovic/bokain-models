@@ -12,5 +12,7 @@ class BillogramBase
 
   String toJSON() => JSON.encode(_data);
 
+  Map<String, dynamic> get data => _data;
+
   Map<String, dynamic> _data = new Map();
 }

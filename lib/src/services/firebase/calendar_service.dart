@@ -67,7 +67,7 @@ class CalendarService
     _onDayChangedController.add(d);
   }
 
-  bool get isLoading => _loading;
+  bool get loading => _loading;
 
 
   bool _loading = false;

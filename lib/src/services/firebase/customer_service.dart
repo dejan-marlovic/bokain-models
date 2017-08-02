@@ -1,7 +1,7 @@
 part of model_service;
 
 @Injectable()
-class CustomerService extends ModelService
+class CustomerService extends FirebaseServiceBase
 {
   CustomerService() : super("customers");
 
@@ -28,8 +28,15 @@ class CustomerService extends ModelService
   Future<Map<String, String>> fetchDetails(String social_number) async
   {
     _loading = true;
-    String response = await dom.HttpRequest.getString("https://api.bokain.se/index.php/ssn/$social_number", withCredentials: false);
-    _loading = false;
-    return JSON.decode(response);
+
+    try
+    {
+      String response = await dom.HttpRequest.getString("https://api.bokain.se/index.php/ssn/$social_number");
+      return JSON.decode(response);
+    }
+    finally
+    {
+      _loading = false;
+    }
   }
 }

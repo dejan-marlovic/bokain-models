@@ -19,7 +19,6 @@ class Booking extends ModelBase
     startTime = DateTime.parse(d["start_time"]);
     endTime = DateTime.parse(d["end_time"]);
     duration = endTime.difference(startTime);
-    //afterMargin = new Duration(minutes: d["after_margin"]);
     customerId = d["customer_id"];
     userId = d["user_id"];
     roomId = d["room_id"];
