@@ -8,6 +8,8 @@ export 'package:bokain_models/src/billogram/billogram_base.dart';
 export 'package:bokain_models/src/validators/bo_validators.dart';
 export 'package:bokain_models/src/phrase.dart';
 
+export 'package:bokain_models/src/pipes/phrase_pipe.dart';
+
 export 'package:bokain_models/src/services/api.bokain.se/billogram_service.dart';
 export 'package:bokain_models/src/services/customer_auth_service.dart';
 export 'package:bokain_models/src/services/error_output_service.dart';

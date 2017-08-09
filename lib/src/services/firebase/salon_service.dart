@@ -59,6 +59,23 @@ class SalonService extends FirebaseServiceBase
     return ids.toList(growable: false);
   }
 
+  Future<String> uploadImage(String salon_name, String data_base64) async
+  {
+    String url = null;
+    try
+    {
+      String filename = Uri.encodeFull("${salon_name}.jpg");
+      _loading = true;
+      await _logosRef.child(filename).putString(data_base64, "base64", _metadata).future;
+      url = (await _logosRef.child(filename).getDownloadURL()).toString();
+    }
+    finally
+    {
+      _loading = false;
+      return url;
+    }
+  }
+
   void _onRoomAdded(firebase.QueryEvent e)
   {
     _rooms[e.snapshot.key] = new Room.decode(e.snapshot.key, e.snapshot.val());
@@ -74,5 +91,7 @@ class SalonService extends FirebaseServiceBase
     await _ref.child(salon.id).child("room_ids").set(salon.roomIds);
   }
 
+  final firebase.UploadMetadata _metadata = new firebase.UploadMetadata(contentType: "image/jpeg");
+  final firebase.StorageReference _logosRef = firebase.storage().ref("salon-logos");
   Map<String, Room> _rooms = new Map();
 }

@@ -23,18 +23,6 @@ class JournalService extends FirebaseServiceBase
   }
 
   @override
-  Future<String> push(JournalEntry model) async
-  {
-    String id = await super.push(model);
-    _loading = true;
-
-    
-
-    _loading = false;
-    return id;
-  }
-
-  @override
   void _onChildAdded(firebase.QueryEvent e)
   {
     super._onChildAdded(e);

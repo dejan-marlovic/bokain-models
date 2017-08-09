@@ -116,6 +116,12 @@ abstract class FirebaseServiceBase
 
   List<String> get modelIds => _models.keys.toList(growable: false);
 
+  Future<ModelBase> fetchByProperty(String property, String value) async
+  {
+    firebase.QueryEvent qe = await _ref.orderByChild(property).equalTo(value).once("value");
+    return qe.snapshot.exists() ? createModelInstance(qe.snapshot.val().keys.first, qe.snapshot.val().values.first) : null;
+  }
+
   void _onChildAdded(firebase.QueryEvent e)
   {
     ModelBase model = createModelInstance(e.snapshot.key, e.snapshot.val());
@@ -148,7 +154,7 @@ abstract class FirebaseServiceBase
   bool _loading = false;
 
   Map<String, ModelBase> _models = new Map();
-  final StreamController<ModelBase> _onChildAddedController = new StreamController();
-  final StreamController<ModelBase> _onChildUpdatedController = new StreamController();
-  final StreamController<String> _onChildRemovedController = new StreamController();
+  final StreamController<ModelBase> _onChildAddedController = new StreamController.broadcast();
+  final StreamController<ModelBase> _onChildUpdatedController = new StreamController.broadcast();
+  final StreamController<String> _onChildRemovedController = new StreamController.broadcast();
 }

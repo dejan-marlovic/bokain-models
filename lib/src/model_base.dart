@@ -27,7 +27,6 @@ abstract class ModelBase extends DataTableModel
     created = new DateTime.now();
   }
 
-
   ModelBase.from(ModelBase other) : super(other.id)
   {
     _data = _deepCopy(other._data);
@@ -111,7 +110,6 @@ abstract class ModelBase extends DataTableModel
   DateTime get created => _data["created"];
   void set created(DateTime value) { _data["created"] = value; }
   void set addedBy(String value) { _data["added_by"] = value; }
-
   Map<String, dynamic> _data;
 
   static String timestampFormat(DateTime dt)

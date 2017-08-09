@@ -45,6 +45,7 @@ class Salon extends EditableModel
   String get street => _data["street"];
   String get postalCode => _data["postal_code"];
   String get city => _data["city"];
+  String get logoUrl => _data["logo_url"];
   List<String> get roomIds => _data["room_ids"];
   List<String> get userIds => _data["user_ids"];
   List<String> get bookingIds => _data["booking_ids"];
@@ -55,6 +56,7 @@ class Salon extends EditableModel
   void set street(String value) { _data["street"] = value; }
   void set postalCode(String value) { _data["postal_code"] = value; }
   void set city(String value) { _data["city"] = value; }
+  void set logoUrl(String value) { _data["logo_url"] = value; }
   void set roomIds(List<String> value) { _data["room_ids"] = value; }
   void set userIds(List<String> value) { _data["user_ids"] = value; }
   void set bookingIds(List<String> value) { _data["booking_ids"] = value; }
