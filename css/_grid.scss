@@ -1,0 +1,237 @@
+$large-width-threshold: 1024px;
+$medium-width-threshold: 750px;
+$colSpan: 12;
+$colPadding: 0.5rem;
+
+body
+{
+  margin: 0 auto;
+  text-align: center;
+}
+
+div.row
+{
+  text-align: left;
+  width: 100%;
+  max-width: 1280px;
+  font-size: 0;
+  display: inline-block;
+  position: relative;
+  margin: 0 auto;
+
+  div.col
+  {
+    min-height: 1rem;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    display: inline-block;
+    margin: 0;
+    font-size: 0.85rem;
+    padding: 0 $colPadding 0.3rem $colPadding;
+    box-sizing: border-box;
+    float: left;
+
+    img
+    {
+      width: 100%;
+    }
+  }
+
+  div.col:after
+  {
+    clear: both;
+  }
+
+  /// Small (default)
+  div.s0.col
+  {
+    width: 0;
+    padding: 0;
+  }
+
+  div.s1.col
+  {
+    width: (100.0%/$colSpan);
+  }
+  div.s2.col
+  {
+    width: (200.0%/$colSpan);
+  }
+  div.s3.col
+  {
+    width: (300.0%/$colSpan);
+  }
+  div.s4.col
+  {
+    width: (400.0%/$colSpan);
+  }
+  div.s5.col
+  {
+    width: (500.0%/$colSpan);
+  }
+  div.s6.col
+  {
+    width: (600.0%/$colSpan);
+  }
+  div.s7.col
+  {
+    width: (700.0%/$colSpan);
+  }
+  div.s8.col
+  {
+    width: (800.0%/$colSpan);
+  }
+  div.s9.col
+  {
+    width: (900.0%/$colSpan);
+  }
+  div.s10.col
+  {
+    width: (1000.0%/$colSpan);
+  }
+  div.s11.col
+  {
+    width: (1100.0%/$colSpan);
+  }
+  div.s12.col
+  {
+    width: (1200.0%/$colSpan);
+  }
+
+  // Medium (overrides small on medium screens and up)
+  @media screen and (min-width: $medium-width-threshold)
+  {
+    div.col
+    {
+      font-size: 0.95rem;
+    }
+
+    div.m0.col
+    {
+      width: 0;
+      padding: 0;
+    }
+    div.m1.col
+    {
+      width: (100.0%/$colSpan);
+    }
+    div.m2.col
+    {
+      width: (200.0%/$colSpan);
+    }
+    div.m3.col
+    {
+      width: (300.0%/$colSpan);
+    }
+    div.m4.col
+    {
+      width: (400.0%/$colSpan);
+    }
+    div.m5.col
+    {
+      width: (500.0%/$colSpan);
+    }
+    div.m6.col
+    {
+      width: (600.0%/$colSpan);
+    }
+    div.m7.col
+    {
+      width: (700.0%/$colSpan);
+    }
+    div.m8.col
+    {
+      width: (800.0%/$colSpan);
+    }
+    div.m9.col
+    {
+      width: (900.0%/$colSpan);
+    }
+    div.m10.col
+    {
+      width: (1000.0%/$colSpan);
+    }
+    div.m11.col
+    {
+      width: (1100.0%/$colSpan);
+    }
+    div.m12.col
+    {
+      width: (1200.0%/$colSpan);
+    }
+  }
+
+  // Large (overrides small + medium on large screens)
+  @media screen and (min-width: $large-width-threshold)
+  {
+    div.col
+    {
+      font-size: 1rem;
+    }
+
+    div.l0.col
+    {
+      width: 0;
+      padding: 0;
+    }
+    div.l1.col
+    {
+      width: (100.0%/$colSpan);
+    }
+    div.l2.col
+    {
+      width: (200.0%/$colSpan);
+    }
+    div.l3.col
+    {
+      width: (300.0%/$colSpan);
+    }
+    div.l4.col
+    {
+      width: (400.0%/$colSpan);
+    }
+    div.l5.col
+    {
+      width: (500.0%/$colSpan);
+    }
+    div.l6.col
+    {
+      width: (600.0%/$colSpan);
+    }
+    div.l7.col
+    {
+      width: (700.0%/$colSpan);
+    }
+    div.l8.col
+    {
+      width: (800.0%/$colSpan);
+    }
+    div.l9.col
+    {
+      width: (900.0%/$colSpan);
+    }
+    div.l10.col
+    {
+      width: (1000.0%/$colSpan);
+    }
+    div.l11.col
+    {
+      width: (1100.0%/$colSpan);
+    }
+    div.l12.col
+    {
+      width: (1200.0%/$colSpan);
+    }
+  }
+}
+
+div.row.collapse > div.col
+{
+  padding: 0 !important;
+}
+
+div.row.expand
+{
+  max-width: 100%;
+}

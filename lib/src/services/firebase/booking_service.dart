@@ -49,7 +49,10 @@ class BookingService extends FirebaseServiceBase
   @override
   Future<String> push(Booking model) async
   {
+    if (find(model.startTime, model.roomId) != null) throw new Exception("This time has already been booked");
+
     model.id = await super.push(model);
+
     await _patchAdd(model, update_remote: true);
     return model.id;
   }

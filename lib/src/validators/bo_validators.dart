@@ -30,6 +30,7 @@ class BoValidators
     Map<String, String> output = new Map();
 
     RegExp r = new RegExp(r"[a-zA-ZåäöÅÄÖ]");
+
     if (r.allMatches(value).length != value.length)
     {
       output["error"] = _phrase.get(["_enter_alphabet_characters_only"]);
@@ -57,7 +58,7 @@ class BoValidators
     String value = control.value;
     Map<String, String> output = new Map();
 
-    RegExp r = new RegExp(r"[a-zA-ZåäöÅÄÖ0-9]");
+    RegExp r = new RegExp(r"[a-zA-ZåäöÅÄÖ0-9 ]");
     if (r.allMatches(value).length != value.length)
     {
       output["error"] = _phrase.get(["_enter_alpha_numeric_values_only"]);
@@ -106,10 +107,11 @@ class BoValidators
     if (required(control) != null) return null;
     String value = control.value;
     Map<String, String> output = new Map();
-    RegExp r = new RegExp("[\+]{0,1}[0-9]{7,32}");
+    RegExp r = new RegExp("[\+]{0,1}[0-9\- ]{7,32}");
+        
     if (r.stringMatch(value) == null || r.stringMatch(value).length != value.length)
     {
-      output["error"] = _phrase.get(["_enter_valid_phone_without_spaces"]); // (+461234567)
+      output["error"] = _phrase.get(["_enter_valid_phone"]); // (+46)8 123 456
     }
     return output;
   }

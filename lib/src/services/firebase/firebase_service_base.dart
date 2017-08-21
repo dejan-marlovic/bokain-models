@@ -124,9 +124,12 @@ abstract class FirebaseServiceBase
 
   void _onChildAdded(firebase.QueryEvent e)
   {
+    _loading = true;
     ModelBase model = createModelInstance(e.snapshot.key, e.snapshot.val());
     _models[e.snapshot.key] = model;
     _onChildAddedController.add(model);
+
+    new Timer(const Duration(milliseconds: 400), () => _loading = false);
   }
 
   void _onChildChanged(firebase.QueryEvent e)

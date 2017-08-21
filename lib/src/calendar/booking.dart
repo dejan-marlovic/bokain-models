@@ -30,7 +30,6 @@ class Booking extends ModelBase
     noshow = d.containsKey("noshow") ? d["noshow"] : false;
     invoiceSent = d.containsKey("invoice_sent") ? d["invoice_sent"] : false;
     comments = d["comments"];
-    discountCode = d["discount_code"];
 
     totalDuration = d["total_duration"];
     totalPrice = d["total_price"];
@@ -64,7 +63,6 @@ class Booking extends ModelBase
   bool get noshow => _data["noshow"];
   bool get invoiceSent => _data["invoice_sent"];
   String get comments => _data["comments"];
-  String get discountCode => _data["discount_code"];
   num get totalDuration => _data["total_duration"];
   num get totalPrice => _data["total_price"];
 
@@ -82,7 +80,6 @@ class Booking extends ModelBase
   void set noshow(bool value) { _data["noshow"] = value; }
   void set invoiceSent(bool value) { _data["invoice_sent"] = value; }
   void set comments(String value) { _data["comments"] = value; }
-  void set discountCode(String value) { _data["discount_code"] = value; }
   void set totalDuration(num value) { _data["total_duration"] = value; }
   void set totalPrice(num value) { _data["total_price"] = value; }
 }

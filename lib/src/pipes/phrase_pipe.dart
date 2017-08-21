@@ -6,9 +6,9 @@ class PhrasePipe implements PipeTransform
 {
   PhrasePipe(this._phraseService);
 
-  String transform(String value, [Map<String, String> params = null])
+  String transform(String value, [bool capitalize_first = true])
   {
-    return _phraseService.get([value], params: params);
+    return _phraseService.get([value], capitalize_first: capitalize_first);
   }
 
   final PhraseService _phraseService;

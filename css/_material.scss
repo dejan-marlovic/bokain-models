@@ -1,0 +1,76 @@
+@import 'theme';
+
+glyph.baseline { vertical-align: baseline; }
+glyph.text-top { vertical-align: text-top; }
+glyph.text-bottom { vertical-align: text-bottom; }
+glyph.super { vertical-align: super; }
+
+material-checkbox
+{
+  div.icon-container
+  {
+    glyph.icon.filled
+    {
+      color: $color-1;
+    }
+  }
+}
+
+material-tab-strip
+{
+  div.navi-bar
+  {
+    div.tab-indicator
+    {
+      background-color: $color-1;
+    }
+  }
+  tab-button.active
+  {
+    color: $color-1 !important;
+  }
+}
+
+material-input
+{
+  span.label-text.focused
+  {
+    color: $color-1 !important;
+  }
+  span.label-text.invalid
+  {
+    color: $color-alert !important;
+  }
+
+  div.focused-underline
+  {
+    background-color: $color-1 !important;
+  }
+  div.focused-underline.invalid
+  {
+    background-color: $color-alert !important;
+  }
+  div.unfocused-underline.invalid
+  {
+    background-color: $color-alert !important;
+  }
+
+  div.error-text
+  {
+    color: $color-alert !important;
+  }
+}
+
+material-spinner
+{
+  border-color: $color-1 !important;
+}
+
+material-tab
+{
+  div.tab-content > div
+  {
+    display: block;
+    width: 100%;
+  }
+}

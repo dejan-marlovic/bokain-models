@@ -74,7 +74,30 @@ class UserService extends FirebaseServiceBase
     _loading = false;
   }
 
+  Future<String> uploadImage(String user_id, String base64) async
+  {
+    String url = null;
+    try
+    {
+      _loading = true;
+      List<String> parts = base64.split(";base64,");
+      String contentType = parts.first.substring("data:".length);
+      String data = parts.last;
+
+      String filename = Uri.encodeFull(user_id);
+      final firebase.UploadMetadata metadata = new firebase.UploadMetadata(contentType: contentType);
+      await _profileImagesRef.child(filename).putString(data, "base64", metadata).future;
+      url = (await _profileImagesRef.child(filename).getDownloadURL()).toString();
+    }
+    finally
+    {
+      _loading = false;
+      return url;
+    }
+  }
+
   bool get isLoggedIn => (_currentUser != null && _currentUser.emailVerified);
 
   firebase.User _currentUser;
+  final firebase.StorageReference _profileImagesRef = firebase.storage().ref("user-profile-images");
 }

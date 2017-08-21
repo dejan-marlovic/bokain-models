@@ -16,6 +16,7 @@ class User extends EditableModel
   @override
   User.decode(String id, Map<String, dynamic> d) : super.decode(id, d)
   {
+    profileImageUrl = d["profile_image_url"];
     socialNumber = d["social_number"];
     firstname = d["firstname"];
     lastname = d["lastname"];
@@ -48,8 +49,9 @@ class User extends EditableModel
   }
 
   @override
-  String toString() => email;
+  String toString() => "$firstname $lastname";
 
+  String get profileImageUrl => _data["profile_image_url"];
   String get city => _data["city"];
   String get email => _data["email"];
   String get firstname => _data["firstname"];
@@ -66,6 +68,7 @@ class User extends EditableModel
   num get bookingRank => _data["booking_rank"];
   String get strBookingRank => bookingRank.toString();
 
+  void set profileImageUrl(String value) { _data["profile_image_url"] = value; }
   void set socialNumber(String value) { _data["social_number"] = value; }
   void set firstname(String value) { _data["firstname"] = value; }
   void set lastname(String value) { _data["lastname"] = value; }
