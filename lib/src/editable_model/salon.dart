@@ -32,10 +32,10 @@ class Salon extends EditableModel
   Map<String, String> toTableRow()
   {
     Map<String, String> table = new Map();
-    table[ModelBase.phrase.get(["name"])] = name;
-    table[ModelBase.phrase.get(["email"])] = email;
-    table[ModelBase.phrase.get(["phone"])] = phone;
-    table[ModelBase.phrase.get(["city"])] = city;
+    table["name"] = name;
+    table["email"] = email;
+    table["phone"] = phone;
+    table["city"] = city;
     return table;
   }
 
@@ -45,7 +45,8 @@ class Salon extends EditableModel
   String get street => _data["street"];
   String get postalCode => _data["postal_code"];
   String get city => _data["city"];
-  String get logoUrl => _data["logo_url"];
+  String get logoUrlAS => _data["logo_url_as"];
+  String get logoUrlSSC => _data["logo_url_ssc"];
   List<String> get roomIds => _data["room_ids"];
   List<String> get userIds => _data["user_ids"];
   List<String> get bookingIds => _data["booking_ids"];
@@ -56,7 +57,8 @@ class Salon extends EditableModel
   void set street(String value) { _data["street"] = value; }
   void set postalCode(String value) { _data["postal_code"] = value; }
   void set city(String value) { _data["city"] = value; }
-  void set logoUrl(String value) { _data["logo_url"] = value; }
+  void set logoUrlAS(String value) { _data["logo_url_as"] = value; }
+  void set logoUrlSSC(String value) { _data["logo_url_ssc"] = value; }
   void set roomIds(List<String> value) { _data["room_ids"] = value; }
   void set userIds(List<String> value) { _data["user_ids"] = value; }
   void set bookingIds(List<String> value) { _data["booking_ids"] = value; }

@@ -1,6 +1,6 @@
 import 'dart:async' show Future;
 import 'package:angular2/angular2.dart' show Injectable;
-import 'package:bokain_models/bokain_models.dart' show PhraseService;
+import 'package:fo_components/fo_components.dart' show PhraseService;
 import 'package:bokain_models/src/services/api.bokain.se/restful_service_base.dart';
 
 @Injectable()
@@ -12,12 +12,11 @@ class MailerService extends RestfulServiceBase
 
   String formatDatePronounced(DateTime date)
   {
-    return _phraseService.get(
-        [
-          'weekday_${date.weekday}_pronounced',
-          '${date.day}_pronounced',
-          'month_${date.month}'
-        ]) + " " + date.year.toString();
+    String weekday = _phraseService.get("weekday_${date.weekday}_pronounced");
+    String day = _phraseService.get("${date.day}_pronounced");
+    String month = _phraseService.get("month_${date.month}");
+
+    return "$weekday $day $month ${date.year}";
   }
 
   String formatHM(DateTime date)

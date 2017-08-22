@@ -35,7 +35,7 @@ class Increment extends ModelBase
   Map<String, String> toTableRow()
   {
     Map<String, String> table = new Map();
-    table[ModelBase.phrase.get(['date'])] = ModelBase.timestampFormat(startTime);
+    table["date"] = ModelBase.timestampFormat(startTime);
     return table;
   }
 

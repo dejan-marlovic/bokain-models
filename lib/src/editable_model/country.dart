@@ -23,8 +23,8 @@ class Country extends EditableModel
   Map<String, String> toTableRow()
   {
     Map<String, String> table = new Map();
-    table[ModelBase.phrase.get(["name"])] = name;
-    table[ModelBase.phrase.get(["iso_alpha2"])] = isoAlpha2;
+    table["name"] = name;
+    table["iso_alpha2"] = isoAlpha2;
     return table;
   }
 

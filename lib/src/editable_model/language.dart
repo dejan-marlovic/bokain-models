@@ -23,13 +23,13 @@ class Language extends EditableModel
   Map<String, String> toTableRow()
   {
     Map<String, String> table = new Map();
-    table[ModelBase.phrase.get(["name"])] = ModelBase.phrase.get([name]);
-    table[ModelBase.phrase.get(["iso_639_1"])] = iso639_1;
+    table["name"] = name;
+    table["iso_639_1"] = iso639_1;
     return table;
   }
 
   @override
-  String toString() => "${ModelBase.phrase.get([name])} ($iso639_1)";
+  String toString() => "${name} ($iso639_1)";
 
   String get iso639_1 => _data["iso_639_1"];
   String get name => _data["name"];

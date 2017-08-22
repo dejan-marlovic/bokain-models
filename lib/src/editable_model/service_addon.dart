@@ -26,7 +26,7 @@ class ServiceAddon extends EditableModel
   @override
   Map<String, String> toTableRow()
   {
-    return {ModelBase.phrase.get(["name"]) : name, ModelBase.phrase.get(["duration"]) : durationMinutes.toString(), ModelBase.phrase.get(["price"]) : price.toString()};
+    return {"name" : name, "duration" : durationMinutes.toString(), "price" : price.toString()};
   }
 
   String toString() => name;

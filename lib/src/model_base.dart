@@ -3,7 +3,6 @@ import 'dart:math';
 import 'dart:convert';
 import 'package:fo_components/fo_components.dart' show DataTableModel;
 
-import 'phrase.dart';
 part 'editable_model/editable_model.dart';
 part 'editable_model/country.dart';
 part 'editable_model/customer.dart';
@@ -122,6 +121,4 @@ abstract class ModelBase extends DataTableModel
     String ss = dt.second < 10 ? "0" + dt.second.toString() : dt.second.toString();
     return "$y-$MM-$dd $HH:$mm:$ss";
   }
-
-  static final Phrase phrase = new Phrase();
 }

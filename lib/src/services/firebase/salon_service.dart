@@ -59,7 +59,7 @@ class SalonService extends FirebaseServiceBase
     return ids.toList(growable: false);
   }
 
-  Future<String> uploadImage(String salon_name, String base64) async
+  Future<String> uploadImage(String salon_name, String company_name, String base64) async
   {
     String url = null;
     try
@@ -69,7 +69,7 @@ class SalonService extends FirebaseServiceBase
       String contentType = parts.first.substring("data:".length);
       String data = parts.last;
 
-      String filename = Uri.encodeFull(salon_name);
+      String filename = Uri.encodeFull("${salon_name}_${company_name}");
       final firebase.UploadMetadata metadata = new firebase.UploadMetadata(contentType: contentType);
       await _logosRef.child(filename).putString(data, "base64", metadata).future;
       url = (await _logosRef.child(filename).getDownloadURL()).toString();

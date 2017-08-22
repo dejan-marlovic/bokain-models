@@ -39,11 +39,11 @@ class Booking extends ModelBase
   Map<String, String> toTableRow()
   {
     Map<String, String> table = new Map();
-    table[ModelBase.phrase.get(["start_time"])] = ModelBase.timestampFormat(startTime);
-    table[ModelBase.phrase.get(["duration_minutes"])] = duration.inMinutes.toString();
-    table[ModelBase.phrase.get(["customer_id"])] = customerId;
-    table[ModelBase.phrase.get(["user_id"])] = userId;
-    table[ModelBase.phrase.get(["salon_id"])] = salonId;
+    table["start_time"] = ModelBase.timestampFormat(startTime);
+    table["duration_minutes"] = duration.inMinutes.toString();
+    table["customer_id"] = customerId;
+    table["user_id"] = userId;
+    table["salon_id"] = salonId;
     return table;
   }
 

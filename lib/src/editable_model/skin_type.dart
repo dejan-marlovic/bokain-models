@@ -21,7 +21,7 @@ class SkinType extends EditableModel
   Map<String, String> toTableRow()
   {
     Map<String, String> table = new Map();
-    table[ModelBase.phrase.get(["name"])] = name;
+    table["name"] = name;
     return table;
   }
 

@@ -1,7 +1,6 @@
 import 'package:angular2/angular2.dart' show ValidatorFn, AbstractControl;
 import 'package:bokain_models/src/services/firebase/firebase_service_base.dart';
 import 'package:bokain_models/src/model_base.dart' show EditableModel;
-import 'package:bokain_models/bokain_models.dart' show Phrase;
 
 class BoValidators
 {
@@ -14,13 +13,13 @@ class BoValidators
       List<String> ids = service.getIdsByProperty(property, control.value);
       if (model != null) ids.removeWhere((id) => id == model.id);
 
-      return (ids.isEmpty) ? null : {"error" : _phrase.get([error_phrase])};
+      return (ids.isEmpty) ? null : {"error" : error_phrase};
     };
   }
 
   static Map<String, String> required(AbstractControl control)
   {
-    return control.value == null || control.value == '' ? {"error": _phrase.get(["_enter_a_value"])} : null;
+    return control.value == null || control.value == '' ? {"error": "_enter_a_value"} : null;
   }
 
   static Map<String, String> isAlpha(AbstractControl control)
@@ -33,7 +32,7 @@ class BoValidators
 
     if (r.allMatches(value).length != value.length)
     {
-      output["error"] = _phrase.get(["_enter_alphabet_characters_only"]);
+      output["error"] = "_enter_alphabet_characters_only";
     }
     return output;
   }
@@ -47,7 +46,7 @@ class BoValidators
     RegExp r = new RegExp(r"[a-zA-ZåäöÅÄÖ\- ]");
     if (r.allMatches(value).length != value.length)
     {
-      output["error"] = _phrase.get(["_enter_alphabet_characters_only"]);
+      output["error"] = "_enter_alphabet_characters_only";
     }
     return output;
   }
@@ -61,7 +60,7 @@ class BoValidators
     RegExp r = new RegExp(r"[a-zA-ZåäöÅÄÖ0-9 ]");
     if (r.allMatches(value).length != value.length)
     {
-      output["error"] = _phrase.get(["_enter_alpha_numeric_values_only"]);
+      output["error"] = "_enter_alpha_numeric_values_only";
     }
     return output;
   }
@@ -78,7 +77,7 @@ class BoValidators
       }
       on FormatException
       {
-        return {"error" : _phrase.get(['_enter_numbers_only'])};
+        return {"error" : "_enter_numbers_only"};
       }
       return null;
     }
@@ -89,7 +88,7 @@ class BoValidators
     return (AbstractControl control)
     {
       if (isNumeric(control) != null) return null;
-      return control.value <= max ? null : {"error":_phrase.get(["_numeric_max_exceeded"], params: {"max":max.toString()})};
+      return control.value <= max ? null : {"error":"_numeric_max_exceeded"};
     };
   }
 
@@ -98,7 +97,7 @@ class BoValidators
     return (AbstractControl control)
     {
       if (isNumeric(control) != null) return null;
-      return control.value >= min ? null : {"error":_phrase.get(["_numeric_min_exceeded"], params: {"min":min.toString()})};
+      return control.value >= min ? null : {"error":"_numeric_min_exceeded"};
     };
   }
 
@@ -111,7 +110,7 @@ class BoValidators
         
     if (r.stringMatch(value) == null || r.stringMatch(value).length != value.length)
     {
-      output["error"] = _phrase.get(["_enter_valid_phone"]); // (+46)8 123 456
+      output["error"] = "_enter_valid_phone"; // (+46)8 123 456
     }
     return output;
   }
@@ -125,7 +124,7 @@ class BoValidators
     RegExp r = new RegExp("07[0-9]{8}");
     if (r.stringMatch(value) == null || r.stringMatch(value).length != value.length)
     {
-      output["error"] = _phrase.get(["_enter_valid_swedish_cellphone_without_spaces"]); // (0712345678)
+      output["error"] = "_enter_valid_swedish_cellphone_without_spaces"; // (0712345678)
     }
     return output;
   }
@@ -138,7 +137,7 @@ class BoValidators
     RegExp r = new RegExp("(19|20)[0-9]{2,2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-2])[0-9]{4,4}");
     if (r.stringMatch(value) == null || r.stringMatch(value).length != value.length)
     {
-      output["error"] = _phrase.get(["_enter_valid_swedish_ssn"]); // (YYYYMMDDXXXX)
+      output["error"] = "_enter_valid_swedish_ssn"; // (YYYYMMDDXXXX)
     }
     return output;
   }
@@ -151,10 +150,8 @@ class BoValidators
     RegExp r = new RegExp("[A-Z]{3}[0-9]{3}");
     if (r.stringMatch(value) == null || r.stringMatch(value).length != value.length)
     {
-      output["error"] = _phrase.get(["_enter_valid_cancel_booking_code"]); // ABC123
+      output["error"] = "_enter_valid_cancel_booking_code"; // ABC123
     }
     return output;
   }
-
-  static Phrase _phrase = new Phrase();
 }

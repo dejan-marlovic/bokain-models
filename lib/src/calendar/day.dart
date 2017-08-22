@@ -49,8 +49,8 @@ class Day extends ModelBase
   Map<String, String> toTableRow()
   {
     Map<String, String> table = new Map();
-    table[ModelBase.phrase.get(["date"])] = ModelBase.timestampFormat(startTime);
-    table[ModelBase.phrase.get(["salon_id"])] = salonId;
+    table["date"] = ModelBase.timestampFormat(startTime);
+    table["salon_id"] = salonId;
     return table;
   }
 
