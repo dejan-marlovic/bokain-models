@@ -11,6 +11,19 @@ class BookingService extends FirebaseServiceBase
     return new Booking.decode(id, data);
   }
 
+  Future<String> _fetchUniqueCancelCode() async
+  {
+    firebase.QueryEvent qe;
+    String cancelCode;
+    while (qe == null || qe.snapshot.exists())
+    {
+      cancelCode = rs.randomAlphaNumeric(7).toUpperCase();
+      qe = await firebase.database().ref('bookings').orderByChild("cancelCode").equalTo(cancelCode).once("value");
+    }
+    return cancelCode;
+  }
+
+
   Booking find(DateTime time, String room_id)
   {
     return _models.values.firstWhere((Booking b) =>
@@ -50,6 +63,8 @@ class BookingService extends FirebaseServiceBase
   Future<String> push(Booking model) async
   {
     if (find(model.startTime, model.roomId) != null) throw new Exception("This time has already been booked");
+
+    model.cancelCode = await _fetchUniqueCancelCode();
 
     model.id = await super.push(model);
 

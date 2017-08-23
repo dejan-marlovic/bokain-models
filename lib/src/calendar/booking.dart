@@ -30,9 +30,9 @@ class Booking extends ModelBase
     noshow = d.containsKey("noshow") ? d["noshow"] : false;
     invoiceSent = d.containsKey("invoice_sent") ? d["invoice_sent"] : false;
     comments = d["comments"];
-
     totalDuration = d["total_duration"];
     totalPrice = d["total_price"];
+    cancelCode = d["cancel_code"];
   }
 
   @override
@@ -44,6 +44,7 @@ class Booking extends ModelBase
     table["customer_id"] = customerId;
     table["user_id"] = userId;
     table["salon_id"] = salonId;
+    table["noshow"] = noshow.toString();
     return table;
   }
 
@@ -65,6 +66,7 @@ class Booking extends ModelBase
   String get comments => _data["comments"];
   num get totalDuration => _data["total_duration"];
   num get totalPrice => _data["total_price"];
+  String get cancelCode => _data["cancel_code"];
 
   void set startTime(DateTime value) { _data["start_time"] = value; }
   void set endTime(DateTime value) { _data["end_time"] = value; }
@@ -82,4 +84,5 @@ class Booking extends ModelBase
   void set comments(String value) { _data["comments"] = value; }
   void set totalDuration(num value) { _data["total_duration"] = value; }
   void set totalPrice(num value) { _data["total_price"] = value; }
+  void set cancelCode(String value) { _data["cancel_code"] = value; }
 }

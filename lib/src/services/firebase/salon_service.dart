@@ -81,6 +81,17 @@ class SalonService extends FirebaseServiceBase
     }
   }
 
+  Future removeImage(String salon_name, String company_name) async
+  {
+    try
+    {
+      _loading = true;
+      String filename = Uri.encodeFull("${salon_name}_${company_name}");
+      await _logosRef.child(filename).delete();
+    }
+    finally { _loading = false; }
+  }
+
   void _onRoomAdded(firebase.QueryEvent e)
   {
     _rooms[e.snapshot.key] = new Room.decode(e.snapshot.key, e.snapshot.val());

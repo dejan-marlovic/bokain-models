@@ -5,6 +5,7 @@ import 'dart:html' as dom show HttpRequest;
 import 'dart:convert' show JSON;
 import 'package:angular2/core.dart';
 import 'package:firebase/firebase.dart' as firebase;
+import 'package:random_string/random_string.dart' as rs;
 import 'package:bokain_models/bokain_models.dart';
 import 'package:bokain_models/src/services/firebase/calendar_service.dart';
 
@@ -147,9 +148,9 @@ abstract class FirebaseServiceBase
 
   ModelBase createModelInstance(String id, Map<String, dynamic> data);
 
-  Stream<ModelBase> get childAddedStream => _onChildAddedController.stream;
-  Stream<ModelBase> get childUpdatedStream => _onChildUpdatedController.stream;
-  Stream<String> get childRemovedStream => _onChildRemovedController.stream;
+  Stream<ModelBase> get onChildAdded => _onChildAddedController.stream;
+  Stream<ModelBase> get onChildUpdated => _onChildUpdatedController.stream;
+  Stream<String> get onChildRemoved => _onChildRemovedController.stream;
 
   final String _name;
   firebase.Database _db;

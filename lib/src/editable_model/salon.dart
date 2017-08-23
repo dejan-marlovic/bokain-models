@@ -8,10 +8,13 @@ class Salon extends EditableModel
     roomIds = new List();
     userIds = new List();
     bookingIds = new List();
+    logoUrls = new Map();
   }
+
 
   @override
   Salon.from(Salon other) : super.from(other);
+
 
   @override
   Salon.decode(String id, Map<String, dynamic> d) : super.decode(id, d)
@@ -23,6 +26,7 @@ class Salon extends EditableModel
     if (roomIds == null) roomIds = new List();
     if (userIds == null) userIds = new List();
     if (bookingIds == null) bookingIds = new List();
+    if (logoUrls == null) logoUrls = new Map();
   }
 
   @override
@@ -45,8 +49,10 @@ class Salon extends EditableModel
   String get street => _data["street"];
   String get postalCode => _data["postal_code"];
   String get city => _data["city"];
-  String get logoUrlAS => _data["logo_url_as"];
-  String get logoUrlSSC => _data["logo_url_ssc"];
+  /**
+   * One url per company
+   */
+  Map<String, String> get logoUrls => _data["logo_urls"];
   List<String> get roomIds => _data["room_ids"];
   List<String> get userIds => _data["user_ids"];
   List<String> get bookingIds => _data["booking_ids"];
@@ -57,8 +63,11 @@ class Salon extends EditableModel
   void set street(String value) { _data["street"] = value; }
   void set postalCode(String value) { _data["postal_code"] = value; }
   void set city(String value) { _data["city"] = value; }
-  void set logoUrlAS(String value) { _data["logo_url_as"] = value; }
-  void set logoUrlSSC(String value) { _data["logo_url_ssc"] = value; }
+
+  /**
+   * One url per company
+   */
+  void set logoUrls(Map<String, String> value) { _data["logo_urls"] = value; }
   void set roomIds(List<String> value) { _data["room_ids"] = value; }
   void set userIds(List<String> value) { _data["user_ids"] = value; }
   void set bookingIds(List<String> value) { _data["booking_ids"] = value; }

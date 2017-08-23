@@ -8,6 +8,7 @@ abstract class EditableModel extends ModelBase
     status = "active";
   }
 
+  
   @override
   EditableModel.from(EditableModel other) : super.from(other);
 

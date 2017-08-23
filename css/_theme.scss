@@ -60,6 +60,20 @@ $font-stack: Arial, "Helvetica Neue", Helvetica, sans-serif;
 .margin-top-large { margin-top: $large !important; }
 .margin-top-x-large { margin-top: $x-large !important; }
 
+.padding-bottom-none { padding-bottom: 0 !important; }
+.padding-bottom-x-small { padding-bottom: $x-small !important; }
+.padding-bottom-small { padding-bottom: $small !important; }
+.padding-bottom-medium { padding-bottom: $medium !important; }
+.padding-bottom-large { padding-bottom: $large !important; }
+.padding-bottom-x-large { padding-bottom: $x-large !important; }
+
+.padding-top-none { padding-top: 0 !important; }
+.padding-top-x-small { padding-top: $x-small !important; }
+.padding-top-small { padding-top: $small !important; }
+.padding-top-medium { padding-top: $medium !important; }
+.padding-top-large { padding-top: $large !important; }
+.padding-top-x-large { padding-top: $x-large !important; }
+
 .is-hidden { display: none; }
 
 .text-center { text-align: center; }

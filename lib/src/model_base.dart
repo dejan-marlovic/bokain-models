@@ -45,10 +45,16 @@ abstract class ModelBase extends DataTableModel
   {
     Map<String, dynamic> d = new Map();
 
-    /// Auto-encode default type properties (String, DateTime, num, null)
+    /// Auto-encode default type properties (String, num, bool, null and DateTime)
     _data.forEach((key, value)
     {
-      if (value is String || value is bool || value is int || value is double || value is List<String> || value == null) d[key] = value;
+      if (value is String || value is num || value is bool ||
+          value is List<String> || value is List<num> || value is List<bool> ||
+          value is Map<String, String> || value is Map<String, num> || value is Map<String, bool> ||
+          value == null)
+      {
+        d[key] = value;
+      }
       else if (value is DateTime) d[key] = timestampFormat(value);
     });
     return d;
