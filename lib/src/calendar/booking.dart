@@ -41,10 +41,13 @@ class Booking extends ModelBase
     Map<String, String> table = new Map();
     table["start_time"] = ModelBase.timestampFormat(startTime);
     table["duration_minutes"] = duration.inMinutes.toString();
+    /*
     table["customer_id"] = customerId;
     table["user_id"] = userId;
     table["salon_id"] = salonId;
+    */
     table["noshow"] = noshow.toString();
+    table["invoice_sent"] = invoiceSent.toString();
     return table;
   }
 

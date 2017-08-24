@@ -29,6 +29,22 @@ $font-stack: Arial, "Helvetica Neue", Helvetica, sans-serif;
   border-radius: 0.5rem;
 }
 
+.background-color-1-x-dark { background-color: $color-1-x-dark !important; }
+.background-color-1-dark { background-color: $color-1-dark !important; }
+.background-color-1 { background-color: $color-1 !important; }
+.background-color-1-bright { background-color: $color-1-bright !important; }
+.background-color-1-x-bright { background-color: $color-1-x-bright !important; }
+
+.background-color-2-x-dark { background-color: $color-2-x-dark !important; }
+.background-color-2-dark { background-color: $color-2-dark !important; }
+.background-color-2 { background-color: $color-2 !important; }
+.background-color-2-bright { background-color: $color-2-bright !important; }
+.background-color-2-x-bright { background-color: $color-2-x-bright !important; }
+
+.background-color-alert { background-color: $color-alert !important; }
+.background-color-black { background-color: $color-black !important; }
+.background-color-white { background-color: white !important; }
+
 .color-1-x-dark { color: $color-1-x-dark !important; }
 .color-1-dark { color: $color-1-dark !important; }
 .color-1 { color: $color-1 !important; }
@@ -43,6 +59,7 @@ $font-stack: Arial, "Helvetica Neue", Helvetica, sans-serif;
 
 .color-alert { color: $color-alert !important; }
 .color-black { color: $color-black !important; }
+.color-white { color: white !important; }
 
 .clickable { cursor: pointer; }
 
@@ -52,6 +69,13 @@ $font-stack: Arial, "Helvetica Neue", Helvetica, sans-serif;
 .margin-bottom-medium { margin-bottom: $medium !important; }
 .margin-bottom-large { margin-bottom: $large !important; }
 .margin-bottom-x-large { margin-bottom: $x-large !important; }
+
+.margin-none { margin: 0 !important; }
+.margin-x-small { margin: $x-small !important; }
+.margin-small { margin: $small !important; }
+.margin-medium { margin: $medium !important; }
+.margin-large { margin: $large !important; }
+.margin-x-large { margin: $x-large !important; }
 
 .margin-top-none { margin-top: 0 !important; }
 .margin-top-x-small { margin-top: $x-small !important; }
@@ -66,6 +90,13 @@ $font-stack: Arial, "Helvetica Neue", Helvetica, sans-serif;
 .padding-bottom-medium { padding-bottom: $medium !important; }
 .padding-bottom-large { padding-bottom: $large !important; }
 .padding-bottom-x-large { padding-bottom: $x-large !important; }
+
+.padding-none { padding: 0 !important; }
+.padding-x-small { padding: $x-small !important; }
+.padding-small { padding: $small !important; }
+.padding-medium { padding: $medium !important; }
+.padding-large { padding: $large !important; }
+.padding-x-large { padding: $x-large !important; }
 
 .padding-top-none { padding-top: 0 !important; }
 .padding-top-x-small { padding-top: $x-small !important; }

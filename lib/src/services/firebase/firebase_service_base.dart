@@ -45,6 +45,9 @@ abstract class FirebaseServiceBase
     }
   }
 
+  /**
+   * Push a new model onto remote
+   */
   Future<String> push(ModelBase model) async
   {
     _loading = true;
@@ -57,6 +60,9 @@ abstract class FirebaseServiceBase
     return ref.key;
   }
 
+  /**
+   * Update the remote model
+   */
   Future set(String id, ModelBase model) async
   {
     _loading = true;
@@ -64,6 +70,9 @@ abstract class FirebaseServiceBase
     _loading = false;
   }
 
+  /**
+   * Remove the model from remote
+   */
   Future remove(String id) async
   {
     try
@@ -77,6 +86,21 @@ abstract class FirebaseServiceBase
       print(e);
       print(s);
     }
+  }
+
+  Future<ModelBase> fetch(String id) async
+  {
+    _loading = true;
+    firebase.QueryEvent qe = await _ref.child(id).once("value");
+    _loading = false;
+    if (!qe.snapshot.exists()) throw new Exception("model with id $id of type $_name not found");
+    return createModelInstance(qe.snapshot.key, qe.snapshot.val());
+  }
+
+  Future<ModelBase> fetchByProperty(String property, String value) async
+  {
+    firebase.QueryEvent qe = await _ref.orderByChild(property).equalTo(value).limitToFirst(1).once("value");
+    return qe.snapshot.exists() ? createModelInstance(qe.snapshot.val().keys.first, qe.snapshot.val().values.first) : null;
   }
 
   List<ModelBase> getModelsAsList([List<String> ids = null, bool include_disabled = false])
@@ -111,17 +135,11 @@ abstract class FirebaseServiceBase
     return output;
   }
 
-  bool get loading => _loading;
-
   ModelBase getModel(String id) => _models.containsKey(id) ? _models[id] : null;
 
-  List<String> get modelIds => _models.keys.toList(growable: false);
+  bool get loading => _loading;
 
-  Future<ModelBase> fetchByProperty(String property, String value) async
-  {
-    firebase.QueryEvent qe = await _ref.orderByChild(property).equalTo(value).once("value");
-    return qe.snapshot.exists() ? createModelInstance(qe.snapshot.val().keys.first, qe.snapshot.val().values.first) : null;
-  }
+  List<String> get modelIds => _models.keys.toList(growable: false);
 
   void _onChildAdded(firebase.QueryEvent e)
   {

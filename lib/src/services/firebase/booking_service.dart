@@ -11,19 +11,14 @@ class BookingService extends FirebaseServiceBase
     return new Booking.decode(id, data);
   }
 
-  Future<String> _fetchUniqueCancelCode() async
+  /**
+  Future<Booking> fetchByCancelCode(String cancel_code) async
   {
-    firebase.QueryEvent qe;
-    String cancelCode;
-    while (qe == null || qe.snapshot.exists())
-    {
-      cancelCode = rs.randomAlphaNumeric(7).toUpperCase();
-      qe = await firebase.database().ref('bookings').orderByChild("cancelCode").equalTo(cancelCode).once("value");
-    }
-    return cancelCode;
+    firebase.QueryEvent qe = await firebase.database().ref('bookings').orderByChild('cancel_code').equalTo(cancel_code).once('value');
+
+    return (qe.snapshot.exists()) ? new Booking.decode(qe.snapshot.key, qe.snapshot.val()) : null;
   }
-
-
+      **/
   Booking find(DateTime time, String room_id)
   {
     return _models.values.firstWhere((Booking b) =>
@@ -31,40 +26,11 @@ class BookingService extends FirebaseServiceBase
   }
 
   @override
-  Future _onChildAdded(firebase.QueryEvent e) async
-  {
-    await super._onChildAdded(e);
-    await _patchAdd(_models[e.snapshot.key], update_remote: false);
-  }
-
-  @override
-  Future _onChildChanged(firebase.QueryEvent e) async
-  {
-    Booking booking = _models[e.snapshot.key];
-
-    // Remove old
-    await patchRemove(booking, update_remote: false);
-
-    // Update
-    await super._onChildChanged(e);
-
-    // Add new
-    await _patchAdd(booking, update_remote: false);
-  }
-
-  @override
-  Future _onChildRemoved(firebase.QueryEvent e) async
-  {
-    await patchRemove(_models[e.snapshot.key], update_remote: false);
-    await super._onChildRemoved(e);
-  }
-
-  @override
   Future<String> push(Booking model) async
   {
     if (find(model.startTime, model.roomId) != null) throw new Exception("This time has already been booked");
 
-    model.cancelCode = await _fetchUniqueCancelCode();
+    model.cancelCode = await _generateUniqueCancelCode();
 
     model.id = await super.push(model);
 
@@ -79,70 +45,18 @@ class BookingService extends FirebaseServiceBase
     await _patchAdd(model, update_remote: true);
   }
 
-  /// Param update_remote: specify if the remote server should be patched (no need to patch server if the changes came from there)
-  Future _patchAdd(Booking booking, {bool update_remote: false}) async
-  {
-    if (booking == null) return;
-
-    _loading = true;
-
-    Day day = await _calendarService.fetch(booking.dayId);
-    User user = _userService.getModel(booking.userId);
-    Salon salon = _salonService.getModel(booking.salonId);
-    Customer customer = _customerService.getModel(booking.customerId);
-    Service service = _serviceService.getModel(booking.serviceId);
-
-    /// Increments
-    if (day != null)
-    {
-      DateTime iTime = new DateTime.fromMillisecondsSinceEpoch(booking.startTime.millisecondsSinceEpoch);
-      DateTime endTimeWithMargin = booking.endTime.add(service.afterMargin);
-      while (iTime.isBefore(endTimeWithMargin))
-      {
-        Increment increment = day.increments.firstWhere((i) => i.startTime.isAtSameMomentAs(iTime), orElse: () => null);
-
-        if (increment != null)
-        {
-          increment.userStates[booking.userId].bookingId = booking.id;
-          /// After-margin
-          if (increment.endTime.isAfter(booking.endTime)) { increment.userStates[booking.userId].state = "margin"; }
-        }
-        iTime = iTime.add(Increment.duration);
-      }
-      if (update_remote == true) await _calendarService.save(day);
-    }
-
-    /// User->bookings
-    if (user != null && !user.bookingIds.contains(booking.id))
-    {
-      user.bookingIds.add(booking.id);
-      if (update_remote == true) await _userService.patchBookings(user);
-    }
-
-    /// Salon->bookings
-    if (salon != null && !salon.bookingIds.contains(booking.id))
-    {
-      salon.bookingIds.add(booking.id);
-      if (update_remote == true) await _salonService.patchBookings(salon);
-    }
-
-    /// Customer->bookings
-    if (customer != null && !customer.bookingIds.contains(booking.id))
-    {
-      customer.bookingIds.add(booking.id);
-      if (update_remote == true) await _customerService.patchBookings(customer);
-    }
-    _loading = false;
-  }
-
-  /// Param remote: specify if the remote server should be patched (no need to patch server if the changes came from there)
+  /**
+   * Remove the booking from its user, salon and customer, and reset its increments to open state.
+   * This method is public so that it can be called before updating the model (which will invalidate patch data)
+   * Param [remote]: specify if the remote server should be patched (no need to patch server if the changes came from there)
+   */
   Future patchRemove(Booking booking, {bool update_remote: false}) async
   {
     if (booking == null) return;
 
     _loading = true;
     /// Increments
-    Day day = await _calendarService.fetch(booking.dayId);
+    Day day = await _calendarService.fetchDay(booking.dayId);
     User user = _userService.getModel(booking.userId);
     Salon salon = _salonService.getModel(booking.salonId);
     Customer customer = _customerService.getModel(booking.customerId);
@@ -176,6 +90,111 @@ class BookingService extends FirebaseServiceBase
     if (customer != null)
     {
       customer.bookingIds.remove(booking.id);
+      if (update_remote == true) await _customerService.patchBookings(customer);
+    }
+    _loading = false;
+  }
+
+  Future<String> _generateUniqueCancelCode() async
+  {
+    firebase.QueryEvent qe;
+    String cancelCode;
+    while (qe == null || qe.snapshot.exists())
+    {
+      cancelCode = rs.randomAlphaNumeric(7).toUpperCase();
+      qe = await firebase.database().ref('bookings').orderByChild("cancel_code").equalTo(cancelCode).once("value");
+    }
+    return cancelCode;
+  }
+
+  @override
+  Future _onChildAdded(firebase.QueryEvent e) async
+  {
+    await super._onChildAdded(e);
+    await _patchAdd(_models[e.snapshot.key], update_remote: false);
+  }
+
+  @override
+  Future _onChildChanged(firebase.QueryEvent e) async
+  {
+    Booking booking = _models[e.snapshot.key];
+
+    /**
+     * Patch customer, salon, and increments locally so that any references to the old booking is removed
+     */
+    await patchRemove(booking, update_remote: false);
+
+    // Update
+    await super._onChildChanged(e);
+
+    /**
+     * Patch customer, salon, and increments locally to reflect the new booking
+     */
+    await _patchAdd(booking, update_remote: false);
+  }
+
+  @override
+  Future _onChildRemoved(firebase.QueryEvent e) async
+  {
+    await patchRemove(_models[e.snapshot.key], update_remote: false);
+    await super._onChildRemoved(e);
+  }
+
+  /**
+   * Add a reference of the booking to its user, salon and customer, and set its increments to closed state
+   * Param [remote]: specify if the remote server should be patched (no need to patch server if the changes came from there)
+   */
+  Future _patchAdd(Booking booking, {bool update_remote: false}) async
+  {
+    if (booking == null) return;
+
+    _loading = true;
+
+    Day day = await _calendarService.fetchDay(booking.dayId);
+    User user = _userService.getModel(booking.userId);
+    Salon salon = _salonService.getModel(booking.salonId);
+    Customer customer = _customerService.getModel(booking.customerId);
+    Service service = _serviceService.getModel(booking.serviceId);
+
+    /// Increments
+    if (day != null)
+    {
+      DateTime iTime = new DateTime.fromMillisecondsSinceEpoch(booking.startTime.millisecondsSinceEpoch);
+      DateTime endTimeWithMargin = booking.endTime.add(service.afterMargin);
+
+      while (iTime.isBefore(endTimeWithMargin))
+      {
+        Increment increment = day.increments.firstWhere((i) => i.startTime.isAtSameMomentAs(iTime), orElse: () => null);
+
+        if (increment != null)
+        {
+          increment.userStates[booking.userId].bookingId = booking.id;
+          /// After-margin
+          if (increment.endTime.isAfter(booking.endTime)) { increment.userStates[booking.userId].state = "margin"; }
+        }
+        iTime = iTime.add(Increment.duration);
+      }
+      if (update_remote == true) await _calendarService.save(day);
+    }
+
+    /// User->bookings
+    if (user != null && !user.bookingIds.contains(booking.id))
+    {
+      user.bookingIds.add(booking.id);
+      if (update_remote == true) await _userService.patchBookings(user);
+    }
+
+    /// Salon->bookings
+    if (salon != null && !salon.bookingIds.contains(booking.id))
+    {
+      salon.bookingIds.add(booking.id);
+      if (update_remote == true) await _salonService.patchBookings(salon);
+    }
+
+    /// Customer->bookings
+    if (customer != null && !customer.bookingIds.contains(booking.id))
+    {
+      customer.bookingIds.add(booking.id);
       if (update_remote == true) await _customerService.patchBookings(customer);
     }
     _loading = false;

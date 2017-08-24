@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:angular2/core.dart';
 import 'package:firebase/firebase.dart' as firebase;
 import 'package:bokain_models/bokain_models.dart' show ModelBase;
@@ -32,12 +33,24 @@ class CalendarService
     _finishedLoadingTimer = new Timer(new Duration(milliseconds: 1000 * (from.difference(to).inDays + 1)), () => _loading = false);
   }
 
-  Future<Day> fetch(String id) async
+  Future<Day> fetchDay(String id) async
   {
     _loading = true;
     firebase.QueryEvent qe = await firebase.database().ref('days').child(id).once('value');
     _loading = false;
-    return qe.snapshot.val() == null ? null : new Day.decode(qe.snapshot.key, qe.snapshot.val());
+    return qe.snapshot.exists() ? new Day.decode(qe.snapshot.key, qe.snapshot.val()) : null;
+  }
+
+  /**
+   * [date_formatted] must be formatted "YYYY-MM-DD HH:MM:SS"
+   */
+  Future<Day> fetchDayByDate(String date_formatted) async
+  {
+    _loading = true;
+    firebase.QueryEvent qe = await firebase.database().ref('days').orderByChild('start_time').equalTo(date_formatted).limitToFirst(1).once('value');
+    _loading = false;
+
+    return qe.snapshot.exists() ? new Day.decode(qe.snapshot.key, qe.snapshot.val()) : null;
   }
 
   Future save(Day day) async

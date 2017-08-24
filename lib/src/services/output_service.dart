@@ -1,12 +1,13 @@
 import 'package:angular2/angular2.dart';
 
 @Injectable()
-class ErrorOutputService
+class OutputService
 {
-  void set(String message, [String title = 'error_occurred'])
+  void set(String message, [String title = 'error_occurred', String error = null])
   {
-    _message = message;
     _title = title;
+    _message = message;
+    _error = error;
     _open = true;
   }
 
@@ -20,11 +21,13 @@ class ErrorOutputService
     }
   }
 
+  String get error => _error;
   String get message => _message;
   String get title => _title;
   bool get open => _open;
 
   String _title;
   String _message;
+  String _error;
   bool _open = false;
 }

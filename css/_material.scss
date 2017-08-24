@@ -68,7 +68,7 @@ material-spinner
 
 material-tab
 {
-  div.tab-content > div
+  div.tab-content:first-child
   {
     display: block;
     width: 100%;
