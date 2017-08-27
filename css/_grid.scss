@@ -226,6 +226,31 @@ div.row
   }
 }
 
+@media screen and (max-width: $medium-width-threshold - 1)
+{
+  .hide-for-small
+  {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: $medium-width-threshold) and (max-width: $large-width-threshold - 1)
+{
+  .hide-for-medium
+  {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: $large-width-threshold)
+{
+  .hide-for-large
+  {
+    display: none !important;
+  }
+}
+
+
 div.row.collapse > div.col
 {
   padding: 0 !important;

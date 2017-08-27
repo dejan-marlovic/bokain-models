@@ -6,7 +6,7 @@ $x-small: 0.25rem;
 $colorStep: 20%;
 
 $color-alert: palevioletred;
-$color-black: #333;
+$color-black: #555;
 
 $color-1: #1b9aaa;
 $color-1-x-bright: lighten($color-1, $colorStep * 2);
@@ -118,28 +118,4 @@ html { font-family: $font-stack; }
 hr
 {
   border: 1px solid $color-2;
-}
-
-@media screen and (max-width: 749px)
-{
-  .hide-for-small
-  {
-    display: none !important;
-  }
-}
-
-@media screen and (min-width: 750px) and (max-width: 1023px)
-{
-  .hide-for-medium
-  {
-    display: none !important;
-  }
-}
-
-@media screen and (min-width: 1024px)
-{
-  .hide-for-large
-  {
-    display: none !important;
-  }
 }
