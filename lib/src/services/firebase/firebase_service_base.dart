@@ -3,7 +3,7 @@ library model_service;
 import 'dart:async';
 import 'dart:html' as dom show HttpRequest;
 import 'dart:convert' show JSON;
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
 import 'package:firebase/firebase.dart' as firebase;
 import 'package:random_string/random_string.dart' as rs;
 import 'package:bokain_models/bokain_models.dart';

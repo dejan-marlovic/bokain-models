@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
 import 'package:firebase/firebase.dart' as firebase;
 import 'package:bokain_models/bokain_models.dart' show ModelBase;
 import 'package:bokain_models/bokain_models.dart' show Day;

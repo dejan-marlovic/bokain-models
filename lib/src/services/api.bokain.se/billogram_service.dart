@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:intl/intl.dart' show DateFormat;
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:bokain_models/src/services/api.bokain.se/restful_service_base.dart';
 

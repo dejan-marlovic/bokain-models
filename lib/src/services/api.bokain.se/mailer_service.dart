@@ -1,5 +1,5 @@
 import 'dart:async' show Future;
-import 'package:angular2/angular2.dart' show Injectable;
+import 'package:angular/angular.dart' show Injectable;
 import 'package:fo_components/fo_components.dart' show PhraseService;
 import 'package:bokain_models/src/services/api.bokain.se/restful_service_base.dart';
 

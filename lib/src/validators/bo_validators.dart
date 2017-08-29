@@ -1,4 +1,4 @@
-import 'package:angular2/angular2.dart' show ValidatorFn, AbstractControl;
+import 'package:angular_forms/angular_forms.dart';
 import 'package:bokain_models/src/services/firebase/firebase_service_base.dart';
 import 'package:bokain_models/src/model_base.dart' show EditableModel;
 import 'package:fo_components/fo_components.dart' show PhraseService;
