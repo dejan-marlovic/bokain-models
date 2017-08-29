@@ -1,7 +1,7 @@
 import 'package:angular2/angular2.dart' show ValidatorFn, AbstractControl;
 import 'package:bokain_models/src/services/firebase/firebase_service_base.dart';
 import 'package:bokain_models/src/model_base.dart' show EditableModel;
-import 'package:fo_components/fo_components.dart' show FoValidators, PhraseService;
+import 'package:fo_components/fo_components.dart' show PhraseService;
 
 class BoValidators
 {
@@ -9,7 +9,8 @@ class BoValidators
   {
     return (AbstractControl control)
     {
-      if (FoValidators.required(control) != null || service == null) return null;
+      //if (FoValidators.required() != null || service == null) return null;
+      //if (FoValidators.required(control) != null || service == null) return null;
 
       PhraseService ps = new PhraseService();
 

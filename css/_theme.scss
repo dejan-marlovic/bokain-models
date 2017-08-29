@@ -7,13 +7,11 @@ $colorStep: 20%;
 
 $color-alert: palevioletred;
 $color-black: #555;
-
 $color-1: #1b9aaa;
 $color-1-x-bright: lighten($color-1, $colorStep * 2);
 $color-1-bright: lighten($color-1, $colorStep);
 $color-1-dark: darken($color-1, $colorStep);
 $color-1-x-dark: darken($color-1, $colorStep * 2);
-
 $color-2: #f5f5f5;
 $color-2-x-bright: lighten($color-2, $colorStep * 2);
 $color-2-bright: lighten($color-2, $colorStep);
@@ -106,12 +104,14 @@ $font-stack: Arial, "Helvetica Neue", Helvetica, sans-serif;
 .padding-top-x-large { padding-top: $x-large !important; }
 
 .is-hidden { display: none; }
+.select-none { user-select: none; }
 
 .text-center { text-align: center; }
 .text-justify { text-align: justify; }
 .text-left { text-align: left; }
 .text-right { text-align: right; }
 .text-small { font-size: 0.9em; }
+.text-overflow-ellipsis { overflow: hidden; text-overflow: ellipsis; }
 
 html { font-family: $font-stack; }
 
