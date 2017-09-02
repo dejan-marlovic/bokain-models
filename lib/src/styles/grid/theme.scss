@@ -3,7 +3,7 @@
 $fontStack: Arial, "Helvetica Neue", Helvetica, sans-serif;
 
 .border-radius { @include border-radius(); }
-.box-shadow { @include border-radius(); }
+.box-shadow { @include box-shadow(); }
 
 .background-color-1 { background-color: $color1 !important; }
 .background-color-2 { background-color: $color2 !important; }

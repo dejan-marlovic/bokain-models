@@ -6,22 +6,19 @@ class CustomerService extends FirebaseServiceBase
   CustomerService() : super("customers");
 
   @override
-  Customer createModelInstance(String id, Map<String, dynamic> data)
-  {
-    return new Customer.decode(id, data);
-  }
+  Customer createModelInstance(String id, Map<String, dynamic> data) => new Customer.decode(id, data);
 
   Future patchBookings(Customer customer) async
   {
     _loading = true;
-    await _ref.child(customer.id).child("booking_ids").set(customer.bookingIds);
+    await _db.ref(_name).child(customer.id).child("booking_ids").set(customer.bookingIds);
     _loading = false;
   }
 
   Future patchJournalEntries(Customer customer) async
   {
     _loading = true;
-    await _ref.child(customer.id).child("journal_entry_ids").set(customer.journalEntryIds);
+    await _db.ref(_name).child(customer.id).child("journal_entry_ids").set(customer.journalEntryIds);
     _loading = false;
   }
 

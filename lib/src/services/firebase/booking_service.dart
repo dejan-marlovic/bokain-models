@@ -6,22 +6,20 @@ class BookingService extends FirebaseServiceBase
   BookingService(this._calendarService, this._customerService, this._salonService, this._serviceService, this._userService) : super("bookings");
 
   @override
-  Booking createModelInstance(String id, Map<String, dynamic> data)
-  {
-    return new Booking.decode(id, data);
-  }
+  Booking createModelInstance(String id, Map<String, dynamic> data) => new Booking.decode(id, data);
 
   /**
-  Future<Booking> fetchByCancelCode(String cancel_code) async
+   * Find all bookings for the specified room id that overlaps the specified time
+   */
+  Future<Booking> find(DateTime time, String room_id) async
   {
-    firebase.QueryEvent qe = await firebase.database().ref('bookings').orderByChild('cancel_code').equalTo(cancel_code).once('value');
+    String from = ModelBase.timestampFormat(time.add(const Duration(hours: -8)));
+    String to = ModelBase.timestampFormat(time.add(const Duration(hours: 8)));
 
-    return (qe.snapshot.exists()) ? new Booking.decode(qe.snapshot.key, qe.snapshot.val()) : null;
-  }
-      **/
-  Booking find(DateTime time, String room_id)
-  {
-    return _models.values.firstWhere((Booking b) =>
+    FirebaseQueryParams queryParams = new FirebaseQueryParams(searchProperty: "start_time", searchRangeStart: from, searchRangeEnd: to);
+    Map<String, Booking> bookings = await super.fetchAll(queryParams);
+
+    return bookings.values.firstWhere((Booking b) =>
     b.roomId == room_id && (b.startTime.isAtSameMomentAs(time) || (b.startTime.isBefore(time) && b.endTime.isAfter(time))), orElse: () => null);
   }
 
@@ -29,12 +27,10 @@ class BookingService extends FirebaseServiceBase
   Future<String> push(Booking model) async
   {
     if (find(model.startTime, model.roomId) != null) throw new Exception("This time has already been booked");
-
     model.cancelCode = await _generateUniqueCancelCode();
-
     model.id = await super.push(model);
-
     await _patchAdd(model, update_remote: true);
+
     return model.id;
   }
 
@@ -57,9 +53,9 @@ class BookingService extends FirebaseServiceBase
     _loading = true;
     /// Increments
     Day day = await _calendarService.fetchDay(booking.dayId);
-    User user = _userService.getModel(booking.userId);
-    Salon salon = _salonService.getModel(booking.salonId);
-    Customer customer = _customerService.getModel(booking.customerId);
+    User user = await _userService.fetch(booking.userId);
+    Salon salon = await _salonService.fetch(booking.salonId);
+    Customer customer = await _customerService.fetch(booking.customerId);
 
     if (day != null)
     {
@@ -108,35 +104,38 @@ class BookingService extends FirebaseServiceBase
   }
 
   @override
-  Future _onChildAdded(firebase.QueryEvent e) async
+  Future<Booking> _onChildAdded(firebase.QueryEvent e) async
   {
-    await super._onChildAdded(e);
-    await _patchAdd(_models[e.snapshot.key], update_remote: false);
+    Booking booking = await super._onChildAdded(e);
+    await _patchAdd(booking, update_remote: false);
+    return booking;
   }
 
   @override
-  Future _onChildChanged(firebase.QueryEvent e) async
+  Future<Booking> _onChildChanged(firebase.QueryEvent e) async
   {
-    Booking booking = _models[e.snapshot.key];
+    Booking booking = await fetch(e.snapshot.key);
 
     /**
      * Patch customer, salon, and increments locally so that any references to the old booking is removed
      */
     await patchRemove(booking, update_remote: false);
 
-    // Update
+    // Update model
     await super._onChildChanged(e);
 
     /**
      * Patch customer, salon, and increments locally to reflect the new booking
      */
     await _patchAdd(booking, update_remote: false);
+
+    return booking;
   }
 
   @override
   Future _onChildRemoved(firebase.QueryEvent e) async
   {
-    await patchRemove(_models[e.snapshot.key], update_remote: false);
+    await patchRemove(await fetch(e.snapshot.key), update_remote: false);
     await super._onChildRemoved(e);
   }
 
@@ -151,10 +150,10 @@ class BookingService extends FirebaseServiceBase
     _loading = true;
 
     Day day = await _calendarService.fetchDay(booking.dayId);
-    User user = _userService.getModel(booking.userId);
-    Salon salon = _salonService.getModel(booking.salonId);
-    Customer customer = _customerService.getModel(booking.customerId);
-    Service service = _serviceService.getModel(booking.serviceId);
+    User user = await _userService.fetch(booking.userId);
+    Salon salon = await _salonService.fetch(booking.salonId);
+    Customer customer = await _customerService.fetch(booking.customerId);
+    Service service = await _serviceService.fetch(booking.serviceId);
 
     /// Increments
     if (day != null)

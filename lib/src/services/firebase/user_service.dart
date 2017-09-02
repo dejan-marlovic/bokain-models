@@ -41,36 +41,33 @@ class UserService extends FirebaseServiceBase
   }
 
   @override
-  User createModelInstance(String id, Map<String, dynamic> data)
-  {
-    return new User.decode(id, data);
-  }
+  User createModelInstance(String id, Map<String, dynamic> data) => new User.decode(id, data);
 
   Future patchCustomers(User user) async
   {
     _loading = true;
-    await _ref.child(user.id).child("customer_ids").set(user.customerIds);
+    await _db.ref(_name).child(user.id).child("customer_ids").set(user.customerIds);
     _loading = false;
   }
 
   Future patchSalons(User user) async
   {
     _loading = true;
-    await _ref.child(user.id).child("salon_ids").set(user.salonIds);
+    await _db.ref(_name).child(user.id).child("salon_ids").set(user.salonIds);
     _loading = false;
   }
 
   Future patchServices(User user) async
   {
     _loading = true;
-    await _ref.child(user.id).child("service_ids").set(user.serviceIds);
+    await _db.ref(_name).child(user.id).child("service_ids").set(user.serviceIds);
     _loading = false;
   }
 
   Future patchBookings(User user) async
   {
     _loading = true;
-    await _ref.child(user.id).child("booking_ids").set(user.bookingIds);
+    await _db.ref(_name).child(user.id).child("booking_ids").set(user.bookingIds);
     _loading = false;
   }
 

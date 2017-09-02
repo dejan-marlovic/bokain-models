@@ -11,6 +11,7 @@ export 'package:bokain_models/src/phrases.dart';
 export 'package:bokain_models/src/services/api.bokain.se/billogram_service.dart';
 export 'package:bokain_models/src/services/customer_auth_service.dart';
 export 'package:bokain_models/src/services/output_service.dart';
-export 'package:bokain_models/src/services/firebase/calendar_service.dart';
+export 'package:bokain_models/src/services/calendar_service.dart';
 export 'package:bokain_models/src/services/firebase/firebase_service_base.dart';
+export 'package:bokain_models/src/services/firebase/firebase_query_params.dart';
 export 'package:bokain_models/src/services/api.bokain.se/mailer_service.dart';

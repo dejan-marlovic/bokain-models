@@ -54,9 +54,12 @@ class Service extends EditableModel
   String get color => _data["color"];
   Duration get duration => new Duration(minutes: durationMinutes);
   num get durationMinutes => _data["duration_minutes"];
+  String get durationMinutesStr => durationMinutes.toString();
   Duration get afterMargin => new Duration(minutes: afterMarginMinutes);
   num get afterMarginMinutes => _data["after_margin_minutes"];
+  String get afterMarginMinutesStr => afterMarginMinutes.toString();
   num get price => _data["price"];
+  String get priceStr => price.toString();
   List<String> get roomIds => _data["room_ids"];
   List<String> get userIds => _data["user_ids"];
   List<String> get serviceAddonIds => _data["service_addon_ids"];
@@ -67,9 +70,24 @@ class Service extends EditableModel
   void set color(String value) { _data["color"] = value; }
   void set duration(Duration value) { _data["duration_minutes"] = value.inMinutes; }
   void set durationMinutes(num value) { _data["duration_minutes"] = value?.toInt(); }
+  void set durationMinutesStr(String value)
+  {
+    try { durationMinutes = num.parse(value); }
+    on FormatException catch (e) { print(e.toString()); }
+  }
   void set afterMargin(Duration value) { _data["after_margin_minutes"] = value.inMinutes; }
   void set afterMarginMinutes(num value) { _data["after_margin_minutes"] = value?.toInt(); }
+  void set afterMarginMinutesStr(String value)
+  {
+    try { afterMarginMinutes = num.parse(value); }
+    on FormatException catch (e) { print(e.toString()); }
+  }
   void set price(num value) { _data["price"] = value?.toDouble(); }
+  void set priceStr(String value)
+  {
+    try { price = num.parse(value); }
+    on FormatException catch (e) { print(e.toString()); }
+  }
   void set roomIds(List<String> value) { _data["room_ids"] = value; }
   void set userIds(List<String> value) { _data["user_ids"] = value; }
   void set serviceAddonIds(List<String> value) { _data["service_addon_ids"] = value; }

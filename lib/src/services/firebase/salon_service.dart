@@ -36,14 +36,14 @@ class SalonService extends FirebaseServiceBase
   Future patchBookings(Salon salon) async
   {
     _loading = true;
-    await _ref.child(salon.id).child("booking_ids").set(salon.bookingIds);
+    await _db.ref(_name).child(salon.id).child("booking_ids").set(salon.bookingIds);
     _loading = false;
   }
 
   Future patchUsers(Salon salon) async
   {
     _loading = true;
-    await _ref.child(salon.id).child("user_ids").set(salon.userIds);
+    await _db.ref(_name).child(salon.id).child("user_ids").set(salon.userIds);
     _loading = false;
   }
 
@@ -104,7 +104,7 @@ class SalonService extends FirebaseServiceBase
 
   Future patchRooms(Salon salon) async
   {
-    await _ref.child(salon.id).child("room_ids").set(salon.roomIds);
+    await _db.ref(_name).child(salon.id).child("room_ids").set(salon.roomIds);
   }
 
   final firebase.StorageReference _logosRef = firebase.storage().ref("salon-logos");

@@ -6,8 +6,5 @@ class SkinTypeService extends FirebaseServiceBase
   SkinTypeService() : super("skin_types");
 
   @override
-  SkinType createModelInstance(String id, Map<String, dynamic> data)
-  {
-    return new SkinType.decode(id, data);
-  }
+  SkinType createModelInstance(String id, Map<String, dynamic> data) => new SkinType.decode(id, data);
 }

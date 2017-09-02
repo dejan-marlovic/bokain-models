@@ -1,7 +1,7 @@
 library model_base;
 import 'dart:math';
 import 'dart:convert';
-import 'package:fo_components/fo_components.dart' show DataTableModel;
+import 'package:fo_components/fo_components.dart' show FoModel;
 
 part 'editable_model/editable_model.dart';
 part 'editable_model/country.dart';
@@ -18,7 +18,7 @@ part 'calendar/day.dart';
 part 'calendar/increment.dart';
 part 'journal_entry.dart';
 
-abstract class ModelBase extends DataTableModel
+abstract class ModelBase extends FoModel
 {
   ModelBase(String id) : super(id)
   {

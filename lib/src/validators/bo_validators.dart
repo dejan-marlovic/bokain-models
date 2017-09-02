@@ -1,7 +1,7 @@
 import 'package:angular_forms/angular_forms.dart';
 import 'package:bokain_models/src/services/firebase/firebase_service_base.dart';
 import 'package:bokain_models/src/model_base.dart' show EditableModel;
-import 'package:fo_components/fo_components.dart' show PhraseService;
+import 'package:fo_components/fo_components.dart';
 
 class BoValidators
 {
@@ -9,14 +9,14 @@ class BoValidators
   {
     return (AbstractControl control)
     {
-      //if (FoValidators.required() != null || service == null) return null;
-      //if (FoValidators.required(control) != null || service == null) return null;
+      if ((FoValidators.required())(control) != null || service == null) return null;
 
+      /*
       PhraseService ps = new PhraseService();
-
       List<String> ids = service.getIdsByProperty(property, control.value);
       if (model != null) ids.removeWhere((id) => id == model.id);
       return (ids.isEmpty) ? null : {"error" : ps.get(error_phrase)};
+      */
     };
   }
 

@@ -82,7 +82,6 @@ class CalendarService
 
   bool get loading => _loading;
 
-
   bool _loading = false;
 
   StreamSubscription<firebase.QueryEvent> addStreamListener;

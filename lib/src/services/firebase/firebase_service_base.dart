@@ -7,7 +7,7 @@ import 'package:angular/angular.dart';
 import 'package:firebase/firebase.dart' as firebase;
 import 'package:random_string/random_string.dart' as rs;
 import 'package:bokain_models/bokain_models.dart';
-import 'package:bokain_models/src/services/firebase/calendar_service.dart';
+import 'package:bokain_models/src/services/calendar_service.dart';
 
 part 'booking_service.dart';
 part 'country_service.dart';
@@ -25,24 +25,128 @@ abstract class FirebaseServiceBase
   FirebaseServiceBase(this._name)
   {
     _db = firebase.database();
-    _ref = _db.ref(_name);
-
-    _ref.onChildAdded.listen(_onChildAdded);
-    _ref.onChildChanged.listen(_onChildChanged);
-    _ref.onChildRemoved.listen(_onChildRemoved);
   }
 
-  List<String> getIdsByProperty(String property, dynamic value)
+  /**
+   * Stream models asynchronously from remote server.
+   * Use the onChildAdded/Updated/Removed stream outputs to detect changes
+   */
+  Stream<ModelBase> streamAll([FirebaseQueryParams queryParams = const FirebaseQueryParams()])
   {
-    if (value is String)
+    //if (_q != null) throw new StateError("this instance of $_name-service is already streaming data");
+    if (_q != null)
     {
-      return _models.keys.where((id) =>
-      _models[id].data[property] != null && (_models[id].data[property] as String).toLowerCase().compareTo(value.toLowerCase()) == 0).toList();
+      _onChildAddedListener.cancel();
+      _onChildChangedListener.cancel();
+      _onChildRemovedListener.cancel();
+      _streamedModels.clear();
     }
-    else
+
+    _q = _buildQuery(queryParams);
+    _onChildAddedListener = _q.onChildAdded.listen(_onChildAdded);
+    _onChildChangedListener = _q.onChildChanged.listen(_onChildChanged);
+    _onChildRemovedListener = _q.onChildRemoved.listen(_onChildRemoved);
+
+    return _onChildAddedController.stream;
+  }
+
+  /**
+   * Fetch models asynchronously from remote server.
+   */
+  Future<Map<String, ModelBase>> fetchAll([FirebaseQueryParams queryParams = const FirebaseQueryParams()]) async
+  {
+    firebase.QueryEvent queryEvent = await _buildQuery(queryParams).once('value');
+
+    dynamic val = queryEvent.snapshot.val();
+
+    Map<String, Map<String, dynamic>> data;
+    if (val is Map) data = queryEvent.snapshot.val();
+    else if (val is List)
     {
-      return _models.keys.where((id) => _models[id].data[property] != null && _models[id].data[property] == value).toList();
+      data = new Map();
+      for (int i = 0; i < val.length; i++)
+      {
+        Map<String, dynamic> row = val[i];
+        if (row != null) data[i.toString()] = row;
+      }
     }
+
+    _cachedModels.clear();
+    for (String id in data.keys)
+    {
+      _cachedModels[id] = createModelInstance(id, data[id]);
+    }
+
+    return _cachedModels;
+  }
+
+  firebase.Query _buildQuery(FirebaseQueryParams queryParams)
+  {
+    if (queryParams == null) throw new ArgumentError("QueryParams cannot be null");
+
+    if (queryParams.searchProperty == null || queryParams.searchValue == null)
+    {
+      if (queryParams.limitTo == null || queryParams.limitDirection == null)
+      {
+        return _db.ref(_name).orderByKey();
+      }
+      else if (queryParams.limitDirection == QUERY_LIMIT_DIRECTION.ASC)
+      {
+        return _db.ref(_name).orderByKey().limitToFirst(queryParams.limitTo);
+      }
+      else return _db.ref(_name).orderByKey().limitToLast(queryParams.limitTo);
+    }
+    // Search key/value are set
+    else if (queryParams.searchProperty != null && queryParams.searchValue != null)
+    {
+      if (queryParams.limitTo == null || queryParams.limitDirection == null)
+      {
+        return _db.ref(_name)
+            .orderByChild(queryParams.searchProperty)
+            .equalTo(queryParams.searchValue);
+      }
+      else if (queryParams.limitDirection == QUERY_LIMIT_DIRECTION.ASC)
+      {
+        return _db.ref(_name)
+            .orderByChild(queryParams.searchProperty)
+            .equalTo(queryParams.searchValue)
+            .limitToFirst(queryParams.limitTo);
+      }
+      else
+      {
+        return _db.ref(_name)
+            .orderByChild(queryParams.searchProperty)
+            .equalTo(queryParams.searchValue)
+            .limitToLast(queryParams.limitTo);
+      }
+    }
+    else if (queryParams.searchProperty != null && queryParams.searchRangeStart != null && queryParams.searchRangeEnd != null)
+    {
+      if (queryParams.limitTo == null || queryParams.limitDirection == null)
+      {
+        return _db.ref(_name)
+            .orderByChild(queryParams.searchProperty)
+            .startAt(queryParams.searchRangeStart)
+            .endAt(queryParams.searchRangeEnd);
+      }
+      else if (queryParams.limitDirection == QUERY_LIMIT_DIRECTION.ASC)
+      {
+        return _db.ref(_name)
+            .orderByChild(queryParams.searchProperty)
+            .startAt(queryParams.searchRangeStart)
+            .endAt(queryParams.searchRangeEnd)
+            .limitToFirst(queryParams.limitTo);
+      }
+      else
+      {
+        return _db.ref(_name)
+            .orderByChild(queryParams.searchProperty)
+            .startAt(queryParams.searchRangeStart)
+            .endAt(queryParams.searchRangeEnd)
+            .limitToLast(queryParams.limitTo);
+      }
+    }
+    else throw new StateError("Invalid QueryParams");
   }
 
   /**
@@ -53,9 +157,10 @@ abstract class FirebaseServiceBase
     _loading = true;
     model.created = new DateTime.now();
     model.addedBy = firebase.auth().currentUser.uid;
-
-    firebase.ThenableReference ref = await _ref.push(model.encoded);
+    firebase.ThenableReference ref = await _db.ref(_name).push(model.encoded);
     _loading = false;
+
+    _cachedModels[ref.key] = model;
 
     return ref.key;
   }
@@ -66,7 +171,7 @@ abstract class FirebaseServiceBase
   Future set(String id, ModelBase model) async
   {
     _loading = true;
-    await _ref.child('$id').set(model.encoded);
+    await _db.ref(_name).child('$id').set(model.encoded);
     _loading = false;
   }
 
@@ -78,7 +183,7 @@ abstract class FirebaseServiceBase
     try
     {
       _loading = true;
-      await _ref.child('$id').remove();
+      await _db.ref(_name).child('$id').remove();
       _loading = false;
     }
     on RangeError catch (e, s)
@@ -91,92 +196,126 @@ abstract class FirebaseServiceBase
   Future<ModelBase> fetch(String id) async
   {
     _loading = true;
-    firebase.QueryEvent qe = await _ref.child(id).once("value");
+    firebase.QueryEvent qe = await _db.ref(_name).child(id).once("value");
     _loading = false;
     if (!qe.snapshot.exists()) throw new Exception("model with id $id of type $_name not found");
-    return createModelInstance(qe.snapshot.key, qe.snapshot.val());
+
+    ModelBase model = createModelInstance(qe.snapshot.key, qe.snapshot.val());
+    _cachedModels[model.id] = model;
+
+    return model;
   }
 
-  Future<ModelBase> fetchByProperty(String property, String value) async
+  Future<Map<String, ModelBase>> fetchMany(List<String> ids) async
   {
-    firebase.QueryEvent qe = await _ref.orderByChild(property).equalTo(value).limitToFirst(1).once("value");
-    return qe.snapshot.exists() ? createModelInstance(qe.snapshot.val().keys.first, qe.snapshot.val().values.first) : null;
-  }
+    _loading = true;
 
-  List<ModelBase> getModelsAsList([List<String> ids = null, bool include_disabled = false])
-  {
-    if (_models.isEmpty) return _models.values.toList(growable: false);
-
-    List<ModelBase> output = (ids == null) ? new List.from(_models.values) : _models.values.where((m) => ids.contains(m.id)).toList(growable: !include_disabled);
-    if (include_disabled == false)
+    for (String id in ids)
     {
-      output.removeWhere((model) => model.data.containsKey("status") && model.data["status"] != "active");
+      firebase.QueryEvent qe = await _db.ref(_name).orderByKey().equalTo(id).once("value");
+      if (qe.snapshot.exists())
+      {
+        _cachedModels[qe.snapshot.key] = createModelInstance(qe.snapshot.key, qe.snapshot.val());
+      }
     }
+    _loading = false;
+    return _cachedModels;
+  }
+
+  Future<ModelBase> fetchByProperty(String property, dynamic value) async
+  {
+    firebase.QueryEvent qe = await _db.ref(_name).orderByChild(property).equalTo(value).limitToFirst(1).once("value");
+
+    ModelBase model;
+    if (qe.snapshot.exists())
+    {
+      model = createModelInstance(qe.snapshot.key, qe.snapshot.val());
+      _cachedModels[qe.snapshot.key] = model;
+    }
+    return model;
+  }
+
+  ModelBase get(String id)
+  {
+    if (_q == null) print("This instance of $_name-service is not currently streaming data");
+    return _streamedModels.containsKey(id) ? _streamedModels[id] : null;
+  }
+
+  Map<String, ModelBase> getMany(List<String> ids)
+  {
+    if (_q == null) print("This instance of $_name-service is not currently streaming data");
+
+    Map<String, ModelBase> output = new Map();
+    _streamedModels.values.where((m) => ids.contains(m.id)).forEach((m) => output[m.id] = m);
     return output;
   }
 
-  Map<String, ModelBase> getModelsAsMap([List<String> ids = null, bool include_disabled = false])
+  ModelBase getByProperty(String property, dynamic value)
   {
-    if (_models.isEmpty) return _models;
-
-    Map<String, ModelBase> output;
-    if (ids == null) output = new Map.from(_models);
-    else
-    {
-      output = new Map();
-      _models.keys.where(ids.contains).forEach((key) => output[key] = _models[key]);
-    }
-
-    if (include_disabled == false)
-    {
-      Iterable<String> disabledKeys = output.keys.where((k) => output[k].data.containsKey("status") && output[k].data["status"] != "active");
-      disabledKeys.forEach(output.remove);
-    }
-    return output;
+    if (_q == null) print("This instance of $_name-service is not currently streaming data");
+    return _streamedModels.values.firstWhere((m) => m.data.containsKey(property) && m.data[property] == value, orElse: () => null);
   }
 
-  ModelBase getModel(String id) => _models.containsKey(id) ? _models[id] : null;
+  Iterable<ModelBase> getAllByProperty(String property, dynamic value)
+  {
+    if (_q == null) print("This instance of $_name-service is not currently streaming data");
+    return _streamedModels.values.where((m) => m.data.containsKey(property) && m.data[property] == value);
+  }
 
-  bool get loading => _loading;
+  bool get streaming => _q != null;
 
-  List<String> get modelIds => _models.keys.toList(growable: false);
-
-  void _onChildAdded(firebase.QueryEvent e)
+  Future<ModelBase> _onChildAdded(firebase.QueryEvent e) async
   {
     _loading = true;
     ModelBase model = createModelInstance(e.snapshot.key, e.snapshot.val());
-    _models[e.snapshot.key] = model;
-    _onChildAddedController.add(model);
+    _streamedModels[model.id] = model;
 
+    _onChildAddedController.add(model);
     new Timer(const Duration(milliseconds: 400), () => _loading = false);
+    return model;
   }
 
-  void _onChildChanged(firebase.QueryEvent e)
+  Future<ModelBase> _onChildChanged(firebase.QueryEvent e) async
   {
     ModelBase model = createModelInstance(e.snapshot.key, e.snapshot.val());
-    _models[e.snapshot.key] = model;
-    _onChildUpdatedController.add(model);
+    _streamedModels[model.id] = model;
+    _onChildChangedController.add(model);
+    return model;
   }
 
-  void _onChildRemoved(firebase.QueryEvent e)
+  Future<String> _onChildRemoved(firebase.QueryEvent e) async
   {
-    _models.remove(e.snapshot.key);
+    _streamedModels.remove(e.snapshot.key);
     _onChildRemovedController.add(e.snapshot.key);
+    return e.snapshot.key;
   }
 
   ModelBase createModelInstance(String id, Map<String, dynamic> data);
 
+  bool get loading => _loading;
   Stream<ModelBase> get onChildAdded => _onChildAddedController.stream;
-  Stream<ModelBase> get onChildUpdated => _onChildUpdatedController.stream;
+  Stream<ModelBase> get onChildUpdated => _onChildChangedController.stream;
   Stream<String> get onChildRemoved => _onChildRemovedController.stream;
+  Map<String, ModelBase> get streamedModels
+  {
+    if (_q == null) throw new StateError("this instance of $_name-service is not currently streaming data");
+    return _streamedModels;
+  }
+  Map<String, ModelBase> get cachedModels => _cachedModels;
 
   final String _name;
-  firebase.Database _db;
-  firebase.DatabaseReference _ref;
-  bool _loading = false;
+  final Map<String, ModelBase> _streamedModels = new Map();
+  final Map<String, ModelBase> _cachedModels = new Map();
 
-  Map<String, ModelBase> _models = new Map();
+  StreamSubscription<firebase.QueryEvent> _onChildAddedListener;
+  StreamSubscription<firebase.QueryEvent> _onChildChangedListener;
+  StreamSubscription<firebase.QueryEvent> _onChildRemovedListener;
+
   final StreamController<ModelBase> _onChildAddedController = new StreamController.broadcast();
-  final StreamController<ModelBase> _onChildUpdatedController = new StreamController.broadcast();
+  final StreamController<ModelBase> _onChildChangedController = new StreamController.broadcast();
   final StreamController<String> _onChildRemovedController = new StreamController.broadcast();
+
+  firebase.Database _db;
+  firebase.Query _q;
+  bool _loading = false;
 }

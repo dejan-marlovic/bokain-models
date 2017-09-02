@@ -43,6 +43,7 @@ class Customer extends EditableModel
     table["email"] = email;
     table["phone"] = phone;
     table["social_number"] = socialNumber;
+    table["status"] = status;
     return table;
   }
 

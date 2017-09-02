@@ -85,8 +85,7 @@ class User extends EditableModel
   void set bookingRank(num value) { _data["booking_rank"] = value.toInt(); }
   void set strBookingRank(String value)
   {
-    int v = 0;
-    try { v = int.parse(value); } on FormatException catch(e) { print(e); }
-    _data["booking_rank"] = v;
+    try { bookingRank = int.parse(value); }
+    on FormatException catch(e) { print(e.toString()); }
   }
 }
