@@ -1,32 +1,26 @@
-part of model_service;
+part of firebase_service;
 
 @Injectable()
 class BookingService extends FirebaseServiceBase
 {
-  BookingService(this._calendarService, this._customerService, this._salonService, this._serviceService, this._userService) : super("bookings");
+  BookingService(this._customerService, this._dayService, this._salonService, this._serviceService, this._userService) : super("bookings");
 
   @override
   Booking createModelInstance(String id, Map<String, dynamic> data) => new Booking.decode(id, data);
 
   /**
-   * Find all bookings for the specified room id that overlaps the specified time
+   * Find all cached bookings for the specified room id overlapping the specified time
    */
-  Future<Booking> find(DateTime time, String room_id) async
+  Booking findCached(DateTime time, String room_id)
   {
-    String from = ModelBase.timestampFormat(time.add(const Duration(hours: -8)));
-    String to = ModelBase.timestampFormat(time.add(const Duration(hours: 8)));
-
-    FirebaseQueryParams queryParams = new FirebaseQueryParams(searchProperty: "start_time", searchRangeStart: from, searchRangeEnd: to);
-    Map<String, Booking> bookings = await super.fetchAll(queryParams);
-
-    return bookings.values.firstWhere((Booking b) =>
+    return _cachedModels.values.firstWhere((Booking b) =>
     b.roomId == room_id && (b.startTime.isAtSameMomentAs(time) || (b.startTime.isBefore(time) && b.endTime.isAfter(time))), orElse: () => null);
   }
 
   @override
   Future<String> push(Booking model) async
   {
-    if (find(model.startTime, model.roomId) != null) throw new Exception("This time has already been booked");
+    if (findCached(model.startTime, model.roomId) != null) throw new Exception("This time has already been booked");
     model.cancelCode = await _generateUniqueCancelCode();
     model.id = await super.push(model);
     await _patchAdd(model, update_remote: true);
@@ -52,7 +46,7 @@ class BookingService extends FirebaseServiceBase
 
     _loading = true;
     /// Increments
-    Day day = await _calendarService.fetchDay(booking.dayId);
+    Day day = await _dayService.fetch(booking.dayId);
     User user = await _userService.fetch(booking.userId);
     Salon salon = await _salonService.fetch(booking.salonId);
     Customer customer = await _customerService.fetch(booking.customerId);
@@ -65,7 +59,7 @@ class BookingService extends FirebaseServiceBase
         /// Reset state to open, clearing any after-margin
         i.userStates[booking.userId].state = "open";
       });
-      if (update_remote == true) await _calendarService.save(day);
+      if (update_remote == true) await _dayService.set(day.id, day);
     }
 
     /// User->bookings
@@ -149,7 +143,7 @@ class BookingService extends FirebaseServiceBase
 
     _loading = true;
 
-    Day day = await _calendarService.fetchDay(booking.dayId);
+    Day day = await _dayService.fetch(booking.dayId);
     User user = await _userService.fetch(booking.userId);
     Salon salon = await _salonService.fetch(booking.salonId);
     Customer customer = await _customerService.fetch(booking.customerId);
@@ -173,7 +167,7 @@ class BookingService extends FirebaseServiceBase
         }
         iTime = iTime.add(Increment.duration);
       }
-      if (update_remote == true) await _calendarService.save(day);
+      if (update_remote == true) await _dayService.set(day.id, day);
     }
 
     /// User->bookings
@@ -200,8 +194,8 @@ class BookingService extends FirebaseServiceBase
   }
 
   Booking rebookBuffer;
-  final CalendarService _calendarService;
   final CustomerService _customerService;
+  final DayService _dayService;
   final SalonService _salonService;
   final ServiceService _serviceService;
   final UserService _userService;

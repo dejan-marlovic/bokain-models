@@ -8,11 +8,7 @@ import 'package:bokain_models/bokain_models.dart' show Day;
 @Injectable()
 class CalendarService
 {
-  CalendarService()
-  {
-    onDayAdded = _onDayAddedController.stream;
-    onDayChanged = _onDayChangedController.stream;
-  }
+  CalendarService();
 
   void setFilters(DateTime from, DateTime to)
   {
@@ -25,12 +21,13 @@ class CalendarService
     addStreamListener?.cancel();
     changeStreamListener?.cancel();
     removeStreamListener?.cancel();
-    addStreamListener = q.onChildAdded.listen(_onChildAdded);
-    changeStreamListener = q.onChildChanged.listen(_onChildChanged);
-    removeStreamListener = q.onChildRemoved.listen(_onChildRemoved);
+
+    addStreamListener = q.onChildAdded.listen(_onDayAdded);
+    changeStreamListener = q.onChildChanged.listen(_onDayChanged);
+    removeStreamListener = q.onChildRemoved.listen(_onDayRemoved);
 
     _finishedLoadingTimer?.cancel();
-    _finishedLoadingTimer = new Timer(new Duration(milliseconds: 1000 * (from.difference(to).inDays + 1)), () => _loading = false);
+    _finishedLoadingTimer = new Timer(new Duration(milliseconds: 500 * (from.difference(to).inDays + 1)), () => _loading = false);
   }
 
   Future<Day> fetchDay(String id) async
@@ -61,7 +58,7 @@ class CalendarService
     _loading = false;
   }
 
-  void _onChildAdded(firebase.QueryEvent qe)
+  void _onDayAdded(firebase.QueryEvent qe)
   {
     Day d = new Day.decode(qe.snapshot.key, qe.snapshot.val());
     _onDayAddedController.add(d);
@@ -69,12 +66,12 @@ class CalendarService
     _loading = false;
   }
 
-  void _onChildRemoved(firebase.QueryEvent qe)
+  void _onDayRemoved(firebase.QueryEvent qe)
   {
    // _models.remove(qe.snapshot.key);
   }
 
-  void _onChildChanged(firebase.QueryEvent qe)
+  void _onDayChanged(firebase.QueryEvent qe)
   {
     Day d = new Day.decode(qe.snapshot.key, qe.snapshot.val());
     _onDayChangedController.add(d);
@@ -93,7 +90,7 @@ class CalendarService
 
   Timer _finishedLoadingTimer;
 
-  Stream<Day> onDayAdded;
-  Stream<Day> onDayChanged;
+  Stream<Day> get onDayAdded => _onDayAddedController.stream;
+  Stream<Day> get onDayChanged => _onDayChangedController.stream;
 
 }

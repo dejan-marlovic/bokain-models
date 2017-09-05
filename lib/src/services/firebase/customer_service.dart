@@ -1,4 +1,4 @@
-part of model_service;
+part of firebase_service;
 
 @Injectable()
 class CustomerService extends FirebaseServiceBase

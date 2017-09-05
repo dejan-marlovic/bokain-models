@@ -1,4 +1,4 @@
-library model_service;
+library firebase_service;
 
 import 'dart:async';
 import 'dart:html' as dom show HttpRequest;
@@ -7,11 +7,11 @@ import 'package:angular/angular.dart';
 import 'package:firebase/firebase.dart' as firebase;
 import 'package:random_string/random_string.dart' as rs;
 import 'package:bokain_models/bokain_models.dart';
-import 'package:bokain_models/src/services/calendar_service.dart';
 
 part 'booking_service.dart';
 part 'country_service.dart';
 part 'customer_service.dart';
+part 'day_service.dart';
 part 'journal_service.dart';
 part 'language_service.dart';
 part 'salon_service.dart';
@@ -27,13 +27,8 @@ abstract class FirebaseServiceBase
     _db = firebase.database();
   }
 
-  /**
-   * Stream models asynchronously from remote server.
-   * Use the onChildAdded/Updated/Removed stream outputs to detect changes
-   */
-  Stream<ModelBase> streamAll([FirebaseQueryParams queryParams = const FirebaseQueryParams()])
+  void cancelStreaming()
   {
-    //if (_q != null) throw new StateError("this instance of $_name-service is already streaming data");
     if (_q != null)
     {
       _onChildAddedListener.cancel();
@@ -41,6 +36,18 @@ abstract class FirebaseServiceBase
       _onChildRemovedListener.cancel();
       _streamedModels.clear();
     }
+  }
+
+  /**
+   * Stream models asynchronously from remote server.
+   * Use the onChildAdded/Updated/Removed stream outputs to detect changes
+   */
+  Stream<ModelBase> streamAll([FirebaseQueryParams queryParams = const FirebaseQueryParams()])
+  {
+    //if (_q != null) throw new StateError("this instance of $_name-service is already streaming data");
+    cancelStreaming();
+
+    print("STREAMING $_name");
 
     _q = _buildQuery(queryParams);
     _onChildAddedListener = _q.onChildAdded.listen(_onChildAdded);
@@ -72,9 +79,13 @@ abstract class FirebaseServiceBase
     }
 
     _cachedModels.clear();
-    for (String id in data.keys)
+
+    if (data != null)
     {
-      _cachedModels[id] = createModelInstance(id, data[id]);
+      for (String id in data.keys)
+      {
+        _cachedModels[id] = createModelInstance(id, data[id]);
+      }
     }
 
     return _cachedModels;
@@ -193,8 +204,15 @@ abstract class FirebaseServiceBase
     }
   }
 
-  Future<ModelBase> fetch(String id) async
+  /**
+   * [force]: skip buffer and force server-fetch
+   */
+  Future<ModelBase> fetch(String id, {bool force: false}) async
   {
+    if (id == null) return null;
+
+    if (!force && _cachedModels.containsKey(id) && _cachedModels[id] != null) return _cachedModels[id];
+
     _loading = true;
     firebase.QueryEvent qe = await _db.ref(_name).child(id).once("value");
     _loading = false;
@@ -206,8 +224,28 @@ abstract class FirebaseServiceBase
     return model;
   }
 
-  Future<Map<String, ModelBase>> fetchMany(List<String> ids) async
+  Future<Map<String, ModelBase>> fetchMany(List<String> ids, {bool force: false}) async
   {
+    if (!force)
+    {
+      Iterable<String> matches = ids.where(_cachedModels.containsKey);
+      if (matches.length == ids.length)
+      {
+        Map<String, ModelBase> models = new Map();
+        for (String key in matches)
+        {
+          models[key] = _cachedModels[key];
+        }
+        _cachedModels.clear();
+        _cachedModels.addAll(models);
+        print(_cachedModels);
+        return _cachedModels;
+      }
+    }
+
+
+    _cachedModels.clear();
+
     _loading = true;
 
     for (String id in ids)
@@ -215,7 +253,11 @@ abstract class FirebaseServiceBase
       firebase.QueryEvent qe = await _db.ref(_name).orderByKey().equalTo(id).once("value");
       if (qe.snapshot.exists())
       {
-        _cachedModels[qe.snapshot.key] = createModelInstance(qe.snapshot.key, qe.snapshot.val());
+        Map<String, Map<String, dynamic>> data = qe.snapshot.val();
+        data.forEach((String key, Map<String, dynamic> row)
+        {
+          _cachedModels[key] = createModelInstance(key, row);
+        });
       }
     }
     _loading = false;
@@ -237,23 +279,25 @@ abstract class FirebaseServiceBase
 
   ModelBase get(String id)
   {
-    if (_q == null) print("This instance of $_name-service is not currently streaming data");
-    return _streamedModels.containsKey(id) ? _streamedModels[id] : null;
+    if (id == null) return null;
+    //if (_q == null) streamAll(); //print("This instance of $_name-service is not currently streaming data");
+    return streamedModels.containsKey(id) ? streamedModels[id] : null;
   }
 
   Map<String, ModelBase> getMany(List<String> ids)
   {
-    if (_q == null) print("This instance of $_name-service is not currently streaming data");
+    //if (_q == null) print("This instance of $_name-service is not currently streaming data");
 
     Map<String, ModelBase> output = new Map();
-    _streamedModels.values.where((m) => ids.contains(m.id)).forEach((m) => output[m.id] = m);
+    if (ids != null) streamedModels.values.where((m) => ids.contains(m.id)).forEach((m) => output[m.id] = m);
+    else output = streamedModels;
     return output;
   }
 
   ModelBase getByProperty(String property, dynamic value)
   {
-    if (_q == null) print("This instance of $_name-service is not currently streaming data");
-    return _streamedModels.values.firstWhere((m) => m.data.containsKey(property) && m.data[property] == value, orElse: () => null);
+    //if (_q == null) print("This instance of $_name-service is not currently streaming data");
+    return streamedModels.values.firstWhere((m) => m.data.containsKey(property) && m.data[property] == value, orElse: () => null);
   }
 
   Iterable<ModelBase> getAllByProperty(String property, dynamic value)
@@ -298,7 +342,8 @@ abstract class FirebaseServiceBase
   Stream<String> get onChildRemoved => _onChildRemovedController.stream;
   Map<String, ModelBase> get streamedModels
   {
-    if (_q == null) throw new StateError("this instance of $_name-service is not currently streaming data");
+    if (!streaming) streamAll();
+    //if (_q == null) throw new StateError("this instance of $_name-service is not currently streaming data");
     return _streamedModels;
   }
   Map<String, ModelBase> get cachedModels => _cachedModels;
