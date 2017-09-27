@@ -3,7 +3,13 @@ part of firebase_service;
 @Injectable()
 class UserService extends FirebaseServiceBase
 {
-  UserService() : super("users");
+  UserService() :
+        super("users",
+          [
+            new UniqueField("users_emails", "email", true),
+            new UniqueField("users_phones", "phone", true),
+            new UniqueField("users_social_numbers", "social_number", true)
+          ]);
 
   Future<String> login(String email, String password) async
   {
@@ -12,8 +18,6 @@ class UserService extends FirebaseServiceBase
     try
     {
       _currentUser = await firebase.auth().signInWithEmailAndPassword(email, password);
-
-      //await _currentUser.sendEmailVerification();
       if (_currentUser.emailVerified == false) throw new Exception("The user is not email verified");
     }
     catch (e)
@@ -26,22 +30,7 @@ class UserService extends FirebaseServiceBase
   }
 
   @override
-  Future<String> push(ModelBase model) async
-  {
-    _loading = true;
-    try
-    {
-      firebase.User user = await firebase.auth().createUserWithEmailAndPassword((model as User).email, (model as User).password);
-      await user.sendEmailVerification();
-    } finally
-    {
-      _loading = false;
-    }
-    return await super.push(model);
-  }
-
-  @override
-  User createModelInstance(String id, Map<String, dynamic> data) => new User.decode(id, data);
+  User createModelInstance(String id, Map<String, dynamic> data) => (data == null) ? new User(id) : new User.decode(id, data);
 
   Future patchCustomers(User user) async
   {

@@ -44,7 +44,7 @@ class User extends EditableModel
     table["email"] = email;
     table["phone"] = phone;
     table["social_number"] = socialNumber;
-    table["customer_plural"] = customerIds.length.toString();
+    table["customers"] = customerIds.length.toString();
     return table;
   }
 

@@ -1,14 +1,14 @@
 part of firebase_service;
 
 @Injectable()
-class JournalService extends FirebaseServiceBase
+class ProductService extends FirebaseServiceBase
 {
-  JournalService() : super("journal");
+  ProductService() : super("products"); /*1, [new UniqueField("products_article_nos", "article_no", true), new UniqueField("products_url_names", "url_name", true)]*/
 
   @override
-  JournalEntry createModelInstance(String id, Map<String, dynamic> data) => new JournalEntry.decode(id, data);
+  Product createModelInstance(String id, Map<String, dynamic> data) => data == null ? new Product(id) : new Product.decode(id, data);
 
-  Future<String> uploadImage(String base64) async
+  Future<String> uploadImage(String article_no, String base64) async
   {
     String url = null;
     try
@@ -18,7 +18,7 @@ class JournalService extends FirebaseServiceBase
       String contentType = parts.first.substring("data:".length);
       String data = parts.last;
 
-      String filename = Uri.encodeFull(new DateTime.now().millisecondsSinceEpoch.toString());
+      String filename = Uri.encodeFull(article_no);
       final firebase.UploadMetadata metadata = new firebase.UploadMetadata(contentType: contentType);
       await _imagesRef.child(filename).putString(data, "base64", metadata).future;
       url = (await _imagesRef.child(filename).getDownloadURL()).toString();
@@ -30,5 +30,5 @@ class JournalService extends FirebaseServiceBase
     }
   }
 
-  final firebase.StorageReference _imagesRef = firebase.storage().ref("journal-images");
+  final firebase.StorageReference _imagesRef = firebase.storage().ref("product-images");
 }

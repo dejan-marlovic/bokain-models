@@ -7,6 +7,8 @@ class JournalEntry extends ModelBase
   {
     imageURIs = new List();
     customerId = customer_id;
+    commentsInternal = "";
+    commentsExternal = "";
   }
 
   @override
@@ -17,6 +19,8 @@ class JournalEntry extends ModelBase
       _data[key] = d[key];
     }
 
+    if (commentsInternal == null) commentsInternal = "";
+    if (commentsExternal == null) commentsExternal = "";
     if (imageURIs == null) imageURIs = new List();
   }
 

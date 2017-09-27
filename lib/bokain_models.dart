@@ -3,15 +3,16 @@
 
 library bokain_models;
 
-export 'package:bokain_models/src/model_base.dart';
-export 'package:bokain_models/src/billogram/billogram_base.dart';
-export 'package:bokain_models/src/validators/bo_validators.dart';
-export 'package:bokain_models/src/phrases.dart';
+export 'src/model_base.dart';
+export 'src/billogram/billogram_base.dart';
+export 'src/validators/bo_validators.dart';
+export 'src/phrases.dart';
 
-export 'package:bokain_models/src/services/api.bokain.se/billogram_service.dart';
-export 'package:bokain_models/src/services/customer_auth_service.dart';
-//export 'package:bokain_models/src/services/calendar_service.dart';
-export 'package:bokain_models/src/services/output_service.dart';
-export 'package:bokain_models/src/services/firebase/firebase_service_base.dart';
-export 'package:bokain_models/src/services/firebase/firebase_query_params.dart';
-export 'package:bokain_models/src/services/api.bokain.se/mailer_service.dart';
+export 'src/services/api.bokain.se/billogram_service.dart';
+export 'src/services/api.bokain.se/mailer_service.dart';
+export 'src/services/api.bokain.se/restful_service_base.dart';
+export 'src/services/dynamic_phrase_service.dart';
+export 'src/services/firebase/firebase_service_base.dart';
+export 'src/services/firebase/firebase_query_params.dart';
+export 'src/services/customer_auth_service.dart';
+export 'src/services/output_service.dart';

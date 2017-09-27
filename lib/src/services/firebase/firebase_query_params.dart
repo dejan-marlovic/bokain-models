@@ -16,6 +16,12 @@ class FirebaseQueryParams
         this.searchRangeEnd = null
       });
 
+  @override
+  String toString()
+  {
+    return "limitTo:$limitTo, limitDirection:$limitDirection, searchProperty:$searchProperty, searchValue:$searchValue, searchRangeStart:$searchRangeStart, searchRangeEnd:$searchRangeEnd";
+  }
+
   final String searchProperty;
   final dynamic searchValue;
   final dynamic searchRangeStart;

@@ -3,14 +3,14 @@ part of firebase_service;
 @Injectable()
 class SalonService extends FirebaseServiceBase
 {
-  SalonService() : super("salons")
+  SalonService() : super("salons", [new UniqueField("salons_names", "name", true)])
   {
     _db.ref('rooms').onChildAdded.listen(_onRoomAdded);
     _db.ref('rooms').onChildChanged.listen(_onRoomChanged);
   }
 
   @override
-  Salon createModelInstance(String id, Map<String, dynamic> data) => new Salon.decode(id, data);
+  Salon createModelInstance(String id, Map<String, dynamic> data) => data == null ? new Salon(id) : new Salon.decode(id, data);
 
   Future<String> pushRoom(Room model) async
   {
@@ -79,17 +79,6 @@ class SalonService extends FirebaseServiceBase
       _loading = false;
       return url;
     }
-  }
-
-  Future removeImage(String salon_name, String company_name) async
-  {
-    try
-    {
-      _loading = true;
-      String filename = Uri.encodeFull("${salon_name}_${company_name}");
-      await _logosRef.child(filename).delete();
-    }
-    finally { _loading = false; }
   }
 
   void _onRoomAdded(firebase.QueryEvent e)

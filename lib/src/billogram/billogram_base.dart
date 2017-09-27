@@ -9,7 +9,6 @@ part 'billogram_item.dart';
 
 class BillogramBase
 {
-
   String toJSON() => JSON.encode(_data);
 
   Map<String, dynamic> get data => _data;

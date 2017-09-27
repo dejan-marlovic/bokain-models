@@ -1,6 +1,5 @@
 import 'package:angular_forms/angular_forms.dart';
-import 'package:bokain_models/src/services/firebase/firebase_service_base.dart';
-import 'package:bokain_models/src/model_base.dart' show EditableModel;
+import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 
 class BoValidators
@@ -11,19 +10,20 @@ class BoValidators
     {
       if ((FoValidators.required())(control) != null || service == null) return null;
 
-      /*
-      PhraseService ps = new PhraseService();
-      List<String> ids = service.getIdsByProperty(property, control.value);
-      if (model != null) ids.removeWhere((id) => id == model.id);
-      return (ids.isEmpty) ? null : {"error" : ps.get(error_phrase)};
-      */
+      List<EditableModel> models = service.getAllByPropertyAsList(property, control.value).toList();
+      if (model.id != null) models.removeWhere((m) => m.id == model.id);
+      if (models.isEmpty) return null;
+      else
+      {
+        PhraseService ps = new PhraseService();
+        return {"error" : ps.get(error_phrase)};
+      }
     };
   }
-
-  /*
+  
   static Map<String, String> cancelBookingCode(AbstractControl control)
   {
-    if (FoValidators.required(control) != null) return null;
+    if ((FoValidators.required()(control)) != null) return null;
 
     RegExp r = new RegExp("[A-Z]{3}[0-9]{3}");
     if (r.allMatches(control.value).length != control.value.length)
@@ -33,5 +33,4 @@ class BoValidators
     }
     else return null;
   }
-  */
 }

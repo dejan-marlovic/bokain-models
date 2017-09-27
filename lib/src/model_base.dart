@@ -7,6 +7,8 @@ part 'editable_model/editable_model.dart';
 part 'editable_model/country.dart';
 part 'editable_model/customer.dart';
 part 'editable_model/language.dart';
+part 'editable_model/product.dart';
+part 'editable_model/product_category.dart';
 part 'editable_model/room.dart';
 part 'editable_model/salon.dart';
 part 'editable_model/service.dart';

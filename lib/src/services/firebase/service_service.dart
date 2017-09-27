@@ -3,10 +3,10 @@ part of firebase_service;
 @Injectable()
 class ServiceService extends FirebaseServiceBase
 {
-  ServiceService() : super("services");
+  ServiceService() : super("services", [new UniqueField("services_names", "name", true)]);
 
   @override
-  Service createModelInstance(String id, Map<String, dynamic> data) => new Service.decode(id, data);
+  Service createModelInstance(String id, Map<String, dynamic> data) => data == null ? new Service(id) : new Service.decode(id, data);
 
   Future patchUsers(Service service) async
   {

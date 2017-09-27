@@ -3,10 +3,15 @@ part of firebase_service;
 @Injectable()
 class CustomerService extends FirebaseServiceBase
 {
-  CustomerService() : super("customers");
+  CustomerService() : super("customers",
+    [
+      new UniqueField("customers_phones", "phone", true),
+      new UniqueField("customers_emails", "email", true),
+      new UniqueField("customers_social_numbers", "social_number", false)
+    ]);
 
   @override
-  Customer createModelInstance(String id, Map<String, dynamic> data) => new Customer.decode(id, data);
+  Customer createModelInstance(String id, Map<String, dynamic> data) => data == null ? new Customer(id) : new Customer.decode(id, data);
 
   Future patchBookings(Customer customer) async
   {

@@ -1,0 +1,128 @@
+part of model_base;
+
+class Product extends EditableModel
+{
+  @override
+  Product([String id = null]) : super(id)
+  {
+    vat = 30;
+    priceEUR = 0.0;
+    priceSEK = 0.0;
+    priceUSD = 0.0;
+  }
+
+  @override
+  Product.decode(String id, Map<String, dynamic> data) : super.decode(id, data)
+  {
+    articleNo = data["article_no"];
+    buyPriceSEK = data["buy_price_sek"];
+    imageURI = data["image_uri"];
+
+    priceEUR = (data["price_eur"] as num).toDouble();
+    priceSEK = (data["price_sek"] as num).toDouble();
+    priceUSD = (data["price_usd"] as num).toDouble();
+
+    productCategoryId = data["product_category_id"];
+    searchRank = data["search_rank"];
+    score = data["score"];
+    stock = data["stock"];
+    urlName = data["url_name"];
+    vat = data["vat"];
+    volume = data["volume"];
+    weight = data["weight"];
+  }
+
+  @override
+  Map<String, String> toTableRow()
+  {
+    Map<String, String> table = new Map();
+    table["article_no"] = articleNo;
+    table["url_name"] = urlName;
+    table["weight"] = strWeight;
+    table["volume"] = strVolume;
+    table["score"] = strScore;
+    table["search_rank"] = strSearchRank;
+    table["price_sek"] = strPriceSEK;
+    table["status"] = status;
+    return table;
+  }
+
+  String get articleNo => _data["article_no"];
+  int get buyPriceSEK => _data["buy_price_sek"];
+  String get imageURI => _data["image_uri"];
+  double get priceEUR => _data["price_eur"];
+  double get priceSEK => _data["price_sek"];
+  double get priceUSD => _data["price_usd"];
+  String get productCategoryId => _data["product_category_id"];
+  int get searchRank => _data["search_rank"];
+  int get score => _data["score"];
+  int get stock => _data["stock"];
+  String get urlName => _data["url_name"];
+  int get vat => _data["vat"];
+  int get volume => _data["volume"];
+  int get weight => _data["weight"];
+
+  String get strBuyPriceSEK => (buyPriceSEK == null) ? "0" : buyPriceSEK.toString();
+  String get strPriceEUR => (priceEUR == null) ? "0" : priceEUR.toString();
+  String get strPriceSEK => (priceSEK == null) ? "0" : priceSEK.toString();
+  String get strPriceUSD => (priceUSD == null) ? "0" : priceUSD.toString();
+  String get strScore => (score == null) ? "0" : score.toString();
+  String get strSearchRank => (searchRank == null) ? "0" : searchRank.toString();
+  String get strStock => (stock == null) ? "0" : stock.toString();
+  String get strVat => (vat == null) ? "0" : vat.toString();
+  String get strVolume => (volume == null) ? "0" : volume.toString();
+  String get strWeight => (weight == null) ? "0" : weight.toString();
+
+  void set articleNo(String value) { _data["article_no"] = value; }
+  void set buyPriceSEK(int value) { _data["buy_price_sek"] = value; }
+  void set imageURI(String value) { _data["image_uri"] = value; }
+  void set priceEUR(double value) { _data["price_eur"] = value; }
+  void set priceSEK(double value) { _data["price_sek"] = value; }
+  void set priceUSD(double value) { _data["price_usd"] = value; }
+  void set productCategoryId(String value) { _data["product_category_id"] = value; }
+  void set searchRank(int value) { _data["search_rank"] = value; }
+  void set stock(int value) { _data["stock"] = value; }
+  void set score(int value) { _data["score"] = value; }     // Score based on webshop sales, 1% tear / day
+  void set urlName(String value) { _data["url_name"] = value; }
+  void set vat(int value) { _data["vat"] = value; }
+  void set volume(int value) { _data["volume"] = value; }   // Ml
+  void set weight(int value) { _data["weight"] = value; }   // Grams
+  void set strBuyPriceSEK(String value) { try { buyPriceSEK = int.parse(value); } on FormatException catch(e) { print(e); }}
+  void set strPriceEUR(String value) { try { priceEUR = double.parse(value); } on FormatException catch(e) { print(e); }}
+  void set strPriceSEK(String value) { try { priceSEK = double.parse(value); } on FormatException catch(e) { print(e); }}
+  void set strPriceUSD(String value) { try { priceUSD = double.parse(value); } on FormatException catch(e) { print(e); }}
+  void set strScore(String value) { try { score = int.parse(value); } on FormatException catch(e) { print(e); }}
+  void set strSearchRank(String value) { try { searchRank = int.parse(value); } on FormatException catch(e) { print(e); }}
+  void set strStock(String value) { try { stock = int.parse(value); } on FormatException catch(e) { print(e); }}
+  void set strVat(String value) { try { vat = int.parse(value); } on FormatException catch(e) { print(e); }}
+  void set strVolume(String value) { try { volume = int.parse(value); } on FormatException catch(e) { print(e); }}
+  void set strWeight(String value) { try { weight = int.parse(value); } on FormatException catch(e) { print(e); }}
+}
+
+class ProductPhrases
+{
+  ProductPhrases() : _data = new Map();
+
+  ProductPhrases.decode(this._data)
+  {
+    if (_data == null) _data = new Map();
+  }
+
+  Map<String, String> get data => _data;
+
+  String get name => _data["name"];
+  String get descriptionLong => _data["description_long"];
+  String get descriptionShort => _data["description_short"];
+  String get usageInstructions => _data["usage_instructions"];
+  String get metaDescription => _data["meta_description"];
+  String get metaKeywords => _data["meta_keywords"];
+
+  void set name(String value) { _data["name"] = value; }
+  void set descriptionLong(String value) { _data["description_long"] = value; }
+  void set descriptionShort(String value) { _data["description_short"] = value; }
+  void set usageInstructions(String value) { _data["usage_instructions"] = value ;}
+  void set metaDescription(String value) { _data["meta_description"] = value; }
+  void set metaKeywords(String value) { _data["meta_keywords"] = value; }
+
+  Map<String, String> _data;
+}
