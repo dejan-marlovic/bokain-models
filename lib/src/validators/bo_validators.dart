@@ -1,6 +1,7 @@
 import 'package:angular_forms/angular_forms.dart';
-import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
+import '../model_base.dart';
+import '../services/firebase/firebase_service_base.dart';
 
 class BoValidators
 {

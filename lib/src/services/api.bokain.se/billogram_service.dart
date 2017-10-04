@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:angular/angular.dart';
-import 'package:bokain_models/bokain_models.dart';
+import 'restful_service_base.dart';
+import '../../billogram/billogram_base.dart';
+import '../../model_base.dart';
 
 @Injectable()
 class BillogramService extends RestfulServiceBase

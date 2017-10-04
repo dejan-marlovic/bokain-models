@@ -5,18 +5,29 @@ class Product extends EditableModel
   @override
   Product([String id = null]) : super(id)
   {
-    vat = 30;
+    ingredientIds = new List();
+    relatedProductIds = new List();
+    subProductIds = new List();
+    productRoutineIds = new List();
     priceEUR = 0.0;
     priceSEK = 0.0;
     priceUSD = 0.0;
+    type = "standard";
+
+    vat = 30;
   }
 
   @override
   Product.decode(String id, Map<String, dynamic> data) : super.decode(id, data)
   {
+    name = data["name"];
     articleNo = data["article_no"];
     buyPriceSEK = data["buy_price_sek"];
     imageURI = data["image_uri"];
+    ingredientIds = data.containsKey("ingredient_ids") ? data["ingredient_ids"] : new List();
+    relatedProductIds = data.containsKey("related_product_ids") ? data["related_product_ids"] : new List();
+    subProductIds = data.containsKey("sub_product_ids") ? data["sub_product_ids"] : new List();
+    productRoutineIds = data.containsKey("product_routine_ids") ? data["product_routine_ids"] : new List();
 
     priceEUR = (data["price_eur"] as num).toDouble();
     priceSEK = (data["price_sek"] as num).toDouble();
@@ -26,6 +37,7 @@ class Product extends EditableModel
     searchRank = data["search_rank"];
     score = data["score"];
     stock = data["stock"];
+    type = data["type"];
     urlName = data["url_name"];
     vat = data["vat"];
     volume = data["volume"];
@@ -36,10 +48,10 @@ class Product extends EditableModel
   Map<String, String> toTableRow()
   {
     Map<String, String> table = new Map();
+    table["name"] = name;
     table["article_no"] = articleNo;
+    table["product_type"] = type;
     table["url_name"] = urlName;
-    table["weight"] = strWeight;
-    table["volume"] = strVolume;
     table["score"] = strScore;
     table["search_rank"] = strSearchRank;
     table["price_sek"] = strPriceSEK;
@@ -47,9 +59,17 @@ class Product extends EditableModel
     return table;
   }
 
+  @override
+  String toString() => name;
+
+  String get name => _data["name"];
   String get articleNo => _data["article_no"];
   int get buyPriceSEK => _data["buy_price_sek"];
   String get imageURI => _data["image_uri"];
+  List<String> get ingredientIds => _data["ingredient_ids"];
+  List<String> get relatedProductIds => _data["related_product_ids"];
+  List<String> get subProductIds => _data["sub_product_ids"];
+  List<String> get productRoutineIds => _data["product_routine_ids"];
   double get priceEUR => _data["price_eur"];
   double get priceSEK => _data["price_sek"];
   double get priceUSD => _data["price_usd"];
@@ -57,6 +77,7 @@ class Product extends EditableModel
   int get searchRank => _data["search_rank"];
   int get score => _data["score"];
   int get stock => _data["stock"];
+  String get type => _data["type"];
   String get urlName => _data["url_name"];
   int get vat => _data["vat"];
   int get volume => _data["volume"];
@@ -73,9 +94,14 @@ class Product extends EditableModel
   String get strVolume => (volume == null) ? "0" : volume.toString();
   String get strWeight => (weight == null) ? "0" : weight.toString();
 
+  void set name(String value) { _data["name"] = value; }
   void set articleNo(String value) { _data["article_no"] = value; }
   void set buyPriceSEK(int value) { _data["buy_price_sek"] = value; }
   void set imageURI(String value) { _data["image_uri"] = value; }
+  void set ingredientIds(List<String> value) { _data["ingredient_ids"] = value; }
+  void set relatedProductIds(List<String> value) { _data["related_product_ids"] = value; }
+  void set subProductIds(List<String> value) { _data["sub_product_ids"] = value; }
+  void set productRoutineIds(List<String> value) { _data["product_routine_ids"] = value; }
   void set priceEUR(double value) { _data["price_eur"] = value; }
   void set priceSEK(double value) { _data["price_sek"] = value; }
   void set priceUSD(double value) { _data["price_usd"] = value; }
@@ -83,6 +109,7 @@ class Product extends EditableModel
   void set searchRank(int value) { _data["search_rank"] = value; }
   void set stock(int value) { _data["stock"] = value; }
   void set score(int value) { _data["score"] = value; }     // Score based on webshop sales, 1% tear / day
+  void set type(String value) { _data["type"] = value; }
   void set urlName(String value) { _data["url_name"] = value; }
   void set vat(int value) { _data["vat"] = value; }
   void set volume(int value) { _data["volume"] = value; }   // Ml

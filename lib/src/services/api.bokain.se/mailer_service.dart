@@ -1,7 +1,7 @@
 import 'dart:async' show Future;
 import 'package:angular/angular.dart' show Injectable;
 import 'package:fo_components/fo_components.dart';
-import 'package:bokain_models/bokain_models.dart';
+import '../api.bokain.se/restful_service_base.dart';
 
 @Injectable()
 class MailerService extends RestfulServiceBase
