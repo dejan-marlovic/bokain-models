@@ -14,7 +14,7 @@ class Product extends EditableModel
     priceUSD = 0.0;
     type = "standard";
 
-    vat = 30;
+    vat = 25;
   }
 
   @override

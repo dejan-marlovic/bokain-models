@@ -45,7 +45,7 @@ class BookingService extends FirebaseServiceBase
         /// Reset state to open, clearing any after-margin
         i.userStates[booking.userId].state = "open";
       });
-      await day_service.set(day.id, day);
+      await day_service.set(day);
     }
 
     User user = await user_service.fetch(booking.userId);
@@ -102,7 +102,7 @@ class BookingService extends FirebaseServiceBase
         }
         iTime = iTime.add(Increment.duration);
       }
-      await day_service.set(day.id, day);
+      await day_service.set(day);
     }
 
     User user = await user_service.fetch(booking.userId);

@@ -230,8 +230,10 @@ abstract class FirebaseServiceBase
 
       key = ref.key;
     }
-    catch (e)
+    catch (e, s)
     {
+      print(e);
+      print(s);
       throw new Exception(e);
     }
     finally
@@ -244,22 +246,18 @@ abstract class FirebaseServiceBase
   /**
    * Update the remote model
    */
-  Future<ModelBase> set(String id, ModelBase model) async
+  Future<ModelBase> set(ModelBase model) async
   {
+    if (model.id == null) return null;
     try
     {
       _loading = true;
-
       await _validateUniqueFields(model);
-
-      ModelBase oldModel = await fetch(id, force: true, cache: false);
-
+      ModelBase oldModel = await fetch(model.id, force: true, cache: false);
       Map<String, dynamic> data = model.encoded;
-      await _db.ref(_name).child(id).set(data);
-
-      _updateUniqueFields(model, id, oldModel);
-
-      if (!streaming) _onChildChanged(id, data);
+      await _db.ref(_name).child(model.id).set(data);
+      _updateUniqueFields(model, model.id, oldModel);
+      if (!streaming) _onChildChanged(model.id, data);
     }
     catch (e)
     {
@@ -269,6 +267,29 @@ abstract class FirebaseServiceBase
     {
       _loading = false;
     }
+    return model;
+  }
+
+  /**
+   * Patch a single model property
+   */
+  Future<ModelBase> patch(ModelBase model, String property) async
+  {
+    if (model.id == null) return null;
+    try
+    {
+      await _db.ref(_name).child(model.id).child(property).set(model.data[property]);
+      if (!streaming) _onChildChanged(model.id, model.data);
+    }
+    catch (e)
+    {
+      throw new Exception(e);
+    }
+    finally
+    {
+      _loading = false;
+    }
+
     return model;
   }
 

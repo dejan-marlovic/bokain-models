@@ -24,7 +24,7 @@ class BillogramService extends RestfulServiceBase
 
     final DateFormat df = new DateFormat("yyyy-MM-dd 'kl 'HH:mm");
 
-    List<BillogramItem> items = services.map((s) => new BillogramItem(s.name, "Missad tid: ${df.format(b.startTime)}", s.price)).toList(growable: false);
+    List<BillogramItem> items = services.map((s) => new BillogramItem(s.name, "Missad tid: ${df.format(b.startTime)}", s.price * 0.75)).toList(growable: false);
     BillogramBillogram billogram = new BillogramBillogram(customer, items);
 
     await httpPUT("billogram/billogram", billogram.data);
