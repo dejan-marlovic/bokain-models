@@ -7,19 +7,16 @@ class DayService extends FirebaseServiceBase
 
   ModelBase _onChildAdded(String key, Map<String, dynamic> data)
   {
-    print("ONCHILDADDED");
     return super._onChildAdded(key, data);
   }
 
   ModelBase _onChildChanged(String key, Map<String, dynamic> data)
   {
-    print("ONCHILDCHANGED");
     return super._onChildChanged(key, data);
   }
 
   String _onChildRemoved(String key)
   {
-    print("ONCHILDREMOVED");
     return super._onChildRemoved(key);
   }
 

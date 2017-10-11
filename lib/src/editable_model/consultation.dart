@@ -8,6 +8,7 @@ class Consultation extends EditableModel
   @override
   Consultation.decode(String id, Map<String, dynamic> d) : super.decode(id, d)
   {
+    customerId = d["customer_id"];
   }
 
   @override
