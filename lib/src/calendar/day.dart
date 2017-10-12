@@ -60,6 +60,12 @@ class Day extends ModelBase
     else return increments.where((i) => salon_id != null && i.userStates.containsKey(user_id)).isNotEmpty && salonId == salon_id;
   }
 
+  bool hasBookings(String user_id)
+  {
+    if (user_id == null) return false;
+    return increments.firstWhere((i) => i.userStates.containsKey(user_id) && i.userStates[user_id].bookingId != null, orElse: () => null) != null;
+  }
+
   bool isSameDateAs(DateTime dt) => (startTime.year == dt.year && startTime.month == dt.month && startTime.day == dt.day);
   bool containsUser(String user_id) => increments.firstWhere((i) => i.userStates.containsKey(user_id), orElse: () => null) != null;
 

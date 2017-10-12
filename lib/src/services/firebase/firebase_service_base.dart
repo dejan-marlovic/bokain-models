@@ -46,7 +46,7 @@ abstract class FirebaseServiceBase
 
   /**
    * Stream models asynchronously from remote server.
-   * Use the onChildAdded/Updated/Removed stream outputs to detect changes
+   * Use the onChildAdded/Changed/Removed stream outputs to detect changes
    */
   Stream<ModelBase> streamAll([FirebaseQueryParams queryParams = const FirebaseQueryParams()])
   {
@@ -59,6 +59,21 @@ abstract class FirebaseServiceBase
     _onStreamChildChangedListener = _q.onChildChanged.listen((qe) => _onChildChanged(qe.snapshot.key, qe.snapshot.val()));
     _onStreamChildRemovedListener = _q.onChildRemoved.listen((qe) => _onChildRemoved(qe.snapshot.key));
 
+    return _onChildAddedController.stream;
+  }
+
+  /**
+   * Stream a single model asynchronously from remote server
+   * * Use the onChildAdded stream outputs to detect changes
+   */
+  Stream<ModelBase> stream(String id)
+  {
+    if (streaming) throw new StateError("this instance of $_name-service is already streaming data");
+    print("STREAMING $_name/$id");
+
+    _q = _db.ref(_name).child(id);
+
+    _onStreamChildAddedListener = _q.onValue.listen((qe) => _onChildAdded(qe.snapshot.key, qe.snapshot.val()));
     return _onChildAddedController.stream;
   }
 

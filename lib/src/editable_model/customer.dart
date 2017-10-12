@@ -11,11 +11,11 @@ class Customer extends EditableModel
     {
       codeUnits.add(rnd.nextInt(30)+97);
     }
+    password = new String.fromCharCodes(codeUnits);
 
     language = "1"; /// Swedish
     country = "1";  /// Sweden
     skinType = "7"; /// Normal
-    password = new String.fromCharCodes(codeUnits);
 
     bookingIds = new List();
     journalEntryIds = new List();
@@ -31,6 +31,7 @@ class Customer extends EditableModel
     {
       _data[key] = d[key];
     }
+
     if (bookingIds == null) bookingIds = new List();
     if (journalEntryIds == null) journalEntryIds = new List();
   }
@@ -50,6 +51,7 @@ class Customer extends EditableModel
   @override
   String toString() => email;
 
+  int get age => _data["age"];
   String get belongsTo => _data["belongs_to"];
   String get careOf => _data["care_of"];
   String get commentsExternal => _data["comments_external"];
@@ -68,9 +70,12 @@ class Customer extends EditableModel
   String get socialNumber => _data["social_number"];
   String get street => _data["street"];
   String get password => _data["password"];
+  String get sex => _data["sex"];
+  String get strAge => age == null ? "0" : age.toString();
   List<String> get bookingIds => _data["booking_ids"];
   List<String> get journalEntryIds => _data["journal_entry_ids"];
 
+  void set age(int value) { _data["age"] = value; }
   void set belongsTo(String value) { _data["belongs_to"] = value; }
   void set commentsExternal(String value) { _data["comments_external"] = value; }
   void set commentsInternal(String value) { _data["comments_internal"] = value; }
@@ -89,6 +94,8 @@ class Customer extends EditableModel
   void set socialNumber(String value) { _data["social_number"] = value; }
   void set street(String value) { _data["street"] = value; }
   void set password(String value) { _data["password"] = value; }
+  void set sex(String value) { _data["sex"] = value; }
+  void set strAge(String value) { try { age = int.parse(value); } on FormatException catch (e, s) { print(e); print(s); } }
   void set bookingIds(List<String> value) { _data["booking_ids"] = value; }
   void set journalEntryIds(List<String> value) { _data["journal_entry_ids"] = value; }
 }
