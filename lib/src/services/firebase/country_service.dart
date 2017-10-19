@@ -1,7 +1,7 @@
 part of firebase_service;
 
 @Injectable()
-class CountryService extends FirebaseServiceBase
+class CountryService extends FirebaseServiceBase<Country>
 {
   CountryService() : super("countries");
 

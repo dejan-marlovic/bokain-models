@@ -1,7 +1,7 @@
 part of firebase_service;
 
 @Injectable()
-class SalonService extends FirebaseServiceBase
+class SalonService extends FirebaseServiceBase<Salon>
 {
   SalonService() : super("salons", [new UniqueField("salons_names", "name", true)])
   {

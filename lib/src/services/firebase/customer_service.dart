@@ -1,7 +1,7 @@
 part of firebase_service;
 
 @Injectable()
-class CustomerService extends FirebaseServiceBase
+class CustomerService extends FirebaseServiceBase<Customer>
 {
   CustomerService() : super("customers",
     [

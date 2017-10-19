@@ -1,7 +1,7 @@
 part of firebase_service;
 
 @Injectable()
-class ServiceService extends FirebaseServiceBase
+class ServiceService extends FirebaseServiceBase<Service>
 {
   ServiceService() : super("services", [new UniqueField("services_names", "name", true)]);
 

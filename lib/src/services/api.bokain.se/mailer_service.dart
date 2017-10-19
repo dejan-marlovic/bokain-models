@@ -8,7 +8,7 @@ class MailerService extends RestfulServiceBase
 {
   MailerService(this._phraseService) : super();
 
-  Future<Map<String, dynamic>> mail(String body, String subject, String to) async => await httpPOST("mail", {"body":body, "subject":subject, "to":to});
+  Future<String> mail(String body, String subject, String to) async => await httpPOST("mail", {"body":body, "subject":subject, "to":to});
 
   String formatDatePronounced(DateTime date)
   {

@@ -1,7 +1,7 @@
 part of firebase_service;
 
 @Injectable()
-class LanguageService extends FirebaseServiceBase
+class LanguageService extends FirebaseServiceBase<Language>
 {
   LanguageService() : super("languages");
 

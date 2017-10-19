@@ -25,12 +25,13 @@ class ProductRoutine extends EditableModel
     weeklyRoutine = d["weekly_routine"];
     dayStep = d["day_step"];
 
+    List<Map<String, dynamic>> sd = d["startup_days"];
 
-    if (d.containsKey("startup_days") && d["startup_days"] is List<Map<String, dynamic>> && d["startup_days"].length == 28)
+    if (d.containsKey("startup_days") && d["startup_days"].length == 28)
     {
       for (int i = 0; i < 28; i++)
       {
-        startupDays[i] = new StartupDay.decode(d["startup_days"][i]);
+        startupDays[i] = new StartupDay.decode(sd[i]);
       }
     }
     else
@@ -46,7 +47,7 @@ class ProductRoutine extends EditableModel
   Map<String, dynamic> get encoded
   {
     Map<String, dynamic> output = super.encoded;
-    output["startup_days"] = startupDays.map((d) => d.encoded);
+    output["startup_days"] = startupDays.map((d) => d.encoded).toList(growable: false);
     return output;
   }
 
@@ -88,8 +89,8 @@ class StartupDay
   {
     Map<String, dynamic> output = new Map();
     output["active"] = active;
-    output["night"] = night;
-    output["duration_minutes"] = duration?.inMinutes;
+    if (night != null) output["night"] = night;
+    if (duration != null) output["duration_minutes"] = duration.inMinutes;
     return output;
   }
 

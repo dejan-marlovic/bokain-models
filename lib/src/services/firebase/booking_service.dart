@@ -1,7 +1,7 @@
 part of firebase_service;
 
 @Injectable()
-class BookingService extends FirebaseServiceBase
+class BookingService extends FirebaseServiceBase<Booking>
 {
   BookingService() : super("bookings");
 
@@ -13,17 +13,18 @@ class BookingService extends FirebaseServiceBase
    */
   Booking getByTimeAndRoomId(DateTime time, String room_id)
   {
-    return _cachedModels.values.firstWhere((Booking b) =>
-    b.roomId == room_id && (b.startTime.isAtSameMomentAs(time) || (b.startTime.isBefore(time) && b.endTime.isAfter(time))), orElse: () => null);
+    return _cachedModels.values.firstWhere((ModelBase b) =>
+    (b as Booking).roomId == room_id && ((b as Booking).startTime.isAtSameMomentAs(time) || ((b as Booking).startTime.isBefore(time) && (b as Booking).endTime.isAfter(time))), orElse: () => null);
   }
 
   @override
-  Future<String> push(Booking model) async
+  Future<String> push(ModelBase model) async
   {
-    if (getByTimeAndRoomId(model.startTime, model.roomId) != null) throw new Exception("This time (${model.startTime}) has already been booked");
-    model.cancelCode = await _generateUniqueCancelCode();
-    model.id = await super.push(model);
-    return model.id;
+    Booking b = model as Booking;
+    if (getByTimeAndRoomId(b.startTime, b.roomId) != null) throw new Exception("This time (${b.startTime}) has already been booked");
+    b.cancelCode = await _generateUniqueCancelCode();
+    b.id = await super.push(model);
+    return b.id;
   }
 
   /**
@@ -136,7 +137,17 @@ class BookingService extends FirebaseServiceBase
     String cancelCode;
     while (qe == null || qe.snapshot.exists())
     {
-      cancelCode = rs.randomAlphaNumeric(7).toUpperCase();
+      /// generate random string "abc123"
+      final int alphaStart = 65;
+      final int alphaEnd = 90;
+      final int numStart = 48;
+      final int numEnd = 57;
+      Random rnd = new Random();
+      List<int> charCodes = new List(6);
+      for (int i = 0; i < 3; i++) charCodes[i] = rnd.nextInt(alphaEnd - alphaStart) + alphaStart;
+      for (int i = 3; i < 6; i++) charCodes[i] = rnd.nextInt(numEnd - numStart) + numStart;
+
+      cancelCode = new String.fromCharCodes(charCodes);
       qe = await firebase.database().ref('bookings').orderByChild("cancel_code").equalTo(cancelCode).once("value");
     }
     return cancelCode;

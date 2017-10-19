@@ -3,9 +3,9 @@ library firebase_service;
 import 'dart:async';
 import 'dart:html' as dom show HttpRequest;
 import 'dart:convert' show JSON;
+import 'dart:math' show Random;
 import 'package:angular/angular.dart';
 import 'package:firebase/firebase.dart' as firebase;
-import 'package:random_string/random_string.dart' as rs;
 import 'package:bokain_models/bokain_models.dart';
 
 part 'booking_service.dart';
@@ -25,7 +25,7 @@ part 'service_addon_service.dart';
 part 'skin_type_service.dart';
 part 'user_service.dart';
 
-abstract class FirebaseServiceBase
+abstract class FirebaseServiceBase<T>
 {
   FirebaseServiceBase(this._name, [this._uniqueFields = const []])
   {
@@ -48,7 +48,7 @@ abstract class FirebaseServiceBase
    * Stream models asynchronously from remote server.
    * Use the onChildAdded/Changed/Removed stream outputs to detect changes
    */
-  Stream<ModelBase> streamAll([FirebaseQueryParams queryParams = const FirebaseQueryParams()])
+  Stream<T> streamAll([FirebaseQueryParams queryParams = const FirebaseQueryParams()])
   {
     if (streaming) throw new StateError("this instance of $_name-service is already streaming data");
 
@@ -66,7 +66,7 @@ abstract class FirebaseServiceBase
    * Stream a single model asynchronously from remote server
    * * Use the onChildAdded stream outputs to detect changes
    */
-  Stream<ModelBase> stream(String id)
+  Stream<T> stream(String id)
   {
     if (streaming) throw new StateError("this instance of $_name-service is already streaming data");
     print("STREAMING $_name/$id");
@@ -80,7 +80,7 @@ abstract class FirebaseServiceBase
   /**
    * [force]: skip buffer and force server-fetch
    */
-  Future<ModelBase> fetch(String id, {bool force: false, bool cache: true}) async
+  Future<T> fetch(String id, {bool force: false, bool cache: true}) async
   {
     if (id == null) return null;
     if (!force && get(id) != null) return get(id);
@@ -102,7 +102,7 @@ abstract class FirebaseServiceBase
    * Fetch models with specified ids asynchronously from the server.
    * Clears model cache and cancels streaming.
    */
-  Future<Map<String, ModelBase>> fetchMany(List<String> ids) async
+  Future<Map<String, T>> fetchMany(List<String> ids) async
   {
     _loading = true;
     cancelStreaming();
@@ -131,7 +131,7 @@ abstract class FirebaseServiceBase
    * Fetch models asynchronously from the server.
    * Clears model cache and cancels streaming.
    */
-  Future<Map<String, ModelBase>> fetchAll([FirebaseQueryParams queryParams = const FirebaseQueryParams(), bool cache = true]) async
+  Future<Map<String, T>> fetchAll([FirebaseQueryParams queryParams = const FirebaseQueryParams(), bool cache = true]) async
   {
     _loading = true;
     print("FETCHING ALL $_name (cache: $cache, queryParams: $queryParams)");
@@ -162,7 +162,7 @@ abstract class FirebaseServiceBase
     }
     else
     {
-      Map<String, ModelBase> output = new Map();
+      Map<String, T> output = new Map();
       if (data != null) for (String id in data.keys)
         output[id] = createModelInstance(id, data[id]);
       _loading = false;
@@ -170,11 +170,11 @@ abstract class FirebaseServiceBase
     }
   }
 
-  Future<ModelBase> fetchByProperty(String property, dynamic value, {bool force: false, bool cache: true}) async
+  Future<T> fetchByProperty(String property, dynamic value, {bool force: false, bool cache: true}) async
   {
     if (!force)
     {
-      ModelBase model = getByProperty(property, value);
+      T model = getByProperty(property, value);
       if (model != null) return model;
     }
 
@@ -192,54 +192,58 @@ abstract class FirebaseServiceBase
     else return createModelInstance(id, data);
   }
 
-  ModelBase get(String id)
+  T get(String id)
   {
     if (id == null) return null;
     return _cachedModels.containsKey(id) ? _cachedModels[id] : null;
   }
 
-  Map<String, ModelBase> getMany(List<String> ids)
+  Map<String, T> getMany(List<String> ids)
   {
-    Map<String, ModelBase> output = new Map();
-    if (ids != null) _cachedModels.values.where((m)
-    => ids.contains(m.id)).forEach((m)
-    => output[m.id] = m);
+    if (ids == null) return _cachedModels;
     else
-      output = _cachedModels;
-    return output;
+    {
+      Map<String, T> output = new Map();
+      _cachedModels.keys.where(ids.contains).forEach((key) => output[key] = _cachedModels[key]);
+      return output;
+    }
   }
 
-  ModelBase getByProperty(String property, dynamic value)
+  T getByProperty(String property, dynamic value)
   {
     return _cachedModels.values.firstWhere((m)
-    => m.data.containsKey(property) && m.data[property] == value, orElse: ()
+    => (m as ModelBase).data.containsKey(property) && (m as ModelBase).data[property] == value, orElse: ()
     => null);
   }
 
-  Iterable<ModelBase> getAllByPropertyAsList(String property, dynamic value)
+  Iterable<T> getAllByPropertyAsList(String property, dynamic value)
   {
     return _cachedModels.values.where((m)
-    => m.data.containsKey(property) && m.data[property] == value);
+    => (m as ModelBase).data.containsKey(property) && (m as ModelBase).data[property] == value);
   }
 
   /**
    * Push a new model onto remote
    */
-  Future<String> push(ModelBase model) async
+  Future<String> push(T t) async
   {
     String key;
     try
     {
       _loading = true;
+
+      ModelBase model = t as ModelBase;
+
       model.created = new DateTime.now();
       model.addedBy = firebase.auth().currentUser.uid;
 
-      await _validateUniqueFields(model);
+      await _validateUniqueFields(t);
 
       Map<String, dynamic> data = model.encoded;
+
       firebase.DatabaseReference ref = await _db.ref(_name).push(data).future;
 
-      await _updateUniqueFields(model, ref.key, null);
+      await _updateUniqueFields(t, ref.key, null);
 
       if (!streaming) _onChildAdded(ref.key, data);
 
@@ -261,43 +265,49 @@ abstract class FirebaseServiceBase
   /**
    * Update the remote model
    */
-  Future<ModelBase> set(ModelBase model) async
+  Future<T> set(T t) async
   {
+    ModelBase model = t as ModelBase;
+
     if (model.id == null) return null;
     try
     {
       _loading = true;
-      await _validateUniqueFields(model);
-      ModelBase oldModel = await fetch(model.id, force: true, cache: false);
+      await _validateUniqueFields(t);
+      T oldModel = await fetch(model.id, force: true, cache: false);
       Map<String, dynamic> data = model.encoded;
       await _db.ref(_name).child(model.id).set(data);
-      _updateUniqueFields(model, model.id, oldModel);
+      _updateUniqueFields(t, model.id, oldModel);
       if (!streaming) _onChildChanged(model.id, data);
     }
-    catch (e)
+    catch (e, s)
     {
+      print(s);
       throw new Exception(e);
     }
     finally
     {
       _loading = false;
     }
-    return model;
+    return t;
   }
 
   /**
    * Patch a single model property
    */
-  Future<ModelBase> patch(ModelBase model, String property) async
+  Future<T> patch(T t, String property) async
   {
+    ModelBase model = t as ModelBase;
+
     if (model.id == null) return null;
     try
     {
       await _db.ref(_name).child(model.id).child(property).set(model.data[property]);
       if (!streaming) _onChildChanged(model.id, model.data);
     }
-    catch (e)
+    catch (e, s)
     {
+      print(s);
       throw new Exception(e);
     }
     finally
@@ -305,7 +315,7 @@ abstract class FirebaseServiceBase
       _loading = false;
     }
 
-    return model;
+    return t;
   }
 
   /**
@@ -320,7 +330,8 @@ abstract class FirebaseServiceBase
       /**
        * Remove unique indices
        */
-      ModelBase model = await fetch(id, force: true, cache: false);
+      T t = await fetch(id, force: true, cache: false);
+      ModelBase model = t as ModelBase;
       for (UniqueField field in _uniqueFields)
       {
         await _db.ref(field.indexTableName).child(model.data[field.propertyName]).remove();
@@ -416,8 +427,10 @@ abstract class FirebaseServiceBase
       throw new StateError("Invalid QueryParams");
   }
 
-  Future _validateUniqueFields(ModelBase model) async
+  Future _validateUniqueFields(T t) async
   {
+    ModelBase model = t as ModelBase;
+
     for (UniqueField field in _uniqueFields)
     {
       dynamic value = _sanitizeKey(model.data[field.propertyName].toString());
@@ -434,14 +447,17 @@ abstract class FirebaseServiceBase
     }
   }
 
-  Future _updateUniqueFields(ModelBase model, String id, ModelBase old_model) async
+  Future _updateUniqueFields(T t, String id, T old_t) async
   {
+    ModelBase model = t as ModelBase;
+    ModelBase oldModel = old_t as ModelBase;
+
     for (UniqueField field in _uniqueFields)
     {
       String value = _sanitizeKey(model.data[field.propertyName].toString());
       if (!field.required && value == "null") continue;
 
-      if (old_model == null)
+      if (oldModel == null)
       {
         if (!field.required && value == null) continue;
         await _db.ref(field.indexTableName).child(value).set(id);
@@ -449,7 +465,7 @@ abstract class FirebaseServiceBase
       else
       {
         /// Remove old index (if property has changed)
-        dynamic oldValue = _sanitizeKey(old_model.data[field.propertyName]);
+        dynamic oldValue = _sanitizeKey(oldModel.data[field.propertyName]);
         if (oldValue != value)
         {
           await _db.ref(field.indexTableName).child(oldValue).remove();
@@ -464,22 +480,25 @@ abstract class FirebaseServiceBase
     return (value).replaceAll(".", "%2E").replaceAll("\$", "%24").replaceAll("#", "%23").replaceAll("[", "%5B").replaceAll("]", "%5D").replaceAll("/", "2F");
   }
 
-  ModelBase _onChildAdded(String key, Map<String, dynamic> data)
+  T _onChildAdded(String key, Map<String, dynamic> data)
   {
-    ModelBase model = createModelInstance(key, data);
-    _cachedModels[model.id] = model;
-    _onChildAddedController.add(model);
+    T t = createModelInstance(key, data);
+    ModelBase model = t as ModelBase;
 
-    return model;
+    _cachedModels[model.id] = t;
+    _onChildAddedController.add(t);
+
+    return t;
   }
 
-  ModelBase _onChildChanged(String key, Map<String, dynamic> data)
+  T _onChildChanged(String key, Map<String, dynamic> data)
   {
-    ModelBase model = createModelInstance(key, data);
-    _cachedModels[model.id] = model;
+    T t = createModelInstance(key, data);
+    ModelBase model = t as ModelBase;
+    _cachedModels[model.id] = t;
 
-    _onChildChangedController.add(model);
-    return model;
+    _onChildChangedController.add(t);
+    return t;
   }
 
   String _onChildRemoved(String key)
@@ -489,26 +508,26 @@ abstract class FirebaseServiceBase
     return key;
   }
 
-  ModelBase createModelInstance(String id, Map<String, dynamic> data);
+  T createModelInstance(String id, Map<String, dynamic> data);
 
   bool get loading => _loading;
 
-  Stream<ModelBase> get onChildAdded => _onChildAddedController.stream;
+  Stream<T> get onChildAdded => _onChildAddedController.stream;
 
-  Stream<ModelBase> get onChildUpdated => _onChildChangedController.stream;
+  Stream<T> get onChildUpdated => _onChildChangedController.stream;
 
   Stream<String> get onChildRemoved => _onChildRemovedController.stream;
 
-  Map<String, ModelBase> get cachedModels => _cachedModels;
+  Map<String, T> get cachedModels => _cachedModels;
 
   StreamSubscription<firebase.QueryEvent> _onStreamChildAddedListener;
   StreamSubscription<firebase.QueryEvent> _onStreamChildChangedListener;
   StreamSubscription<firebase.QueryEvent> _onStreamChildRemovedListener;
 
   final String _name;
-  final Map<String, ModelBase> _cachedModels = new Map();
-  final StreamController<ModelBase> _onChildAddedController = new StreamController.broadcast();
-  final StreamController<ModelBase> _onChildChangedController = new StreamController.broadcast();
+  final Map<String, T> _cachedModels = new Map();
+  final StreamController<T> _onChildAddedController = new StreamController.broadcast();
+  final StreamController<T> _onChildChangedController = new StreamController.broadcast();
   final StreamController<String> _onChildRemovedController = new StreamController.broadcast();
 
   firebase.Database _db;

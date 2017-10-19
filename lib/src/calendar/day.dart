@@ -56,8 +56,9 @@ class Day extends ModelBase
 
   bool isPopulated(String salon_id, String user_id)
   {
-    if (user_id == null) return increments.where((i) => salon_id != null).isNotEmpty && salonId == salon_id;
-    else return increments.where((i) => salon_id != null && i.userStates.containsKey(user_id)).isNotEmpty && salonId == salon_id;
+    if (id == null || salonId != salon_id) return false;
+    else if (user_id == null) return increments.where((i) => i.userStates.isNotEmpty).isNotEmpty;
+    else return increments.where((i) => i.userStates.containsKey(user_id)).isNotEmpty;
   }
 
   bool hasBookings(String user_id)

@@ -66,7 +66,7 @@ class UserState
   }
 
   @override
-  bool operator ==(UserState other) => (hashCode == other.hashCode);
+  bool operator ==(dynamic other) => (hashCode == other.hashCode);
 
   @override
   int get hashCode => JSON.encode(encoded).hashCode;

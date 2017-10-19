@@ -1,7 +1,7 @@
 part of firebase_service;
 
 @Injectable()
-class ProductCategoryService extends FirebaseServiceBase
+class ProductCategoryService extends FirebaseServiceBase<ProductCategory>
 {
   ProductCategoryService() : super("product_categories"); /*1, [new UniqueField("products_article_nos", "article_no", true), new UniqueField("products_url_names", "url_name", true)]*/
 

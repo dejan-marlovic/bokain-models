@@ -1,7 +1,7 @@
 part of firebase_service;
 
 @Injectable()
-class DayService extends FirebaseServiceBase
+class DayService extends FirebaseServiceBase<Day>
 {
   DayService() : super("days")
   {
@@ -9,12 +9,12 @@ class DayService extends FirebaseServiceBase
     instanceCounter++;
   }
 
-  ModelBase _onChildAdded(String key, Map<String, dynamic> data)
+  Day _onChildAdded(String key, Map<String, dynamic> data)
   {
     return super._onChildAdded(key, data);
   }
 
-  ModelBase _onChildChanged(String key, Map<String, dynamic> data)
+  Day _onChildChanged(String key, Map<String, dynamic> data)
   {
     return super._onChildChanged(key, data);
   }
