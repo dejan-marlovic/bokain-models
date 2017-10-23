@@ -12,11 +12,11 @@ dependencies:
   angular_components: '^0.8.0'
   firebase: '^4.0.0'
   fo_components:
-    path: ../../Visurus/FoComponents
+    path: ../../forks/FoComponents
   http: '^0.11.3+14'
   #sass_builder: ^1.0.1
   vi_auth_client:
-    path: ../../Visurus/ViAuthClient
+    path: ../../forks/ViAuthClient
 
 transformers:
 - angular
