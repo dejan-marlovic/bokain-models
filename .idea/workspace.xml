@@ -2,17 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3a385e5-e6e6-4e29-aeca-cdcedaf23309" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/bokain-models.iml" afterPath="$PROJECT_DIR$/.idea/bokain-models.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/services/firebase/calendar_service.dart" afterPath="$PROJECT_DIR$/lib/src/services/firebase/calendar_service.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/services/customer_auth_service.dart" afterPath="$PROJECT_DIR$/lib/src/services/customer_auth_service.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/services/output_service.dart" afterPath="$PROJECT_DIR$/lib/src/services/output_service.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/validators/bo_validators.dart" afterPath="$PROJECT_DIR$/lib/src/validators/bo_validators.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/services/firebase/firebase_service_base.dart" afterPath="$PROJECT_DIR$/lib/src/services/firebase/firebase_service_base.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/services/api.bokain.se/mailer_service.dart" afterPath="$PROJECT_DIR$/lib/src/services/api.bokain.se/mailer_service.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pubspec.yaml" afterPath="$PROJECT_DIR$/pubspec.yaml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/bokain-models.iml" afterPath="$PROJECT_DIR$/.idea/bokain-models.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/services/firebase/firebase_service_base.dart" afterPath="$PROJECT_DIR$/lib/src/services/firebase/firebase_service_base.dart" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/services/api.bokain.se/billogram_service.dart" afterPath="$PROJECT_DIR$/lib/src/services/api.bokain.se/billogram_service.dart" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/validators/bo_validators.dart" afterPath="$PROJECT_DIR$/lib/src/validators/bo_validators.dart" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/services/output_service.dart" afterPath="$PROJECT_DIR$/lib/src/services/output_service.dart" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/services/api.bokain.se/mailer_service.dart" afterPath="$PROJECT_DIR$/lib/src/services/api.bokain.se/mailer_service.dart" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/services/customer_auth_service.dart" afterPath="$PROJECT_DIR$/lib/src/services/customer_auth_service.dart" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/src/services/firebase/calendar_service.dart" afterPath="$PROJECT_DIR$/lib/src/services/firebase/calendar_service.dart" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,10 +47,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user_service.dart" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user_service.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/src/services/firebase/user_service.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
+            <state relative-caret-position="662">
               <caret line="86" column="29" lean-forward="false" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="29" />
               <folding />
             </state>
@@ -72,7 +82,7 @@
       <file leaf-file-name="firebase_service_base.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/src/services/firebase/firebase_service_base.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1701">
+            <state relative-caret-position="1344">
               <caret line="85" column="21" lean-forward="false" selection-start-line="85" selection-start-column="21" selection-end-line="85" selection-end-column="21" />
               <folding>
                 <element signature="e#27#47#0" expanded="true" />
@@ -142,7 +152,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/test/style.scss" />
         <option value="$PROJECT_DIR$/test/test_app_component.scss" />
         <option value="$PROJECT_DIR$/test/test_app_component.html" />
         <option value="$PROJECT_DIR$/test/test_app_component.dart" />
@@ -193,6 +202,7 @@
         <option value="$PROJECT_DIR$/lib/src/validators/bo_validators.dart" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
         <option value="$PROJECT_DIR$/lib/src/services/firebase/user_service.dart" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -203,7 +213,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-9" />
     <option name="y" value="-9" />
     <option name="width" value="1924" />
@@ -225,9 +235,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -246,25 +253,13 @@
               <item name="lib" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="bokain-models" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bokain-models" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bokain-models" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bokain-models" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-              <item name="firebase" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -272,7 +267,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../bokain-admin" />
     <property name="full.screen.before.presentation.mode" value="true" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/lib/src/editable_model/editable_model.dart&#10;F:/Patrick/Workspaces/DAHL/bokain-models/lib/src/services/booking_service.dart&#10;F:/Patrick/Workspaces/DAHL/bokain-models/lib/src/editable_model/service.dart" />
   </component>
@@ -485,10 +480,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30880773" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31310418" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27952328" sideWeight="0.5948827" order="8" side_tool="true" content_ui="tabs" />
@@ -551,13 +547,6 @@
     <entry file="file://C:/tools/dart-sdk/lib/core/iterable.dart" />
     <entry file="file://C:/tools/dart-sdk/lib/core/num.dart" />
     <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/collection-1.13.0/lib/src/equality.dart" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="67" column="17" lean-forward="false" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/Program/Dart/dart-sdk/lib/core/comparable.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1173">
@@ -725,14 +714,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pubspec.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" column="12" lean-forward="false" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/editable_model/user.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1155">
@@ -760,7 +741,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/services/firebase/firebase_service_base.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1701">
+        <state relative-caret-position="1344">
           <caret line="85" column="21" lean-forward="false" selection-start-line="85" selection-start-column="21" selection-end-line="85" selection-end-column="21" />
           <folding>
             <element signature="e#27#47#0" expanded="true" />
@@ -771,8 +752,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/services/firebase/user_service.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
+        <state relative-caret-position="662">
           <caret line="86" column="29" lean-forward="false" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pubspec.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="12" lean-forward="false" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>

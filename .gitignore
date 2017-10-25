@@ -3,3 +3,9 @@
 
 .idea/
 pubspec.lock
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
