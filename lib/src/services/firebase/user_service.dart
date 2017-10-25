@@ -84,6 +84,7 @@ class UserService extends FirebaseServiceBase<User>
 
   bool get isLoggedIn => (_currentUser != null && _currentUser.emailVerified);
 
+  String get currentUserEmail  => _currentUser?.email;
   firebase.User _currentUser;
   final firebase.StorageReference _profileImagesRef = firebase.storage().ref("user-profile-images");
 }
