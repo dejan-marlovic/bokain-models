@@ -10,19 +10,16 @@ import 'package:bokain_models/bokain_models.dart';
 
 part 'booking_service.dart';
 part 'consultation_service.dart';
-part 'country_service.dart';
 part 'customer_service.dart';
 part 'day_service.dart';
 part 'ingredient_service.dart';
 part 'journal_service.dart';
-part 'language_service.dart';
 part 'product_service.dart';
 part 'product_category_service.dart';
 part 'product_routine_service.dart';
 part 'salon_service.dart';
 part 'service_service.dart';
 part 'service_addon_service.dart';
-part 'skin_type_service.dart';
 part 'user_service.dart';
 
 abstract class FirebaseServiceBase<T>

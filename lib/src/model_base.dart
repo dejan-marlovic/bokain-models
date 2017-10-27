@@ -5,10 +5,8 @@ import 'package:fo_components/fo_components.dart' show FoModel;
 
 part 'editable_model/editable_model.dart';
 part 'editable_model/consultation.dart';
-part 'editable_model/country.dart';
 part 'editable_model/customer.dart';
 part 'editable_model/ingredient.dart';
-part 'editable_model/language.dart';
 part 'editable_model/product.dart';
 part 'editable_model/product_category.dart';
 part 'editable_model/product_routine.dart';
@@ -16,7 +14,6 @@ part 'editable_model/room.dart';
 part 'editable_model/salon.dart';
 part 'editable_model/service.dart';
 part 'editable_model/service_addon.dart';
-part 'editable_model/skin_type.dart';
 part 'editable_model/user.dart';
 part 'calendar/booking.dart';
 part 'calendar/day.dart';
