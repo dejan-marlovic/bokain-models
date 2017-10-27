@@ -2,4 +2,5 @@
 .pub/
 
 .idea/
+pubspec.yaml
 pubspec.lock
