@@ -10,20 +10,35 @@ class Consultation extends EditableModel
     areaChest = false;
     areaBack = false;
     areaOther = false;
-    rosacea = false;
-    milia = false;
-    pigmentation = false;
-    closedComedonesLevel = 0;
-    cystsLevel = 0;
-    nodulesLevel = 0;
-    pustulesLevel = 0;
-    papulesLevel = 0;
-    openComedonesLevel = 0;
-    seborrheaLevel = 0;
-    texture = "normal";
-    skinTypeId = "7"; // normal
-    productIds = new List();
+
+    symptoms = new SymptomMap(
+        openComedones: 0,
+        closedComedones: 0,
+        papules: 0,
+        pustules: 0,
+        cysts: 0,
+        nodules: 0,
+        seborrhea: 0,
+        rosacea: false,
+        milia: false,
+        pigmentation: false,
+        surfaceBloodVessels: false,
+        acneScars: false,
+        texture: "normal"
+    );
+    productRoutineRegistry = new Map();
+    skinTypeId = null;
     zones = new List();
+    imageURIs = new List(4);
+  }
+
+  @override
+  Map<String, dynamic> get encoded
+  {
+    Map<String, dynamic> data = super.encoded;
+    data["symptoms"] = symptoms.encoded;
+    data["product_routines"] = productRoutineRegistry;
+    return data;
   }
 
   @override
@@ -38,20 +53,36 @@ class Consultation extends EditableModel
     areaChest = d["area_chest"];
     areaBack = d["area_back"];
     areaOther = d["area_other"];
-    rosacea = d["rosacea"];
-    milia = d["milia"];
-    pigmentation = d["pigmentation"];
-    closedComedonesLevel = d["closed_comedones_level"];
-    cystsLevel = d["cysts_level"];
-    nodulesLevel = d["nodules_level"];
-    pustulesLevel = d["pastules_level"];
-    papulesLevel = d["papules_level"];
-    openComedonesLevel = d["open_comedones_level"];
-    seborrheaLevel = d["seborrhea_level"];
-    texture = d["texture"];
+
+    symptoms = new SymptomMap(
+        openComedones: d['symptoms']['open_comedones'],
+        closedComedones: d['symptoms']['closed_comedones'],
+        papules: d['symptoms']['papules'],
+        pustules: d['symptoms']['pustules'],
+        cysts: d['symptoms']['cysts'],
+        nodules: d['symptoms']['nodules'],
+        seborrhea: d['symptoms']['seborrhea'],
+        rosacea: d['symptoms']['rosacea'],
+        milia: d['symptoms']['milia'],
+        pigmentation: d['symptoms']['pigmentation'],
+        surfaceBloodVessels: d['symptoms']['surface_blood_vessels'],
+        acneScars: d['symptoms']['acne_scars'],
+        texture: (d['symptoms'].containsKey("texture")) ? d['symptoms']['texture'] : "normal"
+    );
+
+    productRoutineRegistry = d.containsKey('product_routines') ? d['product_routines'] : new Map();
+
     skinTypeId = d["skin_type_id"];
-    productIds = (d.containsKey("product_ids")) ? d["product_ids"] : new List();
     zones = (d.containsKey("zones")) ? d["zones"] : new List();
+
+    imageURIs = new List(4);
+    if (d.containsKey("image_uris"))
+    {
+      for (int i = 0; i < d["image_uris"].length; i++)
+      {
+        imageURIs[i] = d["image_uris"][i];
+      }
+    }
   }
 
   @override
@@ -71,22 +102,12 @@ class Consultation extends EditableModel
   bool get areaChest => _data["area_chest"];
   bool get areaBack => _data["area_back"];
   bool get areaOther => _data["area_other"];
-  int get openComedonesLevel => _data["open_comedones_level"];
-  int get closedComedonesLevel => _data["closed_comedones_level"];
-  int get cystsLevel => _data["cysts_level"];
-  int get nodulesLevel => _data["nodules_level"];
-  int get papulesLevel => _data["papules_level"];
-  int get pustulesLevel =>_data["pustules_level"];
-  int get seborrheaLevel => _data["seborrhea_level"];
-  bool get rosacea => _data["rosacea"];
-  bool get milia => _data["milia"];
-  bool get pigmentation => _data["pigmentation"];
-  bool get surfaceBloodVessels => _data["surface_blood_vessels"];
-  bool get acneScars => _data["acne_scars"];
   String get texture => _data["texture"];
   String get skinTypeId => _data["skin_type_id"];
-  List<String> get productIds => _data["product_ids"];
+
+  List<String> get productIds => productRoutineRegistry.keys.toList();
   List<String> get zones => _data["zones"];
+  List<String> get imageURIs => _data["image_uris"];
 
   void set customerId(String value) { _data["customer_id"] = value; }
   void set salonId(String value) { _data["salon_id"] = value; }
@@ -97,20 +118,18 @@ class Consultation extends EditableModel
   void set areaChest(bool value) { _data["area_chest"] = value; }
   void set areaBack(bool value) { _data["area_back"] = value; }
   void set areaOther(bool value) { _data["area_other"] = value; }
-  void set openComedonesLevel(int value) { _data["open_comedones_level"] = value; }
-  void set closedComedonesLevel(int value) { _data["closed_comedones_level"] = value; }
-  void set cystsLevel(int value) { _data["cysts_level"] = value; }
-  void set nodulesLevel(int value) { _data["nodules_level"] = value; }
-  void set papulesLevel(int value) { _data["papules_level"] = value; }
-  void set pustulesLevel(int value) { _data["pustules_level"] = value; }
-  void set seborrheaLevel(int value) { _data["seborrhea_level"] = value; }
-  void set rosacea(bool value) { _data["rosacea"] = value; }
-  void set milia(bool value) { _data["milia"] = value; }
-  void set pigmentation(bool value) { _data["pigmentation"] = value; }
-  void set surfaceBloodVessels(bool value) { _data["surface_blood_vessels"] = value; }
-  void set acneScars(bool value) { _data["acne_scars"] = value; }
-  void set texture(String value) { _data["texture"] = value; } /* dry, normal, oily */
-  void set productIds(List<String> value)  { _data["product_ids"] = value; }
-  void set zones(List<String> value) { _data["zones"] = value; }
   void set skinTypeId(String value) { _data["skin_type_id"] = value; }
+  void set zones(List<String> value) { _data["zones"] = value; }
+  void set imageURIs(List<String> value) { _data["image_uris"] = value; }
+  void set productIds(List<String> value)
+  {
+    productRoutineRegistry.keys.where((id) => !value.contains(id)).toList(growable: false).forEach(productRoutineRegistry.remove);
+    for (String id in value)
+    {
+      if (!productRoutineRegistry.containsKey(id)) productRoutineRegistry[id] = null;
+    }
+  }
+
+  Map<String, String> productRoutineRegistry;
+  SymptomMap symptoms;
 }

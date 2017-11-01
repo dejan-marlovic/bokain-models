@@ -2,6 +2,7 @@ library model_base;
 import 'dart:math';
 import 'dart:convert';
 import 'package:fo_components/fo_components.dart' show FoModel;
+import 'static_model/skin_type.dart';
 
 part 'editable_model/editable_model.dart';
 part 'editable_model/consultation.dart';

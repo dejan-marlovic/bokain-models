@@ -34,9 +34,14 @@ abstract class FirebaseServiceBase<T>
     if (_q != null)
     {
       print("CANCELLING STREAM $_name");
-      _onStreamChildAddedListener.cancel();
-      _onStreamChildChangedListener.cancel();
-      _onStreamChildRemovedListener.cancel();
+      _onStreamChildAddedListener?.cancel();
+      _onStreamChildChangedListener?.cancel();
+      _onStreamChildRemovedListener?.cancel();
+
+      _onStreamChildAddedListener = null;
+      _onStreamChildChangedListener = null;
+      _onStreamChildRemovedListener = null;
+
       _q = null;
     }
   }

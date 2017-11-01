@@ -18,6 +18,7 @@ class ProductRoutine extends EditableModel
   ProductRoutine.decode(String id, Map<String, dynamic> d) : super.decode(id, d)
   {
     name = d["name"];
+    productId = d["product_id"];
     state = d["state"];
     dailyRoutineMorning = d["daily_routine_morning"];
     dailyRoutineMidDay = d["daily_routine_mid_day"];
@@ -55,6 +56,7 @@ class ProductRoutine extends EditableModel
   String toString() => name;
 
   String get name => _data["name"];
+  String get productId => _data["product_id"];
   String get state => _data["state"]; // 'daily' / 'weekly'
   String get dailyRoutineMorning => _data["daily_routine_morning"];
   String get dailyRoutineMidDay => _data["daily_routine_mid_day"];
@@ -64,6 +66,7 @@ class ProductRoutine extends EditableModel
   String get strDayStep => dayStep.toString();
 
   void set name(String value) { _data["name"] = value; }
+  void set productId(String value) { _data["product_id"] = value; }
   void set state(String value) { _data["state"] = value; }
   void set dailyRoutineMorning(String value) { _data["daily_routine_morning"] = value; }
   void set dailyRoutineMidDay(String value) { _data["daily_routine_mid_day"] = value; }
