@@ -97,8 +97,11 @@ class StartupDay
     return output;
   }
 
-  String get strDurationMinutes => (duration == null) ? null : duration.inMinutes.toString();
-  void set strDurationMinutes(String value) { try { duration = new Duration(minutes: int.parse(value)); } on FormatException catch(e, s) { print(e); print(s); } }
+//  String get strDurationMinutes => (duration == null) ? null : duration.inMinutes.toString();
+//  void set strDurationMinutes(String value) { try { duration = new Duration(minutes: int.parse(value)); } on FormatException catch(e, s) { print(e); print(s); } }
+
+  int get durationMinutes => duration == null ? 0 : duration.inMinutes;
+  void set durationMinutes(int value) { duration = new Duration(minutes: value); }
 
   bool active = false;
   bool night;

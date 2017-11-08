@@ -21,6 +21,7 @@ part 'salon_service.dart';
 part 'service_service.dart';
 part 'service_addon_service.dart';
 part 'user_service.dart';
+part 'webshop_content_service.dart';
 
 abstract class FirebaseServiceBase<T>
 {
@@ -484,6 +485,12 @@ abstract class FirebaseServiceBase<T>
 
   T _onChildAdded(String key, Map<String, dynamic> data)
   {
+    if (streaming)
+    {
+      _loading = true;
+      new Timer(const Duration(milliseconds: 200), () => _loading = false);
+    }
+
     T t = createModelInstance(key, data);
     ModelBase model = t as ModelBase;
 
@@ -495,6 +502,12 @@ abstract class FirebaseServiceBase<T>
 
   T _onChildChanged(String key, Map<String, dynamic> data)
   {
+    if (streaming)
+    {
+      _loading = true;
+      new Timer(const Duration(milliseconds: 200), () => _loading = false);
+    }
+
     T t = createModelInstance(key, data);
     ModelBase model = t as ModelBase;
     _cachedModels[model.id] = t;
@@ -505,6 +518,12 @@ abstract class FirebaseServiceBase<T>
 
   String _onChildRemoved(String key)
   {
+    if (streaming)
+    {
+      _loading = true;
+      new Timer(const Duration(milliseconds: 200), () => _loading = false);
+    }
+
     _cachedModels.remove(key);
     _onChildRemovedController.add(key);
     return key;

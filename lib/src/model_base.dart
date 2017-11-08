@@ -16,6 +16,7 @@ part 'editable_model/salon.dart';
 part 'editable_model/service.dart';
 part 'editable_model/service_addon.dart';
 part 'editable_model/user.dart';
+part 'editable_model/webshop_content.dart';
 part 'calendar/booking.dart';
 part 'calendar/day.dart';
 part 'calendar/increment.dart';

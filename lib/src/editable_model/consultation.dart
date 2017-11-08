@@ -19,7 +19,7 @@ class Consultation extends EditableModel
         cysts: 0,
         nodules: 0,
         seborrhea: 0,
-        rosacea: false,
+        rosacea: 0,
         milia: false,
         pigmentation: false,
         surfaceBloodVessels: false,
@@ -102,7 +102,6 @@ class Consultation extends EditableModel
   bool get areaChest => _data["area_chest"];
   bool get areaBack => _data["area_back"];
   bool get areaOther => _data["area_other"];
-  String get texture => _data["texture"];
   String get skinTypeId => _data["skin_type_id"];
 
   List<String> get productIds => productRoutineRegistry.keys.toList();

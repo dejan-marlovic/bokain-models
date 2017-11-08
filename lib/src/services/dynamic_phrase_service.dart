@@ -32,7 +32,7 @@ class DynamicPhraseService
   /**
    * Return phrases from the stream buffer
    */
-  Map<String, String> getPhrases(String category, String key) => _streamedData.containsKey(category) && _streamedData[category].containsKey(key) ? _streamedData[category][key] : key;
+  Map<String, String> getPhrases(String category, String key) => _streamedData.containsKey(category) && _streamedData[category].containsKey(key) ? _streamedData[category][key] : null;
 
   /**
    * Fetch phrases from the server

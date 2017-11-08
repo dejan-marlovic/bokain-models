@@ -29,7 +29,6 @@ class SymptomMap
       this.texture = null
   });
 
-
   @override
   bool operator == (dynamic other)
   {
@@ -88,7 +87,7 @@ class SymptomMap
   int cysts;
   int nodules;
   int seborrhea;
-  bool rosacea;
+  int rosacea;
   bool milia;
   bool pigmentation;
   bool surfaceBloodVessels;
