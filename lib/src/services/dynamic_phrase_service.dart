@@ -75,6 +75,8 @@ class DynamicPhraseService
    */
   Map<String, Map<String, Map<String, String>>> _streamedData = new Map();
 
+  Map<String, Map<String, Map<String, String>>> get streamedData => _streamedData;
+
   fb.Query _q;
   StreamSubscription<fb.QueryEvent> _childAddedListener;
   StreamSubscription<fb.QueryEvent> _childChangedListener;
