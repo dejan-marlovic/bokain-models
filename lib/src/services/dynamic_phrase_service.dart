@@ -18,14 +18,12 @@ class DynamicPhraseService
 
     _childAddedListener = _q.onChildAdded.listen((fb.QueryEvent qe)
     {
-      Map<String, Map<String, Map<String, String>>> data = qe.snapshot.val();
-      _streamedData[data.keys.first] = data.values.first;
+      _streamedData = qe.snapshot.val();
     });
 
     _childChangedListener = _q.onChildChanged.listen((fb.QueryEvent qe)
     {
-      Map<String, Map<String, Map<String, String>>> data = qe.snapshot.val();
-      _streamedData[data.keys.first] = data.values.first;
+      _streamedData = qe.snapshot.val();
     });
   }
 
