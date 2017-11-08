@@ -15,7 +15,6 @@ class Customer extends EditableModel
 
     language = "1"; /// Swedish
     country = "1";  /// Sweden
-    skinType = "7"; /// Normal
 
     bookingIds = new List();
     journalEntryIds = new List();
@@ -66,7 +65,6 @@ class Customer extends EditableModel
   String get phone => _data["phone"];
   String get postalCode => _data["postal_code"];
   String get language => _data["language"];
-  String get skinType => _data["skin_type"];
   String get socialNumber => _data["social_number"];
   String get street => _data["street"];
   String get password => _data["password"];
@@ -90,7 +88,6 @@ class Customer extends EditableModel
   void set phone(String value) { _data["phone"] = value; }
   void set postalCode(String value) { _data["postal_code"] = value; }
   void set language(String value) { _data["language"] = value; }
-  void set skinType(String value) { _data["skin_type"] = value; }
   void set socialNumber(String value) { _data["social_number"] = value; }
   void set street(String value) { _data["street"] = value; }
   void set password(String value) { _data["password"] = value; }
