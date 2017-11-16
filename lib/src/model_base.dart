@@ -15,6 +15,7 @@ part 'editable_model/room.dart';
 part 'editable_model/salon.dart';
 part 'editable_model/service.dart';
 part 'editable_model/service_addon.dart';
+part 'editable_model/settings.dart';
 part 'editable_model/user.dart';
 part 'editable_model/webshop_content.dart';
 part 'calendar/booking.dart';
@@ -39,7 +40,7 @@ abstract class ModelBase extends FoModel
   ModelBase.decode(String id, Map<String, dynamic> d) : super(id)
   {
     _data = new Map();
-    created = DateTime.parse(d["created"]);
+    created = (d.containsKey("created")) ? DateTime.parse(d["created"]) : new DateTime.now();
     addedBy = d["added_by"];
     d.remove("created");
     d.remove("added_by");

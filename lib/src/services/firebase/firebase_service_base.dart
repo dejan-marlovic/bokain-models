@@ -20,6 +20,7 @@ part 'product_routine_service.dart';
 part 'salon_service.dart';
 part 'service_service.dart';
 part 'service_addon_service.dart';
+part 'settings_service.dart';
 part 'user_service.dart';
 part 'webshop_content_service.dart';
 

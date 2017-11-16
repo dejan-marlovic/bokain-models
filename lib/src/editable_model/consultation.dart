@@ -26,7 +26,6 @@ class Consultation extends EditableModel
         acneScars: false,
         texture: "normal"
     );
-    productRoutineRegistry = new Map();
     skinTypeId = null;
     zones = new List();
     imageURIs = new List(4);
@@ -37,7 +36,13 @@ class Consultation extends EditableModel
   {
     Map<String, dynamic> data = super.encoded;
     data["symptoms"] = symptoms.encoded;
-    data["product_routines"] = productRoutineRegistry;
+    data["product_routines"] = new Map();
+    for (ProductRoutinePair pair in productRoutinePairs)
+    {
+      data["product_routines"][pair.productId] = pair.productRoutineId;
+    }
+
+
     return data;
   }
 
@@ -70,7 +75,7 @@ class Consultation extends EditableModel
         texture: (d['symptoms'].containsKey("texture")) ? d['symptoms']['texture'] : "normal"
     );
 
-    productRoutineRegistry = d.containsKey('product_routines') ? d['product_routines'] : new Map();
+    if (d.containsKey("product_routines")) productRoutinePairs = (d["product_routines"].keys).map((key) => new ProductRoutinePair(key, d["product_routines"][key])).toList();
 
     skinTypeId = d["skin_type_id"];
     zones = (d.containsKey("zones")) ? d["zones"] : new List();
@@ -104,7 +109,7 @@ class Consultation extends EditableModel
   bool get areaOther => _data["area_other"];
   String get skinTypeId => _data["skin_type_id"];
 
-  List<String> get productIds => productRoutineRegistry.keys.toList();
+  List<String> get productIds => productRoutinePairs.map((p) => p.productId).toList(growable: false);
   List<String> get zones => _data["zones"];
   List<String> get imageURIs => _data["image_uris"];
 
@@ -122,13 +127,17 @@ class Consultation extends EditableModel
   void set imageURIs(List<String> value) { _data["image_uris"] = value; }
   void set productIds(List<String> value)
   {
-    productRoutineRegistry.keys.where((id) => !value.contains(id)).toList(growable: false).forEach(productRoutineRegistry.remove);
-    for (String id in value)
+    productRoutinePairs.removeWhere((pair) => !value.contains(pair.productId));
+
+    for (String product_id in value)
     {
-      if (!productRoutineRegistry.containsKey(id)) productRoutineRegistry[id] = null;
+      if (productRoutinePairs.firstWhere((pair) => pair.productId == product_id, orElse: () => null) == null)
+      {
+        productRoutinePairs.add(new ProductRoutinePair(product_id, null));
+      }
     }
   }
 
-  Map<String, String> productRoutineRegistry;
+  List<ProductRoutinePair> productRoutinePairs = new List();
   SymptomMap symptoms;
 }

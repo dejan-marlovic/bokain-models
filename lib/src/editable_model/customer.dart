@@ -31,6 +31,9 @@ class Customer extends EditableModel
       _data[key] = d[key];
     }
 
+    if (!_data.containsKey("country")) country = "1";
+    if (!_data.containsKey("language")) language = "1";
+
     if (bookingIds == null) bookingIds = new List();
     if (journalEntryIds == null) journalEntryIds = new List();
   }
@@ -73,6 +76,14 @@ class Customer extends EditableModel
   List<String> get bookingIds => _data["booking_ids"];
   List<String> get journalEntryIds => _data["journal_entry_ids"];
 
+  /**
+   * Temp for importing
+   */
+  String get afterImageUrl => _data["after_image_url"];
+  String get beforeImageUrl => _data["before_image_url"];
+  String get customerId => _data["customer_id"];
+
+
   void set age(int value) { _data["age"] = value; }
   void set belongsTo(String value) { _data["belongs_to"] = value; }
   void set commentsExternal(String value) { _data["comments_external"] = value; }
@@ -95,4 +106,11 @@ class Customer extends EditableModel
   void set strAge(String value) { try { age = int.parse(value); } on FormatException catch (e, s) { print(e); print(s); } }
   void set bookingIds(List<String> value) { _data["booking_ids"] = value; }
   void set journalEntryIds(List<String> value) { _data["journal_entry_ids"] = value; }
+
+  /**
+   * Temp for importing
+   */
+  void set afterImageUrl(String value) { _data["after_image_url"] = value; }
+  void set beforeImageUrl(String value) { _data["before_image_url"] = value; }
+  void set customerId(String value) { _data["customer_id"] = value; }
 }

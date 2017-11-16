@@ -29,9 +29,9 @@ class Product extends EditableModel
     subProductIds = data.containsKey("sub_product_ids") ? data["sub_product_ids"] : new List();
     productRoutineIds = data.containsKey("product_routine_ids") ? data["product_routine_ids"] : new List();
 
-    priceEUR = (data["price_eur"] as num).toDouble();
-    priceSEK = (data["price_sek"] as num).toDouble();
-    priceUSD = (data["price_usd"] as num).toDouble();
+    priceEUR = (data["price_eur"] as num);
+    priceSEK = (data["price_sek"] as num);
+    priceUSD = (data["price_usd"] as num);
 
     productCategoryId = data["product_category_id"];
     searchRank = data["search_rank"];
@@ -70,9 +70,9 @@ class Product extends EditableModel
   List<String> get relatedProductIds => _data["related_product_ids"];
   List<String> get subProductIds => _data["sub_product_ids"];
   List<String> get productRoutineIds => _data["product_routine_ids"];
-  double get priceEUR => _data["price_eur"];
-  double get priceSEK => _data["price_sek"];
-  double get priceUSD => _data["price_usd"];
+  num get priceEUR => _data["price_eur"];
+  num get priceSEK => _data["price_sek"];
+  num get priceUSD => _data["price_usd"];
   String get productCategoryId => _data["product_category_id"];
   int get searchRank => _data["search_rank"];
   int get score => _data["score"];
@@ -102,9 +102,9 @@ class Product extends EditableModel
   void set relatedProductIds(List<String> value) { _data["related_product_ids"] = value; }
   void set subProductIds(List<String> value) { _data["sub_product_ids"] = value; }
   void set productRoutineIds(List<String> value) { _data["product_routine_ids"] = value; }
-  void set priceEUR(double value) { _data["price_eur"] = value; }
-  void set priceSEK(double value) { _data["price_sek"] = value; }
-  void set priceUSD(double value) { _data["price_usd"] = value; }
+  void set priceEUR(num value) { _data["price_eur"] = value; }
+  void set priceSEK(num value) { _data["price_sek"] = value; }
+  void set priceUSD(num value) { _data["price_usd"] = value; }
   void set productCategoryId(String value) { _data["product_category_id"] = value; }
   void set searchRank(int value) { _data["search_rank"] = value; }
   void set stock(int value) { _data["stock"] = value; }
@@ -115,9 +115,9 @@ class Product extends EditableModel
   void set volume(int value) { _data["volume"] = value; }   // Ml
   void set weight(int value) { _data["weight"] = value; }   // Grams
   void set strBuyPriceSEK(String value) { try { buyPriceSEK = int.parse(value); } on FormatException catch(e) { print(e); }}
-  void set strPriceEUR(String value) { try { priceEUR = double.parse(value); } on FormatException catch(e) { print(e); }}
-  void set strPriceSEK(String value) { try { priceSEK = double.parse(value); } on FormatException catch(e) { print(e); }}
-  void set strPriceUSD(String value) { try { priceUSD = double.parse(value); } on FormatException catch(e) { print(e); }}
+  void set strPriceEUR(String value) { try { priceEUR = num.parse(value); } on FormatException catch(e) { print(e); }}
+  void set strPriceSEK(String value) { try { priceSEK = num.parse(value); } on FormatException catch(e) { print(e); }}
+  void set strPriceUSD(String value) { try { priceUSD = num.parse(value); } on FormatException catch(e) { print(e); }}
   void set strScore(String value) { try { score = int.parse(value); } on FormatException catch(e) { print(e); }}
   void set strSearchRank(String value) { try { searchRank = int.parse(value); } on FormatException catch(e) { print(e); }}
   void set strStock(String value) { try { stock = int.parse(value); } on FormatException catch(e) { print(e); }}
