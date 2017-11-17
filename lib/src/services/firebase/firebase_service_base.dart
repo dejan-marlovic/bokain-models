@@ -238,7 +238,7 @@ abstract class FirebaseServiceBase<T>
 
       ModelBase model = t as ModelBase;
 
-      model.created = new DateTime.now();
+      if (model.created == null) model.created = new DateTime.now();
       model.addedBy = firebase.auth().currentUser.uid;
 
       await _validateUniqueFields(t);
