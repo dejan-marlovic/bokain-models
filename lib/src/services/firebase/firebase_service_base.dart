@@ -2,7 +2,7 @@ library firebase_service;
 
 import 'dart:async';
 import 'dart:html' as dom show HttpRequest;
-import 'dart:convert' show JSON;
+import 'dart:convert';
 import 'dart:math' show Random;
 import 'package:angular/angular.dart';
 import 'package:firebase/firebase.dart' as firebase;
@@ -338,7 +338,7 @@ abstract class FirebaseServiceBase<T>
       ModelBase model = t as ModelBase;
       for (UniqueField field in _uniqueFields)
       {
-        await _db.ref(field.indexTableName).child(model.data[field.propertyName]).remove();
+        await _db.ref(field.indexTableName).child(_sanitizeKey(model.data[field.propertyName])).remove();
       }
 
       /**
@@ -481,7 +481,7 @@ abstract class FirebaseServiceBase<T>
   
   String _sanitizeKey(String value)
   {
-    return (value).replaceAll(".", "%2E").replaceAll("\$", "%24").replaceAll("#", "%23").replaceAll("[", "%5B").replaceAll("]", "%5D").replaceAll("/", "2F");
+    return value.replaceAll(".", "%2E").replaceAll("\$", "%24").replaceAll("#", "%23").replaceAll("[", "%5B").replaceAll("]", "%5D").replaceAll("/", "2F");
   }
 
   T _onChildAdded(String key, Map<String, dynamic> data)
