@@ -8,7 +8,7 @@ class FirebaseQueryParams
 {
   const FirebaseQueryParams(
       {
-        this.limitTo = 100,
+        this.limitTo = 1000000,
         this.limitDirection = QUERY_LIMIT_DIRECTION.ASC,
         this.searchProperty = null,
         this.searchValue = null,
