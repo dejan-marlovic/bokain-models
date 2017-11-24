@@ -27,6 +27,31 @@ class CustomerService extends FirebaseServiceBase<Customer>
     _loading = false;
   }
 
+  Future removeDuplicates() async
+  {
+    List<String> removeIds = new List();
+
+    for (Customer customer in cachedModels.values)
+    {
+      List<Customer> matches = new List.from(cachedModels.values.where((c) => c.email == customer.email));
+      if (matches.length > 1)
+      {
+        for (int i = 1; i < matches.length; i++)
+        {
+          if (!removeIds.contains(matches[i].id)) removeIds.add(matches[i].id);
+        }
+      }
+    }
+
+    for (String id in removeIds)
+    {
+      await remove(id);
+      print("REMOVED customer ${id}");
+    }
+
+
+  }
+
   Future<Map<String, String>> fetchDetails(String social_number) async
   {
     _loading = true;

@@ -47,6 +47,7 @@ class Customer extends EditableModel
     table["phone"] = phone;
     table["social_number"] = socialNumber;
     table["status"] = status;
+    table["created"] = ModelBase.timestampFormat(created);
     return table;
   }
 

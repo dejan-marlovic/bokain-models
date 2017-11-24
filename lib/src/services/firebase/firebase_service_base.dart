@@ -338,7 +338,8 @@ abstract class FirebaseServiceBase<T>
       ModelBase model = t as ModelBase;
       for (UniqueField field in _uniqueFields)
       {
-        await _db.ref(field.indexTableName).child(_sanitizeKey(model.data[field.propertyName])).remove();
+        String key = _sanitizeKey(model.data[field.propertyName]);
+        if (key != null) await _db.ref(field.indexTableName).child(key).remove();
       }
 
       /**
@@ -481,6 +482,7 @@ abstract class FirebaseServiceBase<T>
   
   String _sanitizeKey(String value)
   {
+    if (value == null) return null;
     return value.replaceAll(".", "%2E").replaceAll("\$", "%24").replaceAll("#", "%23").replaceAll("[", "%5B").replaceAll("]", "%5D").replaceAll("/", "2F");
   }
 
