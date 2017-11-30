@@ -33,15 +33,11 @@ class Consultation extends EditableModel
     /**
      * Survey data
      */
-    hasPokeHabits = null;
-    isStressed = null;
-    hasInsomnia = null;
-    doesWorkout = null;
-    isClimateSensitive = null;
     touchingObjects = new List();
     pokeHabitsHow = new List();
     pokeHabitsConsciously = new List();
     pokeHabitsUnconsciously = new List();
+    stressCauses = new List();
   }
 
   @override
@@ -104,15 +100,26 @@ class Consultation extends EditableModel
     /**
      * Survey data
      */
-    hasPokeHabits = d.containsKey("has_poke_habits") ? d["has_poke_habits"] : null;
-    isStressed = d.containsKey("is_stressed") ? d["is_stressed"] : null;
-    hasInsomnia = d.containsKey("has_insomnia") ? d["has_insomnia"] : null;
-    doesWorkout = d.containsKey("does_workout") ? d["does_worksout"] : null;
-    isClimateSensitive = d.containsKey("is_climate_sensitive") ? d["is_climate_sensitive"] : null;
-    touchingObjects = d.containsKey("touching_objects") ? d["touching_objects"] : new List();
+    hasPokeHabits = d["has_poke_habits"];
+    pokeHabitsFrequency = d["poke_habits_frequency"];
     pokeHabitsHow = d.containsKey("poke_habits_how") ? d["poke_habits_how"] : new List();
+    pokeHabitsResult = d["poke_habits_result"];
     pokeHabitsConsciously = d.containsKey("poke_habits_consciously") ? d["poke_habits_consciously"] : new List();
+    pokeHabitsConsciouslyOther = d["poke_habits_consciously_other"];
     pokeHabitsUnconsciously = d.containsKey("poke_habits_unconsciously") ? d["poke_habits_unconsciously"] : new List();
+    pokeHabitsUnconsciouslyOther = d["poke_habits_unconsciously_other"];
+    isStressed = d["is_stressed"];
+    stressCauses = d.containsKey("stress_causes") ? d["stress_causes"] : new List();
+    hasInsomnia = d["has_insomnia"];
+    hasInsomniaHoursSleep = d["has_insomnia_hours_sleep"];
+    hasInsomniaBedtime = d["has_insomnia_bedtime"];
+    hasInsomniaTimeRise = d["has_insomnia_time_rise"];
+    doesExercise = d["does_exercise"];
+    doesExerciseDescription = d["does_exercise_description"];
+    isClimateSensitive = d["is_climate_sensitive"];
+    isClimateSensitiveDescription = d["is_climate_sensitive_description"];
+    isClimateSensitiveSunEffect = d["is_climate_sensitive_sun_effect"];
+    touchingObjects = d.containsKey("touching_objects") ? d["touching_objects"] : new List();
   }
 
   @override
@@ -172,6 +179,7 @@ class Consultation extends EditableModel
 /**
  * Survey data
  */
+  // Poke habits
   bool get hasPokeHabits => _data["has_poke_habits"];
   String get pokeHabitsFrequency => _data["poke_habits_frequency"];
   List<String> get pokeHabitsHow => _data["poke_habits_how"];
@@ -181,12 +189,31 @@ class Consultation extends EditableModel
   List<String> get pokeHabitsUnconsciously => _data["poke_habits_unconsciously"];
   String get pokeHabitsUnconsciouslyOther => _data["poke_habits_unconsciously_other"];
 
+  // Stress
   bool get isStressed => _data["is_stressed"];
-  bool get hasInsomnia => _data["has_insomnia"];
-  bool get doesWorkout => _data["does_worksout"];
-  bool get isClimateSensitive => _data["is_climate_sensitive"];
-  List<String> get touchingObjects => _data["touching_objects"];
+  List<String> get stressCauses => _data["stress_causes"];
+  String get stressCauseOther => _data["stress_cause_other"];
 
+  // Insomnia
+  bool get hasInsomnia => _data["has_insomnia"];
+  int get hasInsomniaHoursSleep => _data["has_insomnia_hours_sleep"];
+  String get hasInsomniaBedtime => _data["has_insomnia_bedtime"];
+  String get hasInsomniaTimeRise => _data["has_insomnia_time_rise"];
+
+  // Exercise
+  bool get doesExercise => _data["does_exercise"];
+  String get doesExerciseDescription => _data["does_exercise_description"];
+
+  // Climate
+  bool get isClimateSensitive => _data["is_climate_sensitive"];
+  String get isClimateSensitiveDescription => _data["is_climate_sensitive_description"];
+  String get isClimateSensitiveSunEffect => _data["is_climate_sensitive_sun_effect"];
+
+  // Touching objects
+  List<String> get touchingObjects => _data["touching_objects"];
+  String get touchingObjectsOther => _data["touching_objects_other"];
+
+  // Poke habits
   void set hasPokeHabits(bool value) { _data["has_poke_habits"] = value; }
   void set pokeHabitsFrequency(String value) { _data["poke_habits_frequency"] = value; }
   void set pokeHabitsHow(List<String> value) { _data["poke_habits_how"] = value; }
@@ -196,9 +223,27 @@ class Consultation extends EditableModel
   void set pokeHabitsUnconsciously(List<String> value) { _data["poke_habits_unconsciously"] = value; }
   void set pokeHabitsUnconsciouslyOther(String value) { _data["poke_habits_unconsciously_other"] = value; }
 
+  // Stress
   void set isStressed(bool value) { _data["is_stressed"] = value; }
+  void set stressCauses(List<String> value) { _data["stress_causes"] = value; }
+  void set stressCauseOther(String value) { _data["stress_cause_other"] = value; }
+
+  // Insomnia
   void set hasInsomnia(bool value) { _data["has_insomnia"] = value; }
-  void set doesWorkout(bool value) { _data["does_workout"] = value; }
+  void set hasInsomniaHoursSleep(int value) { _data["has_insomnia_hours_sleep"] = value; }
+  void set hasInsomniaBedtime(String value) { _data["has_insomnia_bedtime"] = value; }
+  void set hasInsomniaTimeRise(String value) { _data["has_insomnia_time_rise"] = value; }
+
+  // Exercise
+  void set doesExercise(bool value) { _data["does_exercise"] = value; }
+  void set doesExerciseDescription(String value) { _data["does_exercise_description"] = value; }
+
+  // Climate
   void set isClimateSensitive(bool value) { _data["is_climate_sensitive"] = value; }
+  void set isClimateSensitiveDescription(String value) { _data["is_climate_sensitive_description"] = value; }
+  void set isClimateSensitiveSunEffect(String value) { _data["is_climate_sensitive_sun_effect"] = value; }
+
+  // Touching objects
   void set touchingObjects(List<String> value) { _data["touching_objects"] = value; }
+  void set touchingObjectsOther(String value) { _data["touching_objects_other"] = value; }
 }
