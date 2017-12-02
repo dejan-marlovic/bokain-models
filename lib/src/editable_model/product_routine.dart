@@ -55,24 +55,24 @@ class ProductRoutine extends EditableModel
   @override
   String toString() => name;
 
-  String get name => _data["name"];
-  String get productId => _data["product_id"];
-  String get state => _data["state"]; // 'daily' / 'weekly'
-  String get dailyRoutineMorning => _data["daily_routine_morning"];
-  String get dailyRoutineMidDay => _data["daily_routine_mid_day"];
-  String get dailyRoutineEvening => _data["daily_routine_evening"];
-  String get weeklyRoutine => _data["weekly_routine"];
-  int get dayStep => _data["day_step"];
+  String get name => data["name"];
+  String get productId => data["product_id"];
+  String get state => data["state"]; // 'daily' / 'weekly'
+  String get dailyRoutineMorning => data["daily_routine_morning"];
+  String get dailyRoutineMidDay => data["daily_routine_mid_day"];
+  String get dailyRoutineEvening => data["daily_routine_evening"];
+  String get weeklyRoutine => data["weekly_routine"];
+  int get dayStep => data["day_step"];
   String get strDayStep => dayStep.toString();
 
-  void set name(String value) { _data["name"] = value; }
-  void set productId(String value) { _data["product_id"] = value; }
-  void set state(String value) { _data["state"] = value; }
-  void set dailyRoutineMorning(String value) { _data["daily_routine_morning"] = value; }
-  void set dailyRoutineMidDay(String value) { _data["daily_routine_mid_day"] = value; }
-  void set dailyRoutineEvening(String value) { _data["daily_routine_evening"] = value; }
-  void set weeklyRoutine(String value) { _data["weekly_routine"] = value; }
-  void set dayStep(int value) { _data["day_step"] = value; }
+  void set name(String value) { data["name"] = value; }
+  void set productId(String value) { data["product_id"] = value; }
+  void set state(String value) { data["state"] = value; }
+  void set dailyRoutineMorning(String value) { data["daily_routine_morning"] = value; }
+  void set dailyRoutineMidDay(String value) { data["daily_routine_mid_day"] = value; }
+  void set dailyRoutineEvening(String value) { data["daily_routine_evening"] = value; }
+  void set weeklyRoutine(String value) { data["weekly_routine"] = value; }
+  void set dayStep(int value) { data["day_step"] = value; }
   void set strDayStep(String value) { try { dayStep = int.parse(value); } on FormatException catch(e, s) { print(e); print(s); } }
   List<StartupDay> startupDays = new List(28);
 }

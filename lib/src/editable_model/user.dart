@@ -36,53 +36,43 @@ class User extends EditableModel
   @override
   User.from(User other) : super.from(other);
 
-  @override
-  Map<String, String> toTableRow()
-  {
-    Map<String, String> table = new Map();
-    table["name"] = "$firstname $lastname";
-    table["email"] = email;
-    table["phone"] = phone;
-    table["social_number"] = socialNumber;
-    table["customers"] = customerIds.length.toString();
-    return table;
-  }
+  List<String> get tableColumns => super.tableColumns..addAll(["firstname", "lastname", "email", "phone", "social_number", "customer_ids", "created"]);
 
   @override
   String toString() => "$firstname $lastname";
 
-  String get profileImageUrl => _data["profile_image_url"];
-  String get city => _data["city"];
-  String get email => _data["email"];
-  String get firstname => _data["firstname"];
-  String get lastname => _data["lastname"];
-  String get phone => _data["phone"];
-  String get postalCode => _data["postal_code"];
-  String get socialNumber => _data["social_number"];
-  String get street => _data["street"];
-  String get password => _data["password"];
-  List<String> get customerIds => _data["customer_ids"];
-  List<String> get salonIds => _data["salon_ids"];
-  List<String> get serviceIds => _data["service_ids"];
-  List<String> get bookingIds => _data["booking_ids"];
-  num get bookingRank => _data["booking_rank"];
+  String get profileImageUrl => data["profile_image_url"];
+  String get city => data["city"];
+  String get email => data["email"];
+  String get firstname => data["firstname"];
+  String get lastname => data["lastname"];
+  String get phone => data["phone"];
+  String get postalCode => data["postal_code"];
+  String get socialNumber => data["social_number"];
+  String get street => data["street"];
+  String get password => data["password"];
+  List<String> get customerIds => data["customer_ids"];
+  List<String> get salonIds => data["salon_ids"];
+  List<String> get serviceIds => data["service_ids"];
+  List<String> get bookingIds => data["booking_ids"];
+  num get bookingRank => data["booking_rank"];
   String get strBookingRank => bookingRank.toString();
 
-  void set profileImageUrl(String value) { _data["profile_image_url"] = value; }
-  void set socialNumber(String value) { _data["social_number"] = value; }
-  void set firstname(String value) { _data["firstname"] = value; }
-  void set lastname(String value) { _data["lastname"] = value; }
-  void set password(String value) { _data["password"] = value; }
-  void set email(String value) { _data["email"] = value; }
-  void set phone(String value) { _data["phone"] = value; }
-  void set street(String value) { _data["street"] = value; }
-  void set postalCode(String value) { _data["postal_code"] = value; }
-  void set city(String value) { _data["city"] = value; }
-  void set customerIds(List<String> value) { _data["customer_ids"] = value; }
-  void set salonIds(List<String> value) { _data["salon_ids"] = value; }
-  void set serviceIds(List<String> value) { _data["service_ids"] = value; }
-  void set bookingIds(List<String> value) { _data["booking_ids"] = value; }
-  void set bookingRank(num value) { _data["booking_rank"] = value.toInt(); }
+  void set profileImageUrl(String value) { data["profile_image_url"] = value; }
+  void set socialNumber(String value) { data["social_number"] = value; }
+  void set firstname(String value) { data["firstname"] = value; }
+  void set lastname(String value) { data["lastname"] = value; }
+  void set password(String value) { data["password"] = value; }
+  void set email(String value) { data["email"] = value; }
+  void set phone(String value) { data["phone"] = value; }
+  void set street(String value) { data["street"] = value; }
+  void set postalCode(String value) { data["postal_code"] = value; }
+  void set city(String value) { data["city"] = value; }
+  void set customerIds(List<String> value) { data["customer_ids"] = value; }
+  void set salonIds(List<String> value) { data["salon_ids"] = value; }
+  void set serviceIds(List<String> value) { data["service_ids"] = value; }
+  void set bookingIds(List<String> value) { data["booking_ids"] = value; }
+  void set bookingRank(num value) { data["booking_rank"] = value.toInt(); }
   void set strBookingRank(String value)
   {
     try { bookingRank = int.parse(value); }

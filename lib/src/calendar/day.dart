@@ -45,14 +45,9 @@ class Day extends ModelBase
     return d;
   }
 
-  @override
-  Map<String, String> toTableRow()
-  {
-    Map<String, String> table = new Map();
-    table["date"] = ModelBase.timestampFormat(startTime);
-    table["salon_id"] = salonId;
-    return table;
-  }
+ // @override
+  //List<String> get tableColumns => ["start_time", "salon_id"];
+
 
   bool isPopulated(String salon_id, String user_id)
   {
@@ -70,15 +65,15 @@ class Day extends ModelBase
   bool isSameDateAs(DateTime dt) => (startTime.year == dt.year && startTime.month == dt.month && startTime.day == dt.day);
   bool containsUser(String user_id) => increments.firstWhere((i) => i.userStates.containsKey(user_id), orElse: () => null) != null;
 
-  List<Increment> get increments => _data["increments"];
-  DateTime get startTime => _data["start_time"];
-  DateTime get endTime => _data["end_time"];
+  List<Increment> get increments => data["increments"];
+  DateTime get startTime => data["start_time"];
+  DateTime get endTime => data["end_time"];
   String get strStartTime => ModelBase.timestampFormat(startTime);
   String get strEndTime => ModelBase.timestampFormat(endTime);
-  String get salonId => _data["salon_id"];
+  String get salonId => data["salon_id"];
 
-  void set increments(List<Increment> value) { _data["increments"] = value; }
-  void set startTime(DateTime value) { _data["start_time"] = value; }
-  void set endTime(DateTime value) { _data["end_time"] = value; }
-  void set salonId(String value) { _data["salon_id"] = value; }
+  void set increments(List<Increment> value) { data["increments"] = value; }
+  void set startTime(DateTime value) { data["start_time"] = value; }
+  void set endTime(DateTime value) { data["end_time"] = value; }
+  void set salonId(String value) { data["salon_id"] = value; }
 }

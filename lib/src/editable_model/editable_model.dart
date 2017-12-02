@@ -20,6 +20,9 @@ abstract class EditableModel extends ModelBase
   @override
   Map<String, dynamic> get encoded => super.encoded;
 
-  String get status => _data["status"];  // active, frozen, disabled
-  void set status(String value) { _data["status"] = value; }
+  @override
+  List<String> get tableColumns => super.tableColumns..addAll(["status"]);
+
+  String get status => data["status"];  // active, frozen, disabled
+  void set status(String value) { data["status"] = value; }
 }

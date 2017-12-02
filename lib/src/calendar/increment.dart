@@ -31,24 +31,16 @@ class Increment extends ModelBase
     return output;
   }
 
-  @override
-  Map<String, String> toTableRow()
-  {
-    Map<String, String> table = new Map();
-    table["date"] = ModelBase.timestampFormat(startTime);
-    return table;
-  }
-
-  Map<String, dynamic> _data = new Map();
-  DateTime get startTime => _data["start_time"];
-  DateTime get endTime => _data["end_time"];
-  Map<String, UserState> get userStates => _data["user_states"];
+  Map<String, dynamic> data = new Map();
+  DateTime get startTime => data["start_time"];
+  DateTime get endTime => data["end_time"];
+  Map<String, UserState> get userStates => data["user_states"];
 
   bool get isPopulated => userStates.values.firstWhere((us) => us.state != null, orElse: () => null) != null;
 
-  void set startTime(DateTime value) { _data["start_time"] = value; }
-  void set endTime(DateTime value) { _data["end_time"] = value; }
-  void set userStates(Map<String, UserState> value) { _data["user_states"] = value; }
+  void set startTime(DateTime value) { data["start_time"] = value; }
+  void set endTime(DateTime value) { data["end_time"] = value; }
+  void set userStates(Map<String, UserState> value) { data["user_states"] = value; }
 }
 
 class UserState

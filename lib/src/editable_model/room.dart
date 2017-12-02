@@ -16,24 +16,16 @@ class Room extends EditableModel
   {
     for (String key in d.keys)
     {
-      _data[key] = d[key];
+      data[key] = d[key];
     }
     if (serviceIds == null) serviceIds = new List();
   }
 
-  @override
-  Map<String, String> toTableRow()
-  {
-    Map<String, String> table = new Map();
-    table["name"] = name;
-    return table;
-  }
-
   String toString() => name;
 
-  String get name => _data["name"];
-  List<String> get serviceIds => _data["service_ids"];
+  String get name => data["name"];
+  List<String> get serviceIds => data["service_ids"];
 
-  void set name(String value) { _data["name"] = value; }
-  void set serviceIds(List<String> value) { _data["service_ids"] = value; }
+  void set name(String value) { data["name"] = value; }
+  void set serviceIds(List<String> value) { data["service_ids"] = value; }
 }

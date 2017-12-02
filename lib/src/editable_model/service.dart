@@ -35,60 +35,52 @@ class Service extends EditableModel
   }
 
   @override
-  Map<String, String> toTableRow()
-  {
-    Map<String, String> table = new Map();
-    table["name"] = name;
-    table["category"] = category;
-    table["duration_minutes"] = durationMinutes.toString();
-    table["price"] = price.toString();
-    return table;
-  }
+  List<String> get tableColumns => super.tableColumns..addAll(["name", "category", "duration_minutes", "price"]);
 
   @override
   String toString() => name;
 
-  String get name => _data["name"];
-  String get category => _data["category"];
-  String get description => _data["description"];
-  String get color => _data["color"];
+  String get name => data["name"];
+  String get category => data["category"];
+  String get description => data["description"];
+  String get color => data["color"];
   Duration get duration => new Duration(minutes: durationMinutes);
-  num get durationMinutes => _data["duration_minutes"];
+  num get durationMinutes => data["duration_minutes"];
   String get durationMinutesStr => durationMinutes.toString();
   Duration get afterMargin => new Duration(minutes: afterMarginMinutes);
-  num get afterMarginMinutes => _data["after_margin_minutes"];
+  num get afterMarginMinutes => data["after_margin_minutes"];
   String get afterMarginMinutesStr => afterMarginMinutes.toString();
-  num get price => _data["price"];
+  num get price => data["price"];
   String get priceStr => price.toString();
-  List<String> get roomIds => _data["room_ids"];
-  List<String> get userIds => _data["user_ids"];
-  List<String> get serviceAddonIds => _data["service_addon_ids"];
+  List<String> get roomIds => data["room_ids"];
+  List<String> get userIds => data["user_ids"];
+  List<String> get serviceAddonIds => data["service_addon_ids"];
 
-  void set category(String value) { _data["category"] = value; }
-  void set description(String value) { _data["description"] = value; }
-  void set name(String value) { _data["name"] = value; }
-  void set color(String value) { _data["color"] = value; }
-  void set duration(Duration value) { _data["duration_minutes"] = value.inMinutes; }
-  void set durationMinutes(num value) { _data["duration_minutes"] = value?.toInt(); }
+  void set category(String value) { data["category"] = value; }
+  void set description(String value) { data["description"] = value; }
+  void set name(String value) { data["name"] = value; }
+  void set color(String value) { data["color"] = value; }
+  void set duration(Duration value) { data["duration_minutes"] = value.inMinutes; }
+  void set durationMinutes(num value) { data["duration_minutes"] = value?.toInt(); }
   void set durationMinutesStr(String value)
   {
     try { durationMinutes = num.parse(value); }
     on FormatException catch (e) { print(e.toString()); }
   }
-  void set afterMargin(Duration value) { _data["after_margin_minutes"] = value.inMinutes; }
-  void set afterMarginMinutes(num value) { _data["after_margin_minutes"] = value?.toInt(); }
+  void set afterMargin(Duration value) { data["after_margin_minutes"] = value.inMinutes; }
+  void set afterMarginMinutes(num value) { data["after_margin_minutes"] = value?.toInt(); }
   void set afterMarginMinutesStr(String value)
   {
     try { afterMarginMinutes = num.parse(value); }
     on FormatException catch (e) { print(e.toString()); }
   }
-  void set price(num value) { _data["price"] = value?.toDouble(); }
+  void set price(num value) { data["price"] = value?.toDouble(); }
   void set priceStr(String value)
   {
     try { price = num.parse(value); }
     on FormatException catch (e) { print(e.toString()); }
   }
-  void set roomIds(List<String> value) { _data["room_ids"] = value; }
-  void set userIds(List<String> value) { _data["user_ids"] = value; }
-  void set serviceAddonIds(List<String> value) { _data["service_addon_ids"] = value; }
+  void set roomIds(List<String> value) { data["room_ids"] = value; }
+  void set userIds(List<String> value) { data["user_ids"] = value; }
+  void set serviceAddonIds(List<String> value) { data["service_addon_ids"] = value; }
 }

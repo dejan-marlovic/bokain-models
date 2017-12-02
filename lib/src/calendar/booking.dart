@@ -35,52 +35,45 @@ class Booking extends ModelBase
     cancelCode = d["cancel_code"];
   }
 
-  @override
-  Map<String, String> toTableRow()
-  {
-    Map<String, String> table = new Map();
-    table["start_time"] = ModelBase.timestampFormat(startTime);
-    table["duration_minutes"] = duration.inMinutes.toString();
-    table["noshow"] = noshow.toString();
-    table["invoice_sent"] = invoiceSent.toString();
-    return table;
-  }
 
-  DateTime get startTime => _data["start_time"];
-  DateTime get endTime => _data["end_time"];
+  @override
+  List<String> get tableColumns => ["start_time", "noshow", "invoice_sent"];
+
+  DateTime get startTime => data["start_time"];
+  DateTime get endTime => data["end_time"];
   String get strStartTime => ModelBase.timestampFormat(startTime);
   String get strEndTime => ModelBase.timestampFormat(endTime);
-  Duration get duration => _data["duration"];
-  String get customerId => _data["customer_id"];
-  String get serviceId => _data["service_id"];
-  String get userId => _data["user_id"];
-  String get roomId => _data["room_id"];
-  String get salonId => _data["salon_id"];
-  String get dayId => _data["day_id"];
-  List<String> get serviceAddonIds => _data["service_addon_ids"];
-  String get addedBy => _data["added_by"];
-  bool get noshow => _data["noshow"];
-  bool get invoiceSent => _data["invoice_sent"];
-  String get comments => _data["comments"];
-  num get totalDuration => _data["total_duration"];
-  num get totalPrice => _data["total_price"];
-  String get cancelCode => _data["cancel_code"];
+  Duration get duration => data["duration"];
+  String get customerId => data["customer_id"];
+  String get serviceId => data["service_id"];
+  String get userId => data["user_id"];
+  String get roomId => data["room_id"];
+  String get salonId => data["salon_id"];
+  String get dayId => data["day_id"];
+  List<String> get serviceAddonIds => data["service_addon_ids"];
+  String get addedBy => data["added_by"];
+  bool get noshow => data["noshow"];
+  bool get invoiceSent => data["invoice_sent"];
+  String get comments => data["comments"];
+  num get totalDuration => data["total_duration"];
+  num get totalPrice => data["total_price"];
+  String get cancelCode => data["cancel_code"];
 
-  void set startTime(DateTime value) { _data["start_time"] = value; }
-  void set endTime(DateTime value) { _data["end_time"] = value; }
-  void set duration(Duration value) { _data["duration"] = value; }
-  void set customerId(String value) { _data["customer_id"] = value; }
-  void set serviceId(String value) { _data["service_id"] = value; }
-  void set userId(String value) { _data["user_id"] = value; }
-  void set roomId(String value) { _data["room_id"] = value; }
-  void set salonId(String value) { _data["salon_id"] = value; }
-  void set dayId(String value) { _data["day_id"] = value; }
-  void set serviceAddonIds(List<String> value) { _data["service_addon_ids"] = value; }
-  void set addedBy(String value) { _data["added_by"] = value; }
-  void set noshow(bool value) { _data["noshow"] = value; }
-  void set invoiceSent(bool value) { _data["invoice_sent"] = value; }
-  void set comments(String value) { _data["comments"] = value; }
-  void set totalDuration(num value) { _data["total_duration"] = value; }
-  void set totalPrice(num value) { _data["total_price"] = value; }
-  void set cancelCode(String value) { _data["cancel_code"] = value; }
+  void set startTime(DateTime value) { data["start_time"] = value; }
+  void set endTime(DateTime value) { data["end_time"] = value; }
+  void set duration(Duration value) { data["duration"] = value; }
+  void set customerId(String value) { data["customer_id"] = value; }
+  void set serviceId(String value) { data["service_id"] = value; }
+  void set userId(String value) { data["user_id"] = value; }
+  void set roomId(String value) { data["room_id"] = value; }
+  void set salonId(String value) { data["salon_id"] = value; }
+  void set dayId(String value) { data["day_id"] = value; }
+  void set serviceAddonIds(List<String> value) { data["service_addon_ids"] = value; }
+  void set addedBy(String value) { data["added_by"] = value; }
+  void set noshow(bool value) { data["noshow"] = value; }
+  void set invoiceSent(bool value) { data["invoice_sent"] = value; }
+  void set comments(String value) { data["comments"] = value; }
+  void set totalDuration(num value) { data["total_duration"] = value; }
+  void set totalPrice(num value) { data["total_price"] = value; }
+  void set cancelCode(String value) { data["cancel_code"] = value; }
 }

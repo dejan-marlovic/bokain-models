@@ -45,43 +45,31 @@ class Product extends EditableModel
   }
 
   @override
-  Map<String, String> toTableRow()
-  {
-    Map<String, String> table = new Map();
-    table["name"] = name;
-    table["article_no"] = articleNo;
-    table["product_type"] = type;
-    table["url_name"] = urlName;
-    table["score"] = strScore;
-    table["search_rank"] = strSearchRank;
-    table["price_sek"] = strPriceSEK;
-    table["status"] = status;
-    return table;
-  }
+  List<String> get tableColumns => super.tableColumns..addAll(["name", "article_no", "product_type", "url_name", "score", "search_rank", "price_sek", "status"]);
 
   @override
   String toString() => name;
 
-  String get name => _data["name"];
-  String get articleNo => _data["article_no"];
-  int get buyPriceSEK => _data["buy_price_sek"];
-  String get imageURI => _data["image_uri"];
-  List<String> get ingredientIds => _data["ingredient_ids"];
-  List<String> get relatedProductIds => _data["related_product_ids"];
-  List<String> get subProductIds => _data["sub_product_ids"];
-  List<String> get productRoutineIds => _data["product_routine_ids"];
-  num get priceEUR => _data["price_eur"];
-  num get priceSEK => _data["price_sek"];
-  num get priceUSD => _data["price_usd"];
-  String get productCategoryId => _data["product_category_id"];
-  int get searchRank => _data["search_rank"];
-  int get score => _data["score"];
-  int get stock => _data["stock"];
-  String get type => _data["type"];
-  String get urlName => _data["url_name"];
-  int get vat => _data["vat"];
-  int get volume => _data["volume"];
-  int get weight => _data["weight"];
+  String get name => data["name"];
+  String get articleNo => data["article_no"];
+  int get buyPriceSEK => data["buy_price_sek"];
+  String get imageURI => data["image_uri"];
+  List<String> get ingredientIds => data["ingredient_ids"];
+  List<String> get relatedProductIds => data["related_product_ids"];
+  List<String> get subProductIds => data["sub_product_ids"];
+  List<String> get productRoutineIds => data["product_routine_ids"];
+  num get priceEUR => data["price_eur"];
+  num get priceSEK => data["price_sek"];
+  num get priceUSD => data["price_usd"];
+  String get productCategoryId => data["product_category_id"];
+  int get searchRank => data["search_rank"];
+  int get score => data["score"];
+  int get stock => data["stock"];
+  String get type => data["type"];
+  String get urlName => data["url_name"];
+  int get vat => data["vat"];
+  int get volume => data["volume"];
+  int get weight => data["weight"];
 
   String get strBuyPriceSEK => (buyPriceSEK == null) ? "0" : buyPriceSEK.toString();
   String get strPriceEUR => (priceEUR == null) ? "0" : priceEUR.toString();
@@ -94,26 +82,26 @@ class Product extends EditableModel
   String get strVolume => (volume == null) ? "0" : volume.toString();
   String get strWeight => (weight == null) ? "0" : weight.toString();
 
-  void set name(String value) { _data["name"] = value; }
-  void set articleNo(String value) { _data["article_no"] = value; }
-  void set buyPriceSEK(int value) { _data["buy_price_sek"] = value; }
-  void set imageURI(String value) { _data["image_uri"] = value; }
-  void set ingredientIds(List<String> value) { _data["ingredient_ids"] = value; }
-  void set relatedProductIds(List<String> value) { _data["related_product_ids"] = value; }
-  void set subProductIds(List<String> value) { _data["sub_product_ids"] = value; }
-  void set productRoutineIds(List<String> value) { _data["product_routine_ids"] = value; }
-  void set priceEUR(num value) { _data["price_eur"] = value; }
-  void set priceSEK(num value) { _data["price_sek"] = value; }
-  void set priceUSD(num value) { _data["price_usd"] = value; }
-  void set productCategoryId(String value) { _data["product_category_id"] = value; }
-  void set searchRank(int value) { _data["search_rank"] = value; }
-  void set stock(int value) { _data["stock"] = value; }
-  void set score(int value) { _data["score"] = value; }     // Score based on webshop sales, 1% tear / day
-  void set type(String value) { _data["type"] = value; }
-  void set urlName(String value) { _data["url_name"] = value; }
-  void set vat(int value) { _data["vat"] = value; }
-  void set volume(int value) { _data["volume"] = value; }   // Ml
-  void set weight(int value) { _data["weight"] = value; }   // Grams
+  void set name(String value) { data["name"] = value; }
+  void set articleNo(String value) { data["article_no"] = value; }
+  void set buyPriceSEK(int value) { data["buy_price_sek"] = value; }
+  void set imageURI(String value) { data["image_uri"] = value; }
+  void set ingredientIds(List<String> value) { data["ingredient_ids"] = value; }
+  void set relatedProductIds(List<String> value) { data["related_product_ids"] = value; }
+  void set subProductIds(List<String> value) { data["sub_product_ids"] = value; }
+  void set productRoutineIds(List<String> value) { data["product_routine_ids"] = value; }
+  void set priceEUR(num value) { data["price_eur"] = value; }
+  void set priceSEK(num value) { data["price_sek"] = value; }
+  void set priceUSD(num value) { data["price_usd"] = value; }
+  void set productCategoryId(String value) { data["product_category_id"] = value; }
+  void set searchRank(int value) { data["search_rank"] = value; }
+  void set stock(int value) { data["stock"] = value; }
+  void set score(int value) { data["score"] = value; }     // Score based on webshop sales, 1% tear / day
+  void set type(String value) { data["type"] = value; }
+  void set urlName(String value) { data["url_name"] = value; }
+  void set vat(int value) { data["vat"] = value; }
+  void set volume(int value) { data["volume"] = value; }   // Ml
+  void set weight(int value) { data["weight"] = value; }   // Grams
   void set strBuyPriceSEK(String value) { try { buyPriceSEK = int.parse(value); } on FormatException catch(e) { print(e); }}
   void set strPriceEUR(String value) { try { priceEUR = num.parse(value); } on FormatException catch(e) { print(e); }}
   void set strPriceSEK(String value) { try { priceSEK = num.parse(value); } on FormatException catch(e) { print(e); }}

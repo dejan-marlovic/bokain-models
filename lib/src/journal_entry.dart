@@ -16,7 +16,7 @@ class JournalEntry extends ModelBase
   {
     for (String key in d.keys)
     {
-      _data[key] = d[key];
+      data[key] = d[key];
     }
 
     if (commentsInternal == null) commentsInternal = "";
@@ -24,15 +24,14 @@ class JournalEntry extends ModelBase
     if (imageURIs == null) imageURIs = new List();
   }
 
-  @override
-  Map<String, String> toTableRow() => {"comments_internal":commentsInternal, "comments_external":commentsExternal};
+  List<String> get tableColumns => super.tableColumns..addAll(["comments_internal", "comments_external"]);
 
-  String get commentsExternal => _data["comments_external"];
-  String get commentsInternal => _data["comments_internal"];
-  String get customerId => _data["customer_id"];
-  List<String> get imageURIs => _data["image_uris"];
-  void set commentsExternal(String value) { _data["comments_external"] = value; }
-  void set commentsInternal(String value) { _data["comments_internal"] = value; }
-  void set customerId(String value) { _data["customer_id"] = value; }
-  void set imageURIs(List<String> value) { _data["image_uris"] = value; }
+  String get commentsExternal => data["comments_external"];
+  String get commentsInternal => data["comments_internal"];
+  String get customerId => data["customer_id"];
+  List<String> get imageURIs => data["image_uris"];
+  void set commentsExternal(String value) { data["comments_external"] = value; }
+  void set commentsInternal(String value) { data["comments_internal"] = value; }
+  void set customerId(String value) { data["customer_id"] = value; }
+  void set imageURIs(List<String> value) { data["image_uris"] = value; }
 }

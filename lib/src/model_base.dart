@@ -27,19 +27,19 @@ abstract class ModelBase extends FoModel
 {
   ModelBase(String id) : super(id)
   {
-    _data = new Map();
+    data = new Map();
     created = new DateTime.now();
   }
 
   ModelBase.from(ModelBase other) : super(other.id)
   {
-    _data = _deepCopy(other._data);
-    if (!_data.containsKey("created")) _data["created"] = new DateTime.now();
+    data = _deepCopy(other.data);
+    if (!data.containsKey("created")) data["created"] = new DateTime.now();
   }
 
   ModelBase.decode(String id, Map<String, dynamic> d) : super(id)
   {
-    _data = new Map();
+    data = new Map();
     created = (d.containsKey("created")) ? DateTime.parse(d["created"]) : new DateTime.now();
     addedBy = d["added_by"];
     d.remove("created");
@@ -51,7 +51,7 @@ abstract class ModelBase extends FoModel
     Map<String, dynamic> d = new Map();
 
     /// Auto-encode default type properties (String, num, bool, null and DateTime)
-    _data.forEach((key, value)
+    data.forEach((key, value)
     {
       if (value is String || value is num || value is bool || value == null) d[key] = value;
       else if (value is DateTime) d[key] = timestampFormat(value);
@@ -60,12 +60,11 @@ abstract class ModelBase extends FoModel
     return d;
   }
 
-  @override
-  Map<String, String> toTableRow();
+  List<String> get tableColumns => super.tableColumns..addAll(["created", "added_by"]);
 
   bool matchesKeyword(String keyword)
   {
-    for (dynamic value in _data.values)
+    for (dynamic value in data.values)
     {
       String v = null;
       if (value is String) v = value;
@@ -110,12 +109,11 @@ abstract class ModelBase extends FoModel
     return ret;
   }
 
-  Map<String, dynamic> get data => _data;
-  String get addedBy => _data["added_by"];
-  DateTime get created => _data["created"];
-  void set created(DateTime value) { _data["created"] = value; }
-  void set addedBy(String value) { _data["added_by"] = value; }
-  Map<String, dynamic> _data;
+
+  String get addedBy => data["added_by"];
+  DateTime get created => data["created"];
+  void set created(DateTime value) { data["created"] = value; }
+  void set addedBy(String value) { data["added_by"] = value; }
 
   static String timestampFormat(DateTime dt)
   {

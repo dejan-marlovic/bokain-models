@@ -123,42 +123,37 @@ class Consultation extends EditableModel
   }
 
   @override
-  Map<String, String> toTableRow()
-  {
-    Map<String, String> table = new Map();
-    table["created"] = ModelBase.timestampFormat(created);
-    return table;
-  }
+  List<String> get tableColumns => super.tableColumns..addAll(["created", "user_id"]);
 
-  String get customerId => _data["customer_id"];
-  String get salonId => _data["salon_id"];
-  String get serviceId => _data["service_id"];
-  String get userId => _data["user_id"];
-  String get description => _data["description"];
-  String get commentsInternal => _data["comments_internal"];
-  bool get areaFace => _data["area_face"];
-  bool get areaChest => _data["area_chest"];
-  bool get areaBack => _data["area_back"];
-  bool get areaOther => _data["area_other"];
-  String get skinTypeId => _data["skin_type_id"];
+  String get customerId => data["customer_id"];
+  String get salonId => data["salon_id"];
+  String get serviceId => data["service_id"];
+  String get userId => data["user_id"];
+  String get description => data["description"];
+  String get commentsInternal => data["comments_internal"];
+  bool get areaFace => data["area_face"];
+  bool get areaChest => data["area_chest"];
+  bool get areaBack => data["area_back"];
+  bool get areaOther => data["area_other"];
+  String get skinTypeId => data["skin_type_id"];
 
   List<String> get productIds => productRoutinePairs.map((p) => p.productId).toList(growable: false);
-  List<String> get zones => _data["zones"];
-  List<String> get imageURIs => _data["image_uris"];
+  List<String> get zones => data["zones"];
+  List<String> get imageURIs => data["image_uris"];
 
-  void set customerId(String value) { _data["customer_id"] = value; }
-  void set salonId(String value) { _data["salon_id"] = value; }
-  void set serviceId(String value) { _data["service_id"] = value; }
-  void set userId(String value) { _data["user_id"] = value; }
-  void set description(String value) { _data["description"] = value; }
-  void set commentsInternal(String value) { _data["comments_internal"] = value; }
-  void set areaFace(bool value) { _data["area_face"] = value; }
-  void set areaChest(bool value) { _data["area_chest"] = value; }
-  void set areaBack(bool value) { _data["area_back"] = value; }
-  void set areaOther(bool value) { _data["area_other"] = value; }
-  void set skinTypeId(String value) { _data["skin_type_id"] = value; }
-  void set zones(List<String> value) { _data["zones"] = value; }
-  void set imageURIs(List<String> value) { _data["image_uris"] = value; }
+  void set customerId(String value) { data["customer_id"] = value; }
+  void set salonId(String value) { data["salon_id"] = value; }
+  void set serviceId(String value) { data["service_id"] = value; }
+  void set userId(String value) { data["user_id"] = value; }
+  void set description(String value) { data["description"] = value; }
+  void set commentsInternal(String value) { data["comments_internal"] = value; }
+  void set areaFace(bool value) { data["area_face"] = value; }
+  void set areaChest(bool value) { data["area_chest"] = value; }
+  void set areaBack(bool value) { data["area_back"] = value; }
+  void set areaOther(bool value) { data["area_other"] = value; }
+  void set skinTypeId(String value) { data["skin_type_id"] = value; }
+  void set zones(List<String> value) { data["zones"] = value; }
+  void set imageURIs(List<String> value) { data["image_uris"] = value; }
   void set productIds(List<String> value)
   {
     productRoutinePairs.removeWhere((pair) => !value.contains(pair.productId));
@@ -180,70 +175,70 @@ class Consultation extends EditableModel
  * Survey data
  */
   // Poke habits
-  bool get hasPokeHabits => _data["has_poke_habits"];
-  String get pokeHabitsFrequency => _data["poke_habits_frequency"];
-  List<String> get pokeHabitsHow => _data["poke_habits_how"];
-  String get pokeHabitsResult => _data["poke_habits_result"];
-  List<String> get pokeHabitsConsciously => _data["poke_habits_consciously"];
-  String get pokeHabitsConsciouslyOther => _data["poke_habits_consciously_other"];
-  List<String> get pokeHabitsUnconsciously => _data["poke_habits_unconsciously"];
-  String get pokeHabitsUnconsciouslyOther => _data["poke_habits_unconsciously_other"];
+  bool get hasPokeHabits => data["has_poke_habits"];
+  String get pokeHabitsFrequency => data["poke_habits_frequency"];
+  List<String> get pokeHabitsHow => data["poke_habits_how"];
+  String get pokeHabitsResult => data["poke_habits_result"];
+  List<String> get pokeHabitsConsciously => data["poke_habits_consciously"];
+  String get pokeHabitsConsciouslyOther => data["poke_habits_consciously_other"];
+  List<String> get pokeHabitsUnconsciously => data["poke_habits_unconsciously"];
+  String get pokeHabitsUnconsciouslyOther => data["poke_habits_unconsciously_other"];
 
   // Stress
-  bool get isStressed => _data["is_stressed"];
-  List<String> get stressCauses => _data["stress_causes"];
-  String get stressCauseOther => _data["stress_cause_other"];
+  bool get isStressed => data["is_stressed"];
+  List<String> get stressCauses => data["stress_causes"];
+  String get stressCauseOther => data["stress_cause_other"];
 
   // Insomnia
-  bool get hasInsomnia => _data["has_insomnia"];
-  int get hasInsomniaHoursSleep => _data["has_insomnia_hours_sleep"];
-  String get hasInsomniaBedtime => _data["has_insomnia_bedtime"];
-  String get hasInsomniaTimeRise => _data["has_insomnia_time_rise"];
+  bool get hasInsomnia => data["has_insomnia"];
+  int get hasInsomniaHoursSleep => data["has_insomnia_hours_sleep"];
+  String get hasInsomniaBedtime => data["has_insomnia_bedtime"];
+  String get hasInsomniaTimeRise => data["has_insomnia_time_rise"];
 
   // Exercise
-  bool get doesExercise => _data["does_exercise"];
-  String get doesExerciseDescription => _data["does_exercise_description"];
+  bool get doesExercise => data["does_exercise"];
+  String get doesExerciseDescription => data["does_exercise_description"];
 
   // Climate
-  bool get isClimateSensitive => _data["is_climate_sensitive"];
-  String get isClimateSensitiveDescription => _data["is_climate_sensitive_description"];
-  String get isClimateSensitiveSunEffect => _data["is_climate_sensitive_sun_effect"];
+  bool get isClimateSensitive => data["is_climate_sensitive"];
+  String get isClimateSensitiveDescription => data["is_climate_sensitive_description"];
+  String get isClimateSensitiveSunEffect => data["is_climate_sensitive_sun_effect"];
 
   // Touching objects
-  List<String> get touchingObjects => _data["touching_objects"];
-  String get touchingObjectsOther => _data["touching_objects_other"];
+  List<String> get touchingObjects => data["touching_objects"];
+  String get touchingObjectsOther => data["touching_objects_other"];
 
   // Poke habits
-  void set hasPokeHabits(bool value) { _data["has_poke_habits"] = value; }
-  void set pokeHabitsFrequency(String value) { _data["poke_habits_frequency"] = value; }
-  void set pokeHabitsHow(List<String> value) { _data["poke_habits_how"] = value; }
-  void set pokeHabitsResult(String value) {_data["poke_habits_result"] = value; }
-  void set pokeHabitsConsciously(List<String> value) { _data["poke_habits_consciously"] = value; }
-  void set pokeHabitsConsciouslyOther(String value) { _data["poke_habits_consciously_other"] = value; }
-  void set pokeHabitsUnconsciously(List<String> value) { _data["poke_habits_unconsciously"] = value; }
-  void set pokeHabitsUnconsciouslyOther(String value) { _data["poke_habits_unconsciously_other"] = value; }
+  void set hasPokeHabits(bool value) { data["has_poke_habits"] = value; }
+  void set pokeHabitsFrequency(String value) { data["poke_habits_frequency"] = value; }
+  void set pokeHabitsHow(List<String> value) { data["poke_habits_how"] = value; }
+  void set pokeHabitsResult(String value) {data["poke_habits_result"] = value; }
+  void set pokeHabitsConsciously(List<String> value) { data["poke_habits_consciously"] = value; }
+  void set pokeHabitsConsciouslyOther(String value) { data["poke_habits_consciously_other"] = value; }
+  void set pokeHabitsUnconsciously(List<String> value) { data["poke_habits_unconsciously"] = value; }
+  void set pokeHabitsUnconsciouslyOther(String value) { data["poke_habits_unconsciously_other"] = value; }
 
   // Stress
-  void set isStressed(bool value) { _data["is_stressed"] = value; }
-  void set stressCauses(List<String> value) { _data["stress_causes"] = value; }
-  void set stressCauseOther(String value) { _data["stress_cause_other"] = value; }
+  void set isStressed(bool value) { data["is_stressed"] = value; }
+  void set stressCauses(List<String> value) { data["stress_causes"] = value; }
+  void set stressCauseOther(String value) { data["stress_cause_other"] = value; }
 
   // Insomnia
-  void set hasInsomnia(bool value) { _data["has_insomnia"] = value; }
-  void set hasInsomniaHoursSleep(int value) { _data["has_insomnia_hours_sleep"] = value; }
-  void set hasInsomniaBedtime(String value) { _data["has_insomnia_bedtime"] = value; }
-  void set hasInsomniaTimeRise(String value) { _data["has_insomnia_time_rise"] = value; }
+  void set hasInsomnia(bool value) { data["has_insomnia"] = value; }
+  void set hasInsomniaHoursSleep(int value) { data["has_insomnia_hours_sleep"] = value; }
+  void set hasInsomniaBedtime(String value) { data["has_insomnia_bedtime"] = value; }
+  void set hasInsomniaTimeRise(String value) { data["has_insomnia_time_rise"] = value; }
 
   // Exercise
-  void set doesExercise(bool value) { _data["does_exercise"] = value; }
-  void set doesExerciseDescription(String value) { _data["does_exercise_description"] = value; }
+  void set doesExercise(bool value) { data["does_exercise"] = value; }
+  void set doesExerciseDescription(String value) { data["does_exercise_description"] = value; }
 
   // Climate
-  void set isClimateSensitive(bool value) { _data["is_climate_sensitive"] = value; }
-  void set isClimateSensitiveDescription(String value) { _data["is_climate_sensitive_description"] = value; }
-  void set isClimateSensitiveSunEffect(String value) { _data["is_climate_sensitive_sun_effect"] = value; }
+  void set isClimateSensitive(bool value) { data["is_climate_sensitive"] = value; }
+  void set isClimateSensitiveDescription(String value) { data["is_climate_sensitive_description"] = value; }
+  void set isClimateSensitiveSunEffect(String value) { data["is_climate_sensitive_sun_effect"] = value; }
 
   // Touching objects
-  void set touchingObjects(List<String> value) { _data["touching_objects"] = value; }
-  void set touchingObjectsOther(String value) { _data["touching_objects_other"] = value; }
+  void set touchingObjects(List<String> value) { data["touching_objects"] = value; }
+  void set touchingObjectsOther(String value) { data["touching_objects_other"] = value; }
 }

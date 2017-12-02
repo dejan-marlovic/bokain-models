@@ -15,8 +15,8 @@ class WebshopContent extends EditableModel
   @override
   String toString() => name;
 
-  String get name => _data["name"];
-  void set name(String value) { _data["name"] = value; }
+  String get name => data["name"];
+  void set name(String value) { data["name"] = value; }
 
   final String logoUrl = "";
   final String faviconUrl = "";

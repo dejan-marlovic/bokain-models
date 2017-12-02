@@ -23,64 +23,55 @@ class Ingredient extends EditableModel
   }
 
   @override
-  Map<String, String> toTableRow()
-  {
-    Map<String, String> table = new Map();
-    table["name"] = name;
-    table["type"] = type.toString();
-    table["grade"] = grade.toString();
-    return table;
-  }
+  List<String> get tableColumns => super.tableColumns..addAll(["name", "type", "grade"]);
 
   @override
   String toString() => name;
 
-  String get name => _data["name"];
-  FoModel get type => _data["type"];
-  FoModel get grade => _data["grade"];
+  String get name => data["name"];
+  FoModel get type => data["type"];
+  FoModel get grade => data["grade"];
 
-  void set name(String value) { _data["name"] = value; }
-  void set type(FoModel value) { _data["type"] = value; }
-  void set grade(FoModel value) { _data["grade"] = value; }
+  void set name(String value) { data["name"] = value; }
+  void set type(FoModel value) { data["type"] = value; }
+  void set grade(FoModel value) { data["grade"] = value; }
 }
 
 class IngredientPhrases
 {
-  IngredientPhrases() : _data = new Map()
+  IngredientPhrases() : data = new Map()
   {
     benefits = new List();
     effects = new List();
     sideEffects = new List();
   }
 
-  IngredientPhrases.decode(this._data)
+  IngredientPhrases.decode(this.data)
   {
-    if (_data == null) _data = new Map();
+    if (data == null) data = new Map();
 
     if (benefits == null) benefits = new List();
     if (effects == null) effects = new List();
     if (sideEffects == null) sideEffects = new List();
   }
 
-  Map<String, String> get data => _data;
+  String get name => data["name"];
+  String get nameINCI => data["name_inci"];
+  String get category => data["category"];
+  List<String> get benefits => data["benefits"];
+  List<String> get effects => data["effects"];
+  List<String> get sideEffects => data["side_effects"];
+  String get origin => data["origin"];
+  String get trivia => data["trivia"];
 
-  String get name => _data["name"];
-  String get nameINCI => _data["name_inci"];
-  String get category => _data["category"];
-  List<String> get benefits => _data["benefits"];
-  List<String> get effects => _data["effects"];
-  List<String> get sideEffects => _data["side_effects"];
-  String get origin => _data["origin"];
-  String get trivia => _data["trivia"];
+  void set name(String value) { data["name"] = value; }
+  void set nameINCI(String value) { data["name_inci"] = value; }
+  void set category(String value) { data["category"] = value; }
+  void set benefits(List<String> value) { data["benefits"] = value; }
+  void set effects(List<String> value) { data["effects"] = value; }
+  void set sideEffects(List<String> value) { data["side_effects"] = value; }
+  void set origin(String value) { data["origin"] = value; }
+  void set trivia(String value) { data["trivia"] = value; }
 
-  void set name(String value) { _data["name"] = value; }
-  void set nameINCI(String value) { _data["name_inci"] = value; }
-  void set category(String value) { _data["category"] = value; }
-  void set benefits(List<String> value) { _data["benefits"] = value; }
-  void set effects(List<String> value) { _data["effects"] = value; }
-  void set sideEffects(List<String> value) { _data["side_effects"] = value; }
-  void set origin(String value) { _data["origin"] = value; }
-  void set trivia(String value) { _data["trivia"] = value; }
-
-  Map<String, dynamic> _data;
+  Map<String, dynamic> data;
 }
