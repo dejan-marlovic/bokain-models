@@ -14,17 +14,17 @@ class BillogramService extends RestfulServiceBase
   {
     /// Create or find billogram customer
     BillogramContact contact = new BillogramContact(c.email, c.phone);
-    BillogramAddress address = new BillogramAddress(c.street, c.city, c.postalCode, "SE", c.careOf);
+    BillogramAddress address = new BillogramAddress(c.street, c.city, c.postal_code, "SE", c.care_of);
 
     /// Convert social number from bokain format (YYYYMMDDXXXX => YYMMDD-XXXX)
-    String socialNumber = (c.socialNumber == null) ? null : c.socialNumber.substring(2, 8) + "-" + c.socialNumber.substring(8);
+    String socialNumber = (c.social_number == null) ? null : c.social_number.substring(2, 8) + "-" + c.social_number.substring(8);
     BillogramCustomer customer = new BillogramCustomer(socialNumber, "${c.firstname} ${c.lastname}", contact, address);
 
     customer.customerNo = await httpPOST("billogram/customer", customer.data);
 
     final DateFormat df = new DateFormat("yyyy-MM-dd 'kl 'HH:mm");
 
-    List<BillogramItem> items = services.map((s) => new BillogramItem(s.name, "Missad tid: ${df.format(b.startTime)}", s.price * 0.75)).toList(growable: false);
+    List<BillogramItem> items = services.map((s) => new BillogramItem(s.name, "Missad tid: ${df.format(b.start_time)}", s.price * 0.75)).toList(growable: false);
     BillogramBillogram billogram = new BillogramBillogram(customer, items);
 
     await httpPUT("billogram/billogram", billogram.data);

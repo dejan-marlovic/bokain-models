@@ -2,9 +2,10 @@ library model_base;
 import 'dart:math';
 import 'dart:convert';
 import 'package:fo_components/fo_components.dart' show FoModel;
+import 'package:intl/intl.dart' show DateFormat;
+import 'package:serializable/serializable.dart';
 import 'static_model/skin_type.dart';
 
-part 'editable_model/editable_model.dart';
 part 'editable_model/consultation.dart';
 part 'editable_model/customer.dart';
 part 'editable_model/ingredient.dart';
@@ -22,15 +23,24 @@ part 'calendar/booking.dart';
 part 'calendar/day.dart';
 part 'calendar/increment.dart';
 part 'journal_entry.dart';
+part 'simple_model.dart';
 
-abstract class ModelBase extends FoModel
+part 'model_base.g.dart';
+
+/*
+class ModelBase implements FoModel
 {
-  ModelBase(String id) : super(id)
+  ModelBase(this.added_by)
   {
-    data = new Map();
+    //data = new Map();
     created = new DateTime.now();
   }
 
+  DateTime created;
+  final String added_by;
+}*/
+
+  /*
   ModelBase.from(ModelBase other) : super(other.id)
   {
     data = _deepCopy(other.data);
@@ -69,7 +79,7 @@ abstract class ModelBase extends FoModel
       String v = null;
       if (value is String) v = value;
       else if (value is num) v = value.toString();
-      else if (value is DateTime) v = timestampFormat(value);
+      else if (value is DateTime) v = timestamp.format(value);
 
       if (v != null && v.toLowerCase().contains(keyword)) return true;
     }
@@ -115,14 +125,18 @@ abstract class ModelBase extends FoModel
   void set created(DateTime value) { data["created"] = value; }
   void set addedBy(String value) { data["added_by"] = value; }
 
-  static String timestampFormat(DateTime dt)
-  {
-    String y = dt.year.toString();
-    String MM = dt.month < 10 ? "0" + dt.month.toString() : dt.month.toString();
-    String dd = dt.day < 10 ? "0" + dt.day.toString() : dt.day.toString();
-    String HH = dt.hour < 10 ? "0" + dt.hour.toString() : dt.hour.toString();
-    String mm = dt.minute < 10 ? "0" + dt.minute.toString() : dt.minute.toString();
-    String ss = dt.second < 10 ? "0" + dt.second.toString() : dt.second.toString();
-    return "$y-$MM-$dd $HH:$mm:$ss";
-  }
 }
+
+String timestampFormat(DateTime dt)
+{
+  String y = dt.year.toString();
+  String MM = dt.month < 10 ? "0" + dt.month.toString() : dt.month.toString();
+  String dd = dt.day < 10 ? "0" + dt.day.toString() : dt.day.toString();
+  String HH = dt.hour < 10 ? "0" + dt.hour.toString() : dt.hour.toString();
+  String mm = dt.minute < 10 ? "0" + dt.minute.toString() : dt.minute.toString();
+  String ss = dt.second < 10 ? "0" + dt.second.toString() : dt.second.toString();
+  return "$y-$MM-$dd $HH:$mm:$ss";
+}
+  */
+
+final DateFormat timestamp = new DateFormat('y-MM-dd HH:mm:ss');

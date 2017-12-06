@@ -4,29 +4,30 @@ part of firebase_service;
 class CustomerService extends FirebaseServiceBase<Customer>
 {
   CustomerService() : super("customers",
-    [
-      new UniqueField("customers_phones", "phone", true),
-      new UniqueField("customers_emails", "email", true),
-      new UniqueField("customers_social_numbers", "social_number", false)
-    ]);
+  [
+    new UniqueField("customers_phones", "phone", true),
+    new UniqueField("customers_emails", "email", true),
+    new UniqueField("customers_social_numbers", "social_number", false)
+  ]);
 
   @override
-  Customer createModelInstance(String id, Map<String, dynamic> data) => data == null ? new Customer(id) : new Customer.decode(id, data);
+  Customer createModelInstance(Map<String, dynamic> data) => new Customer()..fromMap(data);
 
   Future patchBookings(Customer customer) async
   {
     _loading = true;
-    await _db.ref(_name).child(customer.id).child("booking_ids").set(customer.bookingIds);
+    await _db.ref(_name).child(customer.id).child("booking_ids").set(customer.booking_ids);
     _loading = false;
   }
 
   Future patchJournalEntries(Customer customer) async
   {
     _loading = true;
-    await _db.ref(_name).child(customer.id).child("journal_entry_ids").set(customer.journalEntryIds);
+    await _db.ref(_name).child(customer.id).child("journal_entry_ids").set(customer.journal_entry_ids);
     _loading = false;
   }
 
+  // TEMP
   Future removeDuplicates() async
   {
     List<String> removeIds = new List();
@@ -48,8 +49,6 @@ class CustomerService extends FirebaseServiceBase<Customer>
       await remove(id);
       print("REMOVED customer ${id}");
     }
-
-
   }
 
   Future<Map<String, String>> fetchDetails(String social_number) async

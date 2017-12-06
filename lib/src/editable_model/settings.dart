@@ -16,7 +16,7 @@ class Settings extends EditableModel
       Map<String, String> table = new Map();
       for (ProductRoutinePair pair in pairs)
       {
-        table[pair.productId] = pair.productRoutineId;
+        table[pair.product_id] = pair.productRoutineId;
       }
       spr.add(table);
     }
@@ -47,7 +47,7 @@ class Settings extends EditableModel
 
 class ProductRoutinePair
 {
-  ProductRoutinePair(this.productId, this.productRoutineId);
+  ProductRoutinePair(this.product_id, this.productRoutineId);
 
   Map<String, String> get encoded => {"product_id":productId, "product_routine_id":productRoutineId};
 

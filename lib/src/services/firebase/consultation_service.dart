@@ -6,7 +6,7 @@ class ConsultationService extends FirebaseServiceBase<Consultation>
   ConsultationService() : super("consultations");
 
   @override
-  Consultation createModelInstance(String id, Map<String, dynamic> data) => data == null ? new Consultation(id) : new Consultation.decode(id, data);
+  Consultation createModelInstance(Map<String, dynamic> data) => new Consultation()..fromMap(data);
 
   Future<String> uploadImage(String name, String base64) async
   {
@@ -27,6 +27,30 @@ class ConsultationService extends FirebaseServiceBase<Consultation>
     {
       _loading = false;
       return url;
+    }
+  }
+
+  @override
+  Map<String, dynamic> _serialize(Consultation model)
+  {
+    Map<String, dynamic> data = super._serialize(model);
+    data["symptoms"] = model.symptoms?.encoded;
+    return data;
+  }
+
+  @override
+  Consultation _deserialize(Map<String, dynamic> data)
+  {
+    try
+    {
+      data["symptoms"] = new SymptomMap.decode(data["symptoms"]);
+      return super._deserialize(data);
+    }
+    catch (e, s)
+    {
+      print(e);
+      print(s);
+      return null;
     }
   }
 

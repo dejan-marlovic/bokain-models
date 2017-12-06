@@ -11,14 +11,14 @@ class ServiceService extends FirebaseServiceBase<Service>
   Future patchUsers(Service service) async
   {
     _loading = true;
-    await _db.ref(_name).child(service.id).child("user_ids").set(service.userIds);
+    await _db.ref(_name).child(service.id).child("user_ids").set(service.user_ids);
     _loading = false;
   }
 
   Future patchServiceAddons(Service service) async
   {
     _loading = true;
-    await _db.ref(_name).child(service.id).child("service_addon_ids").set(service.serviceAddonIds);
+    await _db.ref(_name).child(service.id).child("service_addon_ids").set(service.service_addon_ids);
     _loading = false;
   }
 }

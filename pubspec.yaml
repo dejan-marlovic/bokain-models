@@ -14,9 +14,9 @@ dependencies:
   fo_components:
     path: ../../Visurus/FoComponents
   http: '^0.11.3+14'
-  #sass_builder: ^1.0.1
   vi_auth_client:
     path: ../../Visurus/ViAuthClient
+  serializable: ^0.7.1
 
 transformers:
 - angular

@@ -11,7 +11,7 @@ class ServiceAddonService extends FirebaseServiceBase<ServiceAddon>
   Future patchServices(ServiceAddon service_addon) async
   {
     _loading = true;
-    await _db.ref(_name).child(service_addon.id).child("service_ids").set(service_addon.serviceIds);
+    await _db.ref(_name).child(service_addon.id).child("service_ids").set(service_addon.service_ids);
     _loading = false;
   }
 }

@@ -35,28 +35,28 @@ class UserService extends FirebaseServiceBase<User>
   Future patchCustomers(User user) async
   {
     _loading = true;
-    await _db.ref(_name).child(user.id).child("customer_ids").set(user.customerIds);
+    await _db.ref(_name).child(user.id).child("customer_ids").set(user.customer_ids);
     _loading = false;
   }
 
   Future patchSalons(User user) async
   {
     _loading = true;
-    await _db.ref(_name).child(user.id).child("salon_ids").set(user.salonIds);
+    await _db.ref(_name).child(user.id).child("salon_ids").set(user.salon_ids);
     _loading = false;
   }
 
   Future patchServices(User user) async
   {
     _loading = true;
-    await _db.ref(_name).child(user.id).child("service_ids").set(user.serviceIds);
+    await _db.ref(_name).child(user.id).child("service_ids").set(user.service_ids);
     _loading = false;
   }
 
   Future patchBookings(User user) async
   {
     _loading = true;
-    await _db.ref(_name).child(user.id).child("booking_ids").set(user.bookingIds);
+    await _db.ref(_name).child(user.id).child("booking_ids").set(user.booking_ids);
     _loading = false;
   }
 

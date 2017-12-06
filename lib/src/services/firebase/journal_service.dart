@@ -6,7 +6,7 @@ class JournalService extends FirebaseServiceBase<JournalEntry>
   JournalService() : super("journal");
 
   @override
-  JournalEntry createModelInstance(String id, Map<String, dynamic> data) => new JournalEntry.decode(id, data);
+  JournalEntry createModelInstance(Map<String, dynamic> data) => new JournalEntry()..fromMap(data);
 
   Future<String> uploadImage(String base64) async
   {

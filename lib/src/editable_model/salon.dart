@@ -1,4 +1,4 @@
-part of model_base;
+gb  npart of model_base;
 
 class Salon extends EditableModel
 {

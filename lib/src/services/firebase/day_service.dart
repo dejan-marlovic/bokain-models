@@ -3,31 +3,33 @@ part of firebase_service;
 @Injectable()
 class DayService extends FirebaseServiceBase<Day>
 {
-  DayService() : super("days")
-  {
-    instance = instanceCounter;
-    instanceCounter++;
-  }
-
-  Day _onChildAdded(String key, Map<String, dynamic> data)
-  {
-    return super._onChildAdded(key, data);
-  }
-
-  Day _onChildChanged(String key, Map<String, dynamic> data)
-  {
-    return super._onChildChanged(key, data);
-  }
-
-  String _onChildRemoved(String key)
-  {
-    return super._onChildRemoved(key);
-  }
-
-  int instance;
+  DayService() : super("days");
 
   @override
-  Day createModelInstance(String id, Map<String, dynamic> data) => new Day.decode(id, data);
+  Day createModelInstance(Map<String, dynamic> data) => new Day()..fromMap(data);
 
-  static int instanceCounter = 0;
+  @override
+  Map<String, dynamic> _serialize(Day model)
+  {
+    Map<String, dynamic> data = super._serialize(model);
+    data["increments"] = model.increments.map((i) => i.encoded).toList(growable: false);
+    return data;
+  }
+
+  @override
+  Day _deserialize(Map<String, dynamic> data)
+  {
+    try
+    {
+      List<Map<String, dynamic>> increments = data["increments"];
+      data["increments"] = increments.map((row) => new Increment.decode(row)).toList(growable: false);
+      return super._deserialize(data);
+    }
+    catch (e, s)
+    {
+      print(e);
+      print(s);
+      return null;
+    }
+  }
 }

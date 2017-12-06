@@ -7,6 +7,7 @@ import 'dart:math' show Random;
 import 'package:angular/angular.dart';
 import 'package:firebase/firebase.dart' as firebase;
 import 'package:bokain_models/bokain_models.dart';
+import 'package:fo_components/fo_components.dart' show FoModel;
 
 part 'booking_service.dart';
 part 'consultation_service.dart';
@@ -99,7 +100,7 @@ abstract class FirebaseServiceBase<T>
       if (_cachedModels.containsKey(id)) return _onChildChanged(id, qe.snapshot.val());
       else return _onChildAdded(id, qe.snapshot.val());
     }
-    else return createModelInstance(id, qe.snapshot.val());
+    else return _deserialize(qe.snapshot.val());
   }
 
   /**
@@ -159,8 +160,7 @@ abstract class FirebaseServiceBase<T>
     {
       cancelStreaming();
       _cachedModels.clear();
-      if (data != null) for (String id in data.keys)
-        _onChildAdded(id, data[id]);
+      if (data != null) for (String id in data.keys) _onChildAdded(id, data[id]);
       _loading = false;
       return _cachedModels;
     }
@@ -168,7 +168,7 @@ abstract class FirebaseServiceBase<T>
     {
       Map<String, T> output = new Map();
       if (data != null) for (String id in data.keys)
-        output[id] = createModelInstance(id, data[id]);
+        output[id] = _deserialize(data[id]);
       _loading = false;
       return output;
     }
@@ -193,7 +193,7 @@ abstract class FirebaseServiceBase<T>
       if (_cachedModels.containsKey(id)) return _onChildChanged(id, data);
       else return _onChildAdded(id, data);
     }
-    else return createModelInstance(id, data);
+    else return _deserialize(data);
   }
 
   T get(String id)
@@ -215,15 +215,12 @@ abstract class FirebaseServiceBase<T>
 
   T getByProperty(String property, dynamic value)
   {
-    return _cachedModels.values.firstWhere((m)
-    => (m as ModelBase).data.containsKey(property) && (m as ModelBase).data[property] == value, orElse: ()
-    => null);
+    return _cachedModels.values.firstWhere((m) => (m as FoModel)[property] == value, orElse: () => null);
   }
 
   Iterable<T> getAllByPropertyAsList(String property, dynamic value)
   {
-    return _cachedModels.values.where((m)
-    => (m as ModelBase).data.containsKey(property) && (m as ModelBase).data[property] == value);
+    return _cachedModels.values.where((m) => (m as FoModel)[property] == value);
   }
 
   /**
@@ -236,19 +233,15 @@ abstract class FirebaseServiceBase<T>
     {
       _loading = true;
 
-      ModelBase model = t as ModelBase;
-
-      if (model.created == null) model.created = new DateTime.now();
-      model.addedBy = firebase.auth().currentUser.uid;
+      FoModel model = t as FoModel;
+      model.created = new DateTime.now();
+      model.added_by = firebase.auth().currentUser.uid;
 
       await _validateUniqueFields(t);
 
-      Map<String, dynamic> data = model.encoded;
-
+      Map<String, dynamic> data = _serialize(t);
       firebase.DatabaseReference ref = await _db.ref(_name).push(data).future;
-
       await _updateUniqueFields(t, ref.key, null);
-
       if (!streaming) _onChildAdded(ref.key, data);
 
       key = ref.key;
@@ -271,7 +264,7 @@ abstract class FirebaseServiceBase<T>
    */
   Future<T> set(T t) async
   {
-    ModelBase model = t as ModelBase;
+    FoModel model = t as FoModel;
 
     if (model.id == null) return null;
     try
@@ -279,13 +272,14 @@ abstract class FirebaseServiceBase<T>
       _loading = true;
       await _validateUniqueFields(t);
       T oldModel = await fetch(model.id, force: true, cache: false);
-      Map<String, dynamic> data = model.encoded;
+      Map<String, dynamic> data = _serialize(t);
       await _db.ref(_name).child(model.id).set(data);
       _updateUniqueFields(t, model.id, oldModel);
       if (!streaming) _onChildChanged(model.id, data);
     }
     catch (e, s)
     {
+      print(e);
       print(s);
       throw new Exception(e);
     }
@@ -301,24 +295,23 @@ abstract class FirebaseServiceBase<T>
    */
   Future<T> patch(T t, String property) async
   {
-    ModelBase model = t as ModelBase;
+    FoModel model = t as FoModel;
 
     if (model.id == null) return null;
     try
     {
-      await _db.ref(_name).child(model.id).child(property).set(model.data[property]);
-      if (!streaming) _onChildChanged(model.id, model.data);
+      Map<String, dynamic> data = _serialize(t);
+
+      await _db.ref(_name).child(model.id).child(property).set(data[property]);
+      if (!streaming) _onChildChanged(model.id, data);
     }
     catch (e, s)
     {
+      print(e);
       print(s);
       throw new Exception(e);
     }
-    finally
-    {
-      _loading = false;
-    }
-
+    finally { _loading = false; }
     return t;
   }
 
@@ -335,10 +328,10 @@ abstract class FirebaseServiceBase<T>
        * Remove unique indices
        */
       T t = await fetch(id, force: true, cache: false);
-      ModelBase model = t as ModelBase;
+      FoModel model = t as FoModel;
       for (UniqueField field in _uniqueFields)
       {
-        String key = _sanitizeKey(model.data[field.propertyName]);
+        String key = _sanitizeKey(model[field.propertyName]);
         if (key != null) await _db.ref(field.indexTableName).child(key).remove();
       }
 
@@ -434,11 +427,11 @@ abstract class FirebaseServiceBase<T>
 
   Future _validateUniqueFields(T t) async
   {
-    ModelBase model = t as ModelBase;
+    FoModel model = t as FoModel;
 
     for (UniqueField field in _uniqueFields)
     {
-      dynamic value = _sanitizeKey(model.data[field.propertyName].toString());
+      dynamic value = _sanitizeKey(model[field.propertyName]?.toString());
 
       /// If property is not required and value is empty, skip validation
       if (!field.required && value == "null") continue;
@@ -447,19 +440,19 @@ abstract class FirebaseServiceBase<T>
       firebase.QueryEvent event = await _db.ref(field.indexTableName).child(value).once('value');
       if (event.snapshot.exists() && (event.snapshot.val() != model.id))
       {
-        throw new StateError("An object of type $_name with unique property ${field.propertyName}: ${model.data[field.propertyName]} already exists.");
+        throw new StateError("An object of type $_name with unique property ${field.propertyName}: ${model[field.propertyName]} already exists.");
       }
     }
   }
 
   Future _updateUniqueFields(T t, String id, T old_t) async
   {
-    ModelBase model = t as ModelBase;
-    ModelBase oldModel = old_t as ModelBase;
+    FoModel model = t as FoModel;
+    FoModel oldModel = old_t as FoModel;
 
     for (UniqueField field in _uniqueFields)
     {
-      String value = _sanitizeKey(model.data[field.propertyName].toString());
+      String value = _sanitizeKey(model[field.propertyName]?.toString());
       if (!field.required && value == "null") continue;
 
       if (oldModel == null)
@@ -470,7 +463,7 @@ abstract class FirebaseServiceBase<T>
       else
       {
         /// Remove old index (if property has changed)
-        dynamic oldValue = _sanitizeKey(oldModel.data[field.propertyName]);
+        dynamic oldValue = _sanitizeKey(oldModel[field.propertyName]);
         if (oldValue != value)
         {
           await _db.ref(field.indexTableName).child(oldValue).remove();
@@ -493,11 +486,11 @@ abstract class FirebaseServiceBase<T>
       _loading = true;
       new Timer(const Duration(milliseconds: 200), () => _loading = false);
     }
+    T t = _deserialize(data);
+    FoModel model = t as FoModel;
+    model.id = key;
 
-    T t = createModelInstance(key, data);
-    ModelBase model = t as ModelBase;
-
-    _cachedModels[model.id] = t;
+    _cachedModels[key] = t;
     _onChildAddedController.add(t);
 
     return t;
@@ -511,9 +504,10 @@ abstract class FirebaseServiceBase<T>
       new Timer(const Duration(milliseconds: 200), () => _loading = false);
     }
 
-    T t = createModelInstance(key, data);
-    ModelBase model = t as ModelBase;
-    _cachedModels[model.id] = t;
+    T t = _deserialize(data);
+    FoModel model = t as FoModel;
+    model.id = key;
+    _cachedModels[key] = t;
 
     _onChildChangedController.add(t);
     return t;
@@ -532,7 +526,34 @@ abstract class FirebaseServiceBase<T>
     return key;
   }
 
-  T createModelInstance(String id, Map<String, dynamic> data);
+  T createModelInstance(Map<String, dynamic> data);
+
+  /**
+   * Override _serialize and _deserialize for complex models
+   * any model containing data which cannot be JSON encoded.
+   * Overridden methods should always start with
+   * super._serialize()/_deserialize()
+   */
+  Map<String, dynamic> _serialize(T model)
+  {
+    if (model == null) throw new ArgumentError.notNull("model");
+    Map<String, dynamic> data = (model as FoModel).toMap();
+    data["created"] = timestamp.format(data["created"]);
+    return data;
+  }
+
+  T _deserialize(Map<String, dynamic> data)
+  {
+    try
+    {
+      data["created"] = DateTime.parse(data["created"]);
+    } catch (e,s)
+    {
+      print(e);
+      print(s);
+    }
+    return createModelInstance(data);
+  }
 
   bool get loading => _loading;
 

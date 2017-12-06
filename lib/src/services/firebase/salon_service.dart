@@ -15,7 +15,7 @@ class SalonService extends FirebaseServiceBase<Salon>
   Future<String> pushRoom(Room model) async
   {
     model.created = new DateTime.now();
-    model.addedBy = firebase.auth().currentUser.uid;
+    model.added_by = firebase.auth().currentUser.uid;
     _loading = true;
     String id = await _db.ref('rooms').push(model.encoded).key;
     _loading = false;
@@ -36,14 +36,14 @@ class SalonService extends FirebaseServiceBase<Salon>
   Future patchBookings(Salon salon) async
   {
     _loading = true;
-    await _db.ref(_name).child(salon.id).child("booking_ids").set(salon.bookingIds);
+    await _db.ref(_name).child(salon.id).child("booking_ids").set(salon.booking_ids);
     _loading = false;
   }
 
   Future patchUsers(Salon salon) async
   {
     _loading = true;
-    await _db.ref(_name).child(salon.id).child("user_ids").set(salon.userIds);
+    await _db.ref(_name).child(salon.id).child("user_ids").set(salon.user_ids);
     _loading = false;
   }
 
@@ -51,10 +51,10 @@ class SalonService extends FirebaseServiceBase<Salon>
   {
     Set<String> ids = new Set();
     if (s == null) return null;
-    for (String room_id in s.roomIds)
+    for (String room_id in s.room_ids)
     {
       Room r = getRoom(room_id);
-      if (r != null && r.serviceIds != null && r.serviceIds.isNotEmpty) ids.addAll(r.serviceIds);
+      if (r != null && r.service_ids != null && r.service_ids.isNotEmpty) ids.addAll(r.service_ids);
     }
     return ids.toList(growable: false);
   }
@@ -93,7 +93,7 @@ class SalonService extends FirebaseServiceBase<Salon>
 
   Future patchRooms(Salon salon) async
   {
-    await _db.ref(_name).child(salon.id).child("room_ids").set(salon.roomIds);
+    await _db.ref(_name).child(salon.id).child("room_ids").set(salon.room_ids);
   }
 
   final firebase.StorageReference _logosRef = firebase.storage().ref("salon-logos");
