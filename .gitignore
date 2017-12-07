@@ -4,3 +4,4 @@
 .idea/
 pubspec.yaml
 pubspec.lock
+*.stackdump
