@@ -126,7 +126,12 @@ class BookingService extends FirebaseServiceBase<Booking>
   }
 
   @override
-  Booking createModelInstance(Map<String, dynamic> data) => new Booking()..fromMap(data);
+  Booking createModelInstance(Map<String, dynamic> data)
+  {
+    Booking booking = new Booking();
+    if (data != null) booking.addAll(data);
+    return booking;
+  }
 
   @override
   Map<String, dynamic> _serialize(Booking model)

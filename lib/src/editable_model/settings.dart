@@ -8,6 +8,8 @@ class Settings extends _$SettingsSerializable implements FoModel
    */
   List<List<ProductRoutinePair>> spr = new List();
 
+  int latest_cancel_booking_hours_before = 24;
+
   /**
    * FoModel fields
    */

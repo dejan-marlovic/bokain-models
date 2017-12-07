@@ -10,14 +10,20 @@ class SalonService extends FirebaseServiceBase<Salon>
   }
 
   @override
-  Salon createModelInstance(Map<String, dynamic> data) => new Salon()..fromMap(data);
+  Salon createModelInstance(Map<String, dynamic> data)
+  {
+    Salon model = new Salon();
+    if (data != null) model.addAll(data);
+    return model;
+  }
 
   Future<String> pushRoom(Room model) async
   {
     model.created = new DateTime.now();
+    model["created"] = timestamp.format(model.created);
     model.added_by = firebase.auth().currentUser.uid;
     _loading = true;
-    model.id = await _db.ref('rooms').push(model.toMap()).key;
+    model.id = (await _db.ref('rooms').push(model.toMap())).key;
     _loading = false;
     return model.id;
   }
@@ -83,12 +89,18 @@ class SalonService extends FirebaseServiceBase<Salon>
 
   void _onRoomAdded(firebase.QueryEvent e)
   {
-    _rooms[e.snapshot.key] = new Room()..fromMap(e.snapshot.val());
+    Map<String, dynamic> data = e.snapshot.val();
+    data["created"] = DateTime.parse(data["created"]);
+
+    _rooms[e.snapshot.key] = new Room()..fromMap(data);
   }
 
   void _onRoomChanged(firebase.QueryEvent e)
   {
-    _rooms[e.snapshot.key] = new Room()..fromMap(e.snapshot.val());
+    Map<String, dynamic> data = e.snapshot.val();
+    data["created"] = DateTime.parse(data["created"]);
+
+    _rooms[e.snapshot.key] = new Room()..fromMap(data);
   }
 
   Future patchRooms(Salon salon) async

@@ -28,17 +28,16 @@ class SimpleModel implements FoModel
   @override
   Map<dynamic, dynamic> toMap() => super.toMap()..addAll({"label":label});
 
+  @override
+  String toString() => label;
+
   String label;
 
-  @override
-  String id;
-
-  @override
-  DateTime created = new DateTime.now();
-
-  @override
-  String status = "active";
-
-  @override
-  String added_by = "system";
+  /**
+   * FoModel fields
+   */
+  @override String id;
+  @override DateTime created = new DateTime.now();
+  @override String status = "active";
+  @override String added_by = "system";
 }

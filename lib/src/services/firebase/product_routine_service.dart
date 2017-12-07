@@ -6,7 +6,12 @@ class ProductRoutineService extends FirebaseServiceBase<ProductRoutine>
   ProductRoutineService() : super("product_routines");
 
   @override
-  ProductRoutine createModelInstance(Map<String, dynamic> data) => new ProductRoutine()..fromMap(data);
+  ProductRoutine createModelInstance(Map<String, dynamic> data)
+  {
+    ProductRoutine model = new ProductRoutine();
+    if (data != null) model.addAll(data);
+    return model;
+  }
 
   @override
   Map<String, dynamic> _serialize(ProductRoutine model)

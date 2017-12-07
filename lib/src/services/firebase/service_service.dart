@@ -6,7 +6,12 @@ class ServiceService extends FirebaseServiceBase<Service>
   ServiceService() : super("services", [new UniqueField("services_names", "name", true)]);
 
   @override
-  Service createModelInstance(Map<String, dynamic> data) => new Service()..fromMap(data);
+  Service createModelInstance(Map<String, dynamic> data)
+  {
+    Service model = new Service();
+    if (data != null) model.addAll(data);
+    return model;
+  }
 
   Future patchUsers(Service service) async
   {

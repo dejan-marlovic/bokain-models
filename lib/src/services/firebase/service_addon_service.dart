@@ -6,7 +6,12 @@ class ServiceAddonService extends FirebaseServiceBase<ServiceAddon>
   ServiceAddonService() : super("service_addons", [new UniqueField("service_addons_names", "name", true)]);
 
   @override
-  ServiceAddon createModelInstance(Map<String, dynamic> data) => new ServiceAddon()..fromMap(data);
+  ServiceAddon createModelInstance(Map<String, dynamic> data)
+  {
+    ServiceAddon model = new ServiceAddon();
+    if (data != null) model.addAll(data);
+    return model;
+  }
 
   Future patchServices(ServiceAddon service_addon) async
   {

@@ -6,7 +6,12 @@ class ConsultationService extends FirebaseServiceBase<Consultation>
   ConsultationService() : super("consultations");
 
   @override
-  Consultation createModelInstance(Map<String, dynamic> data) => new Consultation()..fromMap(data);
+  Consultation createModelInstance(Map<String, dynamic> data)
+  {
+    Consultation model = new Consultation();
+    if (data != null) model.addAll(data);
+    return model;
+  }
 
   Future<String> uploadImage(String name, String base64) async
   {

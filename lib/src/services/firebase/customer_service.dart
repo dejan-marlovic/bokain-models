@@ -11,7 +11,12 @@ class CustomerService extends FirebaseServiceBase<Customer>
   ]);
 
   @override
-  Customer createModelInstance(Map<String, dynamic> data) => new Customer()..fromMap(data);
+  Customer createModelInstance(Map<String, dynamic> data)
+  {
+    Customer customer = new Customer();
+    if (data != null) customer.addAll(data);
+    return customer;
+  }
 
   Future patchBookings(Customer customer) async
   {

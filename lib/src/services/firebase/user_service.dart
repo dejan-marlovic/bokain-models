@@ -30,7 +30,12 @@ class UserService extends FirebaseServiceBase<User>
   }
 
   @override
-  User createModelInstance(Map<String, dynamic> data) => new User()..fromMap(data);
+  User createModelInstance(Map<String, dynamic> data)
+  {
+    User model = new User();
+    if (data != null) model.addAll(data);
+    return model;
+  }
 
   Future patchCustomers(User user) async
   {

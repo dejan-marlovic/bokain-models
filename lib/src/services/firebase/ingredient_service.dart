@@ -6,6 +6,14 @@ class IngredientService extends FirebaseServiceBase<Ingredient>
   IngredientService() : super("ingredients");
 
   @override
+  Ingredient createModelInstance(Map<String, dynamic> data)
+  {
+    Ingredient model = new Ingredient();
+    if (data != null) model.addAll(data);
+    return model;
+  }
+
+  @override
   Map<String, dynamic> _serialize(Ingredient model)
   {
     Map<String, dynamic> data = super._serialize(model);
@@ -30,7 +38,4 @@ class IngredientService extends FirebaseServiceBase<Ingredient>
       return null;
     }
   }
-
-  @override
-  Ingredient createModelInstance(Map<String, dynamic> data) => new Ingredient()..fromMap(data);
 }

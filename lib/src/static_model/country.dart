@@ -11,20 +11,24 @@ class Country implements FoModel
   String toString() => name;
 
   @override
-  Map<dynamic, dynamic> toMap() => super.toMap();
+  @override Map<dynamic, dynamic> toMap() => super.toMap()..addAll({"name":name, "iso_alpha2":iso_alpha2});
 
   @override
   operator []=(Object key, dynamic value) => throw new UnsupportedError("Operator []= is not supported on Country");
 
   @override
-  dynamic operator [](Object key) => throw new UnsupportedError("Operator [] is not supported on Country");
+  dynamic operator [](Object key)
+  {
+    switch (key)
+    {
+      case "name": return name;
+      case "iso_alpha2": return iso_alpha2;
+      default: return null;
+    }
+  }
 
-  @override
-  String status = "active";
-  @override
-  DateTime created = new DateTime.now();
-  @override
-  String id;
-  @override
-  String added_by = "system";
+  @override String status = "active";
+  @override DateTime created = new DateTime.now();
+  @override String id;
+  @override String added_by = "system";
 }

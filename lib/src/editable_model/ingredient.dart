@@ -7,20 +7,12 @@ class Ingredient extends _$IngredientSerializable implements FoModel
   SimpleModel type;
   SimpleModel grade;
 
-  @override
-  String toString() => name;
+  @override String toString() => name;
 
-  @override
-  String added_by;
-
-  @override
-  String status;
-
-  @override
-  DateTime created;
-
-  @override
-  String id;
+  @override String added_by;
+  @override String status;
+  @override DateTime created;
+  @override String id;
 }
 
 @Serializable()

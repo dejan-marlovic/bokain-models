@@ -1741,11 +1741,13 @@ abstract class _$ServiceAddonSerializable extends SerializableMap {
 
 abstract class _$SettingsSerializable extends SerializableMap {
   List<List<ProductRoutinePair>> get spr;
+  int get latest_cancel_booking_hours_before;
   String get id;
   DateTime get created;
   String get added_by;
   String get status;
   void set spr(List<List<ProductRoutinePair>> v);
+  void set latest_cancel_booking_hours_before(int v);
   void set id(String v);
   void set created(DateTime v);
   void set added_by(String v);
@@ -1757,6 +1759,8 @@ abstract class _$SettingsSerializable extends SerializableMap {
     switch (__key) {
       case 'spr':
         return spr;
+      case 'latest_cancel_booking_hours_before':
+        return latest_cancel_booking_hours_before;
       case 'id':
         return id;
       case 'created':
@@ -1778,6 +1782,9 @@ abstract class _$SettingsSerializable extends SerializableMap {
       case 'spr':
         spr = __value;
         return;
+      case 'latest_cancel_booking_hours_before':
+        latest_cancel_booking_hours_before = __value;
+        return;
       case 'id':
         id = __value;
         return;
@@ -1794,8 +1801,14 @@ abstract class _$SettingsSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Settings');
   }
 
-  Iterable<String> get keys =>
-      const ['spr', 'id', 'created', 'added_by', 'status'];
+  Iterable<String> get keys => const [
+        'spr',
+        'latest_cancel_booking_hours_before',
+        'id',
+        'created',
+        'added_by',
+        'status'
+      ];
 }
 
 abstract class _$UserSerializable extends SerializableMap {

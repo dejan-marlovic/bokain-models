@@ -6,7 +6,12 @@ class DayService extends FirebaseServiceBase<Day>
   DayService() : super("days");
 
   @override
-  Day createModelInstance(Map<String, dynamic> data) => new Day()..fromMap(data);
+  Day createModelInstance(Map<String, dynamic> data)
+  {
+    Day model = new Day();
+    if (data != null) model.addAll(data);
+    return model;
+  }
 
   @override
   Map<String, dynamic> _serialize(Day model)

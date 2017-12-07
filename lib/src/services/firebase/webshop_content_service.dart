@@ -6,5 +6,10 @@ class WebshopContentService extends FirebaseServiceBase<WebshopContent>
   WebshopContentService() : super("webshop_contents");
 
   @override
-  WebshopContent createModelInstance(Map<String, dynamic> data) => new WebshopContent()..fromMap(data);
+  WebshopContent createModelInstance(Map<String, dynamic> data)
+  {
+    WebshopContent model = new WebshopContent();
+    if (data != null) model.addAll(data);
+    return model;
+  }
 }

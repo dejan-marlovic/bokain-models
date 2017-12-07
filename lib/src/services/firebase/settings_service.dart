@@ -6,7 +6,12 @@ class SettingsService extends FirebaseServiceBase<Settings>
   SettingsService() : super("settings");
 
   @override
-  Settings createModelInstance(Map<String, dynamic> data) => new Settings()..fromMap(data);
+  Settings createModelInstance(Map<String, dynamic> data)
+  {
+    Settings model = new Settings();
+    if (data != null) model.addAll(data);
+    return model;
+  }
 
   @override
   Map<String, dynamic> _serialize(Settings model)

@@ -6,7 +6,12 @@ class ProductCategoryService extends FirebaseServiceBase<ProductCategory>
   ProductCategoryService() : super("product_categories");
 
   @override
-  ProductCategory createModelInstance(Map<String, dynamic> data) => new ProductCategory()..fromMap(data);
+  ProductCategory createModelInstance(Map<String, dynamic> data)
+  {
+    ProductCategory model = new ProductCategory();
+    if (data != null) model.addAll(data);
+    return model;
+  }
 
   Future<String> uploadImage(String article_no, String base64) async
   {
