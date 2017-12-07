@@ -35,6 +35,7 @@ class ConsultationService extends FirebaseServiceBase<Consultation>
   {
     Map<String, dynamic> data = super._serialize(model);
     data["symptoms"] = model.symptoms?.encoded;
+    data["proudct_routines"] = model.product_routines.map((pair) => pair.encoded).toList(growable: false);
     return data;
   }
 
@@ -44,6 +45,7 @@ class ConsultationService extends FirebaseServiceBase<Consultation>
     try
     {
       data["symptoms"] = new SymptomMap.decode(data["symptoms"]);
+      data["product_routines"] = (data["product_routines"] as List<Map<String, String>>).map((row) => new ProductRoutinePair.decode(row));
       return super._deserialize(data);
     }
     catch (e, s)

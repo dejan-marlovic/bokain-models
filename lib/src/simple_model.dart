@@ -1,6 +1,5 @@
 part of model_base;
 
-@Serializable()
 class SimpleModel implements FoModel
 {
   SimpleModel(this.id, this.label);

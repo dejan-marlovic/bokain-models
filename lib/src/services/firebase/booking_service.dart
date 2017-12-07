@@ -84,7 +84,7 @@ class BookingService extends FirebaseServiceBase<Booking>
     if (day != null)
     {
       DateTime iTime = new DateTime.fromMillisecondsSinceEpoch(booking.start_time.millisecondsSinceEpoch);
-      DateTime endTimeWithMargin = booking.end_time.add(service.afterMargin);
+      DateTime endTimeWithMargin = booking.end_time.add(service.after_margin);
 
       while (iTime.isBefore(endTimeWithMargin))
       {

@@ -20,8 +20,8 @@ abstract class _$ConsultationSerializable extends SerializableMap {
   String get description;
   List<String> get zones;
   List<String> get image_uris;
+  List<ProductRoutinePair> get product_routines;
   SymptomMap get symptoms;
-  Map<String, String> get product_routine_pairs;
   bool get has_poke_habits;
   String get poke_habits_frequency;
   List<String> get poke_habits_how;
@@ -61,8 +61,8 @@ abstract class _$ConsultationSerializable extends SerializableMap {
   void set description(String v);
   void set zones(List<String> v);
   void set image_uris(List<String> v);
+  void set product_routines(List<ProductRoutinePair> v);
   void set symptoms(SymptomMap v);
-  void set product_routine_pairs(Map<String, String> v);
   void set has_poke_habits(bool v);
   void set poke_habits_frequency(String v);
   void set poke_habits_how(List<String> v);
@@ -120,10 +120,10 @@ abstract class _$ConsultationSerializable extends SerializableMap {
         return zones;
       case 'image_uris':
         return image_uris;
+      case 'product_routines':
+        return product_routines;
       case 'symptoms':
         return symptoms;
-      case 'product_routine_pairs':
-        return product_routine_pairs;
       case 'has_poke_habits':
         return has_poke_habits;
       case 'poke_habits_frequency':
@@ -225,11 +225,11 @@ abstract class _$ConsultationSerializable extends SerializableMap {
       case 'image_uris':
         image_uris = __value;
         return;
+      case 'product_routines':
+        product_routines = __value;
+        return;
       case 'symptoms':
         symptoms = __value;
-        return;
-      case 'product_routine_pairs':
-        product_routine_pairs = __value;
         return;
       case 'has_poke_habits':
         has_poke_habits = __value;
@@ -327,8 +327,8 @@ abstract class _$ConsultationSerializable extends SerializableMap {
         'description',
         'zones',
         'image_uris',
+        'product_routines',
         'symptoms',
-        'product_routine_pairs',
         'has_poke_habits',
         'poke_habits_frequency',
         'poke_habits_how',
@@ -765,6 +765,7 @@ abstract class _$ProductSerializable extends SerializableMap {
   List<String> get ingredient_ids;
   List<String> get related_product_ids;
   List<String> get sub_product_ids;
+  List<String> get product_routine_ids;
   String get name;
   String get article_no;
   int get buy_price_sek;
@@ -788,6 +789,7 @@ abstract class _$ProductSerializable extends SerializableMap {
   void set ingredient_ids(List<String> v);
   void set related_product_ids(List<String> v);
   void set sub_product_ids(List<String> v);
+  void set product_routine_ids(List<String> v);
   void set name(String v);
   void set article_no(String v);
   void set buy_price_sek(int v);
@@ -819,6 +821,8 @@ abstract class _$ProductSerializable extends SerializableMap {
         return related_product_ids;
       case 'sub_product_ids':
         return sub_product_ids;
+      case 'product_routine_ids':
+        return product_routine_ids;
       case 'name':
         return name;
       case 'article_no':
@@ -877,6 +881,9 @@ abstract class _$ProductSerializable extends SerializableMap {
         return;
       case 'sub_product_ids':
         sub_product_ids = __value;
+        return;
+      case 'product_routine_ids':
+        product_routine_ids = __value;
         return;
       case 'name':
         name = __value;
@@ -946,6 +953,7 @@ abstract class _$ProductSerializable extends SerializableMap {
         'ingredient_ids',
         'related_product_ids',
         'sub_product_ids',
+        'product_routine_ids',
         'name',
         'article_no',
         'buy_price_sek',
@@ -1363,6 +1371,827 @@ abstract class _$RoomSerializable extends SerializableMap {
       const ['name', 'service_ids', 'id', 'created', 'added_by', 'status'];
 }
 
+abstract class _$SalonSerializable extends SerializableMap {
+  String get name;
+  String get email;
+  String get phone;
+  String get street;
+  String get postal_code;
+  String get city;
+  Map<String, String> get logo_uris;
+  List<String> get room_ids;
+  List<String> get user_ids;
+  List<String> get booking_ids;
+  String get id;
+  DateTime get created;
+  String get added_by;
+  String get status;
+  void set name(String v);
+  void set email(String v);
+  void set phone(String v);
+  void set street(String v);
+  void set postal_code(String v);
+  void set city(String v);
+  void set logo_uris(Map<String, String> v);
+  void set room_ids(List<String> v);
+  void set user_ids(List<String> v);
+  void set booking_ids(List<String> v);
+  void set id(String v);
+  void set created(DateTime v);
+  void set added_by(String v);
+  void set status(String v);
+  String toString();
+  Map<dynamic, dynamic> toMap();
+
+  operator [](Object __key) {
+    switch (__key) {
+      case 'name':
+        return name;
+      case 'email':
+        return email;
+      case 'phone':
+        return phone;
+      case 'street':
+        return street;
+      case 'postal_code':
+        return postal_code;
+      case 'city':
+        return city;
+      case 'logo_uris':
+        return logo_uris;
+      case 'room_ids':
+        return room_ids;
+      case 'user_ids':
+        return user_ids;
+      case 'booking_ids':
+        return booking_ids;
+      case 'id':
+        return id;
+      case 'created':
+        return created;
+      case 'added_by':
+        return added_by;
+      case 'status':
+        return status;
+      case 'toString':
+        return toString;
+      case 'toMap':
+        return toMap;
+    }
+    throwFieldNotFoundException(__key, 'Salon');
+  }
+
+  operator []=(Object __key, __value) {
+    switch (__key) {
+      case 'name':
+        name = __value;
+        return;
+      case 'email':
+        email = __value;
+        return;
+      case 'phone':
+        phone = __value;
+        return;
+      case 'street':
+        street = __value;
+        return;
+      case 'postal_code':
+        postal_code = __value;
+        return;
+      case 'city':
+        city = __value;
+        return;
+      case 'logo_uris':
+        logo_uris = __value;
+        return;
+      case 'room_ids':
+        room_ids = __value;
+        return;
+      case 'user_ids':
+        user_ids = __value;
+        return;
+      case 'booking_ids':
+        booking_ids = __value;
+        return;
+      case 'id':
+        id = __value;
+        return;
+      case 'created':
+        created = __value;
+        return;
+      case 'added_by':
+        added_by = __value;
+        return;
+      case 'status':
+        status = __value;
+        return;
+    }
+    throwFieldNotFoundException(__key, 'Salon');
+  }
+
+  Iterable<String> get keys => const [
+        'name',
+        'email',
+        'phone',
+        'street',
+        'postal_code',
+        'city',
+        'logo_uris',
+        'room_ids',
+        'user_ids',
+        'booking_ids',
+        'id',
+        'created',
+        'added_by',
+        'status'
+      ];
+}
+
+abstract class _$ServiceSerializable extends SerializableMap {
+  String get name;
+  String get category;
+  String get description;
+  String get color;
+  Duration get duration;
+  Duration get after_margin;
+  num get price;
+  List<String> get room_ids;
+  List<String> get user_ids;
+  List<String> get service_addon_ids;
+  String get id;
+  DateTime get created;
+  String get added_by;
+  String get status;
+  void set name(String v);
+  void set category(String v);
+  void set description(String v);
+  void set color(String v);
+  void set duration(Duration v);
+  void set after_margin(Duration v);
+  void set price(num v);
+  void set room_ids(List<String> v);
+  void set user_ids(List<String> v);
+  void set service_addon_ids(List<String> v);
+  void set id(String v);
+  void set created(DateTime v);
+  void set added_by(String v);
+  void set status(String v);
+  String toString();
+  Map<dynamic, dynamic> toMap();
+
+  operator [](Object __key) {
+    switch (__key) {
+      case 'name':
+        return name;
+      case 'category':
+        return category;
+      case 'description':
+        return description;
+      case 'color':
+        return color;
+      case 'duration':
+        return duration;
+      case 'after_margin':
+        return after_margin;
+      case 'price':
+        return price;
+      case 'room_ids':
+        return room_ids;
+      case 'user_ids':
+        return user_ids;
+      case 'service_addon_ids':
+        return service_addon_ids;
+      case 'id':
+        return id;
+      case 'created':
+        return created;
+      case 'added_by':
+        return added_by;
+      case 'status':
+        return status;
+      case 'toString':
+        return toString;
+      case 'toMap':
+        return toMap;
+    }
+    throwFieldNotFoundException(__key, 'Service');
+  }
+
+  operator []=(Object __key, __value) {
+    switch (__key) {
+      case 'name':
+        name = __value;
+        return;
+      case 'category':
+        category = __value;
+        return;
+      case 'description':
+        description = __value;
+        return;
+      case 'color':
+        color = __value;
+        return;
+      case 'duration':
+        duration = __value;
+        return;
+      case 'after_margin':
+        after_margin = __value;
+        return;
+      case 'price':
+        price = __value;
+        return;
+      case 'room_ids':
+        room_ids = __value;
+        return;
+      case 'user_ids':
+        user_ids = __value;
+        return;
+      case 'service_addon_ids':
+        service_addon_ids = __value;
+        return;
+      case 'id':
+        id = __value;
+        return;
+      case 'created':
+        created = __value;
+        return;
+      case 'added_by':
+        added_by = __value;
+        return;
+      case 'status':
+        status = __value;
+        return;
+    }
+    throwFieldNotFoundException(__key, 'Service');
+  }
+
+  Iterable<String> get keys => const [
+        'name',
+        'category',
+        'description',
+        'color',
+        'duration',
+        'after_margin',
+        'price',
+        'room_ids',
+        'user_ids',
+        'service_addon_ids',
+        'id',
+        'created',
+        'added_by',
+        'status'
+      ];
+}
+
+abstract class _$ServiceAddonSerializable extends SerializableMap {
+  String get description;
+  String get name;
+  num get price;
+  Duration get duration;
+  List<String> get service_ids;
+  String get id;
+  DateTime get created;
+  String get added_by;
+  String get status;
+  void set description(String v);
+  void set name(String v);
+  void set price(num v);
+  void set duration(Duration v);
+  void set service_ids(List<String> v);
+  void set id(String v);
+  void set created(DateTime v);
+  void set added_by(String v);
+  void set status(String v);
+  String toString();
+  Map<dynamic, dynamic> toMap();
+
+  operator [](Object __key) {
+    switch (__key) {
+      case 'description':
+        return description;
+      case 'name':
+        return name;
+      case 'price':
+        return price;
+      case 'duration':
+        return duration;
+      case 'service_ids':
+        return service_ids;
+      case 'id':
+        return id;
+      case 'created':
+        return created;
+      case 'added_by':
+        return added_by;
+      case 'status':
+        return status;
+      case 'toString':
+        return toString;
+      case 'toMap':
+        return toMap;
+    }
+    throwFieldNotFoundException(__key, 'ServiceAddon');
+  }
+
+  operator []=(Object __key, __value) {
+    switch (__key) {
+      case 'description':
+        description = __value;
+        return;
+      case 'name':
+        name = __value;
+        return;
+      case 'price':
+        price = __value;
+        return;
+      case 'duration':
+        duration = __value;
+        return;
+      case 'service_ids':
+        service_ids = __value;
+        return;
+      case 'id':
+        id = __value;
+        return;
+      case 'created':
+        created = __value;
+        return;
+      case 'added_by':
+        added_by = __value;
+        return;
+      case 'status':
+        status = __value;
+        return;
+    }
+    throwFieldNotFoundException(__key, 'ServiceAddon');
+  }
+
+  Iterable<String> get keys => const [
+        'description',
+        'name',
+        'price',
+        'duration',
+        'service_ids',
+        'id',
+        'created',
+        'added_by',
+        'status'
+      ];
+}
+
+abstract class _$SettingsSerializable extends SerializableMap {
+  List<List<ProductRoutinePair>> get spr;
+  String get id;
+  DateTime get created;
+  String get added_by;
+  String get status;
+  void set spr(List<List<ProductRoutinePair>> v);
+  void set id(String v);
+  void set created(DateTime v);
+  void set added_by(String v);
+  void set status(String v);
+  Map<dynamic, dynamic> toMap();
+  String toString();
+
+  operator [](Object __key) {
+    switch (__key) {
+      case 'spr':
+        return spr;
+      case 'id':
+        return id;
+      case 'created':
+        return created;
+      case 'added_by':
+        return added_by;
+      case 'status':
+        return status;
+      case 'toMap':
+        return toMap;
+      case 'toString':
+        return toString;
+    }
+    throwFieldNotFoundException(__key, 'Settings');
+  }
+
+  operator []=(Object __key, __value) {
+    switch (__key) {
+      case 'spr':
+        spr = __value;
+        return;
+      case 'id':
+        id = __value;
+        return;
+      case 'created':
+        created = __value;
+        return;
+      case 'added_by':
+        added_by = __value;
+        return;
+      case 'status':
+        status = __value;
+        return;
+    }
+    throwFieldNotFoundException(__key, 'Settings');
+  }
+
+  Iterable<String> get keys =>
+      const ['spr', 'id', 'created', 'added_by', 'status'];
+}
+
+abstract class _$UserSerializable extends SerializableMap {
+  String get profile_image_uri;
+  String get city;
+  String get email;
+  String get firstname;
+  String get lastname;
+  String get phone;
+  String get postal_code;
+  String get social_number;
+  String get street;
+  String get password;
+  int get booking_rank;
+  List<String> get customer_ids;
+  List<String> get salon_ids;
+  List<String> get service_ids;
+  List<String> get booking_ids;
+  String get id;
+  DateTime get created;
+  String get added_by;
+  String get status;
+  void set profile_image_uri(String v);
+  void set city(String v);
+  void set email(String v);
+  void set firstname(String v);
+  void set lastname(String v);
+  void set phone(String v);
+  void set postal_code(String v);
+  void set social_number(String v);
+  void set street(String v);
+  void set password(String v);
+  void set booking_rank(int v);
+  void set customer_ids(List<String> v);
+  void set salon_ids(List<String> v);
+  void set service_ids(List<String> v);
+  void set booking_ids(List<String> v);
+  void set id(String v);
+  void set created(DateTime v);
+  void set added_by(String v);
+  void set status(String v);
+  String toString();
+  Map<dynamic, dynamic> toMap();
+
+  operator [](Object __key) {
+    switch (__key) {
+      case 'profile_image_uri':
+        return profile_image_uri;
+      case 'city':
+        return city;
+      case 'email':
+        return email;
+      case 'firstname':
+        return firstname;
+      case 'lastname':
+        return lastname;
+      case 'phone':
+        return phone;
+      case 'postal_code':
+        return postal_code;
+      case 'social_number':
+        return social_number;
+      case 'street':
+        return street;
+      case 'password':
+        return password;
+      case 'booking_rank':
+        return booking_rank;
+      case 'customer_ids':
+        return customer_ids;
+      case 'salon_ids':
+        return salon_ids;
+      case 'service_ids':
+        return service_ids;
+      case 'booking_ids':
+        return booking_ids;
+      case 'id':
+        return id;
+      case 'created':
+        return created;
+      case 'added_by':
+        return added_by;
+      case 'status':
+        return status;
+      case 'toString':
+        return toString;
+      case 'toMap':
+        return toMap;
+    }
+    throwFieldNotFoundException(__key, 'User');
+  }
+
+  operator []=(Object __key, __value) {
+    switch (__key) {
+      case 'profile_image_uri':
+        profile_image_uri = __value;
+        return;
+      case 'city':
+        city = __value;
+        return;
+      case 'email':
+        email = __value;
+        return;
+      case 'firstname':
+        firstname = __value;
+        return;
+      case 'lastname':
+        lastname = __value;
+        return;
+      case 'phone':
+        phone = __value;
+        return;
+      case 'postal_code':
+        postal_code = __value;
+        return;
+      case 'social_number':
+        social_number = __value;
+        return;
+      case 'street':
+        street = __value;
+        return;
+      case 'password':
+        password = __value;
+        return;
+      case 'booking_rank':
+        booking_rank = __value;
+        return;
+      case 'customer_ids':
+        customer_ids = __value;
+        return;
+      case 'salon_ids':
+        salon_ids = __value;
+        return;
+      case 'service_ids':
+        service_ids = __value;
+        return;
+      case 'booking_ids':
+        booking_ids = __value;
+        return;
+      case 'id':
+        id = __value;
+        return;
+      case 'created':
+        created = __value;
+        return;
+      case 'added_by':
+        added_by = __value;
+        return;
+      case 'status':
+        status = __value;
+        return;
+    }
+    throwFieldNotFoundException(__key, 'User');
+  }
+
+  Iterable<String> get keys => const [
+        'profile_image_uri',
+        'city',
+        'email',
+        'firstname',
+        'lastname',
+        'phone',
+        'postal_code',
+        'social_number',
+        'street',
+        'password',
+        'booking_rank',
+        'customer_ids',
+        'salon_ids',
+        'service_ids',
+        'booking_ids',
+        'id',
+        'created',
+        'added_by',
+        'status'
+      ];
+}
+
+abstract class _$WebshopContentSerializable extends SerializableMap {
+  String get name;
+  String get logo_uri;
+  String get favicon_uri;
+  String get id;
+  DateTime get created;
+  String get added_by;
+  String get status;
+  void set name(String v);
+  void set logo_uri(String v);
+  void set favicon_uri(String v);
+  void set id(String v);
+  void set created(DateTime v);
+  void set added_by(String v);
+  void set status(String v);
+  String toString();
+  Map<dynamic, dynamic> toMap();
+
+  operator [](Object __key) {
+    switch (__key) {
+      case 'name':
+        return name;
+      case 'logo_uri':
+        return logo_uri;
+      case 'favicon_uri':
+        return favicon_uri;
+      case 'id':
+        return id;
+      case 'created':
+        return created;
+      case 'added_by':
+        return added_by;
+      case 'status':
+        return status;
+      case 'toString':
+        return toString;
+      case 'toMap':
+        return toMap;
+    }
+    throwFieldNotFoundException(__key, 'WebshopContent');
+  }
+
+  operator []=(Object __key, __value) {
+    switch (__key) {
+      case 'name':
+        name = __value;
+        return;
+      case 'logo_uri':
+        logo_uri = __value;
+        return;
+      case 'favicon_uri':
+        favicon_uri = __value;
+        return;
+      case 'id':
+        id = __value;
+        return;
+      case 'created':
+        created = __value;
+        return;
+      case 'added_by':
+        added_by = __value;
+        return;
+      case 'status':
+        status = __value;
+        return;
+    }
+    throwFieldNotFoundException(__key, 'WebshopContent');
+  }
+
+  Iterable<String> get keys => const [
+        'name',
+        'logo_uri',
+        'favicon_uri',
+        'id',
+        'created',
+        'added_by',
+        'status'
+      ];
+}
+
+abstract class _$WebshopContentPhrasesSerializable extends SerializableMap {
+  String get title;
+  String get meta_description;
+  String get meta_keywords;
+  String get frontpage_header;
+  String get frontpage_text;
+  String get about_header;
+  String get about_text;
+  String get customer_service_header;
+  String get customerServiceText;
+  String get faq_header;
+  String get faq_text;
+  String get skin_consultation_header;
+  String get skin_consultation_text;
+  String get standard_terms_header;
+  String get standard_terms_text;
+  void set title(String v);
+  void set meta_description(String v);
+  void set meta_keywords(String v);
+  void set frontpage_header(String v);
+  void set frontpage_text(String v);
+  void set about_header(String v);
+  void set about_text(String v);
+  void set customer_service_header(String v);
+  void set customerServiceText(String v);
+  void set faq_header(String v);
+  void set faq_text(String v);
+  void set skin_consultation_header(String v);
+  void set skin_consultation_text(String v);
+  void set standard_terms_header(String v);
+  void set standard_terms_text(String v);
+
+  operator [](Object __key) {
+    switch (__key) {
+      case 'title':
+        return title;
+      case 'meta_description':
+        return meta_description;
+      case 'meta_keywords':
+        return meta_keywords;
+      case 'frontpage_header':
+        return frontpage_header;
+      case 'frontpage_text':
+        return frontpage_text;
+      case 'about_header':
+        return about_header;
+      case 'about_text':
+        return about_text;
+      case 'customer_service_header':
+        return customer_service_header;
+      case 'customerServiceText':
+        return customerServiceText;
+      case 'faq_header':
+        return faq_header;
+      case 'faq_text':
+        return faq_text;
+      case 'skin_consultation_header':
+        return skin_consultation_header;
+      case 'skin_consultation_text':
+        return skin_consultation_text;
+      case 'standard_terms_header':
+        return standard_terms_header;
+      case 'standard_terms_text':
+        return standard_terms_text;
+    }
+    throwFieldNotFoundException(__key, 'WebshopContentPhrases');
+  }
+
+  operator []=(Object __key, __value) {
+    switch (__key) {
+      case 'title':
+        title = __value;
+        return;
+      case 'meta_description':
+        meta_description = __value;
+        return;
+      case 'meta_keywords':
+        meta_keywords = __value;
+        return;
+      case 'frontpage_header':
+        frontpage_header = __value;
+        return;
+      case 'frontpage_text':
+        frontpage_text = __value;
+        return;
+      case 'about_header':
+        about_header = __value;
+        return;
+      case 'about_text':
+        about_text = __value;
+        return;
+      case 'customer_service_header':
+        customer_service_header = __value;
+        return;
+      case 'customerServiceText':
+        customerServiceText = __value;
+        return;
+      case 'faq_header':
+        faq_header = __value;
+        return;
+      case 'faq_text':
+        faq_text = __value;
+        return;
+      case 'skin_consultation_header':
+        skin_consultation_header = __value;
+        return;
+      case 'skin_consultation_text':
+        skin_consultation_text = __value;
+        return;
+      case 'standard_terms_header':
+        standard_terms_header = __value;
+        return;
+      case 'standard_terms_text':
+        standard_terms_text = __value;
+        return;
+    }
+    throwFieldNotFoundException(__key, 'WebshopContentPhrases');
+  }
+
+  Iterable<String> get keys => const [
+        'title',
+        'meta_description',
+        'meta_keywords',
+        'frontpage_header',
+        'frontpage_text',
+        'about_header',
+        'about_text',
+        'customer_service_header',
+        'customerServiceText',
+        'faq_header',
+        'faq_text',
+        'skin_consultation_header',
+        'skin_consultation_text',
+        'standard_terms_header',
+        'standard_terms_text'
+      ];
+}
+
 abstract class _$BookingSerializable extends SerializableMap {
   DateTime get start_time;
   DateTime get end_time;
@@ -1727,63 +2556,4 @@ abstract class _$JournalEntrySerializable extends SerializableMap {
         'created',
         'status'
       ];
-}
-
-abstract class _$SimpleModelSerializable extends SerializableMap {
-  String get label;
-  String get id;
-  DateTime get created;
-  String get status;
-  String get added_by;
-  void set label(String v);
-  void set id(String v);
-  void set created(DateTime v);
-  void set status(String v);
-  void set added_by(String v);
-  Map<dynamic, dynamic> toMap();
-  String toString();
-
-  operator [](Object __key) {
-    switch (__key) {
-      case 'label':
-        return label;
-      case 'id':
-        return id;
-      case 'created':
-        return created;
-      case 'status':
-        return status;
-      case 'added_by':
-        return added_by;
-      case 'toMap':
-        return toMap;
-      case 'toString':
-        return toString;
-    }
-    throwFieldNotFoundException(__key, 'SimpleModel');
-  }
-
-  operator []=(Object __key, __value) {
-    switch (__key) {
-      case 'label':
-        label = __value;
-        return;
-      case 'id':
-        id = __value;
-        return;
-      case 'created':
-        created = __value;
-        return;
-      case 'status':
-        status = __value;
-        return;
-      case 'added_by':
-        added_by = __value;
-        return;
-    }
-    throwFieldNotFoundException(__key, 'SimpleModel');
-  }
-
-  Iterable<String> get keys =>
-      const ['label', 'id', 'created', 'status', 'added_by'];
 }

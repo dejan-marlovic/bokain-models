@@ -47,10 +47,10 @@ class Customer extends _$CustomerSerializable implements FoModel
   /**
    * FoModel fields
    */
-  String id;
-  DateTime created;
-  String added_by;
-  String status;
+  @override String id;
+  @override DateTime created;
+  @override String added_by;
+  @override String status;
 
   @override
   String toString() => email;

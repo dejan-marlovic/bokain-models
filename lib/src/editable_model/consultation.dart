@@ -16,6 +16,7 @@ class Consultation extends _$ConsultationSerializable implements FoModel
   String description;
   List<String> zones = new List();
   List<String> image_uris = new List(4);
+  List<ProductRoutinePair> product_routines = new List();
 
   SymptomMap symptoms = new SymptomMap
   (
@@ -34,13 +35,10 @@ class Consultation extends _$ConsultationSerializable implements FoModel
     texture: "normal"
   );
 
-  // TODO fix this(?)
-  Map<String, String> product_routine_pairs = new Map();
-
   /**
    * Survey data
    */
-  // Poke habits
+  /// Poke habits
   bool has_poke_habits;
   String poke_habits_frequency;
   List<String> poke_habits_how = new List();
@@ -50,27 +48,27 @@ class Consultation extends _$ConsultationSerializable implements FoModel
   List<String> poke_habits_unconsciously = new List();
   String poke_habits_unconsciously_other;
 
-  // Stress
+  /// Stress
   bool is_stressed;
   List<String> stress_causes = new List();
   String stress_causes_other;
 
-  // Insomnia
+  /// Insomnia
   bool has_insomnia;
   int has_insomnia_hours_sleep;
   String has_insomnia_bedtime;
   String has_insomnia_time_rise;
 
-  // Exercise
+  /// Exercise
   bool does_exercise;
   String does_exercise_description;
 
-  // Climate
+  /// Climate
   bool is_climate_sensitive;
   String is_climate_sensitive_description;
   String is_climate_sensitive_sun_effect;
 
-  // Touching objects
+  /// Touching objects
   List<String> touching_objects = new List();
   String touching_objects_other;
 
@@ -81,5 +79,4 @@ class Consultation extends _$ConsultationSerializable implements FoModel
   @override DateTime created;
   @override String added_by;
   @override String status;
-
 }

@@ -10,16 +10,16 @@ class SalonService extends FirebaseServiceBase<Salon>
   }
 
   @override
-  Salon createModelInstance(String id, Map<String, dynamic> data) => data == null ? new Salon(id) : new Salon.decode(id, data);
+  Salon createModelInstance(Map<String, dynamic> data) => new Salon()..fromMap(data);
 
   Future<String> pushRoom(Room model) async
   {
     model.created = new DateTime.now();
     model.added_by = firebase.auth().currentUser.uid;
     _loading = true;
-    String id = await _db.ref('rooms').push(model.encoded).key;
+    model.id = await _db.ref('rooms').push(model.toMap()).key;
     _loading = false;
-    return id;
+    return model.id;
   }
 
   Room getRoom(String id) => _rooms.containsKey(id) ? _rooms[id] : null;
@@ -29,7 +29,7 @@ class SalonService extends FirebaseServiceBase<Salon>
   Future setRoom(String id) async
   {
     _loading = true;
-    await _db.ref('rooms').child(id).set(getRoom(id).encoded);
+    await _db.ref('rooms').child(id).set(getRoom(id).toMap());
     _loading = false;
   }
 
@@ -83,12 +83,12 @@ class SalonService extends FirebaseServiceBase<Salon>
 
   void _onRoomAdded(firebase.QueryEvent e)
   {
-    _rooms[e.snapshot.key] = new Room.decode(e.snapshot.key, e.snapshot.val());
+    _rooms[e.snapshot.key] = new Room()..fromMap(e.snapshot.val());
   }
 
   void _onRoomChanged(firebase.QueryEvent e)
   {
-    _rooms[e.snapshot.key] = new Room.decode(e.snapshot.key, e.snapshot.val());
+    _rooms[e.snapshot.key] = new Room()..fromMap(e.snapshot.val());
   }
 
   Future patchRooms(Salon salon) async

@@ -6,6 +6,7 @@ class Product extends _$ProductSerializable implements FoModel
   List<String> ingredient_ids = new List();
   List<String> related_product_ids = new List();
   List<String> sub_product_ids = new List();
+  List<String> product_routine_ids = new List();
 
   String name;
   String article_no;
