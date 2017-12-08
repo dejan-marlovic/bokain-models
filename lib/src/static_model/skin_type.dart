@@ -1,21 +1,41 @@
 import 'package:fo_components/fo_components.dart';
 import 'dart:convert';
 
-class SkinType extends FoModel
+class SkinType implements FoModel
 {
-  SkinType(String id, String name, this.symptomsRegistry) : super(id, name)
-  {
-  }
+  SkinType(this.id, this.label, this.symptomsRegistry);
 
+  final String label;
   final List<SymptomMap> symptomsRegistry;
+
+  @override
+  String id;
+
+  @override
+  String status = "active";
+
+  @override
+  DateTime created = new DateTime.now();
+
+  @override
+  String added_by = "system";
+
+  @override
+  Map<dynamic, dynamic> toMap() => super.toMap();
+
+  @override
+  operator []=(Object key, dynamic value) => throw new UnsupportedError("Operator []= is not supported on SkinType");
+
+  @override
+  dynamic operator [](Object key) => throw new UnsupportedError("Operator []= is not supported on SkinType");
 }
 
 class SymptomMap
 {
   SymptomMap
   ({
-      this.openComedones = null,
-      this.closedComedones = null,
+      this.open_comedones = null,
+      this.closed_comedones = null,
       this.papules = null,
       this.pustules = null,
       this.cysts = null,
@@ -24,18 +44,35 @@ class SymptomMap
       this.rosacea = null,
       this.milia = null,
       this.pigmentation = null,
-      this.surfaceBloodVessels = null,
-      this.acneScars = null,
+      this.surface_blood_vessels = null,
+      this.acne_scars = null,
       this.texture = null
   });
+
+  SymptomMap.decode(Map<String, dynamic> data)
+  {
+    open_comedones = data["open_comedones"];
+    closed_comedones = data["closed_comedones"];
+    papules = data["papules"];
+    pustules = data["pustules"];
+    cysts = data["cysts"];
+    nodules = data["nodules"];
+    seborrhea = data["seborrhea"];
+    rosacea = data["rosacea"];
+    milia = data["milia"];
+    pigmentation = data["pigmentation"];
+    surface_blood_vessels = data["surface_blood_vessels"];
+    acne_scars = data["acne_scars"];
+    texture = data["texture"];
+  }
 
   @override
   bool operator == (dynamic other)
   {
     return
       other is SymptomMap &&
-      openComedones == other.openComedones &&
-      closedComedones == other.closedComedones &&
+      open_comedones == other.open_comedones &&
+      closed_comedones == other.closed_comedones &&
       papules == other.papules &&
       pustules == other.pustules &&
       cysts == other.cysts &&
@@ -44,8 +81,8 @@ class SymptomMap
       rosacea == other.rosacea &&
       milia == other.milia &&
       pigmentation == other.pigmentation &&
-      surfaceBloodVessels == other.surfaceBloodVessels &&
-      acneScars == other.acneScars &&
+      surface_blood_vessels == other.surface_blood_vessels &&
+      acne_scars == other.acne_scars &&
       texture == other.texture;
   }
 
@@ -61,8 +98,8 @@ class SymptomMap
   {
     return
     {
-      "open_comedones" : openComedones,
-      "closed_comedones" : closedComedones,
+      "open_comedones" : open_comedones,
+      "closed_comedones" : closed_comedones,
       "papules" : papules,
       "pustules" : pustules,
       "cysts" : cysts,
@@ -71,8 +108,8 @@ class SymptomMap
       "rosacea" : rosacea,
       "milia" : milia,
       "pigmentation" : pigmentation,
-      "surface_blood_vessels" : surfaceBloodVessels,
-      "acne_scars" : acneScars,
+      "surface_blood_vessels" : surface_blood_vessels,
+      "acne_scars" : acne_scars,
       "texture" : texture
     };
   }
@@ -80,8 +117,8 @@ class SymptomMap
   @override
   int get hashCode => JSON.encode(encoded).hashCode;
 
-  int openComedones;
-  int closedComedones;
+  int open_comedones;
+  int closed_comedones;
   int papules;
   int pustules;
   int cysts;
@@ -90,7 +127,7 @@ class SymptomMap
   int rosacea;
   bool milia;
   bool pigmentation;
-  bool surfaceBloodVessels;
-  bool acneScars;
+  bool surface_blood_vessels;
+  bool acne_scars;
   String texture;
 }

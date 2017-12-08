@@ -3,10 +3,15 @@ part of firebase_service;
 @Injectable()
 class ProductService extends FirebaseServiceBase<Product>
 {
-  ProductService() : super("products"); /*1, [new UniqueField("products_article_nos", "article_no", true), new UniqueField("products_url_names", "url_name", true)]*/
+  ProductService() : super("products");
 
   @override
-  Product createModelInstance(String id, Map<String, dynamic> data) => data == null ? new Product(id) : new Product.decode(id, data);
+  Product createModelInstance(Map<String, dynamic> data)
+  {
+    Product model = new Product();
+    if (data != null) model.addAll(data);
+    return model;
+  }
 
   Future<String> uploadImage(String article_no, String base64) async
   {

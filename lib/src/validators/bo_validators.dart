@@ -1,17 +1,16 @@
 import 'package:angular_forms/angular_forms.dart';
 import 'package:fo_components/fo_components.dart';
-import '../model_base.dart';
 import '../services/firebase/firebase_service_base.dart';
 
 class BoValidators
 {
-  static ValidatorFn unique(String property, String error_phrase, FirebaseServiceBase service, EditableModel model)
+  static ValidatorFn unique(String property, String error_phrase, FirebaseServiceBase service, FoModel model)
   {
     return (AbstractControl control)
     {
       if ((FoValidators.required())(control) != null || service == null) return null;
 
-      List<EditableModel> models = service.getAllByPropertyAsList(property, control.value).toList();
+      List<FoModel> models = service.getAllByPropertyAsList(property, control.value).toList();
       if (model.id != null) models.removeWhere((m) => m.id == model.id);
       if (models.isEmpty) return null;
       else

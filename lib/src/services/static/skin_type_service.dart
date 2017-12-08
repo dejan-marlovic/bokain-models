@@ -8,12 +8,11 @@ class SkinTypeService
 
   Map<String, SkinType> get data => _data;
 
-
   final Map<String, SkinType> _data =
   {
     "1" : new SkinType("1", "acne",
     [
-      new SymptomMap(openComedones: 0, closedComedones: 0, papules: 1, seborrhea: 0, rosacea: 0),
+      new SymptomMap(open_comedones: 0, closed_comedones: 0, papules: 1, seborrhea: 0, rosacea: 0),
       new SymptomMap(papules: 2, seborrhea: 0, rosacea: 0),
       new SymptomMap(papules: 2, seborrhea: 1, rosacea: 0),
       new SymptomMap(papules: 3, rosacea: 0),
@@ -30,39 +29,39 @@ class SkinTypeService
     "2" : new SkinType("2", "combination_skin", []),
     "3" : new SkinType("3", "oily",
     [
-      new SymptomMap(openComedones: 0, closedComedones: 0, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0, milia: false, surfaceBloodVessels: false, acneScars: false, texture: "oily")
+      new SymptomMap(open_comedones: 0, closed_comedones: 0, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0, milia: false, surface_blood_vessels: false, acne_scars: false, texture: "oily")
     ]),
     "4" : new SkinType("4", "milia",
     [
-      new SymptomMap(openComedones: 0, closedComedones: 0, papules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0, milia: true, pigmentation: false, surfaceBloodVessels: false, acneScars: false)
+      new SymptomMap(open_comedones: 0, closed_comedones: 0, papules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0, milia: true, pigmentation: false, surface_blood_vessels: false, acne_scars: false)
     ]),
     "5" : new SkinType("5", "pigmentation",
     [
-      new SymptomMap(openComedones: 0, closedComedones: 0, papules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0, milia: false, pigmentation: true, surfaceBloodVessels: false, acneScars: false
+      new SymptomMap(open_comedones: 0, closed_comedones: 0, papules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0, milia: false, pigmentation: true, surface_blood_vessels: false, acne_scars: false
       )
     ]),
     "7" : new SkinType("7", "comedones",
     [
-      new SymptomMap(closedComedones: 2, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 1, rosacea: 0),
-      new SymptomMap(closedComedones: 3, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 1, rosacea: 0),
-      new SymptomMap(openComedones: 2, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 1, rosacea: 0),
-      new SymptomMap(openComedones: 3, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 1, rosacea: 0),
-      new SymptomMap(openComedones: 1, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
-      new SymptomMap(openComedones: 2, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
-      new SymptomMap(openComedones: 3, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
-      new SymptomMap(closedComedones: 1, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
-      new SymptomMap(closedComedones: 2, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
-      new SymptomMap(closedComedones: 3, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
-      new SymptomMap(closedComedones: 2, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
-      new SymptomMap(closedComedones: 3, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
-      new SymptomMap(closedComedones: 2, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 1, rosacea: 0),
-      new SymptomMap(closedComedones: 3, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 2, rosacea: 0),
-      new SymptomMap(openComedones: 1, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
-      new SymptomMap(openComedones: 2, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
-      new SymptomMap(openComedones: 3, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
-      new SymptomMap(openComedones: 2, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 1, rosacea: 0),
-      new SymptomMap(openComedones: 3, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 1, rosacea: 0),
-      new SymptomMap(openComedones: 3, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 2, rosacea: 0),
+      new SymptomMap(closed_comedones: 2, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 1, rosacea: 0),
+      new SymptomMap(closed_comedones: 3, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 1, rosacea: 0),
+      new SymptomMap(open_comedones: 2, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 1, rosacea: 0),
+      new SymptomMap(open_comedones: 3, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 1, rosacea: 0),
+      new SymptomMap(open_comedones: 1, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
+      new SymptomMap(open_comedones: 2, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
+      new SymptomMap(open_comedones: 3, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
+      new SymptomMap(closed_comedones: 1, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
+      new SymptomMap(closed_comedones: 2, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
+      new SymptomMap(closed_comedones: 3, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
+      new SymptomMap(closed_comedones: 2, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
+      new SymptomMap(closed_comedones: 3, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
+      new SymptomMap(closed_comedones: 2, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 1, rosacea: 0),
+      new SymptomMap(closed_comedones: 3, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 2, rosacea: 0),
+      new SymptomMap(open_comedones: 1, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
+      new SymptomMap(open_comedones: 2, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
+      new SymptomMap(open_comedones: 3, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0),
+      new SymptomMap(open_comedones: 2, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 1, rosacea: 0),
+      new SymptomMap(open_comedones: 3, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 1, rosacea: 0),
+      new SymptomMap(open_comedones: 3, papules: 1, pustules: 0, cysts: 0, nodules: 0, seborrhea: 2, rosacea: 0),
     ]),
     "8" : new SkinType("8", "rosacea",
     [
@@ -72,21 +71,21 @@ class SkinTypeService
     ]),
     "9" : new SkinType("9", "seborrhea",
     [
-      new SymptomMap(openComedones: 0, closedComedones: 0, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 1, rosacea: 0, pigmentation: false, surfaceBloodVessels: false, acneScars: false),
-      new SymptomMap(openComedones: 0, closedComedones: 0, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 2, rosacea: 0, pigmentation: false, surfaceBloodVessels: false, acneScars: false),
-      new SymptomMap(openComedones: 0, closedComedones: 0, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 3, rosacea: 0, pigmentation: false, surfaceBloodVessels: false, acneScars: false),
+      new SymptomMap(open_comedones: 0, closed_comedones: 0, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 1, rosacea: 0, pigmentation: false, surface_blood_vessels: false, acne_scars: false),
+      new SymptomMap(open_comedones: 0, closed_comedones: 0, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 2, rosacea: 0, pigmentation: false, surface_blood_vessels: false, acne_scars: false),
+      new SymptomMap(open_comedones: 0, closed_comedones: 0, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 3, rosacea: 0, pigmentation: false, surface_blood_vessels: false, acne_scars: false),
     ]),
     "10" : new SkinType("10", "dry",
     [
-      new SymptomMap(openComedones: 0, closedComedones: 0, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0, pigmentation: false, surfaceBloodVessels: false, acneScars: false, texture: "dry")
+      new SymptomMap(open_comedones: 0, closed_comedones: 0, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0, pigmentation: false, surface_blood_vessels: false, acne_scars: false, texture: "dry")
     ]),
     "11" : new SkinType("11", "surface_blood_vessels",
     [
-      new SymptomMap(openComedones: 0, closedComedones: 0, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0, milia: false, pigmentation: false, surfaceBloodVessels: true, acneScars: false),
+      new SymptomMap(open_comedones: 0, closed_comedones: 0, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0, milia: false, pigmentation: false, surface_blood_vessels: true, acne_scars: false),
     ]),
     "12" : new SkinType("12", "acne_scars",
     [
-      new SymptomMap(openComedones: 0, closedComedones: 0, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0, milia: false, pigmentation: false, surfaceBloodVessels: false, acneScars: true)
+      new SymptomMap(open_comedones: 0, closed_comedones: 0, papules: 0, pustules: 0, cysts: 0, nodules: 0, seborrhea: 0, rosacea: 0, milia: false, pigmentation: false, surface_blood_vessels: false, acne_scars: true)
     ])
   };
 
